@@ -1,0 +1,10 @@
+$star:red;
+@use '../styles/modules/style.module.scss';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.import-star{
+    color: $star;
+}
