@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import open from '../../../assets/symbols/opened-eye.png'
 import close from '../../../assets/symbols/closed-eye.png'
+import {EyeOutlined, EyeInvisibleOutlined} from 'antd'
 import Star from '../../Start'
 import './style.scss'
 export default function Password({onBlur}) {
@@ -24,7 +25,7 @@ export default function Password({onBlur}) {
             <div className='password-field password-border'>
                 <input type={type} id='password' onBlur={(e) => {
                     if (e.target.value === "") {
-                        setErrorPassword("Password is emty.")
+                        setErrorPassword("Password is empty.")
                         document.getElementById('password').focus()
                     } else {
                         onBlur(e.target.value)

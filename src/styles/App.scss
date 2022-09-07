@@ -8,3 +8,8 @@ $star:red;
 .import-star{
     color: $star;
 }
+.App{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
