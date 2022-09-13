@@ -5,7 +5,7 @@ export default function ListItem({ listItems }) {
   return (
       <div>
           {listItems.map(item => (
-            <Item key={item.id} data={item}/>
+            <Item key={item.id} info={item}/>
         ))}
     </div>
   )
