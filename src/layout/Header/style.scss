@@ -1,0 +1,45 @@
+.top-nav {
+    background-color: black;
+    width: 100%;
+    display: flex;
+    padding: 10px 10px;
+    justify-content: space-between;
+    a {
+        color: white;
+        text-decoration: none;
+        padding: 0 24px;
+        line-height: 38.4px;
+    }
+    img {
+        height: 30px;
+        width: 30px;
+    }
+    .icon-brand {
+        display: flex;
+        img {
+            margin: 0 10px;
+            height: 35px;
+            width: 35px;
+        }
+    }
+    .singin-singup {
+        .signin {
+            margin: 0 5px;
+            border: none;
+            border-radius: 20px;
+            background-color: #01B768;
+            padding: 10px 14px;
+            color: black;
+            &:hover {}
+        }
+        .signup {
+            margin: 0 5px;
+            border: none;
+            border-radius: 20px;
+            background-color: #01B768;
+            padding: 10px 14px;
+            color: black;
+            &:hover {}
+        }
+    }
+}
