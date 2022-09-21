@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import Validator from 'validator';
 import { Form, Input } from 'antd'
 import './style.scss'
