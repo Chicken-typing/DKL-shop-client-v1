@@ -1,21 +1,31 @@
-import React,{useState} from 'react';
-import Star from '../../Start'
+import React, { useState } from 'react';
+import {Input,Form} from 'antd';
+
 const FName = () => {
     let regExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-    const [nameError, setNameError]=useState(<br/>)
-    return (
-        <div id='FName' className="input-field">
-            <label htmlFor="Fname">First Name <Star /> </label>
-            <input type="text" id='Fname' onBlur={e => {
-                let isContain = regExp.test(e.target.value)
+    const [nameError, setNameError] = useState(<br />)
+    const handleValidateName = e => {
+        let isContain = regExp.test(e.target.value)
                 if (isContain) {
                     setNameError("Name can not contain any symbol.")
                 } else {
-                    setNameError(<br/>)
+                    setNameError(<br />)
                 }
-            }} />
-            <div  className="error-name">{ nameError}</div>
-        </div>
+    }
+    return (
+        <Form.Item
+            id='FName'
+            label="First Name"
+            name="firstname"
+            rules={[
+                {
+                    required: true,
+                    message: 'Please input your username!',
+                },
+            ]}>
+            <Input onBlur={handleValidateName} placeholder="Huynh"/>
+            <div className="error-name">{nameError}</div>
+        </Form.Item>
     );
 }
 
