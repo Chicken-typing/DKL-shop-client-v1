@@ -8,20 +8,16 @@ function Header() {
   return (
     <div className="top-nav">
                 <div className="icon-brand">
-                    <img src={Nike} alt="Nike-icon" />
+                    <Link to='/' className='imgNike'><img src={Nike} alt="Nike-icon"/></Link>
                     <img src={Adidas} alt="" />
                 </div>
             <div className="singin-singup">
-                     <a href='' className='signin'>Sign In</a>
                     
-                    {/* <Link to="/Login" className='signin'>Sign In</Link> */}
+                    <Link to="/Login" className='signin'>Sign In</Link>
                      <a href="../Pages/Register" className='signup'>Sign Up</a>
             </div>
 
 
-            {/* <Routes>
-                <Route path="/Login" element={Login}/>
-            </Routes> */}
     </div>
   )
 }
