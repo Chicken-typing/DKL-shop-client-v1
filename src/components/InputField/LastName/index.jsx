@@ -1,20 +1,32 @@
-import React,{useState} from 'react'
-import Star from '../../Start'
+import React, { useState } from 'react'
+import { Form, Input } from 'antd';
+
 export default function LName() {
   let regExp = /[!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\/?]/;
-  const [nameError, setNameError]=useState( <br/>)
+  const [nameError, setNameError] = useState(<br />)
+  const handleVaildateName = e => {
+    let isContain = regExp.test(e.target.value)
+    if (isContain) {
+      setNameError("Name can not contain any symbol.")
+    } else {
+      setNameError(<br />)
+    }
+  }
   return (
-    <div id='LName' className="input-field">
-    <label htmlFor="Lname">Last Name <Star /> </label>
-    <input type="text" id='Lname'  onBlur={e => {
-                let isContain = regExp.test(e.target.value)
-                if (isContain) {
-                    setNameError("Name can not contain any symbol.")
-                } else {
-                    setNameError(<br/>)
-                }
-            }} />
-            <div  className="error-name">{ nameError}</div>
-</div>
+    <Form.Item
+      id='LName'
+      label="Last name"
+      name="lastName"
+      rules={
+        [
+          {
+            required: true,
+            message: "Please enter your last name!"
+          }
+        ]
+      }>
+      <Input onBlur={handleVaildateName} placeholder="Nguyen Khang"/>
+      <div className="error-name">{nameError}</div>
+    </Form.Item>
   )
 }

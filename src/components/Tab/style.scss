@@ -1,0 +1,18 @@
+#list {
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+    white-space: nowrap;
+    font-size: 20px;
+    .link {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    &:hover {
+        background-color: #f4a261;
+        padding: 10px;
+        color: #000000;
+        border-radius: 14px;
+        animation: fade 300ms ease-in-out forwards;
+    }
+}
