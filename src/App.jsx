@@ -4,20 +4,25 @@ import ListNavigation from "./containers/ListNavigation";
 import MainPage from "./containers/MainPage";
 import Footer from "./layout/Footer";
 import Login from '../src/pages/Login'
-import Router from "./containers/Router";
-import {useLocation} from 'react-router-dom';
+import Router from "./Router";
+import Woman from "./containers/Woman";
+
+
 
 
 function App() {
-  const {pathname} = useLocation()
+
   
   
   return (
     <div className="App">
-      <Header/>        
+      <Header/>  
+      {/* <ListNavigation/>       */}
        <Router>
-       
+          
        </Router>  
+       {/* <Footer/> */}
+       {/* <Woman/> */}
     </div>
   );
 }
