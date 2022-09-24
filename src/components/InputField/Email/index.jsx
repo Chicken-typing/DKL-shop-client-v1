@@ -1,23 +1,31 @@
-import React,{useState} from 'react'
-import Star from '../../Start'
+import React, { useState } from 'react'
 import Validator from 'validator';
-import  './style.scss'
+import { Form, Input } from 'antd'
+import './style.scss'
 export default function Email() {
-    const [email, setEmail] = useState(<br/>)
-    const[error,setError]=useState("")
+    const [email, setEmail] = useState(<br />)
+    const [error, setError] = useState("")
+    const handleVaildate = e => {
+        if (!Validator.isEmail(e.target.value)) {
+            setError("Email is invalid.")
+        } 
+        else {
+            setError(<br />)
+            setEmail(e.target.value)
+        }
+    }
     return (
-        <div id="Email" className="input-field" >
-            <label htmlFor="email">Email <Star/></label>
-            <input type="email" id='email' onBlur={(e) => {
-                let mail = e.target.value
-                if (!Validator.isEmail(mail)) {
-                    setError("Email is invalid.")
-                } else {
-                    setError(<br/>)
-                    setEmail(mail)
-                }
-            }} />
-            <div id="error-email">{ error}</div>
-        </div>
+            <Form.Item
+                label="Username"
+                name="username"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+            >
+                <Input onBlur={handleVaildate} placeholder="nguyenkhang@gmail.com"/>
+            <div className="error-email" style={{
+                color: "red",
+                fontSize:12
+            }}>{error}</div>
+            </Form.Item>
+
     )
 }

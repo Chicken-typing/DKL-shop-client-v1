@@ -1,36 +1,36 @@
-import React,{useState} from 'react'
-import open from '../../../assets/symbols/opened-eye.png'
-import close from '../../../assets/symbols/closed-eye.png'
-import Star from '../../Start'
-import './style.scss'
+import React, { useState } from 'react'
+import { Input, Form } from 'antd'
+
 export default function RePassword(props) {
-    const [icon, setIcon] = useState(close)
-    const [type, setType] = useState('password')
-    const [errorPassword,setErrorPassword]=useState(<br/>)
+
+    const [errorPassword, setErrorPassword] = useState(<br />)
     return (
-        <div id='RePassword' className="input-field">
-            <label htmlFor="rePassword">Re-password <Star/></label>
-            <div className='rePassword-field password-border'>
-                <input type={type} id='rePassword' onBlur={e => {
-                    if(props.password!==e.target.value){
-                        setErrorPassword("Do not match with password.")
-                        e.target.value=""
-                    } else {
-                        setErrorPassword(<br/>)
+        <Form.Item
+            id='RePassword'
+            className="input-field"
+            label="Confirm Password"
+            name="confirmPassword"
+            rules={
+                [
+                    {
+                        required: true,
+                        message: "Please confirm your password!"
+
                     }
-                }} />
-                <img src={icon} alt="eye" onClick={() => {
-                    if (icon === close) {
-                        setIcon(open)
-                        setType('text')
-                    } else {
-                        setIcon(close)
-                        setType('password')
-                    }
-                
+                ]
+            }
+        >
+            <Input.Password
+                    id='rePassword'
+                    onBlur={e => {
+                        if (props.password !== e.target.value) {
+                            setErrorPassword("Do not match with password.")
+                            e.target.value = ""
+                        } else {
+                            setErrorPassword(<br />)
+                        }
                     }} />
-            </div>
-            <div className="error-password">{ errorPassword}</div>
-        </div>
+            <div className="error-password">{errorPassword}</div>
+        </Form.Item>
     )
 }
