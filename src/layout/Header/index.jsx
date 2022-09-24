@@ -9,7 +9,7 @@ function Header() {
     <div className="top-nav">
                 <div className="icon-brand">
                     <Link to='/' className='imgNike'><img src={Nike} alt="Nike-icon"/></Link>
-                    <img src={Adidas} alt="" />
+                    <Link to='/'><img src={Adidas} alt="" /></Link>
                 </div>
             <div className="singin-singup">
                     
