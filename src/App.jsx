@@ -4,7 +4,7 @@ import ListNavigation from "./containers/ListNavigation";
 import MainPage from "./containers/MainPage";
 import Footer from "./layout/Footer";
 import Login from '../src/pages/Login'
-import Router from "./containers/Router";
+import Router from "./Router";
 import Woman from "./containers/Woman";
 
 
