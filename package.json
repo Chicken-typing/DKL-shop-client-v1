@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -13,11 +14,7 @@
     "react-facebook": "^9.0.7",
     "react-facebook-login": "^4.1.1",
     "react-redux": "^8.0.2",
-<<<<<<< HEAD
-    "react-router-dom": "^6.4.0",
-=======
     "react-router-dom": "6",
->>>>>>> ae8f819965e5018b74600be5a4134059d829668d
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "redux": "^4.2.0",
