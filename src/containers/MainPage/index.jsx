@@ -1,7 +1,7 @@
 import React from 'react'
   import Slider from '../../components/Slider'
 import Popular from '../../components/Popular'
-
+import News from './News'
 function MainPage() {
 
   const DataSlider = [
@@ -63,7 +63,7 @@ function MainPage() {
         <Popular data={Data}/>
         <Popular data={Data}/>
         <Popular data={Data}/>
-      
+        <News/>
     </div>
   )
 }

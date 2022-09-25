@@ -26,8 +26,6 @@ function Woman() {
     // const { Header,Footer, Sider, Content} = Layout;
   return (
         <div>
-          <Header/>
-          <ListNavigation/>
           <Slider Data={DataSlider}/>
         </div>
   )

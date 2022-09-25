@@ -74,7 +74,7 @@ function Popular({data}) {
 
   return (
     <section className="popular-container">
-        <h3 className="label">Popular Right Now</h3>
+        <h3 className="label font-bold text-gray-500">Popular Right Now</h3>
         <div className="content">
         <img className='main-img'  alt="" />
          <div className='info'>

@@ -75,7 +75,8 @@ ul {
     position: relative;
     input {
         outline: none;
-        padding: 0 10px;
+        left: 40px;
+        top: -5px;
     }
     #search-engine {
         transform: translateY(10%);
@@ -92,6 +93,16 @@ ul {
             &:active~.search-box {
                 width: -300px;
             }
+        }
+        .disable {
+            position: absolute;
+            width: 0px;
+            border: none;
+            transform: translateY(25%);
+            border-radius: 14px;
+            visibility: hidden;
+            padding: 5px 0;
+            transition: width 1s;
         }
         .search-box {
             position: absolute;
