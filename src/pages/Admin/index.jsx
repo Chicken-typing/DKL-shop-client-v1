@@ -14,7 +14,11 @@ import logo from '../../assets/icons/logo-light.png'
 import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
 import Account from '../../components/Account';
-import DashboardTab from '../../components/DashboardTab'
+// component tab
+import DashboardTab from '../../containers/DashboardTab'
+import ProductListTab from '../../containers/ProductListTab';
+import AddProductTab from '../../containers/AddProductTab';
+// 
 const { Header, Content, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -75,7 +79,7 @@ const Admin = () => {
                         padding:16
                     }}
                 >
-                    <DashboardTab/>
+                    <AddProductTab/>
                 </Content>
             </Layout>
         </Layout>
