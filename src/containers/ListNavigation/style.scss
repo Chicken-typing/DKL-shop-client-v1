@@ -73,6 +73,10 @@ ul {
     margin: auto;
     gap: 10px;
     position: relative;
+    input {
+        outline: none;
+        padding: 0 10px;
+    }
     #search-engine {
         transform: translateY(10%);
         #search-icon {
@@ -92,11 +96,11 @@ ul {
         .search-box {
             position: absolute;
             width: 0px;
-            padding: 5px;
             border: none;
             transform: translateY(25%);
             border-radius: 14px;
-            visibility: hidden;
+            // visibility: hidden;
+            padding: 5px 0;
             transition: width 1s;
         }
         .show-box {

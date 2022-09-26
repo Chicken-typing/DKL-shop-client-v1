@@ -29,7 +29,7 @@ function ListNavigation() {
             <li id='search-engine'>
               <img id='search-icon' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAhNJREFUSEvlluF100AQhGdOBYQOCBWQVECogKQCQgWECkIHhAqIK8AdkFQQUwFJBYQCbpc3fiu/k2PpJOM8/+B+2qv9Zle7cyL2dLgnLqpgd38B4DWAkxB5D+AnycW/iO4Fu/uhmV2SPO8B3JP8THK2jYCNYHc/dfdvAFRt7cxJfiD5WAss/38CDuj3NsjdZyklJZ/rN3UCgIRdAHgZcYuU0vHWYCV197uo9I/a3ALXk+rdu/s1gHch6GvTNBIz6nQqzjlfk3yvJ0me9UHLzGamIdPw6ZlXJDV81bMCRwW/Q/2saZq+oeokjS79mlp1CT5x9x9Tqm0VFFXfppTatRusegXOOWs1LhWdUqrud5l1m2f3D3b389jdSUOiyouhnN5qdz+KVRL4E8mr6mhGgJnJPA7cffRKdd6lmWkVZAqyw+MxbiQjcfcvU4eyAy7bDWCeUjobqrrsEoDRbV6KXE9sZrLGpRsBWISRPDGFstKp5rERHEZy07pRIWDp1WZ2SPJ0/QKRfaaUZiT1bPX07mvO+Yrkx0qGB4kws4vWagHcxHAO3teDRhF3spIeAXgTIh7iFejG0iWhG2vlehHzSPLt0MfCJIcaqt7M1OJWnEIH4TsDx4QLflAI7IXvDBwtlwmNgu8UXIHrrl59Hu0cvAke32TLQWzPs4BLOEltRQe60UCqmz8hQGbU5/fPVnFN3/8H/gtPUCouyo1owQAAAABJRU5ErkJggg==" 
             alt='search-icon' onClick={handleShow}/> 
-            <input   className={show ? "show-box" : "search-box"} type="text" style={{padding: ' 5px 10px'}}/></li>
+            <input   className={show ? "show-box" : "search-box"} type="text" /></li>
             {/* style = {{ visibility: show ? "visible" : "hidden" }} */}
         </ul>  
         <div className='indicator'></div>          

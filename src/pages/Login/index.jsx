@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.scss'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { Link, Route, Routes} from 'react-router-dom';
 
 function Login() {
     const responseFacebook = (response) => {
@@ -15,7 +16,7 @@ function Login() {
       }
     return (
         <div className='main'>
-            <a href=" "><ion-icon name="home-outline"></ion-icon></a>
+            <Link to="/"><ion-icon name="home-outline"></ion-icon></Link>
             <div className="login-label">
                 <h2>LOGIN</h2>
             </div>
