@@ -12,12 +12,19 @@ import {
 } from '@ant-design/icons';
 import logo from '../../assets/icons/logo-light.png'
 import { Layout, Menu } from 'antd';
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import Account from '../../components/Account';
 // component tab
-import DashboardTab from '../../containers/DashboardTab'
-import ProductListTab from '../../containers/ProductListTab';
-import AddProductTab from '../../containers/AddProductTab';
+import {
+    AccountTab,
+    BrandTab,
+    DasboardTab,
+    OrderTab,
+    ProductListTab,
+    SettingTab,
+    TransactionTab,
+    AddProductTab
+} from '../../containers/adminTab'
 // 
 const { Header, Content, Sider } = Layout;
 
@@ -26,25 +33,56 @@ function getItem(label, key, icon, children) {
         key,
         icon,
         children,
-        label,
+        label
     };
 }
 
 const items = [
-    getItem("Dashboard", '1', <HomeOutlined />),
+    getItem("Dashboard", 'DashboarTab', <HomeOutlined />),
     getItem('Product', '2', <ShoppingOutlined />, [
-        getItem('Product list', '8', <UnorderedListOutlined />),
-        getItem('Add product', '3', <PlusCircleOutlined />),
-        getItem('Brand', '4', <RocketOutlined />)
+        getItem('Product list', 'ProductListTab', <UnorderedListOutlined />),
+        getItem('Add product', 'AddProductTab', <PlusCircleOutlined />),
+        getItem('Brand', 'BrandTab', <RocketOutlined />)
     ]),
-    getItem("Order", '5', <ShoppingCartOutlined />),
-    getItem('Transaction', '6', <DollarOutlined />),
-    getItem('Account', '7', <UserOutlined />),
-    getItem('Setting', '9', <SettingOutlined />)
+    getItem("Order", 'OrderTab', <ShoppingCartOutlined />),
+    getItem('Transaction', 'TransactionTab', <DollarOutlined />),
+    getItem('Account', 'AccountTab', <UserOutlined />),
+    getItem('Setting', 'SettingTab', <SettingOutlined />)
 ];
-
 const Admin = () => {
     const [collapsed, setCollapsed] = useState(false);
+    const [tabAdmin, setTabAdmin] = useState("DasboardTab")
+    const tabRender = (tabAdmin) => {
+        switch (tabAdmin) {
+            case 'DashboarTab':
+    
+                return <DasboardTab/>;
+            case 'ProductListTab':
+    
+                return<ProductListTab/>
+            case 'AddProductTab':
+    
+                return <AddProductTab/>
+            case 'BrandTab':
+    
+                return <BrandTab/>
+            case 'OrderTab':
+    
+                return <OrderTab/>
+            case 'TransactionTab':
+    
+                return <TransactionTab/>
+            case 'AccountTab':
+    
+                return <AccountTab />
+            case 'SettingTab':
+    
+                return <SettingTab/>
+    
+            default:
+                break;
+        }
+    }
     return (
         <Layout
             style={{
@@ -59,7 +97,7 @@ const Admin = () => {
                         width: 80
                     }} />
                 <div className="logo" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={value => setTabAdmin(value.key)} />
             </Sider>
             <Layout className="site-layout">
                 <Header
@@ -76,10 +114,10 @@ const Admin = () => {
                 <Content
                     style={{
 
-                        padding:16
+                        padding: 16
                     }}
                 >
-                    <AddProductTab/>
+                    {tabRender(tabAdmin)}
                 </Content>
             </Layout>
         </Layout>
