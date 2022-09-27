@@ -1,6 +1,6 @@
 .item {
     padding: 20px 0px;
-    width: 250px;
+    width: 280px;
     border-radius: 4px;
     color: black;
     position: relative;
@@ -9,6 +9,9 @@
         .costProduct {
             position: relative;
             top: -20px;
+        }
+        .imgProduct {
+            opacity: 0.7;
         }
     }
     .imgProduct {
@@ -24,7 +27,7 @@
             padding: 2px 4px;
             // position: absolute;
             // left: 20px;
-            background-color: #FBDB9C;
+            // background-color: #FBDB9C;
             margin: 10px;
             width: 2%;
             height: 2%;
