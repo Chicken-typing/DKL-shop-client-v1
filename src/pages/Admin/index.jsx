@@ -38,7 +38,7 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-    getItem("Dashboard", 'DashboarTab', <HomeOutlined />),
+    getItem("Dashboard", 'DashboardTab', <HomeOutlined />),
     getItem('Product', '2', <ShoppingOutlined />, [
         getItem('Product list', 'ProductListTab', <UnorderedListOutlined />),
         getItem('Add product', 'AddProductTab', <PlusCircleOutlined />),
@@ -51,10 +51,10 @@ const items = [
 ];
 const Admin = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const [tabAdmin, setTabAdmin] = useState("DasboardTab")
+    const [tabAdmin, setTabAdmin] = useState("DashboardTab")
     const tabRender = (tabAdmin) => {
         switch (tabAdmin) {
-            case 'DashboarTab':
+            case 'DashboardTab':
     
                 return <DasboardTab/>;
             case 'ProductListTab':
@@ -97,7 +97,7 @@ const Admin = () => {
                         width: 80
                     }} />
                 <div className="logo" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={value => setTabAdmin(value.key)} />
+                <Menu theme="dark" defaultSelectedKeys={'DashboardTab'} mode="inline" items={items} onClick={value => setTabAdmin(value.key)} />
             </Sider>
             <Layout className="site-layout">
                 <Header
@@ -114,7 +114,8 @@ const Admin = () => {
                 <Content
                     style={{
 
-                        padding: 16
+                        padding: 16,
+                        justifyContent:"center"
                     }}
                 >
                     {tabRender(tabAdmin)}
