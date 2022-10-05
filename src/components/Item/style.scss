@@ -22,13 +22,18 @@
     .name-cost {
         display: flex;
         flex-wrap: wrap;
+        text-align: center;
         justify-content: space-between;
         .costProduct {
+            color: white;
+            font-size: 15px;
             padding: 2px 4px;
             // position: absolute;
             // left: 20px;
             // background-color: #FBDB9C;
-            margin: 10px;
+            background-color: red;
+            border-radius: 30px;
+            margin: 10px 10px 10px 0px;
             width: 2%;
             height: 2%;
             flex: 0.2;
@@ -36,6 +41,9 @@
             // z-index: 10;
         }
         .name {
+            max-height: 50px;
+            word-wrap: break-word;
+            max-width: 200px;
             flex: 0.8;
             padding: 2px 4px;
             margin: 10px 5px;
@@ -43,8 +51,13 @@
             a {
                 color: black;
                 text-decoration: none;
-                font-size: 14px;
-                font-family: sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 10px;
+            }
+            .type {
+                font-weight: 400;
+                color: gray;
             }
         }
     }

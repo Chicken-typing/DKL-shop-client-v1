@@ -42,7 +42,7 @@ function Slider({Data}) {
         {Data.map((_, idx) => (
           <div
             key={idx}
-            className={`slideshowDot${index === idx ? " active" : ""}`}
+            className={`slideshowDot${index === idx ? " actives" : ""}`}
             onClick={() => {
               setIndex(idx);
             }}

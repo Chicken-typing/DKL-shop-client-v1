@@ -1,25 +1,34 @@
 import "./styles/App.scss";
+import React, {useState, useEffect} from "react";
 import Header from "./layout/Header";
-import ListNavigation from "./containers/ListNavigation";
-import MainPage from "./containers/MainPage";
-import Footer from "./layout/Footer";
-import Login from '../src/pages/Login'
 import Router from "./Router";
-import Item from "./components/Item";
-import Woman from "./containers/Woman";
-import { info } from "autoprefixer";
+
 
 
 
 
 function App() {
 
+  // const [position, setPosition] = useState(window.pageYOffset)
+  //   const [visible, setVisible] = useState(true) 
+  //   useEffect(()=> {
+  //       const handleScroll = () => {
+  //          const moving = window.pageYOffset
+           
+  //          setVisible(position > moving);
+  //          setPosition(moving)
+  //       };
+  //       window.addEventListener("scroll", handleScroll);
+  //       return(() => {
+  //          window.removeEventListener("scroll", handleScroll);
+  //       })
+  //   })
   
-  
+  // const cls = visible ? "visible" : "hidden";
   return (
     
     <div className="App">
-      <Header/>  
+      <Header/>
       {/* {Data.map((info) => {
         return <Item info={info}/>
       })} */}
