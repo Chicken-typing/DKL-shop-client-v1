@@ -39,7 +39,7 @@ function Slider({Data}) {
         </div>
 
         <div className="slideshowDots">
-        {Data.map((_, idx) => (
+        {Data.length > 1 && Data.map((_, idx) => (
           <div
             key={idx}
             className={`slideshowDot${index === idx ? " actives" : ""}`}

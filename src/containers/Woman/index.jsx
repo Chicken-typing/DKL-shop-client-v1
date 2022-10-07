@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Layout } from 'antd';
 import Header from '../../layout/Header';
 import ListNavigation from '../ListNavigation';
@@ -7,6 +7,7 @@ import Advertise from '../../components/Advertise';
 import Item from '../../components/Item';
 import Filter from '../../components/Filter';
 import {Data} from '../../Data/Data'
+import axios from 'axios';
 
 function Woman() {
 
@@ -50,27 +51,34 @@ const listAdvertise = [
 ]
 const [products, setProducts] = useState(Data)
   
-  function onSelectionChange(value) {
-    const sortDirection = value;
-    const copyArray = [...products]; // create a new array & not mutate state
+  // function onSelectionChange(value) {
+  //   const sortDirection = value;
+  //   const copyArray = [...products]; // create a new array & not mutate state
 
-    copyArray.sort((a, b) => {
-      const productA = a.cost[0] === '$' ? parseFloat(a.cost.slice(1,-1)) : 0;
-      const productB = b.cost[0] === '$' ? parseFloat(b.cost.slice(1,-1)) : 0;
-       if (sortDirection === "ascd")
-       {         
-          return productA - productB
-       }
-       if(sortDirection === "desc")
-       {
-        return productB - productA
-       }
-    });
-    setProducts(copyArray); //re-render
-    console.log(copyArray);
-  }
+  //   copyArray.sort((a, b) => {
+  //     const productA = a.cost[0] === '$' ? parseFloat(a.cost.slice(1,-1)) : 0;
+  //     const productB = b.cost[0] === '$' ? parseFloat(b.cost.slice(1,-1)) : 0;
+  //      if (sortDirection === "ascd")
+  //      {         
+  //         return productA - productB
+  //      }
+  //      if(sortDirection === "desc")
+  //      {
+  //       return productB - productA
+  //      }
+  //   });
+  //   setProducts(copyArray); //re-render
+  //   console.log(copyArray);
+  // }
 
-
+// useEffect(() => {
+//   axios.get(`https://633c4d6a74afaef164068be4.mockapi.io/products/product`)
+//   .then(res => {
+//     const products = res.data
+//     setProducts(products)
+//   })
+//   .catch(error => console.log(error))
+// })
   return (
         <div>
           <Slider Data={DataSlider}/>
@@ -78,7 +86,7 @@ const [products, setProducts] = useState(Data)
           <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
           <div className='flex justify-between'>
           <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Woman's Shoes</h2>
-          <Filter onClick={onSelectionChange} />
+          <Filter />
           </div>
           <div className='list-product mt-[20px] mx-auto my-auto'>
               <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>

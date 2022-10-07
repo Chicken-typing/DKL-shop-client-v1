@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import ListNavigation from '../containers/ListNavigation';
 import Footer from '../layout/Footer';
 import Woman from '../containers/Woman';
+import Man from '../containers/Man';
 
 function Router() {
   return (
@@ -13,6 +14,7 @@ function Router() {
         <Route path="/Login" element={<Login/>}/>
         <Route path='/' element={<><ListNavigation/><MainPage/><Footer/></>}/>
         <Route path='/Woman' element={<><ListNavigation/><Woman/><Footer/></>}/>
+        <Route path='/Man' element={<><ListNavigation/><Man/><Footer/></>}/>
     </Routes>
   )
 }

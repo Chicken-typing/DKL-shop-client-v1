@@ -4,7 +4,7 @@ function Advertise({DataInfo}) {
   const [id, imgSrc, title, info] = DataInfo
   
   return (
-    <div className='bg-white mb-[150px]'>
+    <div className='bg-white mb-[150px] '>
       <div className='mx-auto my-auto py-10 px-5 max-w-[80%]'>
         <div className="grid grid-cols-1 gap-y-[20px] sm:grid-cols-2 sm:gap-x-[20px] lg:grid-cols-3 xl:gap-x-8">
           {DataInfo.map((advertise) => (
