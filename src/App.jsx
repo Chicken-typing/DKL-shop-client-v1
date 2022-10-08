@@ -37,8 +37,7 @@ function App() {
        <Router>
           
        </Router>  
-       {/* <Footer/> */}
-       {/* <Woman/> */}
+
     </div>
   );
 }

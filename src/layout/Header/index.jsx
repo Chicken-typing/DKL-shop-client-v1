@@ -14,7 +14,7 @@ function Header() {
             <div className="singin-singup">
                     
                     <Link to="/Login" className='signin'>Sign In</Link>
-                     <a href="../Pages/Register" className='signup'>Sign Up</a>
+                     <Link to="/Register" className='signup'>Sign Up</Link>
             </div>
 
 
