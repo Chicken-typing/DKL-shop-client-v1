@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import logo from '../../assets/icons/logo-light.png'
 import { Layout, Menu } from 'antd';
-import React, { Component, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Account from '../../components/Account';
 // component tab
 import {
@@ -25,8 +25,12 @@ import {
     TransactionTab,
     AddProductTab
 } from '../../containers/adminTab'
+import { useDispatch } from 'react-redux';
+import { API_ADMIN } from '../../linkTo';
+import{fetchAPI, postLink}from '../../action'
 // 
 const { Header, Content, Sider } = Layout;
+
 
 function getItem(label, key, icon, children) {
     return {
@@ -50,6 +54,13 @@ const items = [
     getItem('Setting', 'SettingTab', <SettingOutlined />)
 ];
 const Admin = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(postLink(API_ADMIN));
+        dispatch(fetchAPI());
+    },[]);
+    
+
     const [collapsed, setCollapsed] = useState(false);
     const [tabAdmin, setTabAdmin] = useState("DashboardTab")
     const tabRender = (tabAdmin) => {
