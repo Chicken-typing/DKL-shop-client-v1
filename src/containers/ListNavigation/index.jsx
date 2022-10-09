@@ -73,7 +73,7 @@ function ListNavigation() {
  // This function to hide the search box when click any where on the screen
  useEffect(() => {
   function handleClickOutside(event) {
-    if(show) {
+    if(!show) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setShow(false)
       }

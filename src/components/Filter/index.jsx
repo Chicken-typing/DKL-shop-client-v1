@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
-import "antd/dist/antd.css";
+import 'antd/dist/antd.less';
 import { Dropdown, Menu, Space } from "antd";
 import { Data } from "../../Data/Data";
 import { Select } from "antd";
