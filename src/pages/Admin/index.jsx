@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import logo from '../../assets/icons/logo-light.png'
 import { Layout, Menu } from 'antd';
-import React, { Component, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Account from '../../components/Account';
 // component tab
 import {
@@ -25,8 +25,11 @@ import {
     TransactionTab,
     AddProductTab
 } from '../../containers/adminTab'
-// 
+import { useDispatch } from 'react-redux';
+import { API_ADMIN_STATIC } from '../../linkTo';
+import { fetchAPI } from '../../action'
 const { Header, Content, Sider } = Layout;
+
 
 function getItem(label, key, icon, children) {
     return {
@@ -38,7 +41,7 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-    getItem("Dashboard", 'DashboarTab', <HomeOutlined />),
+    getItem("Dashboard", 'DashboardTab', <HomeOutlined />),
     getItem('Product', '2', <ShoppingOutlined />, [
         getItem('Product list', 'ProductListTab', <UnorderedListOutlined />),
         getItem('Add product', 'AddProductTab', <PlusCircleOutlined />),
@@ -50,46 +53,65 @@ const items = [
     getItem('Setting', 'SettingTab', <SettingOutlined />)
 ];
 const Admin = () => {
+    const [isScroll, setIsScroll] = useState(false);
+    window.onscroll = () => {
+        window.scrollY > 1 ? setIsScroll(true) : setIsScroll(false)
+
+    }
+    // console.log(isScroll)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchAPI({
+            url: API_ADMIN_STATIC
+        }));
+    }, []);
+
+
     const [collapsed, setCollapsed] = useState(false);
-    const [tabAdmin, setTabAdmin] = useState("DasboardTab")
+    const [tabAdmin, setTabAdmin] = useState("DashboardTab")
     const tabRender = (tabAdmin) => {
         switch (tabAdmin) {
-            case 'DashboarTab':
-    
-                return <DasboardTab/>;
+            case 'DashboardTab':
+
+                return <DasboardTab />;
             case 'ProductListTab':
-    
-                return<ProductListTab/>
+
+                return <ProductListTab />
             case 'AddProductTab':
-    
-                return <AddProductTab/>
+
+                return <AddProductTab />
             case 'BrandTab':
-    
-                return <BrandTab/>
+
+                return <BrandTab />
             case 'OrderTab':
-    
-                return <OrderTab/>
+
+                return <OrderTab />
             case 'TransactionTab':
-    
-                return <TransactionTab/>
+
+                return <TransactionTab />
             case 'AccountTab':
-    
+
                 return <AccountTab />
             case 'SettingTab':
-    
-                return <SettingTab/>
-    
+
+                return <SettingTab />
+
             default:
                 break;
         }
     }
     return (
         <Layout
-            style={{
-                minHeight: '100vh',
-            }}
+            hasSider
         >
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+            <Sider style={{
+                overflow: 'auto',
+                height: '100vh',
+                position: 'fixed',
+                left: 0,
+                top: 0,
+                bottom: 0,
+            }}>
                 <img
                     src={logo}
                     alt='logo'
@@ -97,9 +119,13 @@ const Admin = () => {
                         width: 80
                     }} />
                 <div className="logo" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={value => setTabAdmin(value.key)} />
+                <Menu theme="dark" defaultSelectedKeys={'DashboardTab'} mode="inline" items={items} onClick={value => setTabAdmin(value.key)} />
             </Sider>
-            <Layout className="site-layout">
+            <Layout className="site-layout"
+                style={{
+                    marginLeft: 200,
+                    overflow:"hidden"
+                }}>
                 <Header
                     className="site-layout-background"
                     style={{
@@ -114,7 +140,8 @@ const Admin = () => {
                 <Content
                     style={{
 
-                        padding: 16
+                        padding: 16,
+                        justifyContent: "center"
                     }}
                 >
                     {tabRender(tabAdmin)}
