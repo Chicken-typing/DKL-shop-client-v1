@@ -1,1 +1,1 @@
-export const API_ADMIN ="https://63354b80849edb52d6fef88c.mockapi.io/api/v1/workspace"
+export const API_ADMIN_STATIC ="https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/static"

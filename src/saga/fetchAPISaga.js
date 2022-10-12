@@ -15,8 +15,6 @@ function* fetchPost(action) {
   }
 }
 function* fetchAPISaga() {
-    // const url = yield take(POST_LINK)
-    // console.log(url.payload)
   yield takeLatest(FETCH_API, fetchPost)
 }
 export default fetchAPISaga;

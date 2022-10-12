@@ -26,9 +26,8 @@ import {
     AddProductTab
 } from '../../containers/adminTab'
 import { useDispatch } from 'react-redux';
-import { API_ADMIN } from '../../linkTo';
-import { fetchAPI, postLink } from '../../action'
-// 
+import { API_ADMIN_STATIC } from '../../linkTo';
+import { fetchAPI } from '../../action'
 const { Header, Content, Sider } = Layout;
 
 
@@ -54,10 +53,16 @@ const items = [
     getItem('Setting', 'SettingTab', <SettingOutlined />)
 ];
 const Admin = () => {
+    const [isScroll, setIsScroll] = useState(false);
+    window.onscroll = () => {
+        window.scrollY > 1 ? setIsScroll(true) : setIsScroll(false)
+
+    }
+    // console.log(isScroll)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchAPI({
-            url: API_ADMIN
+            url: API_ADMIN_STATIC
         }));
     }, []);
 
@@ -97,11 +102,16 @@ const Admin = () => {
     }
     return (
         <Layout
-            style={{
-                minHeight: '100vh',
-            }}
+            hasSider
         >
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+            <Sider style={{
+                overflow: 'auto',
+                height: '100vh',
+                position: 'fixed',
+                left: 0,
+                top: 0,
+                bottom: 0,
+            }}>
                 <img
                     src={logo}
                     alt='logo'
@@ -111,7 +121,11 @@ const Admin = () => {
                 <div className="logo" />
                 <Menu theme="dark" defaultSelectedKeys={'DashboardTab'} mode="inline" items={items} onClick={value => setTabAdmin(value.key)} />
             </Sider>
-            <Layout className="site-layout">
+            <Layout className="site-layout"
+                style={{
+                    marginLeft: 200,
+                    overflow:"hidden"
+                }}>
                 <Header
                     className="site-layout-background"
                     style={{
