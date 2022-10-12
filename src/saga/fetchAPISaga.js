@@ -1,17 +1,15 @@
-import { fetchAPI, fetchAPISuccess, fetchAPIFailure } from "../action";
-import { call, takeLatest, put,take } from 'redux-saga/effects'
+import { fetchAPISuccess, fetchAPIFailure } from "../action";
+import { call, takeLatest, put } from 'redux-saga/effects'
 import axios from "axios";
-import { FETCH_API,POST_LINK } from "../ActionType";
+import { FETCH_API } from "../ActionType";
 
 
-function getPost(api) {
-    return axios.get(api);
-}
-function* fetchPost(api) {
-    console.log(api)
+
+function* fetchPost(action) {
   try {
-    const data = yield call(getPost(api));
-    yield put(fetchAPISuccess(data));
+    const res = (yield call (axios.get,action.params.url)).data
+    console.log(res)
+    yield put(fetchAPISuccess(res));
   } catch (e) {
     yield put(fetchAPIFailure(e.message));
   }
@@ -19,6 +17,6 @@ function* fetchPost(api) {
 function* fetchAPISaga() {
     // const url = yield take(POST_LINK)
     // console.log(url.payload)
-  yield takeLatest(FETCH_API, fetchPost(""))
+  yield takeLatest(FETCH_API, fetchPost)
 }
 export default fetchAPISaga;

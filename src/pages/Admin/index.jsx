@@ -27,7 +27,7 @@ import {
 } from '../../containers/adminTab'
 import { useDispatch } from 'react-redux';
 import { API_ADMIN } from '../../linkTo';
-import{fetchAPI, postLink}from '../../action'
+import { fetchAPI, postLink } from '../../action'
 // 
 const { Header, Content, Sider } = Layout;
 
@@ -56,40 +56,41 @@ const items = [
 const Admin = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(postLink(API_ADMIN));
-        dispatch(fetchAPI());
-    },[]);
-    
+        dispatch(fetchAPI({
+            url: API_ADMIN
+        }));
+    }, []);
+
 
     const [collapsed, setCollapsed] = useState(false);
     const [tabAdmin, setTabAdmin] = useState("DashboardTab")
     const tabRender = (tabAdmin) => {
         switch (tabAdmin) {
             case 'DashboardTab':
-    
-                return <DasboardTab/>;
+
+                return <DasboardTab />;
             case 'ProductListTab':
-    
-                return<ProductListTab/>
+
+                return <ProductListTab />
             case 'AddProductTab':
-    
-                return <AddProductTab/>
+
+                return <AddProductTab />
             case 'BrandTab':
-    
-                return <BrandTab/>
+
+                return <BrandTab />
             case 'OrderTab':
-    
-                return <OrderTab/>
+
+                return <OrderTab />
             case 'TransactionTab':
-    
-                return <TransactionTab/>
+
+                return <TransactionTab />
             case 'AccountTab':
-    
+
                 return <AccountTab />
             case 'SettingTab':
-    
-                return <SettingTab/>
-    
+
+                return <SettingTab />
+
             default:
                 break;
         }
@@ -126,7 +127,7 @@ const Admin = () => {
                     style={{
 
                         padding: 16,
-                        justifyContent:"center"
+                        justifyContent: "center"
                     }}
                 >
                     {tabRender(tabAdmin)}

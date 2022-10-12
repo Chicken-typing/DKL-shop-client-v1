@@ -1,4 +1,3 @@
 export const FETCH_API = "FETCH_API";
 export const FETCH_API_SUCCESS = "FETCH_API_SUCCESS";
 export const FETCH_API_FAILURE = "FETCH_API_FAILURE";
-export const POST_LINK ="POST_LINK"
