@@ -53,21 +53,9 @@ const items = [
     getItem('Setting', 'SettingTab', <SettingOutlined />)
 ];
 const Admin = () => {
-    const [isScroll, setIsScroll] = useState(false);
-    window.onscroll = () => {
-        window.scrollY > 1 ? setIsScroll(true) : setIsScroll(false)
-
-    }
-    // console.log(isScroll)
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchAPI({
-            url: API_ADMIN_STATIC
-        }));
-    }, []);
 
 
-    const [collapsed, setCollapsed] = useState(false);
+
     const [tabAdmin, setTabAdmin] = useState("DashboardTab")
     const tabRender = (tabAdmin) => {
         switch (tabAdmin) {
@@ -112,19 +100,22 @@ const Admin = () => {
                 top: 0,
                 bottom: 0,
             }}>
-                <img
-                    src={logo}
-                    alt='logo'
-                    style={{
-                        width: 80
-                    }} />
-                <div className="logo" />
+
+                <div className="logo" >
+                    <img
+                        src={logo}
+                        alt='logo'
+                        style={{
+                            width: 160,
+
+                        }} />
+                </div>
                 <Menu theme="dark" defaultSelectedKeys={'DashboardTab'} mode="inline" items={items} onClick={value => setTabAdmin(value.key)} />
             </Sider>
             <Layout className="site-layout"
                 style={{
                     marginLeft: 200,
-                    overflow:"hidden"
+                    overflow: "hidden"
                 }}>
                 <Header
                     className="site-layout-background"
