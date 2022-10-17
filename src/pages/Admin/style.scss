@@ -1,17 +1,29 @@
-#components-layout-demo-side .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+.ant-menu-title-content {
+  a {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    div {
+      width: 100px;
+    }
+  }
 }
-
-.site-layout .site-layout-background {
-  background: #fff;
+.ant-menu-submenu {
+  .ant-menu-submenu-title {
+    .ant-menu-title-content {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: baseline;
+    }
+  }
 }
-#components-layout-demo-fixed-sider .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.2);
-}
-.site-layout .site-layout-background {
-  background: #fff;
+.subItem {
+  a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    span {
+      margin-right: 20px;
+    }
+  }
 }

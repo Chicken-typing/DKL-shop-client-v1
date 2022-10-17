@@ -1,24 +1,27 @@
 import React from 'react';
-import { List, Skeleton, Avatar, Divider } from 'antd'
-import { DeleteTwoTone } from '@ant-design/icons';
+import { List, Avatar, Divider } from 'antd'
+import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
+import Button from '../Button';
 const ListItem = (props) => {
     const { item } = props
     return (
         <List.Item
             actions={[
-                <a key="list-loadmore-edit">edit</a>,
+                <Button key="list-loadmore-edit" type="link" title="Edit"><EditOutlined /></Button>,
                 <Divider type='vertical' />,
-                <a key="list-loadmore-delete"><DeleteTwoTone twoToneColor="#fa1212" /></a>
+                <Button type='link' key="list-loadmore-delete" title="Delete"><DeleteTwoTone twoToneColor="#fa1212" /></Button>
             ]}
+            style={{
+                backgroundColor: "#f1f1f1",
+                padding: 10
+            }}
         >
-            <Skeleton avatar title={false} loading={item.loading} active>
-                <List.Item.Meta
-                    avatar={<Avatar src={item.picture.large} shape="square" size={128} />}
-                    title={<a href="https://ant.design">{item.name?.last}</a>}
-                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                />
-                <div>Price</div>
-            </Skeleton>
+            <List.Item.Meta
+                avatar={<Avatar src={item.prodImage} shape="square" size={128} style={{ marginLeft: 10 }} />}
+                title={<span style={{ fontSize: 18, fontWeight: "bold" }}>{item.prodName}</span>}
+                description={item.description}
+            />
+            <div>{item.price} VND</div>
         </List.Item>
     );
 }

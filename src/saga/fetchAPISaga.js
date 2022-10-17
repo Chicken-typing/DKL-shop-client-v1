@@ -8,7 +8,6 @@ import { FETCH_API } from "../ActionType";
 function* fetchPost(action) {
   try {
     const res = (yield call (axios.get,action.params.url)).data
-    console.log(res)
     yield put(fetchAPISuccess(res));
   } catch (e) {
     yield put(fetchAPIFailure(e.message));

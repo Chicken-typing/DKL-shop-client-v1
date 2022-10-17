@@ -1,76 +1,157 @@
-import React, { useEffect, useState } from 'react';
+import { SearchOutlined } from '@ant-design/icons';
+import { Button, Input, Space, Table } from 'antd';
+import React, { useRef, useState, useEffect } from 'react';
+import Highlighter from 'react-highlight-words';
 import './style.scss'
-import { Avatar, Button, List, Skeleton, Divider } from 'antd'
-import ListItem from '../../components/ListItem'
-const count = 5;
-const urlData = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct } from '../../action';
+
+
 const ProductListTab = () => {
-    const [initLoading, setInitLoading] = useState(true);
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState([]);
-    const [list, setList] = useState([]);
+    const dispatch = useDispatch();
     useEffect(() => {
-        fetch(urlData)
-            .then((res) => res.json())
-            .then((res) => {
-                setInitLoading(false);
-                setData(res.results);
-                setList(res.results);
-            });
-    }, []);
+        dispatch(fetchProduct())
+    }, [])
+    const res = useSelector(state => state.fetchProduct.products)
+    const brands = [{
+        text: "Nike",
+        value: "Nike"
+    }, {
+        text: "Adidas",
+        value: "Adidas"
+    }
+    ]
 
-    const onLoadMore = () => {
-        setLoading(true);
-        setList(
-            data.concat(
-                [...new Array(count)].map(() => ({
-                    loading: true,
-                    name: {},
-                    picture: {},
-                })),
-            ),
-        );
-        fetch(urlData)
-            .then((res) => res.json())
-            .then((res) => {
-                const newData = data.concat(res.results);
-                setData(newData);
-                setList(newData);
-                setLoading(false); // Resetting window's offsetTop so:to display react-virtualized demo underfloor.
-                // In real scene, you can using public method of react-virtualized:
-                // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
 
-                window.dispatchEvent(new Event('resize'));
-            });
+    const [searchText, setSearchText] = useState('');
+    const [searchedColumn, setSearchedColumn] = useState('');
+    const searchInput = useRef(null);
+    const handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm();
+        setSearchText(selectedKeys[0]);
+        setSearchedColumn(dataIndex);
     };
-
-    const loadMore =
-        !initLoading && !loading ? (
+    const handleReset = (clearFilters) => {
+        clearFilters();
+        setSearchText('');
+    };
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
             <div
                 style={{
-                    textAlign: 'center',
-                    marginTop: 12,
-                    height: 32,
-                    lineHeight: '32px',
+                    padding: 8,
                 }}
             >
-                <Button onClick={onLoadMore}>loading more</Button>
+                <Input
+                    ref={searchInput}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{
+                        marginBottom: 8,
+                        display: 'block',
+                    }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Search
+                    </Button>
+                    <Button
+                        onClick={() => clearFilters && handleReset(clearFilters)}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Reset
+                    </Button>
+                    <Button
+                        type="link"
+                        size="small"
+                        onClick={() => {
+                            confirm({
+                                closeDropdown: false,
+                            });
+                            setSearchText(selectedKeys[0]);
+                            setSearchedColumn(dataIndex);
+                        }}
+                    >
+                        Filter
+                    </Button>
+                </Space>
             </div>
-        ) : null;
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{
+                    color: filtered ? '#1890ff' : undefined,
+                }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownOpenChange: (visible) => {
+            if (visible) {
+                setTimeout(() => searchInput.current?.select(), 100);
+            }
+        },
+        render: (text) =>
+            searchedColumn === dataIndex ? (
+                <Highlighter
+                    highlightStyle={{
+                        backgroundColor: '#ffc069',
+                        padding: 0,
+                    }}
+                    searchWords={[searchText]}
+                    autoEscape
+                    textToHighlight={text ? text.toString() : ''}
+                />
+            ) : (
+                text
+            ),
+    });
+    const columns = [
+        {
+            title: 'Name',
+            dataIndex: 'prodName',
+            ...getColumnSearchProps('prodName')
+        },
+        {
+            title: 'Brand',
+            dataIndex: 'brand',
+            filters: [
+                ...brands
+            ],
+            onFilter: (value, record) => record.brand.indexOf(value) === 0
+        },
+        {
+            title: 'Type',
+            dataIndex: 'types',
+        },
+        {
+            title: 'Price',
+            dataIndex: 'price',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.price - b.price,
+        },
+    ];
+    const onChange = (pagination, filters, sorter, extra) => {
+        console.log('params', pagination, filters, sorter, extra);
+    };
     return (
-        <List
-            className="demo-loadmore-list"
-            loading={initLoading}
-            itemLayout="horizontal"
-            loadMore={loadMore}
-            dataSource={list}
-            renderItem={(item) => (
-                <>
-                    <ListItem item={item}/>
-                    <Divider />
-                </>
-            )}
-        />
+        <Table columns={columns} dataSource={res} onChange={onChange} rowSelection pagination={{
+            pageSize: 9,
+            simple: true,
+        }} />
     );
 }
 

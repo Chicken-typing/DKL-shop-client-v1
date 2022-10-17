@@ -3,7 +3,6 @@ import {
     ShoppingOutlined,
     ShoppingCartOutlined,
     PlusCircleOutlined,
-    RocketOutlined,
     DollarOutlined,
     UserOutlined,
     UnorderedListOutlined,
@@ -11,95 +10,17 @@ import {
 
 } from '@ant-design/icons';
 import logo from '../../assets/icons/logo-light.png'
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Affix } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Account from '../../components/Account';
-// component tab
-import {
-    AccountTab,
-    BrandTab,
-    DasboardTab,
-    OrderTab,
-    ProductListTab,
-    SettingTab,
-    TransactionTab,
-    AddProductTab
-} from '../../containers/adminTab'
-import { useDispatch } from 'react-redux';
-import { API_ADMIN_STATIC } from '../../linkTo';
-import { fetchAPI } from '../../action'
+import { Link, Outlet } from 'react-router-dom';
+import './style.scss'
+import Waiting from '../Waiting';
+const { Item, SubMenu } = Menu
 const { Header, Content, Sider } = Layout;
-
-
-function getItem(label, key, icon, children) {
-    return {
-        key,
-        icon,
-        children,
-        label
-    };
-}
-
-const items = [
-    getItem("Dashboard", 'DashboardTab', <HomeOutlined />),
-    getItem('Product', '2', <ShoppingOutlined />, [
-        getItem('Product list', 'ProductListTab', <UnorderedListOutlined />),
-        getItem('Add product', 'AddProductTab', <PlusCircleOutlined />),
-        getItem('Brand', 'BrandTab', <RocketOutlined />)
-    ]),
-    getItem("Order", 'OrderTab', <ShoppingCartOutlined />),
-    getItem('Transaction', 'TransactionTab', <DollarOutlined />),
-    getItem('Account', 'AccountTab', <UserOutlined />),
-    getItem('Setting', 'SettingTab', <SettingOutlined />)
-];
 const Admin = () => {
-    const [isScroll, setIsScroll] = useState(false);
-    window.onscroll = () => {
-        window.scrollY > 1 ? setIsScroll(true) : setIsScroll(false)
+    const [tabAdmin, setTabAdmin] = useState("")
 
-    }
-    // console.log(isScroll)
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchAPI({
-            url: API_ADMIN_STATIC
-        }));
-    }, []);
-
-
-    const [collapsed, setCollapsed] = useState(false);
-    const [tabAdmin, setTabAdmin] = useState("DashboardTab")
-    const tabRender = (tabAdmin) => {
-        switch (tabAdmin) {
-            case 'DashboardTab':
-
-                return <DasboardTab />;
-            case 'ProductListTab':
-
-                return <ProductListTab />
-            case 'AddProductTab':
-
-                return <AddProductTab />
-            case 'BrandTab':
-
-                return <BrandTab />
-            case 'OrderTab':
-
-                return <OrderTab />
-            case 'TransactionTab':
-
-                return <TransactionTab />
-            case 'AccountTab':
-
-                return <AccountTab />
-            case 'SettingTab':
-
-                return <SettingTab />
-
-            default:
-                break;
-        }
-    }
     return (
         <Layout
             hasSider
@@ -112,39 +33,103 @@ const Admin = () => {
                 top: 0,
                 bottom: 0,
             }}>
-                <img
-                    src={logo}
-                    alt='logo'
-                    style={{
-                        width: 80
-                    }} />
-                <div className="logo" />
-                <Menu theme="dark" defaultSelectedKeys={'DashboardTab'} mode="inline" items={items} onClick={value => setTabAdmin(value.key)} />
+
+                <div className="logo" >
+                    <img
+                        src={logo}
+                        alt='logo'
+                        style={{
+                            width: 160,
+
+                        }} />
+                </div>
+                <Menu theme="dark" mode="inline" onClick={value => setTabAdmin(value.key)} >
+                    <Item key="dashboard">
+                        <Link to={`/admin/dashboard`}>
+                            <HomeOutlined />
+                            <div>
+                                Dashboard
+                            </div>
+                        </Link>
+                    </Item>
+                    <SubMenu key="product" title={
+                        <>
+                            <ShoppingOutlined /> Product
+                        </>
+                    } className="subItem">
+                        <Item key="product-list">
+                            <Link to={`/admin/product-list`}>
+                                <UnorderedListOutlined />
+                                List products
+                            </Link>
+                        </Item>
+                        <Item key="add-product">
+                            <Link to={`/admin/add-product`}>
+                                <PlusCircleOutlined />
+                                Add product
+                            </Link>
+                        </Item>
+                    </SubMenu>
+                    <Item key="order">
+                        <Link to={`/admin/order`}>
+                            <ShoppingCartOutlined />
+                            <div>
+                                Order
+                            </div>
+                        </Link>
+                    </Item>
+                    <Item key="transaction">
+                        <Link to={`/admin/transaction`}>
+                            <DollarOutlined />
+                            <div>
+                                Transaction
+                            </div>
+                        </Link>
+                    </Item>
+                    <Item key="accounts">
+                        <Link to={`/admin/accounts`}>
+                            <UserOutlined />
+                            <div>
+                                Accounts
+                            </div>
+                        </Link>
+                    </Item>
+                    <Item key="setting">
+                        <Link to={`/admin/setting`}>
+                            <SettingOutlined />
+                            <div>
+                                Setting
+                            </div>
+                        </Link>
+                    </Item>
+                </Menu>
             </Sider>
             <Layout className="site-layout"
                 style={{
                     marginLeft: 200,
-                    overflow:"hidden"
-                }}>
-                <Header
-                    className="site-layout-background"
-                    style={{
-                        padding: 0,
-                        display: "flex",
-                        justifyContent: "end",
-                        paddingRight: 20
-                    }}
-                >
-                    <Account image={logo} />
-                </Header>
+                    overflow: "hidden"
+                }}
+            >
+                <Affix offsetTop={0.1}>
+                    <Header
+                        className="site-layout-background"
+                        style={{
+                            padding: 0,
+                            display: "flex",
+                            justifyContent: "end"
+                        }}
+                    >
+                        <Account image={logo} style={{ marginRight: "2%" }} />
+                    </Header>
+                </Affix>
                 <Content
                     style={{
-
+                        backgroundColor: "white",
                         padding: 16,
                         justifyContent: "center"
-                    }}
-                >
-                    {tabRender(tabAdmin)}
+                    }}>
+                    <Outlet />
+                    {tabAdmin.length === 0 ? <Waiting label="DKL Store" /> : ""}
                 </Content>
             </Layout>
         </Layout>
