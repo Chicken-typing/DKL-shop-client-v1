@@ -1,8 +1,4 @@
-import {
-  FETCH_API_PRODUCT,
-  FETCH_API_PRODUCT_FAILURE,
-  FETCH_API_PRODUCT_SUCCESS,
-} from "../ActionType";
+import { FETCH_API_PRODUCT, FETCH_API_PRODUCT_SUCCESS } from "../ActionType";
 const initialize = {
   products: [],
   error: "",
@@ -16,11 +12,7 @@ const fetchProductReducer = (state = initialize, action) => {
     case FETCH_API_PRODUCT_SUCCESS:
       return {
         ...state,
-        products: action.payload.data
-      };
-    case FETCH_API_PRODUCT_FAILURE:
-      return {
-        error: action.payload.error,
+        products: action.payload.data,
       };
     default:
       return {

@@ -1,20 +1,26 @@
 import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
-import { Dropdown, Menu, Avatar } from 'antd';
-import { Link } from 'react-router-dom'
+import { Dropdown, Menu, Avatar, Popconfirm, Button } from 'antd';
+import { Link, redirect } from 'react-router-dom'
+const confirm = () =>
+    new Promise((resolve) => {
+        return redirect("/")
+    });
 const menu = (
     <Menu
         items={[
             {
                 key: '1',
                 label: (
-                    <Link to="">My account</Link>
+                    <Link to="/admin/my-account">My account</Link>
                 ),
             },
             {
                 key: '2',
                 label: (
-                    <Link to="">Log out</Link>
+                    <Popconfirm title="Title" onConfirm={confirm}>
+                        <div style={{ border: 0, width: "100%" }}>Log out</div>
+                    </Popconfirm>
                 ),
             }
         ]}
@@ -24,16 +30,19 @@ const Account = (props) => {
     return (
         <Dropdown overlay={menu}
         >
-            <span>
+            <span
+                style={{
+                    ...props.style
+                }}>
 
                 {
                     props.image ? <Avatar
                         shape='cirle'
                         src={props.image}
                         style={{
-                            width: 48,
+                            width: 56
                         }}
-                    /> : <Avatar size={48} icon={<UserOutlined />} />
+                    /> : <Avatar size={56} icon={<UserOutlined />} />
                 }
             </span>
         </Dropdown>
