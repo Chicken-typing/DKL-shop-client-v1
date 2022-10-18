@@ -1,41 +1,35 @@
-import React,{useState} from 'react'
-import open from '../../../assets/symbols/opened-eye.png'
-import close from '../../../assets/symbols/closed-eye.png'
-import {EyeOutlined, EyeInvisibleOutlined} from 'antd'
-import Star from '../../Start'
-import './style.scss'
-export default function Password({onBlur}) {
-    const [icon, setIcon] = useState(close)
-    const [type, setType] = useState('password')
-    const [errorPassword,setErrorPassword]=useState(<br/>)
-    const handleShowPassword = () => {
-        if (icon === close) {
-            setIcon(open)
-            setType('text')
-        } else {
-            setIcon(close)
-            setType('password')
-        }
-    
-        
-    }
+import React, { useState } from 'react'
+import { Input, Form } from 'antd'
+
+export default function Password({ onBlur }) {
+    const [errorPassword, setErrorPassword] = useState(<br />)
     return (
-        <div id='Password' className="input-field">
-            <label htmlFor="password">Password <Star/></label>
-            <div className='password-field password-border'>
-                <input type={type} id='password' onBlur={(e) => {
+        <Form.Item
+            id='Password'
+            className="input-field"
+            label="Password"
+            name="password"
+            rules={
+                [
+                    {
+                        required: true,
+                        message: "Please enter your password!"
+
+                    }
+                ]
+            }>
+            <Input.Password
+                id='password'
+                onBlur={(e) => {
                     if (e.target.value === "") {
                         setErrorPassword("Password is empty.")
                         document.getElementById('password').focus()
                     } else {
                         onBlur(e.target.value)
-                        setErrorPassword(<br/>)
-
+                        setErrorPassword(<br />)
                     }
-                }}/>
-                <img src={icon} alt="eye" onClick={handleShowPassword} />
-            </div>
-            <div className="error-password">{ errorPassword}</div>
-        </div>
+                }} />
+            <div className="error-password">{errorPassword}</div>
+        </Form.Item>
     )
 }

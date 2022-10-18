@@ -1,6 +1,4 @@
 import React from 'react'
-import './style.scss'
-
 export default function Item({info}) {
   const {id, name, imgProduct, type, cost} = info
   return (
