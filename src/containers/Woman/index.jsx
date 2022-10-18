@@ -84,9 +84,9 @@ const [products, setProducts] = useState(Data)
           <Slider Data={DataSlider}/>
           <Advertise DataInfo={listAdvertise}/>
           <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
-          <div className='flex justify-between'>
+          <div className='flex justify-between '>
           <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Woman's Shoes</h2>
-          <Filter />
+          <div className='flex '><Filter/></div>
           </div>
           <div className='list-product mt-[20px] mx-auto my-auto'>
               <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>

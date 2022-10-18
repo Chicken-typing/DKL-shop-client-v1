@@ -58,9 +58,23 @@ function ListNavigation() {
     if(!show)
     {
       setShow(true)
-    }
+     
+  }
     else {
       setShow(false)
+      function handleClickOutside(event) {
+
+        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+          setShow(false)
+        }
+
+    }
+     // Bind the event listener
+     document.addEventListener("mousedown", handleClickOutside);
+     return () => {
+       // Unbind the event listener on clean up
+       document.removeEventListener("mousedown", handleClickOutside);
+     };
     }
    }
 
@@ -71,21 +85,21 @@ function ListNavigation() {
 
 
  // This function to hide the search box when click any where on the screen
- useEffect(() => {
-  function handleClickOutside(event) {
-    if(!show) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setShow(false)
-      }
-    }
-  }
-   // Bind the event listener
-   document.addEventListener("mousedown", handleClickOutside);
-   return () => {
-     // Unbind the event listener on clean up
-     document.removeEventListener("mousedown", handleClickOutside);
-   };
-}, [wrapperRef])
+//  useEffect(() => {
+//   function handleClickOutside(event) {
+//     if(!show) {
+//       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+//         setShow(false)
+//       }
+//     }
+//   }
+//    // Bind the event listener
+//    document.addEventListener("mousedown", handleClickOutside);
+//    return () => {
+//      // Unbind the event listener on clean up
+//      document.removeEventListener("mousedown", handleClickOutside);
+//    };
+// }, [wrapperRef])
 
 
 
