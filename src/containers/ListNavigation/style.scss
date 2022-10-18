@@ -12,7 +12,6 @@
     font-weight: 200;
     // position: fixed;
     width: 100%;
-    z-index: 10;
     // background-color: #ecf0f1;
 }
 
@@ -49,16 +48,36 @@ ul {
 
 .header {
     display: flex;
+    transition: 0.4s linear;
     justify-content: center;
     align-items: center;
     width: 100%;
+    visibility: visible;
     padding: 20px;
-    position: relative;
+    z-index: 140;
+    box-shadow: 0 2px 5px -1px rgba(0, 0, 0, .08);
     // background-color: #fafbfb;
     background-color: #0C0C0C;
     .bag {
         position: absolute;
         right: 20px;
+    }
+}
+
+.hidden {
+    transition: 0.1s linear;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    visibility: hidden;
+    // background-color: #fafbfb;
+    .bag {
+        position: absolute;
+        right: 20px;
+    }
+    .navbar {
+        display: none;
     }
 }
 
@@ -75,7 +94,8 @@ ul {
     position: relative;
     input {
         outline: none;
-        padding: 0 10px;
+        left: 40px;
+        top: -5px;
     }
     #search-engine {
         transform: translateY(10%);
@@ -92,6 +112,16 @@ ul {
             &:active~.search-box {
                 width: -300px;
             }
+        }
+        .disable {
+            position: absolute;
+            width: 0px;
+            border: none;
+            transform: translateY(25%);
+            border-radius: 14px;
+            visibility: hidden;
+            padding: 5px 0;
+            transition: width 1s;
         }
         .search-box {
             position: absolute;
@@ -133,7 +163,7 @@ ul {
 
 .active {
     position: relative;
-    --bc: #f4a261;
+    --bc: white;
 }
 
 .active::after {

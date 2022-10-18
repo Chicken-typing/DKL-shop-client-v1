@@ -73,20 +73,13 @@ function Popular({data}) {
 };
 
   return (
-    <section className="popular-container">
-        <h3 className="label">Popular Right Now</h3>
-        <div className="content">
-        <img className='main-img'  alt="" />
-         <div className='info'>
+    <div className='info'>
           <Slider {...settings}>
           {data.map(item => {
           return <Item  info={item}/>
           })} 
           </Slider>        
         </div>
-        </div>
-        
-    </section>
   )
 }
 
