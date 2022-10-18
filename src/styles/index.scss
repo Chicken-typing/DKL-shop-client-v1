@@ -1,8 +1,7 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 body {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.min.css";

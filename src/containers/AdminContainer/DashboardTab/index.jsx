@@ -1,9 +1,9 @@
 import React from 'react'
-import ColumnChart from '../../components/chart/ColumnChart';
-import AreaChart from '../../components/chart/AreaChart';
+import ColumnChart from '../../../components/chart/ColumnChart';
+import AreaChart from '../../../components/chart/AreaChart';
 import { Divider, Space } from 'antd';
-import PieChart from '../../components/chart/PieChart';
-import CardWrapper from '../CardWrapper';
+import PieChart from '../../../components/chart/PieChart';
+import CardWrapper from '../../CardWrapper';
 
 const DasboardTab = () => {
   return (

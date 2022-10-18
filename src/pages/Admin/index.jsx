@@ -20,7 +20,6 @@ const { Item, SubMenu } = Menu
 const { Header, Content, Sider } = Layout;
 const Admin = () => {
     const [tabAdmin, setTabAdmin] = useState("")
-
     return (
         <Layout
             hasSider
@@ -120,6 +119,7 @@ const Admin = () => {
                         }}
                     >
                         <Account image={logo} style={{ marginRight: "2%" }} />
+
                     </Header>
                 </Affix>
                 <Content
