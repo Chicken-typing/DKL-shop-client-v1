@@ -2,9 +2,6 @@ import React from 'react'
 import './style.scss'
 export default function Item({info}) {
   const { img, name, cost } = info
-  console.log(info)
-  console.log(cost)
-
   return (
     <div className="list-popular">       
         <img className='imgProduct' src={img} alt="" />
