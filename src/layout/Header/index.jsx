@@ -8,8 +8,8 @@ function Header() {
   return (
     <div className="top-nav">
                 <div className="icon-brand">
-                    <Link to='/' className='imgNike'><img src={Nike} alt="Nike-icon"/></Link>
-                    <Link to='/'><img src={Adidas} alt="" /></Link>
+                    <Link to='/main-page' className='imgNike'><img src={Nike} alt="Nike-icon"/></Link>
+                    <Link to='/main-page'><img src={Adidas} alt="" /></Link>
                 </div>
             <div className="singin-singup">
                     

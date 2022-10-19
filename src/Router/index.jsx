@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import MainPage from '../containers/MainPage'
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate, redirect, useLocation, useNavigate} from 'react-router-dom';
 import Login from '../pages/Login';
 import ListNavigation from '../containers/ListNavigation';
 import Footer from '../layout/Footer';
@@ -20,12 +20,15 @@ import {
   AddProductTab
 } from '../containers/adminTab'
 function Router() {
+
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path='/register' element={<Register />} />
-      <Route path='/' element={<Customer />}>
-        <Route path='main-page' element={<MainPage />} />
+      <Route path='/'element={<Customer/>} >    
+      <Route path="" element={<Navigate to="/main-page" replace />} />      
+       <Route path='main-page' element={<MainPage />} />
         <Route path='woman' element={<Woman />} />
         <Route path='man' element={<Man />} />
         <Route path='kid' element={<Kid />} />
