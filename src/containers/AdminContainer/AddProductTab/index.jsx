@@ -1,8 +1,8 @@
 import React from 'react';
 import { Select, Input, Form } from 'antd';
 import { HeartOutlined, DollarCircleOutlined, FormOutlined } from '@ant-design/icons';
-import InputImage from '../../components/InputImage';
-import Button from '../../components/Button';
+import InputImage from '../../../components/InputImage';
+import Button from '../../../components/Button';
 import './style.scss'
 const { TextArea } = Input
 const brands = [{

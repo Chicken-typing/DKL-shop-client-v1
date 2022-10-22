@@ -1,15 +1,11 @@
-import React, {useEffect, useState} from 'react'
-import MainPage from '../containers/MainPage'
-import { Route, Routes, Navigate, redirect, useLocation, useNavigate} from 'react-router-dom';
+
+import React from 'react'
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Login from '../pages/Login';
-import ListNavigation from '../containers/ListNavigation';
-import Footer from '../layout/Footer';
-import Woman from '../containers/Woman';
-import Man from '../containers/Man';
 import Register from '../pages/Register';
-import Customer from '../pages/Customer';
-import Kid from '../containers/Kid';
 import Admin from "../pages/Admin"
+import Customer from '../pages/Customer'
+import { MainPage, Woman, Man, Kid } from '../containers/CustomerContainer'
 import {
   AccountTab,
   DasboardTab,
@@ -18,7 +14,7 @@ import {
   SettingTab,
   TransactionTab,
   AddProductTab
-} from '../containers/adminTab'
+} from '../containers/AdminContainer'
 function Router() {
 
 

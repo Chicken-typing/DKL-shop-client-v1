@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import './style.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProduct } from '../../action';
+import { fetchProduct } from '../../../action';
 
 
 const ProductListTab = () => {
