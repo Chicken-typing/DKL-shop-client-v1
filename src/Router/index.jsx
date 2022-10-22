@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Admin from "../pages/Admin"
@@ -20,6 +20,7 @@ function Router() {
       <Route path="/login" element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/' element={<Customer />}>
+        <Route path="" element={<Navigate to="main-page" replace />} />
         <Route path='main-page' element={<MainPage />} />
         <Route path='woman' element={<Woman />} />
         <Route path='man' element={<Man />} />
@@ -27,6 +28,7 @@ function Router() {
       </Route>
       {/* admin page */}
       <Route path="/admin" element={<Admin />} >
+        <Route path="" element={<Navigate to="dashboard" replace />} />
         <Route path="product-list" element={<ProductListTab />} />
         <Route path="setting" element={<SettingTab />} />
         <Route path="transaction" element={<TransactionTab />} />
