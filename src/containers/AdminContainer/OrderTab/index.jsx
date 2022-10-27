@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchOrders } from '../../../action'
+import ListOrders from '../../ListOrders';
 const OrderTab = () => {
     const dispatch = useDispatch()
-    dispatch(fetchOrders())
+    useEffect(() => {
+        dispatch(fetchOrders())
+    });
 
     return (
-        <div>
-
+        <div className='OrderTab'>
+            <ListOrders />
         </div>
     );
 }
