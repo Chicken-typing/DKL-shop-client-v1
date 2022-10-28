@@ -1,5 +1,6 @@
 import { fetchAPI, fetchAPISuccess, fetchAPIFailure } from "./fetch";
 import { fetchProduct, fetchProductSuccess } from "./fetchProducts";
+import { fetchOrders, fetchOrdersSuccess } from "./fetchOrders";
 import {
   fetchStatic,
   fetchAccessionSuccess,
@@ -17,4 +18,6 @@ export {
   fetchAccessionSuccess,
   fetchRevenueSuccess,
   fetchNeededSuccess,
+  fetchOrders,
+  fetchOrdersSuccess,
 };
