@@ -40,6 +40,9 @@ const OrderItem = props => {
             DONE
         </Tag>) : ""
     )
+    const pay = (payment) => (
+        <Tag color={payment ? '#01A5FC' : '#FFAB04'}>{payment ? 'PAID' : 'UNPAID'}</Tag>
+    )
     return (
         <>
             <Item
@@ -60,7 +63,11 @@ const OrderItem = props => {
                     <Item.Meta
                         title={<Typography.Paragraph ellipsis={true}>{item.userName}</Typography.Paragraph>}
                         avatar={<Avatar size='large' src={item.userImage} />}
-                        description={<Typography.Text keyboard>{item.totalPrice} VND</Typography.Text>} />
+                        description={<>
+                            <Typography.Text keyboard>{item.totalPrice} VND</Typography.Text>
+                            {pay(item.paid)}
+                        </>}
+                    />
 
                 </Card>
             </Item>
@@ -74,6 +81,7 @@ const OrderItem = props => {
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <div>Customer name: {item.userName}</div>
                     <div>Address: {item.address}</div>
+                    <div>Phone number: {item.phone}</div>
                 </div>
                 <div style={{
                     display: 'flex',
