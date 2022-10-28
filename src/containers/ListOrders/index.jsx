@@ -17,7 +17,7 @@ export default function ListOrders() {
         position: "top",
         responsive: true,
         showSizeChanger: false,
-        pageSize: 9
+        pageSize: 12
       }}
       grid={{
         gutter: 16,
