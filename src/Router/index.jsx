@@ -22,15 +22,18 @@ function Router() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path='/register' element={<Register />} />
-      <Route path='/'element={<Customer/>} >    
-      <Route path="" element={<Navigate to="/main-page" replace />} />      
-       <Route path='main-page' element={<MainPage />} />
+
+      <Route path='/' element={<Customer />}>
+        <Route path="" element={<Navigate to="main-page" replace />} />
+        <Route path='main-page' element={<MainPage />} />
+
         <Route path='woman' element={<Woman />} />
         <Route path='man' element={<Man />} />
         <Route path='kid' element={<Kid />} />
       </Route>
       {/* admin page */}
       <Route path="/admin" element={<Admin />} >
+        <Route path="" element={<Navigate to="dashboard" replace />} />
         <Route path="product-list" element={<ProductListTab />} />
         <Route path="setting" element={<SettingTab />} />
         <Route path="transaction" element={<TransactionTab />} />
