@@ -12,7 +12,6 @@ import {
   OrderTab,
   ProductListTab,
   SettingTab,
-  TransactionTab,
   AddProductTab
 } from '../containers/AdminContainer'
 function Router() {
@@ -36,7 +35,6 @@ function Router() {
         <Route path="" element={<Navigate to="dashboard" replace />} />
         <Route path="product-list" element={<ProductListTab />} />
         <Route path="setting" element={<SettingTab />} />
-        <Route path="transaction" element={<TransactionTab />} />
         <Route path="add-product" element={<AddProductTab />} />
         <Route path="accounts" element={<AccountTab />} />
         <Route path="dashboard" element={<DasboardTab />} />

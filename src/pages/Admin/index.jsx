@@ -77,14 +77,6 @@ const Admin = () => {
                             </div>
                         </Link>
                     </Item>
-                    <Item key="transaction">
-                        <Link to={`/admin/transaction`}>
-                            <DollarOutlined />
-                            <div>
-                                Transaction
-                            </div>
-                        </Link>
-                    </Item>
                     <Item key="accounts">
                         <Link to={`/admin/accounts`}>
                             <UserOutlined />
@@ -129,7 +121,6 @@ const Admin = () => {
                         justifyContent: "center"
                     }}>
                     <Outlet />
-                    {tabAdmin.length === 0 ? <Waiting label="DKL Store" /> : ""}
                 </Content>
             </Layout>
         </Layout>

@@ -4,7 +4,6 @@ import DasboardTab from "./DashboardTab";
 import OrderTab from "./OrderTab";
 import ProductListTab from "./ProductListTab";
 import SettingTab from "./SettingTab";
-import TransactionTab from "./TransactionTab";
 
 export {
   AccountTab,
@@ -12,6 +11,5 @@ export {
   OrderTab,
   ProductListTab,
   SettingTab,
-  TransactionTab,
   AddProductTab,
 };
