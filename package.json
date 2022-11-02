@@ -5,8 +5,13 @@
     "dependencies": {
         "@ant-design/plots": "^1.2.2",
         "@craco/craco": "^6.4.5",
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
         "@headlessui/react": "^1.7.2",
         "@heroicons/react": "^2.0.11",
+        "@mui/icons-material": "^5.10.9",
+        "@mui/material": "^5.10.12",
+        "@mui/styled-engine-sc": "^5.10.6",
         "@reduxjs/toolkit": "^1.8.6",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.3.0",
@@ -28,6 +33,7 @@
         "redux-saga": "^1.2.1",
         "sass": "^1.55.0",
         "slick-carousel": "^1.8.1",
+        "styled-components": "^5.3.6",
         "validate.js": "^0.13.1",
         "validator": "^13.7.0",
         "web-vitals": "^2.1.4"
