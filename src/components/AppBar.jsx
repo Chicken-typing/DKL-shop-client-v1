@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBarMUI from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import SearchIcon from '@mui/icons-material/Search';
@@ -12,7 +11,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PropTypes from "prop-types"
-import { Divider, Dropdown } from 'antd';
+import { Dropdown } from 'antd';
 import Button from './Button'
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -55,11 +54,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const AppBar = props => {
-    const { hasMail, hasNotification, hasAccount } = props
+    const { hasMail, hasNotification, hasAccount, hasSearch } = props
     const menuId = 'primary-search-account-menu';
-    const notification = hasNotification => {
+    //Notification
+    const NotificationFeature = hasNotification => {
+        let [badge, setBadge] = useState("")
+        useEffect(() => {
+            setBadge("dot")
+        }, [hasNotification.data])
         const items = hasNotification.data
-        return (Object.keys(hasNotification).length > 0 ? (
+        return (items.length > 0 ? (
             <Dropdown
                 menu={{ items }}
                 trigger={['click']}
@@ -69,32 +73,38 @@ const AppBar = props => {
                     size="large"
                     aria-label="show 17 new notifications"
                     color="inherit"
+                    onClick={() => { setBadge("") }}
                 >
-                    <Badge badgeContent={hasNotification.quantity} color="error">
+                    <Badge variant={badge} color="error">
                         <NotificationsIcon />
                     </Badge>
                 </IconButton>
             </Dropdown>
         ) : "")
     }
-    const mail = hasMail => {
+    //Mail
+    const MailFeature = hasMail => {
         const items = hasMail.data
-        return (Object.keys(hasMail).length > 0 ? (
+        let [badge, setBadge] = useState("")
+        useEffect(() => {
+            setBadge("dot")
+        }, [hasMail.data])
+        return (items.length > 0 ? (
             <Dropdown
                 menu={{ items }}
                 trigger={['click']}
+                onClick={() => { setBadge("") }}
 
             >
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={(e) => e.preventDefault()}>
-                    <Badge badgeContent={hasMail.quantity} color="error">
+                    <Badge variant={badge} color="error">
                         <MailIcon />
                     </Badge>
                 </IconButton>
             </Dropdown>) : "")
     }
-
-
-    const account = hasAccount => {
+    //Account
+    const AccountFeature = hasAccount => {
         const items = [
             {
                 label: <Button type='link' onClick={hasAccount.handleProfile}>Profile</Button>,
@@ -124,33 +134,40 @@ const AppBar = props => {
                 </IconButton>
             </Dropdown>) : "")
     }
+    //Search
+    const SearchFeature = (hasSearch) => {
+        const [input, setInput] = useState("")
+        return (
+            Object.keys(hasSearch).length > 0 ? <Search>
+                <SearchIconWrapper>
+                    <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ 'aria-label': 'search' }}
+                    inputRef={hasSearch.refSearch}
+                    defaultValue={input}
+                    onKeyDown={e => {
+                        if (e.key === 'Enter') {
+                            hasSearch.handleSearch()
+                            setInput("")
+                        }
+                    }}
+                />
+            </Search> : ""
+        )
 
+    }
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBarMUI position="static">
                 <Toolbar>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
-                    >
-                        MUI
-                    </Typography>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
+                    {SearchFeature(hasSearch)}
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        {notification(hasNotification)}
-                        {mail(hasMail)}
-                        {account(hasAccount)}
+                        {NotificationFeature(hasNotification)}
+                        {MailFeature(hasMail)}
+                        {AccountFeature(hasAccount)}
                     </Box>
                 </Toolbar>
             </AppBarMUI>
@@ -162,10 +179,17 @@ AppBar.propTypes = {
     hasMail: PropTypes.object,
     hasNotification: PropTypes.object,
     hasAccount: PropTypes.object,
+    hasSearch: PropTypes.object,
 }
 AppBar.defaultProps = {
-    hasMail: {},
-    hasNotification: {},
-    hasAccount: {}
+    hasMail: {
+        data: []
+    },
+    hasNotification: {
+        data: []
+    },
+    hasAccount: {},
+    hasSearch: {}
 }
+
 export default AppBar
