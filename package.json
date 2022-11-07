@@ -36,9 +36,7 @@
         "start": "craco start",
         "build": "craco build",
         "test": "craco test",
-        "eject": "react-scripts eject",
-        "predeploy":"yarn build",
-        "deploy": "gh-pages -d   build"
+        "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": [
@@ -62,6 +60,5 @@
         "autoprefixer": "^10.4.12",
         "postcss": "^8.4.16",
         "tailwindcss": "^3.1.8"
-    },
-    "homepage": "http://Chicken-typing.github.io/DKL-shop-client-v1"
+    }
 }
