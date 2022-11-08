@@ -3,11 +3,14 @@ import Slider from '../../../components/Slider'
 import Advertise from '../../../components/Advertise';
 import Item from '../../../components/Item';
 import Filter from '../../../components/Filter';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct } from '../../../action';
+import Waiting from '../../../pages/Waiting';
 import axios from 'axios';
 
 function Man() {
 
-
+  const [loading, setLoading] = useState(false)
   const DataSlider = [
     {
       id: 1,
@@ -47,14 +50,20 @@ function Man() {
     },
   ]
   const [products, setProducts] = useState([])
-  useEffect(() => {
-    axios.get(`https://633c4d6a74afaef164068be4.mockapi.io/products/product`)
-      .then(res => {
-        const products = res.data
-        setProducts(products)
-      })
-      .catch(error => console.log(error))
-  })
+  // useEffect(() => {
+  //   axios.get(`https://633c4d6a74afaef164068be4.mockapi.io/products/product`)
+  //     .then(res => {
+  //       const products = res.data
+  //       setProducts(products)
+  //     })
+  //     .catch(error => console.log(error))
+  // })
+  const dispatch = useDispatch();
+  useEffect(() => {      
+      dispatch(fetchProduct())
+      setLoading(true)
+  }, [])
+  const res = useSelector(state => state.fetchProduct.products)
 
   return (
     <div>
@@ -68,7 +77,7 @@ function Man() {
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
           <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
-            {products.map((info) => {
+            {loading && res.map((info) => {
               return <Item info={info} />
             })}
           </div>

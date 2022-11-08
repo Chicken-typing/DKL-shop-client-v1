@@ -4,6 +4,8 @@ import Advertise from '../../../components/Advertise';
 import Item from '../../../components/Item';
 import Filter from '../../../components/Filter';
 import { Data } from '../../../Data/Data'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct } from '../../../action';
 
 function Woman() {
 
@@ -75,6 +77,12 @@ function Woman() {
   //   })
   //   .catch(error => console.log(error))
   // })
+  const dispatch = useDispatch();
+  useEffect(() => {
+      dispatch(fetchProduct())
+  }, [])
+  const res = useSelector(state => state.fetchProduct.products)
+
   return (
     <div>
       <Slider Data={DataSlider} />
@@ -86,7 +94,7 @@ function Woman() {
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
           <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
-            {products.map((info) => {
+            {res.map((info) => {
               return <Item info={info} />
             })}
           </div>

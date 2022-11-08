@@ -110,7 +110,7 @@ function ListNavigation() {
       <header className={`header ${scrollNav && 'hidden'}`} style={{top: scroll ? '0' : '' , position: scroll ? 'fixed': ''}}>       
     <nav className='navbar'>
     <ul className="ul-container"  >
-            <Tab label="Home" url="/mainpage" />
+            <Tab label="Home" url="/main-page" />
             <Tab label="Woman" url="/woman" />
             <Tab label="Man" url="/man" />
             <Tab label="Kid" url="/kid" />            
