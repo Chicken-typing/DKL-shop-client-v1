@@ -51,6 +51,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             width: '20ch',
         },
     },
+    borderBottom: "2px solid #81b4e6"
 }));
 
 const AppBar = props => {
@@ -71,7 +72,6 @@ const AppBar = props => {
             >
                 <IconButton
                     size="large"
-                    aria-label="show 17 new notifications"
                     color="inherit"
                     onClick={() => { setBadge("") }}
                 >
