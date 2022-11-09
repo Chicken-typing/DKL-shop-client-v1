@@ -5,7 +5,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Admin from "../pages/Admin"
 import Customer from '../pages/Customer'
-import { MainPage, Woman, Man, Kid } from '../containers/CustomerContainer'
+import { MainPage, Woman, Man, Kid, Brand } from '../containers/CustomerContainer'
 import {
   AccountTab,
   DasboardTab,
@@ -29,6 +29,7 @@ function Router() {
         <Route path='woman' element={<Woman />} />
         <Route path='man' element={<Man />} />
         <Route path='kid' element={<Kid />} />
+        <Route path='brand' element={<Brand/>} />
       </Route>
       {/* admin page */}
       <Route path="/admin" element={<Admin />} >

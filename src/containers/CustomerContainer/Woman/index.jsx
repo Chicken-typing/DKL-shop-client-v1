@@ -6,6 +6,7 @@ import Filter from '../../../components/Filter';
 import { Data } from '../../../Data/Data'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../../action';
+import { BackTop } from 'antd';
 
 function Woman() {
 
@@ -100,6 +101,7 @@ function Woman() {
           </div>
         </div>
       </div>
+      <BackTop style={{right:'50px'}}/>
     </div>
   )
 }

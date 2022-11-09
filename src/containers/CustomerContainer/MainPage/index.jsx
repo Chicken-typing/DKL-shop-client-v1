@@ -3,6 +3,7 @@ import Slider from '../../../components/Slider'
 import ListPopular from '../../../components/ListPouplar'
 import News from './News'
 import { DataPopular } from '../../../Data/DataPopular'
+import { BackTop } from 'antd';
 function MainPage() {
 
   const DataSlider = [
@@ -81,6 +82,7 @@ function MainPage() {
       <Slider Data={DataSlider} />
       <ListPopular dataPopular={DataPopular} />
       <News />
+      <BackTop style={{right:'50px'}}/>
     </div>
   )
 }

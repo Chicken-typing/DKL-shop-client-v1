@@ -7,6 +7,7 @@ import { fetchAdvertise } from '../../../action/fetchAdvertises';
 import {fetchProduct} from "../../../action/fetchProducts"
 import Item from '../../../components/Item';
 import Filter from '../../../components/Filter';
+import {BackTop} from 'antd'
 
 function Kid() {
   const DataSlider = [
@@ -65,6 +66,7 @@ function Kid() {
           </div>
         </div>
       </div>
+      <BackTop style={{right:'50px'}}/>
     </div>
   )
 }
