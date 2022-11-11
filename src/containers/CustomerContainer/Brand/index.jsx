@@ -5,6 +5,8 @@ import { fetchProduct } from '../../../action';
 import { fetchAdvertise } from '../../../action/fetchAdvertises';
 import { CardBrand } from './CardBrand';
 import {Data} from '../../../Data/Data'
+import ImageBackground from './ImageBackground';
+import { BackTop } from 'antd';
 
 
 function Brand() {
@@ -30,22 +32,42 @@ function Brand() {
     const data1 = [
         {
             image:
-              'https://images.unsplash.com/photo-1559494007-9f5847c49d94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-            title: 'Hawaii beaches review: better than you think',
-            category: 'beach',
+              'https://w0.peakpx.com/wallpaper/75/712/HD-wallpaper-adidas-shoes-estg-htrh.jpg',
+            title: 'LIFE IS SHORT, BUY THIS SHOES',
+            category: 'ADIDAS',
           },
+    ]
+    const background = [
+      {
+        image: 'https://wallpaperaccess.com/full/3512023.jpg',
+        title: 'Our main Brand'
+      }
     ]
   return (
     <div>
-        
-       <div  className='flex justify-evenly mt-[20px]'>
-       <div className=''>
+        {background.map((info) => (
+          <ImageBackground info={info} />
+        ))}
+        <h2 className="mt-[20px] text-2xl font-bold tracking-tight text-gray-700 text-center">Our Brand</h2>
+       <div  className='flex justify-evenly mt-[20px] p-[25px]' id='main-title'>
+       <div className='relative'>
             <CardBrand data={data} />
-            <button className=' p-[15px] border-2 rounded-[15px] bg-gray-800' onClick={() => setActive('Nike')}>More Product</button>
+            <button type='button' data-mdb-ripple="true" 
+            data-mdb-ripple-color="light" 
+            className=' p-[15px] border-2 x] bg-gray-200 text-gray-700 font-[700] text-sm leading-tight uppercase rounded shadow-md
+             hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0
+              active:bg-gray-400 active:shadow-lg
+               transition duration-150 ease-in-out absolute bottom-[20px] left-[20px]' 
+              onClick={() => setActive('Nike')}>More Product</button>
         </div>
-        <div>
+        <div className='relative'>
             <CardBrand data={data1}/>
-            <button className=' ' onClick={() => setActive('Adidas')}>More Product</button>
+            <button ype='button' data-mdb-ripple="true" 
+            data-mdb-ripple-color="light" className='p-[15px] border-2 x] bg-gray-200 text-gray-700 font-[700] text-sm leading-tight uppercase rounded shadow-md
+             hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0
+              active:bg-gray-400 active:shadow-lg
+               transition duration-150 ease-in-out absolute bottom-[20px] left-[20px]'
+             onClick={() => setActive('Adidas')}>More Product</button>
         </div>
        </div>
        <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]  grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
@@ -56,7 +78,7 @@ function Brand() {
             return <Item info={info} />
         })}
        </div>   
-
+       <BackTop style={{right:'50px'}}/>     
     </div>
  
   )
