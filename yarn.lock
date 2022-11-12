@@ -3302,7 +3302,7 @@ array.prototype.reduce@^1.0.4:
     es-array-method-boxes-properly "^1.0.0"
     is-string "^1.0.7"
 
-asap@~2.0.6:
+asap@~2.0.3, asap@~2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
@@ -4034,6 +4034,11 @@ core-js-pure@^3.23.3, core-js-pure@^3.25.1:
   version "3.26.0"
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.26.0.tgz#7ad8a5dd7d910756f3124374b50026e23265ca9a"
   integrity sha512-LiN6fylpVBVwT8twhhluD9TzXmZQQsr2I2eIKtWNbZI1XMfBT7CV18itaN6RA7EtQd/SDdRx/wzvAShX2HvhQA==
+
+core-js@^1.0.0:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
+  integrity sha512-ZiPp9pZlgxpWRu0M+YWbm6+aQ84XEfH1JRXvfOc/fILWI0VKhLC2LX13X1NYq4fULzLMq7Hfh43CSo2/aIaUPA==
 
 core-js@^3.19.2:
   version "3.26.0"
@@ -5298,6 +5303,15 @@ fb-watchman@^2.0.0:
   integrity sha512-p5161BqbuCaSnB8jIbzQHOlpgsPmK5rJVDfDKO91Axs5NC1uu3HRQm6wt9cd9/+GtQQIO53JdGXXoyDpTAsgYA==
   dependencies:
     bser "2.1.1"
+
+fbjs@0.1.0-alpha.10:
+  version "0.1.0-alpha.10"
+  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.1.0-alpha.10.tgz#46e457c09cbefb51fc752a3e030e7b67fcc384c8"
+  integrity sha512-J/R1vnoEb5AxuT8v/NdbMZ135ZGxTUAOSg1GsxVI5ArKwqnsblgZQecXnGqWnwb2KwC54j2KjgThq6fBpUM69A==
+  dependencies:
+    core-js "^1.0.0"
+    promise "^7.0.3"
+    whatwg-fetch "^0.9.0"
 
 fecha@~4.2.0:
   version "4.2.3"
@@ -8366,6 +8380,13 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
+promise@^7.0.3:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
+  integrity sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==
+  dependencies:
+    asap "~2.0.3"
+
 promise@^8.1.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/promise/-/promise-8.3.0.tgz#8cb333d1edeb61ef23869fbb8a4ea0279ab60e0a"
@@ -8956,6 +8977,13 @@ react-is@^18.0.0, react-is@^18.2.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-redirect@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-redirect/-/react-redirect-1.0.0.tgz#4679a3d4d3babbf9ae051794e2579cd71964cb3c"
+  integrity sha512-NMjs0/Umi2DtZYwuKzEHBCr9xa5+c8RexhtRBU4JZQIRzuW/h+IqNXA5mqbfXFQoaePwRZ9fuddiHe9a4JCaOw==
+  dependencies:
+    react-side-effect "~0.3.0"
+
 react-redux@^8.0.2:
   version "8.0.4"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.0.4.tgz#80c31dffa8af9526967c4267022ae1525ff0e36a"
@@ -9067,6 +9095,13 @@ react-scripts@5.0.1:
     workbox-webpack-plugin "^6.4.1"
   optionalDependencies:
     fsevents "^2.3.2"
+
+react-side-effect@~0.3.0:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-0.3.2.tgz#0daff9af35a3ec98db2036dc1683d63fbe147710"
+  integrity sha512-UGaE75w7UXQA3XYRWh2KLpU1oq8sJDhkgT91HVRzejGwVU516ll6l3xjqCAVXEl7xTCECLRbA7fr4V+h07iCwg==
+  dependencies:
+    fbjs "0.1.0-alpha.10"
 
 react-slick@^0.29.0:
   version "0.29.0"
@@ -10760,6 +10795,11 @@ whatwg-encoding@^1.0.5:
   integrity sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==
   dependencies:
     iconv-lite "0.4.24"
+
+whatwg-fetch@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-0.9.0.tgz#0e3684c6cb9995b43efc9df03e4c365d95fd9cc0"
+  integrity sha512-DIuh7/cloHxHYwS/oRXGgkALYAntijL63nsgMQsNSnBj825AysosAqA2ZbYXGRqpPRiNH7335dTqV364euRpZw==
 
 whatwg-fetch@^3.6.2:
   version "3.6.2"
