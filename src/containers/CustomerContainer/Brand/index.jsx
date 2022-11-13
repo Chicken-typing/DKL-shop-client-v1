@@ -11,7 +11,7 @@ import { BackTop } from 'antd';
 
 function Brand() {
 
-    const [active, setActive] = useState("")
+    const [active, setActive] = useState("Nike")
 
 
     const dispatch = useDispatch();

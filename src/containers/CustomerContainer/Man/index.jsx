@@ -8,6 +8,8 @@ import { fetchProduct } from '../../../action';
 import { BackTop } from 'antd';
 import Waiting from '../../../pages/Waiting';
 import axios from 'axios';
+import {Data} from '../../../Data/Data'
+
 
 function Man() {
 
@@ -17,18 +19,6 @@ function Man() {
       id: 1,
       img: 'https://i.pinimg.com/originals/ad/86/30/ad8630efb2a4b2acdf8f97e0841fe3e4.gif'
     },
-    // {
-    //     id: 2,
-    //     img: 'https://wallpaperaccess.com/full/1597753.jpg'
-    // },
-    // {
-    //     id: 3,
-    //     img: "https://raritysniper.com/news/wp-content//uploads/2022/04/rtfkt-announces-metaverse-ready-nike-dunks-nfts-758x379.jpg"
-    // },
-    // {
-    //     id: 4,
-    //     img: "https://wallpapercave.com/wp/4DvmzwJ.jpg"
-    // }
   ]
   const listAdvertise = [
     {
@@ -50,7 +40,7 @@ function Man() {
       info: 'If you’re tackling the elements, try a shoe with extra traction and durability to run through all conditions with confidence.',
     },
   ]
- 
+
   // useEffect(() => {
   //   axios.get(`https://633c4d6a74afaef164068be4.mockapi.io/products/product`)
   //     .then(res => {
@@ -62,10 +52,34 @@ function Man() {
   const dispatch = useDispatch();
   useEffect(() => {      
       dispatch(fetchProduct())
-      setLoading(true)
   }, [])
-  const res = useSelector(state => state.fetchProduct.products)
-  const [products, setProducts] = useState(res)
+  
+  // const res = useSelector(state => state.fetchProduct.products)
+  const [products, setProducts] = useState(Data)
+  const [filter, setFilter] = useState('all')
+
+  const filterHighLow = () => {
+      setFilter('HighLow')
+      const datas = [...Data]
+      datas.sort((a,b) => {
+        return a.cost - b.cost
+      })
+      setProducts(datas)
+  }
+  const filterLowHigh = () => {
+    setFilter('lowhigh')
+      const datas = [...Data]
+      datas.sort((a,b) => {
+        return b.cost - a.cost
+      })
+      setProducts(datas)
+  }
+  const filterNike = () => {
+    setFilter('nike')
+    const datas = [...Data]
+    datas.filter((val) =>  val.brand === 'Man')
+    setProducts(datas)
+  }
   return (
     <div>
       <Slider Data={DataSlider} />
@@ -74,11 +88,20 @@ function Man() {
       <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
         <div className='flex justify-between'>
           <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Man's Shoes</h2>
-          <Filter />
+          <Filter filterHighLow={filterHighLow} filterLowHigh={filterLowHigh} filterNike={filterNike}/>
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
           <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
-            {products.map((info) => {
+            {filter  &&  products.map((info) => {
+              return <Item info={info} />
+            })}
+            {filter === 'HighLow' && products.map((info) => {
+              return <Item info={info} />
+            })}
+            {filter === 'lowhigh' && products.map((info) => {
+              return <Item info={info} />
+            })}
+            {filter === 'nike' && products.map((info) => {
               return <Item info={info} />
             })}
           </div>

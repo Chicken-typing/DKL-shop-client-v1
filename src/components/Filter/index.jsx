@@ -16,7 +16,7 @@ function Filter({filterHighLow, filterLowHigh, filterNike, filterAdidas}) {
             label:  <button onClick={filterHighLow}>Price: High-Low</button>,
             key: '0',
 
-          },
+          },          
           {
             label: <button onClick={filterLowHigh}>Price: Low-High</button>,
             key: '1',
