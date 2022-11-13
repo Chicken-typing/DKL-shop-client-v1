@@ -8,12 +8,9 @@ export const API_ADMIN_NEEDED =
     "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/";
 export const API_ORDER =
     "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/order";
-<<<<<<< HEAD
+
 export const API_ADVERTISE = "https://633c4d6a74afaef164068be4.mockapi.io/products/advertise";
 
 
 export const API_PRODUCT1 =
     'https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/products';
-=======
-export const API_ADVERTISE = "https://633c4d6a74afaef164068be4.mockapi.io/products/advertise";
->>>>>>> b8bd2ee932d254a538193e3f287ace9cb1c25155
