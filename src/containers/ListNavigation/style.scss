@@ -95,7 +95,8 @@ ul {
     input {
         outline: none;
         left: 40px;
-        top: -5px;
+        top: -2px;
+        margin-left: 5px;
     }
     #search-engine {
         transform: translateY(10%);
@@ -191,16 +192,3 @@ ul {
         opacity: 1;
     }
 }
-
-// .search-info {
-//     background-color: aqua;
-//     z-index: 10;
-//     width: 100px;
-//     height: 100px;
-// }
-// .navBar {
-//     @extend %component;
-//     position: fixed;
-//     background-color: black;
-//     color: white;
-// }

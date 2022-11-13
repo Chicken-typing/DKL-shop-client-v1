@@ -6,6 +6,7 @@ import Filter from '../../../components/Filter';
 import { Data } from '../../../Data/Data'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../../action';
+import { BackTop } from 'antd';
 
 function Woman() {
 
@@ -47,7 +48,7 @@ function Woman() {
       info: 'Waterproof Running Gear for Rainy-Day Runs',
     },
   ]
-  const [products, setProducts] = useState(Data)
+ 
 
   // function onSelectionChange(value) {
   //   const sortDirection = value;
@@ -82,7 +83,31 @@ function Woman() {
       dispatch(fetchProduct())
   }, [])
   const res = useSelector(state => state.fetchProduct.products)
+  const [products, setProducts] = useState(res)
+  const [filter, setFilter] = useState('all')
 
+  const filterHighLow = () => {
+      setFilter('HighLow')
+      const datas = [...res]
+      datas.sort((a,b) => {
+        return a.cost - b.cost
+      })
+      setProducts(datas)
+  }
+  const filterLowHigh = () => {
+    setFilter('lowhigh')
+      const datas = [...res]
+      datas.sort((a,b) => {
+        return b.cost - a.cost
+      })
+      setProducts(datas)
+  }
+  const filterNike = () => {
+    setFilter('nike')
+    const datas = [...res]
+    datas.filter((val) =>  val.brand === 'Trans Male')
+    setProducts(datas)
+  }
   return (
     <div>
       <Slider Data={DataSlider} />
@@ -90,16 +115,26 @@ function Woman() {
       <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
         <div className='flex justify-between '>
           <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Woman's Shoes</h2>
-          <div className='flex '><Filter /></div>
+          <Filter filterHighLow={filterHighLow} filterLowHigh={filterLowHigh} filterNike={filterNike}/>
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
           <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
-            {res.map((info) => {
+          {filter  &&  products.map((info) => {
+              return <Item info={info} />
+            })}
+            {filter === 'HighLow' && products.map((info) => {
+              return <Item info={info} />
+            })}
+            {filter === 'lowhigh' && products.map((info) => {
+              return <Item info={info} />
+            })}
+            {filter === 'nike' && products.map((info) => {
               return <Item info={info} />
             })}
           </div>
         </div>
       </div>
+      <BackTop style={{right:'50px'}}/>
     </div>
   )
 }
