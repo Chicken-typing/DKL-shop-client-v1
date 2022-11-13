@@ -50,7 +50,7 @@ function Man() {
       info: 'If you’re tackling the elements, try a shoe with extra traction and durability to run through all conditions with confidence.',
     },
   ]
-  const [products, setProducts] = useState([])
+ 
   // useEffect(() => {
   //   axios.get(`https://633c4d6a74afaef164068be4.mockapi.io/products/product`)
   //     .then(res => {
@@ -65,7 +65,7 @@ function Man() {
       setLoading(true)
   }, [])
   const res = useSelector(state => state.fetchProduct.products)
-
+  const [products, setProducts] = useState(res)
   return (
     <div>
       <Slider Data={DataSlider} />
@@ -78,7 +78,7 @@ function Man() {
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
           <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
-            {loading && res.map((info) => {
+            {products.map((info) => {
               return <Item info={info} />
             })}
           </div>
