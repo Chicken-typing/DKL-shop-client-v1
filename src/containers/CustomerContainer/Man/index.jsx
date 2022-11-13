@@ -5,7 +5,9 @@ import Item from '../../../components/Item';
 import Filter from '../../../components/Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../../action';
+
 import { BackTop } from 'antd';
+
 import Waiting from '../../../pages/Waiting';
 import axios from 'axios';
 import {Data} from '../../../Data/Data'
