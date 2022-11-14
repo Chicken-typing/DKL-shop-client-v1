@@ -14,104 +14,67 @@ export const Data = [
         cost: 110
       },
       {
-        id:3,
+        id: 3,
         type: "Man's Shoes",
         name: 'SKT T1 INPUT',
         imgProduct: 'https://i.pinimg.com/originals/c7/45/62/c74562aa6f95064391d3dd9cd44ff372.jpg',
         cost: 140
       },
       {
-        id:4,
+        id: 4,
         type: "Man's Shoes",
         name: 'SKT T1 OUTPUT',
         imgProduct: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.3/w_608,c_limit/2038d7ff-8926-4d65-a014-6d7151588e4f/nikecourt-zoom-vapor-cage-4-rafa-hard-court-tennis-shoes-cS7wct.png',
         cost: 190
       },
       {
-        id:5,
+        id: 5,
         type: "Woman's Shoes",
         name: 'Sneaker1',
         imgProduct: 'https://www.fitness-savvy.co.uk/wp-content/uploads/2020/01/Nike-Air-Max-2017-Trainers.jpg',
         cost: 130
       },
       {
-        id:6,
+        id: 6,
         type: "Woman's Shoes",
         name: 'Sneaker1',
         imgProduct: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNV5IfrqOhCF5LCvm7cGTfVB96BQnw1Xj_-w&usqp=CAU',
         cost: 170
       },
       {
-        id:7,
+        id: 7,
         type: "Woman's Shoes",
         name: 'Nike Air Force 1',
         imgProduct: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.3/w_455,c_limit/752efdf6-b2b7-47fc-b137-5a70b5dd9423/air-force-1-07-shoe-tnM0q0.png',
         cost: 180
       },
       {
-        id:8,
+        id: 8,
         type: "Man's Shoes",
         name: 'Sneaker1',
         imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/1492bfe1-0bd0-4697-b20b-cb41ec5b4f6b/air-max-flyknit-racer-shoes-Q9lN71.png',
         cost: 240
       },
       {
-        id:9,
+        id: 9,
         type: "Woman's Shoes",
         name: 'Sneaker1',
         imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/36d491cd-5b6e-4aa1-b710-c77a53ff4b84/air-force-1-shadow-shoes-mN8Glx.png',
         cost: 340
       },
       {
-        id:10,
+        id: 10,
         type: "Man's Shoes",
         name: 'Sneaker1',
         imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/fccb1a2a-c94d-4328-b4a7-66680a7080fd/air-max-sc-shoes-FVn5sK.png',
         cost: 640
       },
       {
-        id:11,
+        id: 11,
         type: "Woman's Shoes",
         name: 'Sneaker1',
         imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/9f059ac0-7051-4f76-a056-a92e2a91c122/air-force-1-07-shoes-Bzrdk4.png',
         cost: 1240
       },
-      {
-        id:12,
-        type: "Woman's Shoes",
-        name: 'Sneaker1',
-        imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/ff572aeb-747f-40ce-93ee-2954fa1d941e/air-force-1-07-se-shoes-fcXS74.png',
-        cost: 140
-      },
-      {
-        id:13,
-        type: "Woman's Shoes",
-        name: 'Sneaker1',
-        imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/2ada706e-eabf-417b-a126-339434f884f5/air-zoom-pegasus-39-road-running-shoes-0ksHjP.png',
-        cost: 90
-      },
-      ,
-      {
-        id:14,
-        type: "Man's Shoes",
-        name: 'Sneaker1',
-        imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a30ca8b6-4421-4dfd-b9f8-800b1630782d/zoom-fly-5-road-running-shoes-3sF4CW.png',
-        cost: 480
-      },
-      ,
-      {
-        id:15,
-        type: "Woman's Shoes",
-        name: 'Sneaker1',
-        imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/441213d1-9c4b-487d-8600-634874ffcc15/superrep-go-3-next-nature-flyknit-training-shoes-tc95W5.png',
-        cost: 140
-      },
-      ,
-      {
-        id:16,
-        type: "Woman's Shoes",
-        name: 'Sneaker1',
-        imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/b72aa81e-f334-43d2-8e40-3ad10d382e7f/air-zoom-pegasus-38-ekiden-road-running-shoes-0z837x.png',
-        cost: 240
-      },
+      
 ]

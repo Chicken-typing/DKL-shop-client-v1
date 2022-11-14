@@ -6,28 +6,32 @@ import { Data } from "../../Data/Data";
 import { Select } from "antd";
 const { Option } = Select;
 
-function Filter({filterHighLow, filterLowHigh, filterNike, filterAdidas}) {
+function Filter({filterHighLow, filterLowHigh, filterNike, filterAdidas, all}) {
 
 
   const menu = (
       <Menu
         items={[
           {
-            label:  <button onClick={filterHighLow}>Price: High-Low</button>,
+            label:  <button onClick={all}>All</button>,
             key: '0',
 
-          },          
+          }, 
+          {
+            label:  <button onClick={filterHighLow}>Price: High-Low</button>,
+            key: '1',
+          },           
           {
             label: <button onClick={filterLowHigh}>Price: Low-High</button>,
-            key: '1',
-          },
-          {
-            label: <button onClick={filterNike}>Nike</button>,
             key: '2',
           },
           {
-              label: <button onClick={filterAdidas}>Adidas</button>,
-              key: '3',
+            label: <button  onClick={filterNike}>Nike</button>,
+            key: '3',
+          },
+          {
+              label: <button  onClick={filterAdidas}>Adidas</button>,
+              key: '4',
           },
         ]}
       />

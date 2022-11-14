@@ -2,6 +2,7 @@ import React from 'react'
 import './style.scss'
 
 export default function Item({info}) {
+
   const {id, name, imgProduct, brand, cost} = info
   return (
     <div className="item" key={id}>       

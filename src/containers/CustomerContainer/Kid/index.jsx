@@ -30,7 +30,7 @@ function Kid() {
       img: "https://wallpapercave.com/wp/4DvmzwJ.jpg"
     }
   ]
-  const [slider, setSlider] = useState([])
+
   // useEffect(() => {
   //   axios.get(`https://633c4d6a74afaef164068be4.mockapi.io/products/dataSlider`)
   //     .then(res => {
@@ -43,26 +43,76 @@ function Kid() {
   useEffect(() => {      
     dispatch(fetchAdvertise())
       dispatch(fetchProduct())
-
   }, [])
   const res = useSelector(state => state.fetchProduct.products)
   const advertise = useSelector(state => state.fetchAdvertise.products)
+  const [products, setProducts] = useState([])
+  const [filter, setFilter] = useState()
+
+  useEffect(() => {
+    setProducts(res)
+  }, [res])
+  const filterHighLow = () => {
+      setFilter('HighLow')
+      const datas = [...res]
+      datas.sort((a,b) => {
+        return a.cost - b.cost
+      })
+      setProducts(datas)
+  }
+  const filterLowHigh = () => {
+    setFilter('lowhigh')
+      const datas = [...res]
+      datas.sort((a,b) => {
+        return b.cost - a.cost
+      })
+      setProducts(datas)
+
+  }
+  const filterNike = () => {
+    setFilter('nike')
+    const datas = [...res]
+    datas.filter((val) =>  val.brand === 'tan')
+    setProducts( datas.filter((val) => val.brand === "tan"))
+
+  }
+  const filterAdidas = () => {
+    setFilter('adidas')
+    const datas = [...res]
+    datas.filter((val) =>  val.brand === 'tan')
+    setProducts( datas.filter((val) => val.brand === "olive"))
+  }
+  const all = () => {
+    setFilter('all')
+    setProducts(res)
+  }
   return (
     <div>
-      {/* {slider.map((info) => {
-                    return <Slider Data={slider}/>
-                  } )} */}
-      {/* <Slider Data={slider} /> */}
       <Advertise DataInfo={advertise} />
       <h3 className='mt-[30px] text-center font-normal font-Helvetical text-3xl italic text-light-black'>More Product</h3>
       <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
         <div className='flex justify-between'>
           <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Kid's Shoes</h2>
-          <Filter />
+          <Filter filterHighLow={filterHighLow} filterLowHigh={filterLowHigh} filterNike={filterNike} filterAdidas={filterAdidas} all={all}/>
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
           <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
-            {res.map((info) => {
+          {products.map((info) => {
+              return <Item info={info} />
+            })}
+            {filter === 'HighLow' && products.map((info) => {
+              return <Item info={info} />
+            })}
+            {filter === 'lowhigh' && products.map((info) => {
+              return <Item info={info} />
+            })}
+            {filter === 'nike' && products.map((info) => {
+              return <Item info={info} />
+            })}
+             {filter === 'adidas' && products.map((info) => {
+              return <Item info={info} />
+            })}
+             {filter === 'all' && products.map((info) => {
               return <Item info={info} />
             })}
           </div>
