@@ -4,6 +4,7 @@ import fetchReducer from "./fetchReducer";
 import fetchStaticReducer from "./fetchStaticReducer";
 import fetchOrderReducer from "./fetchOrderReducer";
 import fetchAdvertiseReducer from "./fetchAdvertiseReducer";
+import showSearchReducer from "./searcHiddenReducer";
 
 const rootReducer = combineReducers({
     fetch: fetchReducer,
@@ -11,5 +12,6 @@ const rootReducer = combineReducers({
     fetchStatic: fetchStaticReducer,
     fetchOrder: fetchOrderReducer,
     fetchAdvertise: fetchAdvertiseReducer,
+    showSearch: showSearchReducer,
 });
 export default rootReducer;

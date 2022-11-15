@@ -7,8 +7,9 @@ import './style.scss'
 import { searchProduct } from '../../action/searchActions';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
-import Tippy from '@tippyjs/react/headless';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct } from '../../action';
+import { useNavigate } from 'react-router-dom';
 
 function ListNavigation() {
 
@@ -20,6 +21,7 @@ function ListNavigation() {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [keyword, setKeyword] = useState("")
     const [searchResult, setSearchResult] = useState([])
+    let navigate = useNavigate();
     const controlNavbar = () => {
       if (typeof window !== 'undefined') { 
         if (window.scrollY > lastScrollY) {
@@ -69,19 +71,7 @@ function ListNavigation() {
   }
     else {
       setShow(false)
-      function handleClickOutside(event) {
 
-        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-          setShow(false)
-        }
-
-    }
-     // Bind the event listener
-     document.addEventListener("mousedown", handleClickOutside);
-     return () => {
-       // Unbind the event listener on clean up
-       document.removeEventListener("mousedown", handleClickOutside);
-     };
     }
    }
 
@@ -90,13 +80,35 @@ function ListNavigation() {
     setShow(false)
  }, [pathname])
 
+// useEffect(() => {
+//   let handler = (e) => {
+//     if(wrapperRef.current.contains(e.target))
+//     {
+//       setShow(false)
+//     }
+//   };
 
+//   document.addEventListener("mousedown", handler)
+//   return () => {
+//     // Unbind the event listener on clean up
+//     document.removeEventListener("mousedown", handler);
+//   };
+// })
  // This function to hide the search box when click any where on the screen
  useEffect(() => {
   function handleClickOutside(event) {
     if(!show) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setShow(false)        
+            if(searchResult.length > 0)
+            {
+              setShow(true)
+              
+            }
+            else{
+              
+            }
+           
+                  
       }
     }
   }
@@ -111,18 +123,32 @@ function ListNavigation() {
 const handle = e => {
   // searchProduct(e.target.value)
   setKeyword(e.target.value)
-  console.log(e.target.value)
 } 
 
 // Use this function to press Enter
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
+      setKeyword(event.target.value)
       event.target.value = ''
       console.log('do validate')
     }
 
   }
+  const dispatch = useDispatch();
+  useEffect(() => {
+      dispatch(fetchProduct())
+  }, [])
+  const res = useSelector(state => state.fetchProduct.products)
 
+
+
+  const onSearch = (searchTerm) => {
+    setKeyword(searchTerm);
+    // our api to fetch the search result
+    console.log("search ", searchTerm);
+    navigate("/products")
+    
+  };
 
   return (
    <Affix>
@@ -138,15 +164,41 @@ const handle = e => {
            <li id='search-engine'>
               <Tooltip title="search">
               <Button id='search-icon' shape="circle" icon={<SearchOutlined />} size="large" onClick={handleShow} style={{top: '-5px'}}
-              disabled={show ? true : false} />
-              <input ref={wrapperRef}  
-            onKeyDown={handleKeyDown}
-            className={show ? "show-box" : "search-box disable"} 
-            onChange={handle}
-            type="text"  />
+               />
+              <input ref={wrapperRef} 
+              value={keyword} 
+              onKeyDown={handleKeyDown}
+              onFocus={() => setKeyword("")}
+              className={show ? "show-box" : "search-box disable"} 
+              onChange={handle}
+              type="text"  />
               </Tooltip>
             </li>
-           
+            <div className="dropdown">
+            {res
+            .filter((item) => {
+              const searchTerm = keyword.toLowerCase();
+              const fullName = item.name.toLowerCase();
+
+              return (
+                searchTerm &&
+                fullName.startsWith(searchTerm) &&
+                fullName !== searchTerm
+                
+              );
+            })
+            .slice(0, 10)
+            .map((item) => (
+              <div
+                onClick={() => onSearch(item.name)}
+                className={show ?'dropdown-row': 'dropdown_close'}
+                key={item.id}
+              >
+                {item.name}
+                <img src={item.imgProduct} alt="" />
+              </div>
+            ))}        
+              </div>
             {/* style = {{ visibility: show ? "" : "hidden" }} */}
         </ul>  
         <div className='indicator'></div>          

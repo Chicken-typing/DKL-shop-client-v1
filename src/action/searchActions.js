@@ -1,4 +1,4 @@
-import { SEARCH_PRODUCT, SEARCH_PRODUCT_SUCCESS } from "../ActionType";
+import { SEARCH_PRODUCT, SEARCH_PRODUCT_SUCCESS, SHOW_SEARCH } from "../ActionType";
 
 export const searchProduct = (query) => {
     return {
@@ -12,5 +12,11 @@ export const searchProductSuccess = (res) => {
         payload: {
             data: res,
         }
+    }
+}
+export const setShowSearch = (res) => {
+    return {
+        type: SHOW_SEARCH,
+        payload: res
     }
 }
