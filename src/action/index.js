@@ -7,7 +7,7 @@ import {
     fetchRevenueSuccess,
     fetchNeededSuccess,
 } from "./fetchStatic";
-import { searchProduct, searchProductSuccess, setShowSearch } from "./searchActions";
+
 
 export {
     fetchAPI,
@@ -21,7 +21,5 @@ export {
     fetchNeededSuccess,
     fetchOrders,
     fetchOrdersSuccess,
-    searchProduct,
-    searchProductSuccess,
-    setShowSearch,
+
 };

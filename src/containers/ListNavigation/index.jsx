@@ -4,12 +4,12 @@ import { Avatar, Badge } from 'antd';
 import { useLocation} from 'react-router-dom';
 import { Affix } from 'antd';
 import './style.scss'
-import { searchProduct } from '../../action/searchActions';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../action';
 import { useNavigate } from 'react-router-dom';
+import { Data } from '../../Data/Data';
 
 function ListNavigation() {
 
@@ -33,6 +33,7 @@ function ListNavigation() {
            
         } else { // if scroll up show the navbar
           setShow(false)
+          setKeyword("")
           if(window.scrollY > 45)
           {
             setScroll(true)   
@@ -67,10 +68,12 @@ function ListNavigation() {
     if(!show)
     {
       setShow(true)
+      setKeyword("")
      
   }
     else {
       setShow(false)
+      setKeyword("")
 
     }
    }
@@ -78,39 +81,19 @@ function ListNavigation() {
    // This function to hide the search box when change the orther tab
    useEffect(() => {
     setShow(false)
+    setKeyword('')
  }, [pathname])
 
-// useEffect(() => {
-//   let handler = (e) => {
-//     if(wrapperRef.current.contains(e.target))
-//     {
-//       setShow(false)
-//     }
-//   };
-
-//   document.addEventListener("mousedown", handler)
-//   return () => {
-//     // Unbind the event listener on clean up
-//     document.removeEventListener("mousedown", handler);
-//   };
-// })
  // This function to hide the search box when click any where on the screen
  useEffect(() => {
   function handleClickOutside(event) {
-    if(!show) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-            if(searchResult.length > 0)
-            {
-              setShow(true)
-              
-            }
-            else{
-              
-            }
-           
-                  
-      }
-    }
+    // if (!keyword === "") {
+    //   if(wrapperRef.current && !wrapperRef.current.contains(event.target))
+    //   {
+    //     setShow(false)
+    //   }
+      
+    // }
   }
    // Bind the event listener
    document.addEventListener("mousedown", handleClickOutside);
@@ -121,8 +104,21 @@ function ListNavigation() {
 }, [wrapperRef])
 
 const handle = e => {
-  // searchProduct(e.target.value)
+  // This function to set value onChange and when search can not find product will show message.
   setKeyword(e.target.value)
+  setSearchResult(Data
+    .filter((item) => {
+      const searchTerm = keyword.toLowerCase();
+      const fullName = item.name.toLowerCase();
+
+      return (
+        searchTerm &&
+        fullName.startsWith(searchTerm) &&
+        fullName !== searchTerm
+        
+      );
+    })
+    .slice(0, 10))
 } 
 
 // Use this function to press Enter
@@ -174,30 +170,19 @@ const handle = e => {
               type="text"  />
               </Tooltip>
             </li>
-            <div className="dropdown">
-            {res
-            .filter((item) => {
-              const searchTerm = keyword.toLowerCase();
-              const fullName = item.name.toLowerCase();
-
-              return (
-                searchTerm &&
-                fullName.startsWith(searchTerm) &&
-                fullName !== searchTerm
-                
-              );
-            })
-            .slice(0, 10)
+            <div className='dropdown' style={{display: keyword.length > 0 ? 'block' : 'none', visibility: show ? 'visible' : 'hidden'}} >
+            { searchResult.length > 0 ? searchResult
             .map((item) => (
               <div
                 onClick={() => onSearch(item.name)}
                 className={show ?'dropdown-row': 'dropdown_close'}
+                style={{visibility: show ? 'visible': 'hidden'}}
                 key={item.id}
               >
-                {item.name}
                 <img src={item.imgProduct} alt="" />
+                <div className=' item_name z-[10]'>{item.name}</div>
               </div>
-            ))}        
+            )) : 'Can not find this product'}        
               </div>
             {/* style = {{ visibility: show ? "" : "hidden" }} */}
         </ul>  

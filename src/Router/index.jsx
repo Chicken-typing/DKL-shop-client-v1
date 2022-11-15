@@ -14,6 +14,7 @@ import {
   SettingTab,
   AddProductTab
 } from '../containers/AdminContainer'
+import ProductDetail from '../containers/ProductDetail';
 function Router() {
 
 
@@ -21,15 +22,15 @@ function Router() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path='/register' element={<Register />} />
-
       <Route path='/' element={<Customer />}>
         <Route path="" element={<Navigate to="main-page" replace />} />
         <Route path='main-page' element={<MainPage />} />
-
         <Route path='woman' element={<Woman />} />
         <Route path='man' element={<Man />} />
         <Route path='kid' element={<Kid />} />
         <Route path='brand' element={<Brand/>} />
+        <Route path='/product' element={<ProductDetail/>}/>
+        
       </Route>
       {/* admin page */}
       <Route path="/admin" element={<Admin />} >
