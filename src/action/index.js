@@ -7,6 +7,7 @@ import {
   fetchRevenueSuccess,
   fetchNeededSuccess,
 } from "./fetchStatic";
+import { fetchUser, fetchUserSuccess } from "./fetchUser";
 
 export {
   fetchAPI,
@@ -20,4 +21,6 @@ export {
   fetchNeededSuccess,
   fetchOrders,
   fetchOrdersSuccess,
+  fetchUser,
+  fetchUserSuccess,
 };

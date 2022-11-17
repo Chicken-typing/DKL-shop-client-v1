@@ -11,7 +11,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PropTypes from "prop-types"
-import { Dropdown } from 'antd';
+import { Affix, Dropdown } from 'antd';
 import Button from './Button'
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -28,7 +28,6 @@ const Search = styled('div')(({ theme }) => ({
         width: 'auto',
     },
 }));
-
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
@@ -145,13 +144,16 @@ const AppBar = props => {
                 <StyledInputBase
                     placeholder="Search…"
                     inputProps={{ 'aria-label': 'search' }}
-                    inputRef={hasSearch.refSearch}
-                    defaultValue={input}
+                    value={input}
                     onKeyDown={e => {
                         if (e.key === 'Enter') {
-                            hasSearch.handleSearch()
+                            hasSearch.handleSearch(e.target.value)
                             setInput("")
                         }
+                    }}
+                    onChange={e => {
+                        hasSearch.handleSearch(e.target.value)
+                        setInput(e.target.value)
                     }}
                 />
             </Search> : ""
@@ -159,20 +161,21 @@ const AppBar = props => {
 
     }
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBarMUI position="static">
-                <Toolbar>
-                    {SearchFeature(hasSearch)}
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        {NotificationFeature(hasNotification)}
-                        {MailFeature(hasMail)}
-                        {AccountFeature(hasAccount)}
-                    </Box>
-                </Toolbar>
-            </AppBarMUI>
-
-        </Box>
+        <Affix offsetTop={props.affix}>
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBarMUI position="static">
+                    <Toolbar>
+                        {SearchFeature(hasSearch)}
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                            {NotificationFeature(hasNotification)}
+                            {MailFeature(hasMail)}
+                            {AccountFeature(hasAccount)}
+                        </Box>
+                    </Toolbar>
+                </AppBarMUI>
+            </Box>
+        </Affix>
     );
 }
 AppBar.propTypes = {
@@ -189,7 +192,8 @@ AppBar.defaultProps = {
         data: []
     },
     hasAccount: {},
-    hasSearch: {}
+    hasSearch: {},
+    affix: 0
 }
 
 export default AppBar
