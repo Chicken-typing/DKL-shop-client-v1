@@ -1,0 +1,17 @@
+import { ADD_TO_CART } from "../ActionType";
+
+
+const CartReducer = (data = [], action) => {
+
+    switch (action.type) {
+        case ADD_TO_CART:
+            return [action.data, ...data]
+
+
+        default:
+            return data
+
+
+    }
+}
+export default CartReducer

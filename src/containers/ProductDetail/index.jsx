@@ -1,6 +1,8 @@
-import { useState } from 'react'
-import { StarIcon } from '@heroicons/react/20/solid'
+import { useState, useEffect } from 'react'
 import { RadioGroup } from '@headlessui/react'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProduct } from '../../action';
+import {useParams} from "react-router-dom"
 
 const product = {
   name: 'Nike Air Zoom Pegasus 39 Premium',
@@ -11,14 +13,7 @@ const product = {
     { id: 2, name: 'Shoes', href: '#' },
   ],
   images: [
-    {
-      src: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/5492ba39-d456-4f69-9ba6-0654077aaf13/air-zoom-pegasus-39-road-running-shoes-H2wpv0.png',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/8f91c596-0b55-4b33-bbec-87e10e6bf4d5/air-zoom-pegasus-39-road-running-shoes-H2wpv0.png',
-      alt: 'Model wearing plain black basic tee.',
-    },
+
     {
       src: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/f5d4d99e-0fb5-4a2a-81bf-4a6530bf05ef/air-zoom-pegasus-39-road-running-shoes-H2wpv0.png',
       alt: 'Model wearing plain gray basic tee.',
@@ -54,7 +49,7 @@ const product = {
   details:
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 }
-const reviews = { href: '#', average: 4, totalCount: 117 }
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -63,6 +58,14 @@ function classNames(...classes) {
 export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+      dispatch(fetchProduct())
+  }, [])
+  const res = useSelector(state => state.fetchProduct.products)
+  const {productName} = useParams()
+  const thisProduct = res.find(prod => prod.name === productName)
 
   return (
     <div className="bg-white">
@@ -91,7 +94,7 @@ export default function ProductDetail() {
             ))}
             <li className="text-sm">
               <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                {product.name}
+                {thisProduct.name}
               </a>
             </li>
           </ol>
@@ -132,13 +135,15 @@ export default function ProductDetail() {
         </div> */}
         <div className=" flex justify-center mt-6 aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
             <img
-              src={product.images[3].src}
-              alt={product.images[3].alt}
+              // src={product.images[3].src}
+              // alt={product.images[3].alt}
+              src={thisProduct.imgProduct}
               className="h-[40%] w-[40%] object-cover object-center mr-[20px] "
             />
              <img
-              src={product.images[2].src}
-              alt={product.images[2].alt}
+              // src={product.images[2].src}
+              // alt={product.images[2].alt}
+              src={thisProduct.imgProduct}
               className="h-[40%] w-[40%] object-cover object-center "
             />
           </div>
@@ -151,7 +156,7 @@ export default function ProductDetail() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
+            <p className="text-3xl tracking-tight text-gray-900">{thisProduct.cost}</p>
 
             {/* Reviews */}
             {/* <div className="mt-6">

@@ -7,7 +7,7 @@ import {
     fetchRevenueSuccess,
     fetchNeededSuccess,
 } from "./fetchStatic";
-
+import { addToCart } from "./Cart";
 
 export {
     fetchAPI,
@@ -21,5 +21,5 @@ export {
     fetchNeededSuccess,
     fetchOrders,
     fetchOrdersSuccess,
-
+    addToCart,
 };

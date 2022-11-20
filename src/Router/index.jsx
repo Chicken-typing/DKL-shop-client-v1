@@ -15,6 +15,7 @@ import {
   AddProductTab
 } from '../containers/AdminContainer'
 import ProductDetail from '../containers/ProductDetail';
+import Cart from '../pages/Cart';
 function Router() {
 
 
@@ -29,7 +30,9 @@ function Router() {
         <Route path='man' element={<Man />} />
         <Route path='kid' element={<Kid />} />
         <Route path='brand' element={<Brand/>} />
-        <Route path='/product' element={<ProductDetail/>}/>
+        <Route path="/products/:productName" element={<ProductDetail/>}/>
+        <Route path="/cart" element={<Cart/>}/>
+        
         
       </Route>
       {/* admin page */}

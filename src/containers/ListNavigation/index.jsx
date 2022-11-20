@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../action';
 import { useNavigate } from 'react-router-dom';
 import { Data } from '../../Data/Data';
+import { Link } from 'react-router-dom'
+import { addToCart } from '../../action';
+
 
 function ListNavigation() {
 
@@ -21,6 +24,7 @@ function ListNavigation() {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [keyword, setKeyword] = useState("")
     const [searchResult, setSearchResult] = useState([])
+    const [cursor, setCursor] = useState(-1)
     let navigate = useNavigate();
     const controlNavbar = () => {
       if (typeof window !== 'undefined') { 
@@ -48,7 +52,6 @@ function ListNavigation() {
         // remember current page location to use in the next move
         setLastScrollY(window.scrollY); 
       }
-      console.log(window.scrollY);
     };
        
 
@@ -87,13 +90,13 @@ function ListNavigation() {
  // This function to hide the search box when click any where on the screen
  useEffect(() => {
   function handleClickOutside(event) {
-    // if (!keyword === "") {
-    //   if(wrapperRef.current && !wrapperRef.current.contains(event.target))
-    //   {
-    //     setShow(false)
-    //   }
+    if (keyword === "") {
+      if(wrapperRef.current && !wrapperRef.current.contains(event.target))
+      {
+        setShow(false)
+      }
       
-    // }
+    }
   }
    // Bind the event listener
    document.addEventListener("mousedown", handleClickOutside);
@@ -106,7 +109,7 @@ function ListNavigation() {
 const handle = e => {
   // This function to set value onChange and when search can not find product will show message.
   setKeyword(e.target.value)
-  setSearchResult(Data
+  setSearchResult(res
     .filter((item) => {
       const searchTerm = keyword.toLowerCase();
       const fullName = item.name.toLowerCase();
@@ -126,8 +129,17 @@ const handle = e => {
     if (event.key === 'Enter') {
       setKeyword(event.target.value)
       event.target.value = ''
-      console.log('do validate')
     }
+    if (event.key === 'ArrowDown') {
+      show ? setCursor(C => (C < searchResult.length - 1 ? C + 1 : C)): setShow(true)
+    }
+    if (event.key === "ArrowUp") {
+      setCursor(c => (c > 0 ? c - 1 : 0));
+    }
+    if (event.key === "Escape") {
+      setShow(false)
+  }
+  
 
   }
   const dispatch = useDispatch();
@@ -141,17 +153,21 @@ const handle = e => {
   const onSearch = (searchTerm) => {
     setKeyword(searchTerm);
     // our api to fetch the search result
-    console.log("search ", searchTerm);
-    navigate("/products")
+    navigate("/products/:productName")
     
   };
+
+
+ 
+const data = useSelector(state => state.Cart)
+
 
   return (
    <Affix>
      <div className="all">
       <header className={`header ${scrollNav && 'hidden'}`} style={{top: scroll ? '0' : '' , position: scroll ? 'fixed': ''}}>       
     <nav className='navbar'>
-    <ul className="ul-container"  >
+    <ul className="ul-container" ref={wrapperRef}   >
             <Tab label="Home" url="/main-page" />
             <Tab label="Woman" url="/woman" />
             <Tab label="Man" url="/man" />
@@ -161,7 +177,7 @@ const handle = e => {
               <Tooltip title="search">
               <Button id='search-icon' shape="circle" icon={<SearchOutlined />} size="large" onClick={handleShow} style={{top: '-5px'}}
                />
-              <input ref={wrapperRef} 
+              <input 
               value={keyword} 
               onKeyDown={handleKeyDown}
               onFocus={() => setKeyword("")}
@@ -170,10 +186,11 @@ const handle = e => {
               type="text"  />
               </Tooltip>
             </li>
-            <div className='dropdown' style={{display: keyword.length > 0 ? 'block' : 'none', visibility: show ? 'visible' : 'hidden'}} >
+            <div  className='dropdown' style={{display: keyword.length > 0 ? 'block' : 'none', visibility: show ? 'visible' : 'hidden'}} >
             { searchResult.length > 0 ? searchResult
             .map((item) => (
               <div
+                onSelect={item}
                 onClick={() => onSearch(item.name)}
                 className={show ?'dropdown-row': 'dropdown_close'}
                 style={{visibility: show ? 'visible': 'hidden'}}
@@ -184,18 +201,15 @@ const handle = e => {
               </div>
             )) : 'Can not find this product'}        
               </div>
-            {/* style = {{ visibility: show ? "" : "hidden" }} */}
         </ul>  
         <div className='indicator'></div>          
     </nav>
         <div className="bag">
-        {/* <img id='test' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAV1JREFUSEvtluFRwzAMhfWUAYAJKBNQJqDdoCPABLABjFAmoBvABrQbwAZlgzKA/Tj1DOcmTeL4cpfjiH4lZ1uf9CydBRnIMBBXOoNJnorIpYhMRcS+1wA2XRPoBCa5IPkcgDFrB+AWwGtqAMlg59wjgIcmxwG+SoEngUnOSL4Fh18A7k3i8G9rSxE5sX8AcwA/a7UxJIG99+boWkQMOgWwjT2SnJB8D/C1qs7bsk4F0xyRfCqKwrKtmHNuCeAuZH0GYNd4LW2RxTI3yRgK7yVV7taMO4B/6yDlng/A1qOhiKxH+7Stql7EDsvguHr7BFeqPQX8SXLfmwBuROS8JqLGfWX5U8AbVZ0ZLGqrY+zGfX8K3Mtd52Q8grMUGKVO6eMsacuHRqn/hdRXAGw82ltlEPDe2zxV9wLlFtqHqh688RVwGNgX3vtJLiU+p6o2e63KM1jr6NMH/JiPwcDftpYILoVzxCEAAAAASUVORK5CYII="/>
-               */}
-          <a href="cart">
-            <Badge count={4}>
+          <Link to='/cart'>
+            <Badge count={data.length}>
                 <Avatar src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAV1JREFUSEvtluFRwzAMhfWUAYAJKBNQJqDdoCPABLABjFAmoBvABrQbwAZlgzKA/Tj1DOcmTeL4cpfjiH4lZ1uf9CydBRnIMBBXOoNJnorIpYhMRcS+1wA2XRPoBCa5IPkcgDFrB+AWwGtqAMlg59wjgIcmxwG+SoEngUnOSL4Fh18A7k3i8G9rSxE5sX8AcwA/a7UxJIG99+boWkQMOgWwjT2SnJB8D/C1qs7bsk4F0xyRfCqKwrKtmHNuCeAuZH0GYNd4LW2RxTI3yRgK7yVV7taMO4B/6yDlng/A1qOhiKxH+7Stql7EDsvguHr7BFeqPQX8SXLfmwBuROS8JqLGfWX5U8AbVZ0ZLGqrY+zGfX8K3Mtd52Q8grMUGKVO6eMsacuHRqn/hdRXAGw82ltlEPDe2zxV9wLlFtqHqh688RVwGNgX3vtJLiU+p6o2e63KM1jr6NMH/JiPwcDftpYILoVzxCEAAAAASUVORK5CYII=" />
             </Badge>
-          </a>
+          </Link>
         </div>  
     </header>
     </div>
