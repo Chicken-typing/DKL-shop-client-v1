@@ -1,4 +1,4 @@
-import { call, takeLatest, put } from "redux-saga/effects";
+import { call, takeEvery, put } from "redux-saga/effects";
 import { fetchUserSuccess, fetchAPIFailure } from "../action";
 import { FETCH_USER } from "../ActionType";
 import axios from "axios";
@@ -11,7 +11,7 @@ function* fetchPost(action) {
   }
 }
 function* fetchUserSaga() {
-  yield takeLatest(FETCH_USER, fetchPost);
+  yield takeEvery(FETCH_USER, fetchPost);
 }
 
 export default fetchUserSaga;

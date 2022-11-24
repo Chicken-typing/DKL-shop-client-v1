@@ -1,0 +1,30 @@
+#chatbox {
+  height: 100%;
+  #chatbox-header {
+    background-color: #1976d2;
+    padding: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+  }
+  #chatbox-body {
+    max-height: 80%;
+    height: 80%;
+    background-color: white;
+    padding: 10px 7px;
+    display: flex;
+    justify-content: flex-end;
+    overflow-y: scroll;
+    position: relative;
+    .chatbox-content {
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+  #chatbox-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+  }
+}
