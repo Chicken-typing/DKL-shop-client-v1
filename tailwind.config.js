@@ -42,6 +42,8 @@ module.exports = {
                 '800': '#1f2937',
                 '900': '#111827',
             },
+            'gray-bg': '#F9FAFC',
+            'gray-button': '#f2f2f2',
             'gray-light': '#d3dce6',
             'gray-nike': '#f6f6f6',
             'light-black': '#111111',
@@ -56,7 +58,8 @@ module.exports = {
                 '700': '#4338ca',
                 '800': '#3730a3',
                 '900': '#312e81',
-            }
+            },
+            'black': '	#000000',
         },
         fontFamily: {
             sans: ['Graphik', 'sans-serif'],

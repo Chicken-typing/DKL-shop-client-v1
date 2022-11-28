@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import Tab from '../../components/Tab'
 import { Avatar, Badge } from 'antd';
-import { useLocation} from 'react-router-dom';
+import { useLocation, useParams} from 'react-router-dom';
 import { Affix } from 'antd';
 import './style.scss'
 import { SearchOutlined } from '@ant-design/icons';
@@ -25,6 +25,7 @@ function ListNavigation() {
     const [keyword, setKeyword] = useState("")
     const [searchResult, setSearchResult] = useState([])
     const [cursor, setCursor] = useState(-1)
+
     let navigate = useNavigate();
     const controlNavbar = () => {
       if (typeof window !== 'undefined') { 
@@ -148,18 +149,13 @@ const handle = e => {
   }, [])
   const res = useSelector(state => state.fetchProduct.products)
 
+  // const thisProduct = res.find(prod => prod.name === productName)
 
 
-  const onSearch = (searchTerm) => {
-    setKeyword(searchTerm);
-    // our api to fetch the search result
-    navigate("/products/:productName")
-    
-  };
 
 
  
-const data = useSelector(state => state.Cart)
+const data = useSelector(state => state.Cart.carts)
 
 
   return (
@@ -191,7 +187,7 @@ const data = useSelector(state => state.Cart)
             .map((item) => (
               <div
                 onSelect={item}
-                onClick={() => onSearch(item.name)}
+                onClick={() => navigate(`/products/${item.name}`)}
                 className={show ?'dropdown-row': 'dropdown_close'}
                 style={{visibility: show ? 'visible': 'hidden'}}
                 key={item.id}

@@ -16,6 +16,9 @@ import {
 } from '../containers/AdminContainer'
 import ProductDetail from '../containers/ProductDetail';
 import Cart from '../pages/Cart';
+import Checkout from '../pages/Checkout';
+import Shipping from '../components/Shipping';
+import Payment from '../components/Payment';
 function Router() {
 
 
@@ -32,8 +35,9 @@ function Router() {
         <Route path='brand' element={<Brand/>} />
         <Route path="/products/:productName" element={<ProductDetail/>}/>
         <Route path="/cart" element={<Cart/>}/>
-        
-        
+        <Route path='/checkout' element={<Checkout/>}/>
+        <Route path='/shippingAddress' element={<Shipping/>}/>
+        <Route path='/payment' element={<Payment/>}/>
       </Route>
       {/* admin page */}
       <Route path="/admin" element={<Admin />} >

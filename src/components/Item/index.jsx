@@ -8,8 +8,6 @@ export default function Item({info}) {
 
   const {id, name, imgProduct, brand, cost} = info
   const dispatch = useDispatch();
-  const res = useSelector(state => state.fetchProduct.products)
-  const data = useSelector(state => state.Cart)
 
 
  
