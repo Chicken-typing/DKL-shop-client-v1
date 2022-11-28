@@ -42,9 +42,26 @@ module.exports = {
                 '800': '#1f2937',
                 '900': '#111827',
             },
+
+            'gray-bg': '#F9FAFC',
+            'gray-button': '#f2f2f2',
+
             'gray-light': '#d3dce6',
             'gray-nike': '#f6f6f6',
             'light-black': '#111111',
+            'indigo': {
+                default: '#eef2ff',
+                '100': '#e0e7ff',
+                '200': '#c7d2fe',
+                '300': '#a5b4fc',
+                '400': '#818cf8',
+                '500': '#6366f1',
+                '600': '#4f46e5',
+                '700': '#4338ca',
+                '800': '#3730a3',
+                '900': '#312e81',
+            },
+            'black': '	#000000',
         },
         fontFamily: {
             sans: ['Graphik', 'sans-serif'],
