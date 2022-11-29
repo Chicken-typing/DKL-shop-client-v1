@@ -8,6 +8,7 @@ import {
   fetchNeededSuccess,
 } from "./fetchStatic";
 import { addToCart, removeFromCart, deleteFromCart } from "./Cart";
+import { fetchUser, fetchUserSuccess } from "./fetchUser";
 
 export {
   fetchAPI,
@@ -24,4 +25,6 @@ export {
   addToCart,
   removeFromCart,
   deleteFromCart,
+  fetchUser,
+  fetchUserSuccess,
 };
