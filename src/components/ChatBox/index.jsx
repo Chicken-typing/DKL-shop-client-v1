@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, Layout, Avatar, Button, Drawer, Input, Typography } from 'antd';
 import { UserOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import './style.scss'
@@ -6,6 +6,8 @@ import { SendOutlined } from '@mui/icons-material';
 import MessagePiece from '../MessagePiece';
 import sendMessage from '../../services/sendMessage';
 import ScrollToBottom from 'react-scroll-to-bottom';
+import moment from 'moment';
+import { keyboard } from '@testing-library/user-event/dist/keyboard';
 const { Text } = Typography
 const { Meta } = Card
 const { Header, Footer, Content } = Layout;
@@ -27,7 +29,28 @@ const ChatBox = ({ user, handleCloseChatbox, open, socket }) => {
         })
     }, [socket])
     return (
-        <Drawer closable={false} open={open} bodyStyle={{ padding: 0 }} size='large'>
+        <Drawer
+            closable
+            closeIcon={
+                <CloseCircleOutlined style={{ fontSize: 24, color: "white" }} />
+            }
+            open={open}
+            bodyStyle={{ padding: 0 }}
+            onClose={() => {
+                // setMessageList([])
+                handleCloseChatbox()
+                setCurrentMessage("")
+            }}
+            maskClosable={false}
+            size='large'
+            headerStyle={{
+                padding: 0,
+                position: 'fixed',
+                right: 0,
+                marginTop: 20,
+                border: 0
+            }}
+        >
             <Layout id='chatbox'>
                 <Header id='chatbox-header'>
                     <Meta
@@ -36,36 +59,40 @@ const ChatBox = ({ user, handleCloseChatbox, open, socket }) => {
                         description={user.phoneNumber}
                         style={{ color: "white" }}
                     />
-                    <Button type='text' onClick={handleCloseChatbox}><CloseCircleOutlined style={{ fontSize: 24, color: "white" }} /></Button>
                 </Header>
                 <Content id='chatbox-body'>
                     <ScrollToBottom className="chatbox-content">
                         {
-                            messageList.map(item => <MessagePiece userID={item.author} message={item.message} />)
+                            messageList.map(item => <MessagePiece message={item.message} userRole={item.author} />)
                         }
                     </ScrollToBottom>
                 </Content>
                 <Footer id='chatbox-footer'>
-                    <TextArea
-                        autoSize={{
-                            minRows: 1,
-                            maxRows: 3,
-                        }}
-                        style={{
-                            padding: "5px 10px",
-                            borderRadius: 25,
-                            justifyItems: ' center'
-                        }} onChange={e => {
-                            if (e.keyCode === 13 && e.keycode === 52) {
-                                console.log(e.keyCode, e.shiftKey)
-                                setCurrentMessage(currentMessage + " <br/>")
-                            } else {
-                                if (e.keyCode === 13) return;
+                    <div id='chatbox-input'>
+                        <TextArea
+                            bordered={false}
+                            value={currentMessage}
+                            autoSize={{
+                                minRows: 1,
+                                maxRows: 3,
+                            }}
+                            style={{
+                                justifyItems: ' center',
+                            }}
+                            onChange={e => {
                                 setCurrentMessage(e.target.value)
-                            }
-
-                        }} onPressEnter={sendNewMessage} />
-                    <Button type='link' onClick={sendNewMessage}><SendOutlined /></Button>
+                            }}
+                            onPressEnter={(e) => {
+                                sendNewMessage()
+                                setCurrentMessage("")
+                                e.preventDefault()
+                            }}
+                        />
+                    </div>
+                    <Button type='link' onClick={() => {
+                        sendNewMessage()
+                        setCurrentMessage("")
+                    }}><SendOutlined /></Button>
                 </Footer>
             </Layout>
         </Drawer>

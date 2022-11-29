@@ -5,10 +5,10 @@ import Button from './Button'
 import updateUser from '../services/updateUser';
 import ChatBox from './ChatBox';
 import { io } from 'socket.io-client';
-import { API_CHAT_ROOM } from '../linkTo';
+import { API_CHAT_ROOM,API_USER_CUSTOMER } from '../linkTo';
 const { Meta } = Card;
 const { Item } = Form;
-const AccountItem = ({ user, hasEmail, handleDeleteUser, reFetch }) => {
+const AccountItem = ({ url,user, hasEmail, handleDeleteUser, reFetch,key }) => {
     const socket = io.connect(API_CHAT_ROOM)
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
@@ -17,6 +17,7 @@ const AccountItem = ({ user, hasEmail, handleDeleteUser, reFetch }) => {
         setOpenChat(!openChat)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
+    
     const showModal = () => {
         setIsModalOpen(true);
         form.resetFields()
@@ -29,7 +30,7 @@ const AccountItem = ({ user, hasEmail, handleDeleteUser, reFetch }) => {
         setIsModalOpen(false);
     };
     const onFinish = (values) => {
-        updateUser(user.id, values)
+        updateUser(url,user.id, values)
         reFetch()
     };
     const handleCloseChatbox = () => {
@@ -50,7 +51,10 @@ const AccountItem = ({ user, hasEmail, handleDeleteUser, reFetch }) => {
                         <Popconfirm
                             placement="bottom"
                             title="Do you want to delete this account?"
-                            onConfirm={() => { handleDeleteUser.handleDeleteUser(user.id); reFetch() }}
+                            onConfirm={() => {
+                                handleDeleteUser.handleDeleteUser(API_USER_CUSTOMER, user.id);
+                                reFetch()
+                            }}
                             okText="Accept"
                             cancelText="Cancel"
                         >

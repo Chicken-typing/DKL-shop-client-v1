@@ -1,9 +1,8 @@
 import axios from "axios";
-import { API_USER } from "../linkTo";
-const deleteUser = (id) => {
-  console.log(`${API_USER}/${id}`);
+const deleteUser = (url,id) => {
+  console.log(`${url}/${id}`);
   return axios
-    .delete(`${API_USER}/${id}`)
+    .delete(`${url}/${id}`)
     .catch((error) => console.error(error));
 };
 export default deleteUser;

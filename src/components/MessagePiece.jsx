@@ -2,8 +2,9 @@ import { Typography } from 'antd';
 import React from 'react';
 
 const MessagePiece = ({
-    userID,
-    message
+    userRole,
+    message,
+    key
 }) => {
     const reciveStyle = {
         backgroundColor: "#e4e6eb",
@@ -25,16 +26,18 @@ const MessagePiece = ({
 
     }
     const accountID = 'admin'
-    const alignStyle = userID === accountID ? { justifyContent: "flex-end" } : { justifyContent: "flex-start" }
+    const alignStyle = userRole === accountID ? { justifyContent: "flex-end" } : { justifyContent: "flex-start" }
     return (
-        <div style={{
+        <div
+            key={key}
+            style={{
             ...alignStyle,
             width: "100%",
             display: 'flex',
             margin: "5x 0px",
 
         }}>
-            <Typography.Paragraph style={userID === accountID ? sendStyle : reciveStyle}>
+            <Typography.Paragraph style={userRole === accountID ? sendStyle : reciveStyle}>
                 {message}
             </Typography.Paragraph>
         </div>

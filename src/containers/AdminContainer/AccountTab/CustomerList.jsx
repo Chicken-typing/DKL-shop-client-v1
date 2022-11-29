@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../../action'
 import AccountItem from '../../../components/AccountItem'
 import AppBar from '../../../components/AppBar'
-import { API_USER } from '../../../linkTo'
+import {  API_USER_CUSTOMER } from '../../../linkTo'
 import deleteUser from '../../../services/deleteUser'
 const { Header, Content } = Layout
 export default function CustomerList(props) {
@@ -12,25 +12,14 @@ export default function CustomerList(props) {
     const [result, setResult] = useState([])
     const [searching, setSearching] = useState(false)
     const mail = {
-        data: [
-            {
-                label: '123'
-            },
-            {
-                label: '123'
-            },
-            {
-                label: '123'
-            },
-        ]
+        data: []
     }
     useEffect(() => {
         dispatch(fetchUser({
-            url: API_USER
+            url: API_USER_CUSTOMER
         }))
     }, []);
     const dataUser = useSelector(state => state.fetchUser.dataUser)
-    console.log(dataUser)
     useEffect(() => {
         setResult(dataUser)
     }, [dataUser])
@@ -46,12 +35,12 @@ export default function CustomerList(props) {
     const reFetch = () => {
         setTimeout(() => {
             dispatch(fetchUser({
-                url: API_USER
+                url: API_USER_CUSTOMER
             }))
         }, 1000)
     }
-    const handleDeleteUser = (id) => {
-        deleteUser(id)
+    const handleDeleteUser = (url,id) => {
+        deleteUser(url,id)
     }
     const deleteAccount = {
         handleDeleteUser: handleDeleteUser
@@ -63,7 +52,8 @@ export default function CustomerList(props) {
                 <Header style={{ padding: 0 }}>
                     <AppBar hasMail={mail} hasSearch={search} affix={64} />
                 </Header>
-                <Content style={{
+                <Content
+                    style={{
                     overflow: "auto",
                     minHeight: 500,
                     display: "flex",
@@ -72,7 +62,7 @@ export default function CustomerList(props) {
                     paddingBottom: 20
                 }}>
                     {result.length > 0
-                        ? result.map(user => <AccountItem user={user} hasEmail handleDeleteUser={deleteAccount} reFetch={reFetch} />)
+                        ? result.map(user => <AccountItem user={user} url={API_USER_CUSTOMER}  hasEmail handleDeleteUser={deleteAccount} reFetch={reFetch} />)
                         : searching ?
                             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="The user do not exist." />
                             : <Skeleton active avatar />
