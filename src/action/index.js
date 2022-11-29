@@ -7,7 +7,7 @@ import {
   fetchRevenueSuccess,
   fetchNeededSuccess,
 } from "./fetchStatic";
-import { fetchUser, fetchUserSuccess } from "./fetchUser";
+import { addToCart, removeFromCart, deleteFromCart } from "./Cart";
 
 export {
   fetchAPI,
@@ -21,6 +21,7 @@ export {
   fetchNeededSuccess,
   fetchOrders,
   fetchOrdersSuccess,
-  fetchUser,
-  fetchUserSuccess,
+  addToCart,
+  removeFromCart,
+  deleteFromCart,
 };

@@ -6,36 +6,40 @@ import { Data } from "../../Data/Data";
 import { Select } from "antd";
 const { Option } = Select;
 
-function Filter({onClick}) {
-  const [sorted, setSorted] = useState('Normal');
+
+function Filter({filterHighLow, filterLowHigh, filterNike, filterAdidas, all}) {
+
+
 
   const menu = (
       <Menu
         items={[
           {
-            label:  <a href="">Price: High-Low</a>,
+            label:  <button onClick={all}>All</button>,
             key: '0',
-            
 
-          },
+          }, 
           {
-            label: <a href="">Price: Low-High</a>,
+            label:  <button onClick={filterHighLow}>Price: High-Low</button>,
+
             key: '1',
-          },
+          },           
           {
-            label: <a href="">Man</a>,
+            label: <button onClick={filterLowHigh}>Price: Low-High</button>,
             key: '2',
           },
           {
-              label: <a href="">Woman</a>,
-              key: '3',
+            label: <button  onClick={filterNike}>Nike</button>,
+            key: '3',
+          },
+          {
+              label: <button  onClick={filterAdidas}>Adidas</button>,
+              key: '4',
           },
         ]}
       />
     );
-  const handleSelect = (value) => {
-      setSorted(value)
-  }
+
 
   return (
     <div className="mt-[40px] ">

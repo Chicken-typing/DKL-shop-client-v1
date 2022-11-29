@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Item from '../Item';
+import ItemSlider from '../ItemSlider';
 import './style.scss'
 
 function Popular({data}) {
@@ -76,7 +76,7 @@ function Popular({data}) {
     <div className='info'>
           <Slider {...settings}>
           {data.map(item => {
-          return <Item  info={item}/>
+          return <ItemSlider  item={item}/>
           })} 
           </Slider>        
         </div>

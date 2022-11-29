@@ -1,11 +1,11 @@
-.item {
+.items {
     padding: 20px 0px;
     width: 280px;
     border-radius: 4px;
     color: black;
     position: relative;
     min-height: 350px;
-    .overplay {
+    .overplayed {
         position: absolute;
         top: 20px;
         left: 0;
@@ -26,15 +26,15 @@
             left: 50%;
             top: 50%;
             transform: translateX(-50%);
+            font-size: 15px;
+            border-radius: 11px;
             color: white;
             padding: 5px 10px;
             border: 1px solid #e8e6ea;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 11px;
-            font-size: 15px;
+            background-color: rgba(255, 255, 255, 0.2)
         }
     }
-    .overplays {
+    .overplayss {
         position: absolute;
         bottom: 90px;
         left: 0;
@@ -54,12 +54,12 @@
             position: relative;
             left: 50%;
             top: 50%;
-            font-size: 15px;
-            border-radius: 11px;
             transform: translateX(-50%);
             border: 1px solid #e8e6ea;
             background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 11px;
             color: white;
+            font-size: 15px;
             padding: 5px 10px;
         }
     }
@@ -68,12 +68,12 @@
             position: relative;
             top: -20px;
         }
-        .overplay {
+        .overplayed {
             top: 20px;
             height: 34.5%;
             opacity: 0.9;
         }
-        .overplays {
+        .overplayss {
             bottom: 90px;
             height: 34.5%;
             opacity: 0.9;
