@@ -14,6 +14,8 @@
         "@mui/styled-engine-sc": "^5.10.6",
         "@headlessui/react": "^1.7.2",
         "@heroicons/react": "^2.0.11",
+        "@headlessui/react": "^1.7.2",
+        "@heroicons/react": "^2.0.11",
         "@mantine/carousel": "^5.7.1",
         "@mantine/core": "^5.7.1",
         "@mantine/form": "^5.8.4",
