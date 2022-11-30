@@ -19,7 +19,6 @@ export default function CustomerList(props) {
             url: API_USER_CUSTOMER
         }))
     }, []);
-
     const dataUser = useSelector(state => state.fetchUser.dataUser)
     useEffect(() => {
         setResult(dataUser)
