@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../../action'
 import AccountItem from '../../../components/AccountItem'
 import AppBar from '../../../components/AppBar'
-import {  API_USER_CUSTOMER } from '../../../linkTo'
+import { API_USER_CUSTOMER } from '../../../linkTo'
 import deleteUser from '../../../services/deleteUser'
 const { Header, Content } = Layout
 export default function CustomerList(props) {
@@ -19,6 +19,7 @@ export default function CustomerList(props) {
             url: API_USER_CUSTOMER
         }))
     }, []);
+
     const dataUser = useSelector(state => state.fetchUser.dataUser)
     useEffect(() => {
         setResult(dataUser)
@@ -39,8 +40,8 @@ export default function CustomerList(props) {
             }))
         }, 1000)
     }
-    const handleDeleteUser = (url,id) => {
-        deleteUser(url,id)
+    const handleDeleteUser = (url, id) => {
+        deleteUser(url, id)
     }
     const deleteAccount = {
         handleDeleteUser: handleDeleteUser
@@ -54,15 +55,15 @@ export default function CustomerList(props) {
                 </Header>
                 <Content
                     style={{
-                    overflow: "auto",
-                    minHeight: 500,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    paddingBottom: 20
-                }}>
+                        overflow: "auto",
+                        minHeight: 500,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        paddingBottom: 20
+                    }}>
                     {result.length > 0
-                        ? result.map(user => <AccountItem user={user} url={API_USER_CUSTOMER}  hasEmail handleDeleteUser={deleteAccount} reFetch={reFetch} />)
+                        ? result.map(user => <AccountItem user={user} url={API_USER_CUSTOMER} hasEmail handleDeleteUser={deleteAccount} reFetch={reFetch} />)
                         : searching ?
                             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="The user do not exist." />
                             : <Skeleton active avatar />

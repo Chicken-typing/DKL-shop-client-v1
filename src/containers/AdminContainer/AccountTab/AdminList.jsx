@@ -4,7 +4,6 @@ import { fetchUser } from '../../../action'
 import AccountItem from '../../../components/AccountItem'
 import { API_USER_ADMIN } from '../../../linkTo'
 import deleteUser from '../../../services/deleteUser'
-import updateUser from '../../../services/updateUser'
 import { Layout, Skeleton, Affix, Modal, Form, Input } from 'antd'
 import Button from '../../../components/Button'
 import { PlusCircleOutlined } from '@ant-design/icons'
@@ -13,7 +12,14 @@ const { Header, Content } = Layout
 
 const CreateAdminForm = (open, handleFinish) => {
     return (
-        <Modal title="Add new admin" open={open} footer={null} maskClosable={false}>
+        <Modal
+            title="Add new admin"
+            open={open}
+            footer={null}
+            maskClosable={false}
+            closable={false}
+            destroyOnClose={true}
+        >
             <Form
                 name="basic"
                 labelCol={{
