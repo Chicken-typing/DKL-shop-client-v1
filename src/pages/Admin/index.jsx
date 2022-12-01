@@ -12,13 +12,11 @@ import logo from '../../assets/icons/logo-light.png'
 import { Layout, Menu, Affix } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Account from '../../components/Account';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import './style.scss'
 const { Item, SubMenu } = Menu
 const { Header, Content, Sider } = Layout;
 const Admin = () => {
-    const location = useLocation().pathname.split('/')
-    const [tabAdmin, setTabAdmin] = useState(location[2])
     return (
         <Layout
             hasSider
@@ -41,7 +39,7 @@ const Admin = () => {
 
                         }} />
                 </div>
-                <Menu theme="dark" mode="inline" onClick={value => setTabAdmin(value.key)} defaultSelectedKeys={[tabAdmin]}>
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['dashboard']}>
                     <Item key="dashboard">
                         <Link to={`/admin/dashboard`}>
                             <HomeOutlined />
