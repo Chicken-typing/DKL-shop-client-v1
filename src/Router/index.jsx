@@ -35,9 +35,14 @@ function Router() {
         <Route path='brand' element={<Brand/>} />
         <Route path="/products/:productName" element={<ProductDetail/>}/>
         <Route path="/cart" element={<Cart/>}/>
-        <Route path='/checkout' element={<Checkout/>}/>
-        <Route path='/shippingAddress' element={<Shipping/>}/>
-        <Route path='/payment' element={<Payment/>}/>
+
+        <Route path='/checkout' element={<Checkout/>}>
+            <Route path='shippingAddress' element={<Shipping/>}/>
+            <Route path='payment' element={<Payment/>}/>
+        </Route>
+        
+
+        
       </Route>
       {/* admin page */}
       <Route path="/admin" element={<Admin />} >

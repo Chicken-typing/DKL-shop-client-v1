@@ -8,6 +8,7 @@ import {
     fetchNeededSuccess,
 } from "./fetchStatic";
 import { addToCart, removeFromCart, deleteFromCart } from "./Cart";
+import { savePaymentMethod, saveShippingAddress } from "./Shipping";
 
 export {
     fetchAPI,

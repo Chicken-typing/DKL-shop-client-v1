@@ -20,10 +20,9 @@ const [postalCode, setPostalCode] = useState(
 );
 const [country, setCountry] = useState(shipping.country || '');
   
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = () => {
     dispatch(saveShippingAddress({fullName,address, city, postalCode, country }))
-    navigate('/payment')
+    navigate('/checkout/payment')
   }
   const [form] = Form.useForm();
 
@@ -45,6 +44,7 @@ const [country, setCountry] = useState(shipping.country || '');
   //     navigate('/signin?redirect=/shipping');
   //   }
   // }, [userInfo, navigate]);
+  console.log(fullName);
   
   return (
     <div>
@@ -55,7 +55,10 @@ const [country, setCountry] = useState(shipping.country || '');
         <Form
       form={form}
       layout="vertical"
-      onFinish={submitHandler} 
+      onFinish={() => {
+        submitHandler()
+        
+      }} 
       validateMessages={validateMessages}
       name="nest-messages" 
     >
@@ -67,7 +70,7 @@ const [country, setCountry] = useState(shipping.country || '');
         <Input placeholder="Your FullName" value={fullName} onChange={(e) => setFullName(e.target.value)} />
       </Form.Item>
 
-      <Form.Item label="Address" name={['user', 'address']} required tooltip="Input your correct address" rules={[
+      <Form.Item label="Address" name={[ 'address']} required tooltip="Input your correct address" rules={[
               {
                 required: true,
               },
@@ -109,7 +112,7 @@ const [country, setCountry] = useState(shipping.country || '');
       </Form.Item> */}
 
       <Form.Item>
-        <Button type="primary" htmlType="submit"  onClick={submitHandler}>Submit</Button>
+        <Button type="primary" htmlType="submit" onClick={() =>submitHandler }>Submit</Button>
       </Form.Item>
     </Form>
       </div>

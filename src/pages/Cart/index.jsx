@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, deleteFromCart, removeFromCart} from '../../action';
 import { useNavigate } from 'react-router-dom';
-
-
+import {  message } from 'antd';
+import { Empty } from 'antd';
 
 function Cart() {
 
@@ -38,14 +38,18 @@ const subTotal = () => {
 };
 
 const totalAll = () => {
-  let price = 0
-  let shipCost = ship
-  data.map(item => {
-    if(data.length > 0)
-    {
-      setShip(14)
-      price = item.cost * item.quantity + shipCost + price
-      setTotal(price)
+  let price = 0                  
+  let shipCost = ship            
+  data.map(item => {             
+    if(data.length > 0)          
+    {   
+      setShip(14)                
+      price = item.cost * item.quantity + shipCost + price    
+      setTotal(price)            
+    }
+    else {                       
+      setShip(0)                 
+      setTotal(0)                
     }
   })
 }
@@ -66,17 +70,23 @@ useEffect(() => {
   totalAll()
 }, [totalAll])
 
-
+const [messageApi, contextHolder] = message.useMessage()
+const warning = () => {
+  messageApi.open({
+    type: 'warning',
+    content: 'This is a warning message',
+  });
+};
 
   return (
+    
     <div className='py-14 px-10'>
+      {contextHolder}
       <div className='font-[800] text-gray-900 text-2xl'>Shopping Cart</div>
       <div className='flex'>
       <div className='w-[70%] px-4 pt-10 pb-16 sm:px-6 lg:grid lg:grid-cols-2 lg:grid-rows-[auto,auto,1fr] 
       lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24 lg:max-h-[30%]'>
-        {data.length === 0 &&  <div className='flex '>
-          <p className='lg:mt-28 lg:text-xl'>Your carts is empty</p>
-                    <img src="https://media0.giphy.com/media/LOL2XB5O5slfFE4K3M/200w.webp?cid=ecf05e470zc7xrtrdfp9l64cjymmikqxd87pp814xr1ocht7&rid=200w.webp&ct=s" alt="" className='emptycart_img' style={{width:"15rem",padding:10}} /></div>}
+        {data.length === 0 &&   <Empty /> }
         {/* Product List */}
         <div className='lg:col-span-2'>
         {data.map((item) => (
@@ -149,11 +159,11 @@ useEffect(() => {
              {/* Checkout  */}
           <button className='w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
                   focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4'
-                  onClick={() => navigate('/checkout')}
+                  onClick={() => data.length === 0 ? warning : navigate('/checkout/shippingAddress')}
                   >Checkout</button>
           </div>
 
-         
+          
 
 
 

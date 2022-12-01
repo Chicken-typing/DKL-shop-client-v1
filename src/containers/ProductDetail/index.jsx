@@ -183,7 +183,7 @@ export default function ProductDetail() {
               </div>
             </div> */}
 
-            <form className="mt-10">
+            <form className="mt-10" onSubmit={(e) => e.preventDefault()}>
               {/* Colors */}
               <div>
                 <h3 className="text-sm font-medium text-gray-900">Color</h3>
@@ -288,7 +288,8 @@ export default function ProductDetail() {
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent
                  bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700
                   focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  onClick={() => dispatch(addToCart(thisProduct))}
+                  onClick={() => {dispatch(addToCart(thisProduct))
+                    console.log(res);}}
               >
                 Add to Cart
               </button>

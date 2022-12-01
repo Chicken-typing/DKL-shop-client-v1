@@ -161,9 +161,10 @@ const data = useSelector(state => state.Cart.carts)
   return (
    <Affix>
      <div className="all">
-      <header className={`header ${scrollNav && 'hidden'}`} style={{top: scroll ? '0' : '' , position: scroll ? 'fixed': ''}}>       
-    <nav className='navbar'>
-    <ul className="ul-container" ref={wrapperRef}   >
+      <header className={`header  ${scrollNav && 'hidden'}`} style={{top: scroll ? '0' : '' , position: scroll ? 'fixed': ''}}>       
+        <nav className='navbar'>
+
+        <ul className="ul-container max-[570px]:absolute max-[570px]:flex-col " ref={wrapperRef}   >
             <Tab label="Home" url="/main-page" />
             <Tab label="Woman" url="/woman" />
             <Tab label="Man" url="/man" />

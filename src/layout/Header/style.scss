@@ -2,26 +2,21 @@
     background-color: black;
     width: 100%;
     display: flex;
-    padding: 10px 10px;
     justify-content: space-between;
-    a {
-        color: white;
-        text-decoration: none;
-        padding: 0 24px;
-        line-height: 38.4px;
-    }
     img {
         height: 30px;
         width: 30px;
     }
     .icon-brand {
         display: flex;
-        img {
-            margin: 0 10px;
+        padding: 10px 0;
+        align-items: center;
+        .imgNike {
+            padding: 0px 0px;
             height: 35px;
             width: 35px;
         }
-        .imgNike {
+        .imgAdidas {
             padding: 0px 0px;
             height: 35px;
             width: 35px;
@@ -32,20 +27,24 @@
         .signin {
             margin: 0 5px;
             border: none;
-            border-radius: 20px;
-            background-color: #01B768;
             padding: 10px 14px;
-            color: black;
-            &:hover {}
+            color: white;
+            &:hover {
+                background-color: #F2F4F5;
+                color: black;
+                border-radius: 12px;
+            }
         }
         .signup {
             margin: 0 5px;
             border: none;
-            border-radius: 20px;
-            background-color: #01B768;
             padding: 10px 14px;
-            color: black;
-            &:hover {}
+            color: white;
+            &:hover {
+                background-color: #F2F4F5;
+                color: black;
+                border-radius: 12px;
+            }
         }
     }
 }

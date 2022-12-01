@@ -12,5 +12,5 @@ export const API_ORDER =
 export const API_ADVERTISE = "https://633c4d6a74afaef164068be4.mockapi.io/products/advertise";
 
 
-export const API_PRODUCT1 =
+export const API_PRODUCT_CUSTOMER =
     'https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/products';

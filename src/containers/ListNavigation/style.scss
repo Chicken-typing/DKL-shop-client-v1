@@ -6,7 +6,8 @@
     
     @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
     .all {
-        display: grid;
+        display: flex;
+        flex-wrap: wrap;
         height: 80px;
         font-family: "Roboto", sans-serif;
         font-weight: 200;
@@ -245,5 +246,14 @@
         }
         &:hover {
             background-color: #f6f6f6;
+        }
+    }
+    
+    @media only screen and (max-width: 570px) {
+        .header {
+            justify-content: flex-start;
+        }
+        .ul-container {
+            left: 0;
         }
     }
