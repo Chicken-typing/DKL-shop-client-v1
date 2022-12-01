@@ -12,13 +12,21 @@ const ProductListTab = () => {
     useEffect(() => {
         dispatch(fetchProduct())
     }, [])
-    const res = useSelector(state => state.fetchProduct.products)
+    const res = useSelector(state => state.fetchProduct.products.map((item) => {
+        return {
+            ...item,
+            key: item.id
+        }
+    }
+    ))
     const brands = [{
         text: "Nike",
-        value: "Nike"
+        value: "Nike",
+        key: 'nike'
     }, {
         text: "Adidas",
-        value: "Adidas"
+        value: "Adidas",
+        key: 'adidas'
     }
     ]
 
@@ -122,8 +130,9 @@ const ProductListTab = () => {
     const columns = [
         {
             title: 'Name',
-            dataIndex: 'prodName',
-            ...getColumnSearchProps('prodName')
+            dataIndex: 'name',
+            ...getColumnSearchProps('name'),
+            width: 280
         },
         {
             title: 'Brand',
@@ -134,8 +143,8 @@ const ProductListTab = () => {
             onFilter: (value, record) => record.brand.indexOf(value) === 0
         },
         {
-            title: 'Type',
-            dataIndex: 'types',
+            title: 'Category',
+            dataIndex: 'category',
         },
         {
             title: 'Price',
@@ -143,9 +152,17 @@ const ProductListTab = () => {
             defaultSortOrder: 'descend',
             sorter: (a, b) => a.price - b.price,
         },
+        {
+            render: (_) => (
+                <>
+                    <Button type='link'>Edit</Button>
+                    <Button type='link'>Delete</Button>
+                </>
+            )
+        }
     ];
     const onChange = (pagination, filters, sorter, extra) => {
-        console.log('params', pagination, filters, sorter, extra);
+
     };
     return (
         <Table columns={columns} dataSource={res} onChange={onChange} rowSelection pagination={{
