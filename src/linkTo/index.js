@@ -17,3 +17,5 @@ export const API_USER_CUSTOMER =
 export const API_USER =
   "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/user";
 export const API_CHAT_ROOM = "";
+export const API_IMAGE_SOURCE =
+  "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/imgSrc";

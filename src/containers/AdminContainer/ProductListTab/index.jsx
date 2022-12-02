@@ -14,11 +14,6 @@ const ProductListTab = () => {
     useEffect(() => {
         dispatch(fetchProduct())
     }, [])
-    const reFetch = () => {
-        setTimeout(() => {
-            dispatch(fetchProduct())
-        }, 1000)
-    }
 
     const res = useSelector(state => state.fetchProduct.products.map((item) => {
         return {
@@ -37,7 +32,29 @@ const ProductListTab = () => {
         key: 'adidas'
     }
     ]
-
+    const categories =
+        [
+            {
+                key: 'man',
+                value: 'man',
+                text: 'Man'
+            },
+            {
+                key: 'woman',
+                value: 'woman',
+                text: 'Woman'
+            },
+            {
+                key: 'kid',
+                value: 'kid',
+                text: 'Kid'
+            },
+        ]
+    const Refetch = (callback) => {
+        return setTimeout(() => {
+            dispatch(callback);
+        }, 1000)
+    }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -138,7 +155,7 @@ const ProductListTab = () => {
     });
     const confirm = (index) => {
         deleteProduct(index.id)
-        reFetch()
+        Refetch(fetchProduct())
     };
     const columns = [
         {
@@ -158,6 +175,26 @@ const ProductListTab = () => {
         {
             title: 'Category',
             dataIndex: 'category',
+            render: (_, { category }) =>
+            (
+                <>
+                    {category.map((tag) =>
+                        <Tag color={tag === "man"
+                            ? 'red' : tag === "woman"
+                                ? 'cyan'
+                                : 'green'}>
+                            {tag}
+                        </Tag>
+                    )
+                    }
+                </>
+            ),
+            filters: [
+                ...categories
+            ],
+            onFilter: (value, record) => record.category.includes(value)
+
+
         },
         {
             title: 'Price',
@@ -198,7 +235,7 @@ const ProductListTab = () => {
     const handleSubmit = (id, values) => {
         updateProduct(id, values)
         handleClose()
-        reFetch()
+        Refetch(fetchProduct())
     };
     return (
         <>

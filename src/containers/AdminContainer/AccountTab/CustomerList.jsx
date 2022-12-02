@@ -32,11 +32,9 @@ export default function CustomerList(props) {
 
         handleSearch: handleSearch
     }
-    const reFetch = () => {
-        setTimeout(() => {
-            dispatch(fetchUser({
-                url: API_USER_CUSTOMER
-            }))
+    const Refetch = (callback) => {
+        return setTimeout(() => {
+            dispatch(callback);
         }, 1000)
     }
     const handleDeleteUser = (url, id) => {
@@ -45,7 +43,6 @@ export default function CustomerList(props) {
     const deleteAccount = {
         handleDeleteUser: handleDeleteUser
     }
-
     return (
         <>
             <Layout>
@@ -62,7 +59,11 @@ export default function CustomerList(props) {
                         paddingBottom: 20
                     }}>
                     {result.length > 0
-                        ? result.map(user => <AccountItem user={user} url={API_USER_CUSTOMER} hasEmail handleDeleteUser={deleteAccount} reFetch={reFetch} />)
+                        ? result.map(user => <AccountItem user={user} url={API_USER_CUSTOMER}
+                            hasEmail handleDeleteUser={deleteAccount}
+                            reFetch={Refetch(fetchUser({
+                                url: API_USER_CUSTOMER
+                            }))} />)
                         : searching ?
                             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="The user do not exist." />
                             : <Skeleton active avatar />
