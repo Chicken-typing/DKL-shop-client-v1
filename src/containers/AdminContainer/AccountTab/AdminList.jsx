@@ -18,7 +18,9 @@ const CreateAdminForm = (open, handleFinish, handleTurnOff) => {
             footer={null}
             closable={false}
             destroyOnClose
-            >
+
+        >
+
             <Form
                 name="basic"
                 labelCol={{
@@ -117,11 +119,9 @@ export default function AdminList() {
         }))
     }, []);
     const dataUser = useSelector(state => state.fetchUser.dataUser)
-    const reFetch = () => {
-        setTimeout(() => {
-            dispatch(fetchUser({
-                url: API_USER_ADMIN
-            }))
+    const Refetch = (callback) => {
+        return setTimeout(() => {
+            dispatch(callback);
         }, 1000)
     }
     const handleDeleteUser = (url, id) => {
@@ -138,7 +138,11 @@ export default function AdminList() {
     const handleFinish = (values) => {
         handleTurnOff()
         addUser({ ...values, role: 'ADMIN', isActive: true })
-        reFetch()
+
+        Refetch(fetchUser({
+            url: API_USER_ADMIN
+        }))
+
     };
 
     return (
@@ -178,7 +182,11 @@ export default function AdminList() {
                     }}
                 >
                     {dataUser.length > 0
-                        ? dataUser.map(user => <AccountItem user={user} url={API_USER_ADMIN} handleDeleteUser={deleteAccount} reFetch={reFetch} />)
+                        ? dataUser.map(user => <AccountItem user={user} url={API_USER_ADMIN} h
+                            andleDeleteUser={deleteAccount}
+                            reFetch={Refetch(fetchUser({
+                                url: API_USER_ADMIN
+                            }))} />)
                         : <Skeleton active avatar />
                     }
                 </Content>
