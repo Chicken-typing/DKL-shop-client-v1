@@ -40,6 +40,7 @@ const Admin = () => {
 
                         }} />
                 </div>
+
                 <Menu theme="dark" mode="inline" selectedKeys={[location[2]]}>
                     <Item key="dashboard">
                         <Link to={`/admin/dashboard`}>

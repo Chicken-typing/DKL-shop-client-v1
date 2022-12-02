@@ -18,7 +18,7 @@ const CreateAdminForm = (open, handleFinish, handleTurnOff) => {
             footer={null}
             closable={false}
             destroyOnClose
-        >
+            >
             <Form
                 name="basic"
                 labelCol={{

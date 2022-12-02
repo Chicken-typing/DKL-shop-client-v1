@@ -19,6 +19,7 @@ const ProductListTab = () => {
             dispatch(fetchProduct())
         }, 1000)
     }
+
     const res = useSelector(state => state.fetchProduct.products.map((item) => {
         return {
             ...item,
