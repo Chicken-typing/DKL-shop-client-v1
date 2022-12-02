@@ -10,16 +10,15 @@ import { PlusCircleOutlined } from '@ant-design/icons'
 import addUser from '../../../services/addUser'
 const { Header, Content } = Layout
 
-const CreateAdminForm = (open, handleFinish) => {
+const CreateAdminForm = (open, handleFinish, handleTurnOff) => {
     return (
         <Modal
             title="Add new admin"
             open={open}
             footer={null}
-            maskClosable={false}
             closable={false}
-            destroyOnClose={true}
-        >
+            destroyOnClose
+            >
             <Form
                 name="basic"
                 labelCol={{
@@ -96,11 +95,12 @@ const CreateAdminForm = (open, handleFinish) => {
                 </Form.Item>
                 <Form.Item
                     wrapperCol={{
-                        offset: 8,
+                        offset: 10,
                         span: 16,
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
+                    <Button type='ghost' style={{ margin: '0px 5px' }} onClick={handleTurnOff}>Cancel</Button>
+                    <Button type="primary" htmlType="submit" style={{ margin: '0px 5px' }}>
                         Submit
                     </Button>
                 </Form.Item>
@@ -131,9 +131,13 @@ export default function AdminList() {
         handleDeleteUser: handleDeleteUser
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleFinish = (values) => {
+    const handleTurnOff = () => {
         setIsModalOpen(false);
-        addUser({ ...values, role: 'ADMIN' })
+
+    }
+    const handleFinish = (values) => {
+        handleTurnOff()
+        addUser({ ...values, role: 'ADMIN', isActive: true })
         reFetch()
     };
 
@@ -179,7 +183,7 @@ export default function AdminList() {
                     }
                 </Content>
             </Layout>
-            {CreateAdminForm(isModalOpen, handleFinish)}
+            {CreateAdminForm(isModalOpen, handleFinish, handleTurnOff)}
         </>
     )
 }

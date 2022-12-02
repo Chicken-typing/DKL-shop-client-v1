@@ -18,7 +18,6 @@ const { Item, SubMenu } = Menu
 const { Header, Content, Sider } = Layout;
 const Admin = () => {
     const location = useLocation().pathname.split('/')
-    const [tabAdmin, setTabAdmin] = useState(location[2])
     return (
         <Layout
             hasSider
@@ -41,7 +40,8 @@ const Admin = () => {
 
                         }} />
                 </div>
-                <Menu theme="dark" mode="inline" onClick={value => setTabAdmin(value.key)} defaultSelectedKeys={[tabAdmin]}>
+
+                <Menu theme="dark" mode="inline" selectedKeys={[location[2]]}>
                     <Item key="dashboard">
                         <Link to={`/admin/dashboard`}>
                             <HomeOutlined />
