@@ -18,7 +18,9 @@ const CreateAdminForm = (open, handleFinish, handleTurnOff) => {
             footer={null}
             closable={false}
             destroyOnClose
+
         >
+
             <Form
                 name="basic"
                 labelCol={{
@@ -136,9 +138,11 @@ export default function AdminList() {
     const handleFinish = (values) => {
         handleTurnOff()
         addUser({ ...values, role: 'ADMIN', isActive: true })
+
         Refetch(fetchUser({
             url: API_USER_ADMIN
         }))
+
     };
 
     return (
