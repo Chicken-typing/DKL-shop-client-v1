@@ -1,8 +1,10 @@
 .top-nav {
     background-color: black;
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
     #profile {
         color: black;
     }

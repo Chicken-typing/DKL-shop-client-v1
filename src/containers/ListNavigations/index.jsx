@@ -143,10 +143,10 @@ function ListNavigations() {
  
 
   return (
-    <Disclosure as="nav" className="bg-black">
+    <Disclosure as="nav" className={`scroll bg-black max-w-[100%] ${scrollNav && 'hidden'} `} style={{top: scroll ? '0' : '' , position: scroll ? 'fixed': ''}}>
       {({ open }) => (
         <>
-          <div className=" px-2 sm:px-6 lg:px-7">
+          <div className=" px-3 sm:px-6 lg:px-7">
             <div className="relative flex h-16 items-center justify-center">
               <div className="absolute inset-y-0 left-0 flex items-center nmd:hidden">
                 {/* Mobile menu button*/}
@@ -159,9 +159,9 @@ function ListNavigations() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex  items-center justify-center sm:items-stretch sm:justify-start justify-self-center ">
-                <div className="sm:ml-6 sm:block ">
-                  <div className="flex space-x-4 m-sm:invisible">
+              <div className="flex  items-center justify-center sm:items-stretch sm:justify-start max-w-[100%] ">
+                <div className="sm:ml-6 sm:block max-w-[100%] ">
+                  <div className="flex  m-sm:invisible max-w-[100%]">
                     <Tab label="Home" url="/main-page" />
                     <Tab label="Woman" url="/woman" />
                     <Tab label="Man" url="/man" />
@@ -175,7 +175,7 @@ function ListNavigations() {
             onChange={() => handle}
             value={keyword}
                 /> */}
-                    <li id="search-engine">
+                    <li className="search-engine m-sm:hidden">
                       <Tooltip title="search">
                         <Button
                           id="search-icon"
@@ -238,14 +238,14 @@ function ListNavigations() {
             </div>
           </div>
 
-          <Disclosure.Panel className="nmd:hidden">
+          <Disclosure.Panel className='nmd:hidden'>
             <div className="space-y-1 px-2 pt-2 pb-3 relative">
               <Tab label="Home" url="/main-page" />
-              <Tab label="Woman" url="/woman" />
+              <Tab label="Woman" url="/woman" />-=
               <Tab label="Man" url="/man" />
               <Tab label="Kid" url="/kid" />
               <Tab label="Brand" url="/brand" />
-              <li id="search-engine">
+              <li className="search-engine">
                 <Tooltip title="search">
                   <Button
                     id="search-icon"
@@ -267,7 +267,7 @@ function ListNavigations() {
                 </Tooltip>
               </li>
               <div
-                className="dropdown"
+                className="dropdowns"
                 style={{
                   display: keyword.length > 0 ? "block" : "none",
                   visibility: show ? "visible" : "hidden",
@@ -278,11 +278,10 @@ function ListNavigations() {
                       <div
                         onSelect={item}
                         onClick={() => navigate(`/products/${item.name}`)}
-                        className={show ? "dropdown-row" : "dropdown_close"}
+                        className={show ? "dropdown-col" : "dropdown_close"}
                         style={{ visibility: show ? "visible" : "hidden" }}
                         key={item.id}
                       >
-                        <img src={item.imgProduct} alt="" />
                         <div className=" item_name z-[10]">{item.name}</div>
                       </div>
                     ))

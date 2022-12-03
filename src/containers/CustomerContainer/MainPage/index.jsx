@@ -6,15 +6,16 @@ import { DataPopular } from '../../../Data/DataPopular'
 import { BackTop } from 'antd';
 import './style.scss'
 import MainBackground from '../../../components/MainBackground'
+
 function MainPage() {
 
 
 
   return (
-    <div className="main-page max-w-[100%] ">
+    <div className="main-page  ">
       <div id='popular' >
         <div className='popular_container m-s:px-[10px] '>
-        <MainBackground />
+        <MainBackground />   
         <ListPopular dataPopular={DataPopular} />
         </div>
      </div>

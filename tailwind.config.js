@@ -24,6 +24,7 @@ module.exports = {
 
 
             'm-sm': { 'max': '639px' },
+            'm-ss': { 'max': '375px' }
         },
         colors: {
             'white': '#FFFFFF',

@@ -15,14 +15,14 @@ function Customer() {
     const navigate = useNavigate()
   return (
     <div>
-        <Layout.Header  style={{padding: '0', backgroundColor: 'black'}}><Header/></Layout.Header>
-        <Layout.Content>
+        <Header/>
+
             <ListNavigations/>
             <div>
                 <Outlet/>
             </div>
-        </Layout.Content>
-        <Layout.Footer><Footer/></Layout.Footer>
+
+        {/* <Layout.Footer><Footer/></Layout.Footer> */}
     </div>
   )
 }

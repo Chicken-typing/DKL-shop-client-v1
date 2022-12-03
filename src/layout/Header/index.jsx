@@ -20,7 +20,7 @@ const [isLoged, setIsLoged] = useState(false)
 
   return (
     
-    <div className="top-nav lg:W-[100%] s:w-[375px]">
+    <div className="top-nav">
                 <div className="icon-brand">
                     <Link to='/main-page' className='imgNike'><img src={Nike} alt="Nike-icon"/></Link>
                     <Link to='/main-page' className="imgAdidas"><img src={Adidas} alt="" /></Link>
@@ -48,37 +48,34 @@ const [isLoged, setIsLoged] = useState(false)
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-30 mt-2 w-48 origin-top-right rounded-md text-black bg-thin-black drop-shadow-4xl  py-1  focus:outline-none"
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     id="custom">
-                      <Menu.Item >
+                      <Menu.Item  >
                         {({ active }) => (
-                          <Link
-                            href="#"
-                            className={classNames(active ? 'bg-light-blue' : '', 'block px-4 py-2 text-sm text-black')}
-                            id='profile'
+                          <div
+                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
                           >
                             Your Profile
-                          </Link>
+                          </div>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <Link
-                            href="#"
-                            className={classNames(active ? 'bg-light-blue' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          <div
+                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
                           >
                             Settings
-                          </Link>
+                          </div>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <Link
+                          <div
                             href="#"
-                            className={classNames(active ? 'bg-light-blue' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
                           >
                             Sign out
-                          </Link>
+                          </div>
                         )}
                       </Menu.Item>
                     </Menu.Items>
