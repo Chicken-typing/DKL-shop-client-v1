@@ -1,45 +1,151 @@
 import React, { useState } from 'react';
-import Email from '../../components/InputField/Email'
-import Password from '../../components/InputField/Password'
-import RePassword from '../../components/InputField/RePassword';
-import FName from '../../components/InputField/FirstName';
-import LName from '../../components/InputField/LastName';
-import { Form, Button } from 'antd'
+import { Form, Button, Input, DatePicker, Tag, message } from 'antd'
 import './style.scss'
+import { Link, useNavigate } from 'react-router-dom';
+import addNewAccount from '../../services/addNewAccount';
+const { Item } = Form
+const key = 'signign-up';
+const openMessage = () => {
+    message.loading({
+        content: 'Loading...',
+        key,
+    });
+    setTimeout(() => {
+        message.success({
+            content: 'Sign up success!',
+            key,
+            duration: 2,
+        });
+    }, 1000);
+};
 const Register = () => {
     const [password, setPassword] = useState("")
-    function onGetPassword(getPassword) {
-        setPassword(getPassword)
-
+    const [isSame, setIsSame] = useState(false)
+    const navigate = useNavigate()
+    const handleRegist = value => {
+        const data = { ...value }
+        delete data.repassword
+        addNewAccount(data)
     }
     return (
-        <div className='Register'>
+        <div className='register'>
+            <h1>SIGN UP</h1>
             <Form
                 name="basic"
                 labelCol={{
-                    span: 16,
+                    span: 6,
                 }}
                 wrapperCol={{
-                    span: 150,
+                    span: 14,
                 }}
                 autoComplete="off"
-                layout="vertical"            
-            >
+                layout="horizontal"
+                onFinish={
+                    value => {
+                        handleRegist(value)
+                        openMessage()
+                        navigate('/login')
+                    }
+                }
 
-                <h1>Register</h1>
-                <Email />
-                <div className='input-row'>
-                    <FName />
-                    <LName />
-                </div>
-                <div className='input-row '>
-                    <Password onBlur={onGetPassword} />
-                    <RePassword password={password} />
-                </div>
-                <div className='input-row'>
-                    <Button type='primary' block danger >REGISTER</Button>
-                    <span className='title'>Already a member,&nbsp;<a href=' '>Sign in</a></span>
-                </div>
+            >
+                <Item
+                    label="Email"
+                    name='email'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your email.',
+                            type: 'email'
+                        }
+
+                    ]}>
+                    <Input />
+                </Item>
+                <Item
+                    label="Full name"
+                    name='fullname'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your full name.',
+                        }
+
+                    ]}>
+                    <Input />
+                </Item>
+                <Item
+                    label="Birthday"
+                    name='birthday'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your birthday.',
+                            type: 'object'
+                        }
+
+                    ]}>
+                    <DatePicker format={'DD/MM/YY'} />
+                </Item>
+                <Item
+                    label="Phone number"
+                    name='phone'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your phone number.'
+                        }
+
+                    ]}>
+                    <Input />
+                </Item>
+                <Item
+                    label="Address"
+                    name='address'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your address.',
+                            type: 'string'
+                        }
+
+                    ]}>
+                    <Input />
+                </Item>
+                <Item
+                    label="Password"
+                    name='password'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your password.'
+                        }
+
+                    ]}>
+                    <Input.Password onBlur={(e) => setPassword(e.target.value)} />
+                </Item>
+                <Item
+                    label="Confirm Password"
+                    name='repassword'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please confirm input your password.'
+                        }
+
+                    ]}>
+                    <Input.Password
+                        status={!isSame && 'error'}
+                        onBlur={
+                            (e) => setIsSame(e.target.value === password)
+                        }
+                        addonAfter={!isSame && <Tag color="error">Not match</Tag>}
+                    />
+                </Item>
+                <Item style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button htmlType='submit' type='danger' size='large' disabled={!isSame}>Register</Button>
+                </Item>
+                <div className='title'>Already a member,&nbsp;<Link to='/login'>Sign in</Link></div>
             </Form>
         </div>
     );
