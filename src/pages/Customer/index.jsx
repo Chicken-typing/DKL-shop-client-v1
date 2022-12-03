@@ -21,8 +21,8 @@ function Customer() {
             <div>
                 <Outlet/>
             </div>
-
-        {/* <Layout.Footer><Footer/></Layout.Footer> */}
+        <Footer/>
+        
     </div>
   )
 }
