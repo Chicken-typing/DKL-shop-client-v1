@@ -27,8 +27,8 @@ function Router() {
       <Route path="/login" element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/' element={<Customer />}>
-        <Route path="" element={<Navigate to="main-page" replace />} />
-        <Route path='main-page' element={<MainPage />} />
+        <Route path="" element={<Navigate to="home" replace />} />
+        <Route path='home' element={<MainPage />} />
         <Route path='woman' element={<Woman />} />
         <Route path='man' element={<Man />} />
         <Route path='kid' element={<Kid />} />

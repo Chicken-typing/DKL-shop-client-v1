@@ -26,8 +26,8 @@ const [isLoged, setIsLoged] = useState(false)
                     <Link to='/main-page' className="imgAdidas"><img src={Adidas} alt="" /></Link>
                 </div>
               {isLoged ? <div className="singin-singup">
-                    <Link to="/Login" className='signin'>Sign In</Link>
-                     <Link to="/Register" className='signup'>Sign Up</Link>
+                    <Link to="/login" className='signin'>Sign In</Link>
+                     <Link to="/register" className='signup'>Sign Up</Link>
             </div>: <Menu as="div" className="relative ml-3 mt-2 text-black">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
