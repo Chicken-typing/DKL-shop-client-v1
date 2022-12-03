@@ -32,6 +32,7 @@ const ProductListTab = () => {
         key: 'adidas'
     }
     ]
+
     const categories =
         [
             {
@@ -55,6 +56,7 @@ const ProductListTab = () => {
             dispatch(callback);
         }, 1000)
     }
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -155,7 +157,9 @@ const ProductListTab = () => {
     });
     const confirm = (index) => {
         deleteProduct(index.id)
+
         Refetch(fetchProduct())
+
     };
     const columns = [
         {
@@ -235,7 +239,9 @@ const ProductListTab = () => {
     const handleSubmit = (id, values) => {
         updateProduct(id, values)
         handleClose()
+
         Refetch(fetchProduct())
+
     };
     return (
         <>
