@@ -6,11 +6,13 @@ import './style.scss'
 
 export default function Item({info}) {
 
+
   const {id, name, imgProduct, brand, cost} = info
   const dispatch = useDispatch();
 
 
  
+
   return (
     <div  className="item" key={id} >       
         <img className='imgProduct' src={imgProduct} alt="" />
@@ -20,7 +22,9 @@ export default function Item({info}) {
         <div className="name-cost">
         <div className="costProduct">{cost}</div> 
         <div className="name font-Helvetical">
+
           <Link to={`/products/${info.name}`}>{name}</Link>
+
           <div className='type'>{brand}</div>
         </div>
         </div>

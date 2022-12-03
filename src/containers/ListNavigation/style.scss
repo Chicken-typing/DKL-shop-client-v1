@@ -46,6 +46,7 @@
     ul {
         list-style: none;
     }
+
     
     .header {
         display: flex;
@@ -80,6 +81,7 @@
         .navbar {
             display: none;
         }
+
     }
     
     .navbar {
@@ -209,6 +211,7 @@
     .dropdown:empty {
         border: none;
     }
+
     
     // .dropdown_close {
     //     display: flex;
@@ -248,6 +251,7 @@
             background-color: #f6f6f6;
         }
     }
+
     
     @media only screen and (max-width: 570px) {
         .header {
@@ -257,3 +261,6 @@
             left: 0;
         }
     }
+
+
+
