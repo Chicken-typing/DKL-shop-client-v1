@@ -10,16 +10,17 @@ import { PlusCircleOutlined } from '@ant-design/icons'
 import addUser from '../../../services/addUser'
 const { Header, Content } = Layout
 
-const CreateAdminForm = (open, handleFinish) => {
+const CreateAdminForm = (open, handleFinish, handleTurnOff) => {
     return (
         <Modal
             title="Add new admin"
             open={open}
             footer={null}
-            maskClosable={false}
             closable={false}
-            destroyOnClose={true}
+            destroyOnClose
+
         >
+
             <Form
                 name="basic"
                 labelCol={{
@@ -96,11 +97,12 @@ const CreateAdminForm = (open, handleFinish) => {
                 </Form.Item>
                 <Form.Item
                     wrapperCol={{
-                        offset: 8,
+                        offset: 10,
                         span: 16,
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
+                    <Button type='ghost' style={{ margin: '0px 5px' }} onClick={handleTurnOff}>Cancel</Button>
+                    <Button type="primary" htmlType="submit" style={{ margin: '0px 5px' }}>
                         Submit
                     </Button>
                 </Form.Item>
@@ -117,11 +119,9 @@ export default function AdminList() {
         }))
     }, []);
     const dataUser = useSelector(state => state.fetchUser.dataUser)
-    const reFetch = () => {
-        setTimeout(() => {
-            dispatch(fetchUser({
-                url: API_USER_ADMIN
-            }))
+    const Refetch = (callback) => {
+        return setTimeout(() => {
+            dispatch(callback);
         }, 1000)
     }
     const handleDeleteUser = (url, id) => {
@@ -131,10 +131,18 @@ export default function AdminList() {
         handleDeleteUser: handleDeleteUser
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleFinish = (values) => {
+    const handleTurnOff = () => {
         setIsModalOpen(false);
-        addUser({ ...values, role: 'ADMIN' })
-        reFetch()
+
+    }
+    const handleFinish = (values) => {
+        handleTurnOff()
+        addUser({ ...values, role: 'ADMIN', isActive: true })
+
+        Refetch(fetchUser({
+            url: API_USER_ADMIN
+        }))
+
     };
 
     return (
@@ -174,12 +182,16 @@ export default function AdminList() {
                     }}
                 >
                     {dataUser.length > 0
-                        ? dataUser.map(user => <AccountItem user={user} url={API_USER_ADMIN} handleDeleteUser={deleteAccount} reFetch={reFetch} />)
+                        ? dataUser.map(user => <AccountItem user={user} url={API_USER_ADMIN} h
+                            andleDeleteUser={deleteAccount}
+                            reFetch={Refetch(fetchUser({
+                                url: API_USER_ADMIN
+                            }))} />)
                         : <Skeleton active avatar />
                     }
                 </Content>
             </Layout>
-            {CreateAdminForm(isModalOpen, handleFinish)}
+            {CreateAdminForm(isModalOpen, handleFinish, handleTurnOff)}
         </>
     )
 }
