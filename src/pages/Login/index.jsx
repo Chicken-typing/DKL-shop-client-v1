@@ -1,68 +1,77 @@
 import React from 'react'
 import './style.scss'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { Link, Route, Routes} from 'react-router-dom';
-
-function Login() {
-    const responseFacebook = (response) => {
-        console.log(response);
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Button, Divider, Form, Input, message, Typography } from 'antd';
+import loginUser from '../../services/loginUser';
+import _ from 'lodash'
+const { Item } = Form
+const Login = () => {
+    const success = () => {
+        message.success('Login success.');
+    };
+    const error = () => {
+        message.error('Wrong email or password.');
+    };
+    const navigate = useNavigate()
+    const handleLogin = (value) => {
+        loginUser(value)
+        if (_.isEmpty(JSON.parse(localStorage.getItem('user')))) {
+            error()
+        } else {
+            success()
+            navigate('/')
+        }
     }
-      const onSuccess = res => {
-        console.log('LOGIN SUCCESS! Current user: ', res.profileObj);       
-      }
-
-      const onFailure = res => {
-        console.log('LOGIN FAILED! res: ', res);
-      }
+    const responseFacebook = (res) => { }
     return (
-        <div className='main'>
-            <Link to="/"><ion-icon name="home-outline"></ion-icon></Link>
-            <div className="login-label">
-                <h2>LOGIN</h2>
-            </div>
-            <div className="form-container">
-                <form action="">
-                    <p className='label'>Email <span className='star'>*</span></p>
-                    <input className='login-form' type="email" name='email' />
-                    <p className='label'>Password <span className='star'>*</span></p>
-                    <input className='login-form password' type="password" />
-                    <a className='forgot-password' href=" ">Forgot Password?</a>
-                    <button className='btn-login'>LOGIN</button>
-                    <p className='have-account'>Don't have an account, register
-                        <a className='here' href=" ">here</a></p>
-                    <div className="other-choices">
-                        <hr />
-                        <p>Or login with</p>
-                        <hr />
-                    </div>
-                    <div className="fb-gmail">
-                        <FacebookLogin
+        <div className='form-container'>
+            <h1>Login</h1>
+            <Form
+                layout='vertical'
+                onFinish={value => handleLogin(value)}
+            >
+                <Item
+                    label='Email'
+                    name='email'
+                    rules={[{
+                        required: true,
+                        message: 'Please input email',
+                        type: 'email'
+                    }]}
+                >
+                    <Input />
+                </Item>
+                <Item label='Password'
+                    name='password'
+                    rules={[{
+                        required: true,
+                        message: 'Please input password'
+                    }]}>
+                    <Input.Password />
+                </Item>
+                <Typography.Link>Forgot password?</Typography.Link>
+                <Item>
+                    <Button className='btn-login' htmlType='submit'>LOGIN</Button>
+                </Item>
+                <div style={{ display: 'flex' }}>Don't have an account, register&nbsp;<Link to='/register' style={{ color: 'red', textDecoration: 'none' }}>here</Link></div>
+                <Divider plain>or Login with</Divider>
+                <div className="fb-gmail">
+                    <FacebookLogin
+                        appId="1088597931155576"
+                        textButton='Facebook'
+                        fields="name,email,picture"
+                        callback={response => responseFacebook(response)}
+                        render={renderProps => (
+                            <Button className='fb-button' onClick={renderProps.onClick}>Facebook</Button>
+                        )}
+                    />
 
-                            appId="1088597931155576"
-                            textButton='Facebook'
-                            fields="name,email,picture"
-                            callback={responseFacebook}
-                            render={renderProps => (
+                </div>
+            </Form>
 
-                                <button className='fb-button' onClick={renderProps.onClick}>Facebook</button>
-                            )}
-                        />
-                         {/* <GoogleLogin
-                            clientId="234564224405-ap1dvr6pf2muh01cs98h4uhop41c1o70.apps.googleusercontent.com"
-                            buttonText="Login"
-                            onSuccess={onSuccess}
-                            onFailure={onFailure}
-                            cookiePolicy={'single_host_origin'}
-                            isSignedIn={true}
-                        />,  */}
-                        
-                    </div>
-
-
-                </form>
-            </div>
         </div>
     )
-}
 
+}
 export default Login
