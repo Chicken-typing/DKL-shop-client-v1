@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
@@ -16,12 +16,14 @@ const Login = () => {
     const navigate = useNavigate()
     const handleLogin = (value) => {
         loginUser(value)
-        if (_.isEmpty(JSON.parse(localStorage.getItem('user')))) {
-            error()
-        } else {
-            success()
-            navigate('/')
-        }
+        setTimeout(() => {
+            if (_.isEmpty(JSON.parse(localStorage.getItem('userInfor')))) {
+                error()
+            } else {
+                success()
+                navigate('/')
+            }
+        }, 1000)
     }
     const responseFacebook = (res) => { }
     return (
