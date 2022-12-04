@@ -7,8 +7,9 @@ import Payment from '../../components/Payment';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Input, Radio } from 'antd';
 import {  Group } from '@mantine/core';
-
 import PlaceOrder from '../../components/PlaceOrder';
+import PreviewOrder from '../../components/PreviewOrder';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 
 
 function Checkout() {
@@ -42,7 +43,7 @@ function Checkout() {
         </Stepper.Step>
 
         <Stepper.Completed>
-          Completed, click back button to get to previous step
+          <PreviewOrder/>
         
         </Stepper.Completed>
 

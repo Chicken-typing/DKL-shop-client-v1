@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Space, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {  Group } from '@mantine/core';
+
 
 
 function PlaceOrder({onClickBack, onClickNext}) {
