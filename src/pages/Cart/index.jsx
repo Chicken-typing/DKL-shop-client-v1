@@ -81,7 +81,7 @@ const warning = () => {
   return (
     
     <div className='py-14 px-10'>
-      {contextHolder}
+
       <div className='font-[800] text-gray-900 text-2xl'>Shopping Cart</div>
       <div className='flex'>
       <div className='w-[70%] px-4 pt-10 pb-16 sm:px-6 lg:grid lg:grid-cols-2 lg:grid-rows-[auto,auto,1fr] 

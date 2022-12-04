@@ -92,15 +92,15 @@ function Woman() {
   const filterNike = () => {
     setFilter('nike')
     const datas = [...res]
-    datas.filter((val) =>  val.brand === 'tan')
-    setProducts( datas.filter((val) => val.brand === "tan"))
+    datas.filter((val) =>  val.brand === 'Nike')
+    setProducts( datas.filter((val) => val.brand === "Nike"))
 
   }
   const filterAdidas = () => {
     setFilter('adidas')
     const datas = [...res]
-    datas.filter((val) =>  val.brand === 'tan')
-    setProducts( datas.filter((val) => val.brand === "olive"))
+    datas.filter((val) =>  val.brand === 'Adidas')
+    setProducts( datas.filter((val) => val.brand === "Adidas"))
   }
   const all = () => {
     setFilter('all')

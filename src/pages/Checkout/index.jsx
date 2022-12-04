@@ -1,69 +1,58 @@
-import { useState } from "react"
-import Cart from "../Cart"
-import Shipping from "../../components/Shipping"
-import { Link, Outlet, useNavigate } from "react-router-dom"
-import Stepper from "../../components/Stepper"
-import StepperControl from "../../components/StepperControl"
-import { UseContextProvider } from "../../components/StepperContext"
-import Payment from "../../components/Payment"
+import { useState } from 'react';
+import { Stepper } from '@mantine/core';
+import Shipping from '../../components/Shipping';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveShippingAddress } from '../../action/Shipping';
+import Payment from '../../components/Payment';
+import { useNavigate } from 'react-router-dom';
+import { Button, Form, Input, Radio } from 'antd';
+import {  Group } from '@mantine/core';
 
+import PlaceOrder from '../../components/PlaceOrder';
 
 
 function Checkout() {
-  const steps = [
-    "Account Information",
-    "Personal Details",
-    "Payment",
-    "Complete",
-  ];
-  const [currentStep, setCurrentStep] = useState(1);
-    const navigate = useNavigate()
-
-
-    const displayStep = (step) => {
-      switch (step) {
-        case 1:
-  
-        case 2:
-          return <Shipping/>
-
-        case 3:
-          return <Payment />;
-        case 4:
-      
-        default:
-      }
-    };
-
-    const handleClick = (direction) => {
-      let newStep = currentStep;
-  
-      direction === "next" ? newStep++ : newStep--;
-      // check if steps are within bounds
-      newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
-    };
+  const [active, setActive] = useState(1);
+  const nextStep = () => setActive((current) => (current < 4 ? current + 1 : current));
+  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
+  const dispatch = useDispatch()
+  const shipping = useSelector(state => state.ShippingInfo.shippingAddress)
+  const handle = () => {
+    nextStep()
+  }
 
   return (
-    <div className="mt-10 pt-8 px-20">
-           <div className="mx-auto rounded-2xl bg-white pb-2 shadow-xl md:w-1/2">
-      {/* Stepper */}
-      <div className="horizontal container mt-5 ">
-        <Stepper steps={steps} currentStep={currentStep} />
+    <div className='mt-10 pt-8 px-20'>
+       
+       <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+        <Stepper.Step label="First step" description="Create an account" allowStepSelect={active > 0}>
+          Step 1 content: Create an account
+        </Stepper.Step>
 
-        <div className="my-10 p-10 ">
-          <UseContextProvider>{displayStep(currentStep)}</UseContextProvider>
-        </div>
-      </div>
+        <Stepper.Step label="Second step" description="Verify email" allowStepSelect={active > 1}>
+          <Shipping onClick={nextStep}/>
+        </Stepper.Step>
 
-      {/* navigation button */}
-      {currentStep !== steps.length && (
-        <StepperControl
-          handleClick={handleClick}
-          currentStep={currentStep}
-          steps={steps}
-        />
-      )}
-    </div>
+        <Stepper.Step label="Third step" description="Get full access" allowStepSelect={active > 2}>
+          <Payment onClickBack={prevStep} onClickNext={nextStep}/>
+        </Stepper.Step>
+
+        <Stepper.Step label="Final step" description="Get full access" allowStepSelect={active > 3}>
+          <PlaceOrder onClickBack={prevStep} onClickNext={nextStep}/>
+        </Stepper.Step>
+
+        <Stepper.Completed>
+          Completed, click back button to get to previous step
+        
+        </Stepper.Completed>
+
+      </Stepper>
+
+      {/* <Group position="center" mt="xl">
+        <Button variant="default" onClick={prevStep}>Back</Button>
+        <Button variant='default' onClick={handle} type='submit'>Next step</Button>
+      </Group> */}
+     
     </div>
   )
 }

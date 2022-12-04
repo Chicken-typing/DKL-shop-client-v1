@@ -165,11 +165,11 @@ const data = useSelector(state => state.Cart.carts)
         <nav className='navbar'>
 
         <ul className="ul-container max-[570px]:absolute max-[570px]:flex-col " ref={wrapperRef}   >
-            <Tab label="Home" url="/main-page" />
+            {/* <Tab label="Home" url="/main-page" />
             <Tab label="Woman" url="/woman" />
             <Tab label="Man" url="/man" />
             <Tab label="Kid" url="/kid" />            
-           <Tab label="Brand" url="/brand" /> 
+           <Tab label="Brand" url="/brand" />  */}
            <li id='search-engine'>
               <Tooltip title="search">
               <Button id='search-icon' shape="circle" icon={<SearchOutlined />} size="large" onClick={handleShow} style={{top: '-5px'}}

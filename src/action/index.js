@@ -25,4 +25,6 @@ export {
     addToCart,
     removeFromCart,
     deleteFromCart,
+    savePaymentMethod,
+    saveShippingAddress
 };

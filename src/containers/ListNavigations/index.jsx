@@ -162,7 +162,7 @@ function ListNavigations() {
               <div className="flex  items-center justify-center sm:items-stretch sm:justify-start max-w-[100%] ">
                 <div className="sm:ml-6 sm:block max-w-[100%] ">
                   <div className="flex  m-sm:invisible max-w-[100%]">
-                    <Tab label="Home" url="/main-page" />
+                    <Tab label="Home" url="/home" />
                     <Tab label="Woman" url="/woman" />
                     <Tab label="Man" url="/man" />
                     <Tab label="Kid" url="/kid" />
@@ -240,7 +240,7 @@ function ListNavigations() {
 
           <Disclosure.Panel className='nmd:hidden'>
             <div className="space-y-1 px-2 pt-2 pb-3 relative">
-              <Tab label="Home" url="/main-page" />
+              <Tab label="Home" url="/home" />
               <Tab label="Woman" url="/woman" />-=
               <Tab label="Man" url="/man" />
               <Tab label="Kid" url="/kid" />

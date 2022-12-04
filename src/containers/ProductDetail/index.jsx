@@ -139,26 +139,26 @@ export default function ProductDetail() {
             <img
               // src={product.images[3].src}
               // alt={product.images[3].alt}
-              src={thisProduct.imgProduct}
+              src={thisProduct.image}
               className="h-[40%] w-[40%] object-cover object-center mr-[20px] "
             />
              <img
               // src={product.images[2].src}
               // alt={product.images[2].alt}
-              src={thisProduct.imgProduct}
+              src={thisProduct.image}
               className="h-[40%] w-[40%] object-cover object-center "
             />
           </div>
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{thisProduct.name}</h1>
           </div>
 
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{thisProduct.cost}</p>
+            <p className="text-3xl tracking-tight text-gray-900">{thisProduct.price}</p>
 
             {/* Reviews */}
             {/* <div className="mt-6">
@@ -267,7 +267,7 @@ export default function ProductDetail() {
               <h3 className="sr-only">Description</h3>
 
               <div className="space-y-6">
-                <p className="text-base text-gray-900">{product.description}</p>
+                <p className="text-base text-gray-900">{thisProduct.description}</p>
               </div>
             </div>
 
