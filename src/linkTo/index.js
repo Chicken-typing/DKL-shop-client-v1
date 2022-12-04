@@ -8,9 +8,15 @@ export const API_ADMIN_NEEDED =
     "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/";
 export const API_ORDER =
     "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/order";
-
-export const API_ADVERTISE = "https://633c4d6a74afaef164068be4.mockapi.io/products/advertise";
-
-
-export const API_PRODUCT_CUSTOMER =
-    'https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/products';
+export const API_ADVERTISE =
+    "https://633c4d6a74afaef164068be4.mockapi.io/products/advertise";
+export const API_USER_ADMIN =
+    "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/user";
+export const API_USER_CUSTOMER =
+    "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/user";
+export const API_USER =
+    "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/user";
+export const API_CHAT_ROOM = "";
+export const API_SIGNUP =
+    "https://633ba111f11701a65f65f43e.mockapi.io/admin/v1/imgSrc";
+export const API_SIGNIN = "http://dkl-store-api.herokuapp.com/api/users/signin";
