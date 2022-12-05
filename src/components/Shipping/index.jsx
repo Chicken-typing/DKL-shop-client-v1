@@ -23,11 +23,7 @@ const [postalCode, setPostalCode] = useState(
 const [country, setCountry] = useState(shipping.shippingAddress.country || '');
 
   
-  const submitHandler = (e) => {
-    dispatch(saveShippingAddress({fullName,address, city, postalCode, country }))
-
-
-  }
+  
   const [form] = Form.useForm();
 
 
@@ -53,17 +49,27 @@ const [country, setCountry] = useState(shipping.shippingAddress.country || '');
   // }, [userInfo, navigate]);
 
 
+  const submitHandler = (e) => {
+    dispatch(saveShippingAddress({fullName,address, city, postalCode, country }))
+    
 
+  }
   const handleBack = () => {
     navigate('/cart')
   }
 
   const handleNext = () => {
- 
+   if(fullName === "" || address === "" || city === "" || postalCode === "" || country === "")
+   {
+    window.alert("Full fill information")
+   }
+   else
+   {
+    submitHandler()
     onClick()
     dispatch(saveShippingAddress({fullName,address, city, postalCode, country }))
-
     navigate('/checkout/payment')
+   }
   }
 
   return (
