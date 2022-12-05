@@ -17,11 +17,14 @@ const Login = () => {
     const handleLogin = (value) => {
         loginUser(value)
         setTimeout(() => {
-            if (_.isEmpty(JSON.parse(localStorage.getItem('userInfor')))) {
+            const user = JSON.parse(localStorage.getItem('userInfor'))
+            if (_.isEmpty(user)) {
                 error()
             } else {
                 success()
-                navigate('/')
+                user.role === 'customer'
+                    ? navigate('/')
+                    : navigate('/admin')
             }
         }, 1000)
     }
