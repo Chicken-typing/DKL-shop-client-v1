@@ -4,8 +4,7 @@ import Router from "./Router";
 
 
 function App() {
-
-
+  localStorage.setItem('userInfor', JSON.stringify({}))
   return (
     <div className="App">
       <Router>
