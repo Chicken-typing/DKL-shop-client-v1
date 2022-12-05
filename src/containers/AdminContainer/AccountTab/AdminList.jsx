@@ -164,12 +164,10 @@ export default function AdminList() {
                             }}
                                 onClick={() => {
                                     setIsModalOpen(true);
-
                                 }}
                             />
                         </Button>
                     </Header>
-
                 </Affix>
                 <Content
                     style={{

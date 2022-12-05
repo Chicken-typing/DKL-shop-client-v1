@@ -1,5 +1,5 @@
 import { Layout, Skeleton, Empty } from 'antd'
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../../action'
 import AccountItem from '../../../components/AccountItem'
