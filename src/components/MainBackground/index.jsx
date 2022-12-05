@@ -10,7 +10,7 @@ const useStyles = createStyles(theme => ({
         "url(https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8c25lYWtlcnN8ZW58MHx8MHx8&w=1000&q=80)",
       backgroundSize: "cover",
       backgroundPosition: "center",
-  
+      maxWidth: '100%',
       "@media (max-width: 520px)": {
         paddingTop: 80,
         paddingBottom: 50

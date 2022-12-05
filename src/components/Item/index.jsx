@@ -6,25 +6,21 @@ import './style.scss'
 
 export default function Item({info}) {
 
-
-  const {id, name, imgProduct, brand, cost} = info
+  const {id, name, image, brand, price} = info
   const dispatch = useDispatch();
 
 
  
-
   return (
     <div  className="item" key={id} >       
-        <img className='imgProduct' src={imgProduct} alt="" />
+        <img className='imgProduct' src={image} alt="" />
         <div className='overplay'><input type="button" value='Add to cart' className='add' onClick={() =>dispatch(addToCart(info))}/></div>
         <Link to={`/products/${info.name}`} className='overplays'><input type="button" value='More Detail' className='adds' 
         /></Link>
         <div className="name-cost">
-        <div className="costProduct">{cost}</div> 
+        <div className="costProduct">{price}</div> 
         <div className="name font-Helvetical">
-
           <Link to={`/products/${info.name}`}>{name}</Link>
-
           <div className='type'>{brand}</div>
         </div>
         </div>

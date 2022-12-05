@@ -13,7 +13,7 @@ useEffect(() => {
 }, [pathname])
 
   return (
-    <li className={underlined ? 'active ' : ''} id='list'>
+    <li  id='list'>
     <Link to={url} className='link'>
         {label}
     </Link>

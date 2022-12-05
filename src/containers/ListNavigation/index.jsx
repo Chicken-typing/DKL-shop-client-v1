@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import Tab from '../../components/Tab'
 import { Avatar, Badge } from 'antd';
-
 import { useLocation, useParams} from 'react-router-dom';
 import { Affix } from 'antd';
 import './style.scss'
@@ -15,7 +14,6 @@ import { Link } from 'react-router-dom'
 import { addToCart } from '../../action';
 
 
-
 function ListNavigation() {
 
     const [show, setShow] = useState(false)
@@ -26,11 +24,9 @@ function ListNavigation() {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [keyword, setKeyword] = useState("")
     const [searchResult, setSearchResult] = useState([])
-
     const [cursor, setCursor] = useState(-1)
 
     let navigate = useNavigate();
-
     const controlNavbar = () => {
       if (typeof window !== 'undefined') { 
         if (window.scrollY > lastScrollY) {
@@ -95,12 +91,10 @@ function ListNavigation() {
  // This function to hide the search box when click any where on the screen
  useEffect(() => {
   function handleClickOutside(event) {
-
     if (keyword === "") {
       if(wrapperRef.current && !wrapperRef.current.contains(event.target))
       {
         setShow(false)
-
       }
       
     }
@@ -114,7 +108,6 @@ function ListNavigation() {
 }, [wrapperRef])
 
 const handle = e => {
-
   // This function to set value onChange and when search can not find product will show message.
   setKeyword(e.target.value)
   setSearchResult(res
@@ -130,13 +123,11 @@ const handle = e => {
       );
     })
     .slice(0, 10))
-
 } 
 
 // Use this function to press Enter
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-
       setKeyword(event.target.value)
       event.target.value = ''
     }
@@ -167,22 +158,21 @@ const handle = e => {
 const data = useSelector(state => state.Cart.carts)
 
 
-
   return (
    <Affix>
      <div className="all">
-      <header className={`header ${scrollNav && 'hidden'}`} style={{top: scroll ? '0' : '' , position: scroll ? 'fixed': ''}}>       
-    <nav className='navbar'>
-    <ul className="ul-container" ref={wrapperRef}   >
-            <Tab label="Home" url="/main-page" />
+      <header className={`header  ${scrollNav && 'hidden'}`} style={{top: scroll ? '0' : '' , position: scroll ? 'fixed': ''}}>       
+        <nav className='navbar'>
+
+        <ul className="ul-container max-[570px]:absolute max-[570px]:flex-col " ref={wrapperRef}   >
+            {/* <Tab label="Home" url="/main-page" />
             <Tab label="Woman" url="/woman" />
             <Tab label="Man" url="/man" />
             <Tab label="Kid" url="/kid" />            
-           <Tab label="Brand" url="/brand" /> 
+           <Tab label="Brand" url="/brand" />  */}
            <li id='search-engine'>
               <Tooltip title="search">
               <Button id='search-icon' shape="circle" icon={<SearchOutlined />} size="large" onClick={handleShow} style={{top: '-5px'}}
-
                />
               <input 
               value={keyword} 
@@ -208,18 +198,15 @@ const data = useSelector(state => state.Cart.carts)
               </div>
             )) : 'Can not find this product'}        
               </div>
-
         </ul>  
         <div className='indicator'></div>          
     </nav>
         <div className="bag">
-
           <Link to='/cart'>
             <Badge count={data.length}>
                 <Avatar src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAV1JREFUSEvtluFRwzAMhfWUAYAJKBNQJqDdoCPABLABjFAmoBvABrQbwAZlgzKA/Tj1DOcmTeL4cpfjiH4lZ1uf9CydBRnIMBBXOoNJnorIpYhMRcS+1wA2XRPoBCa5IPkcgDFrB+AWwGtqAMlg59wjgIcmxwG+SoEngUnOSL4Fh18A7k3i8G9rSxE5sX8AcwA/a7UxJIG99+boWkQMOgWwjT2SnJB8D/C1qs7bsk4F0xyRfCqKwrKtmHNuCeAuZH0GYNd4LW2RxTI3yRgK7yVV7taMO4B/6yDlng/A1qOhiKxH+7Stql7EDsvguHr7BFeqPQX8SXLfmwBuROS8JqLGfWX5U8AbVZ0ZLGqrY+zGfX8K3Mtd52Q8grMUGKVO6eMsacuHRqn/hdRXAGw82ltlEPDe2zxV9wLlFtqHqh688RVwGNgX3vtJLiU+p6o2e63KM1jr6NMH/JiPwcDftpYILoVzxCEAAAAASUVORK5CYII=" />
             </Badge>
           </Link>
-
         </div>  
     </header>
     </div>

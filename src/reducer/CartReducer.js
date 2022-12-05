@@ -30,6 +30,7 @@ const CartReducer = (state = initialize, action) => {
             }
 
         case REMOVE_FROM_CART:
+
             const IteamIndex_dec = state.carts.findIndex((iteam) => iteam.id === action.payload.id);
             if (state.carts[IteamIndex_dec].quantity >= 1) {
                 const dltiteams = state.carts[IteamIndex_dec].quantity -= 1
@@ -49,7 +50,7 @@ const CartReducer = (state = initialize, action) => {
             }
         case DELETE_FROM_CART:
             const data = state.carts.filter((el) => el.id !== action.payload);
-            localStorage.setItem('carts', JSON.stringify(state.carts))
+            // localStorage.setItem('carts', JSON.stringify(state.carts))
             return {
                 ...state,
                 carts: data

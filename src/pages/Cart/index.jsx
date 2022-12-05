@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, deleteFromCart, removeFromCart} from '../../action';
 import { useNavigate } from 'react-router-dom';
-
-
+import {  message } from 'antd';
+import { Empty } from 'antd';
 
 function Cart() {
 
@@ -38,14 +38,18 @@ const subTotal = () => {
 };
 
 const totalAll = () => {
-  let price = 0
-  let shipCost = ship
-  data.map(item => {
-    if(data.length > 0)
-    {
-      setShip(14)
-      price = item.cost * item.quantity + shipCost + price
-      setTotal(price)
+  let price = 0                  
+  let shipCost = ship            
+  data.map(item => {             
+    if(data.length > 0)          
+    {   
+      setShip(14)                
+      price = item.cost * item.quantity + shipCost + price    
+      setTotal(price)            
+    }
+    else {                       
+      setShip(0)                 
+      setTotal(0)                
     }
   })
 }
@@ -66,28 +70,77 @@ useEffect(() => {
   totalAll()
 }, [totalAll])
 
-
+const [messageApi, contextHolder] = message.useMessage()
+const warning = () => {
+  messageApi.open({
+    type: 'warning',
+    content: 'This is a warning message',
+  });
+};
 
   return (
+    
     <div className='py-14 px-10'>
+
       <div className='font-[800] text-gray-900 text-2xl'>Shopping Cart</div>
-      <div className='flex'>
-      <div className='w-[70%] px-4 pt-10 pb-16 sm:px-6 lg:grid lg:grid-cols-2 lg:grid-rows-[auto,auto,1fr] 
-      lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24 lg:max-h-[30%]'>
-        {data.length === 0 &&  <div className='flex '>
-          <p className='lg:mt-28 lg:text-xl'>Your carts is empty</p>
-                    <img src="https://media0.giphy.com/media/LOL2XB5O5slfFE4K3M/200w.webp?cid=ecf05e470zc7xrtrdfp9l64cjymmikqxd87pp814xr1ocht7&rid=200w.webp&ct=s" alt="" className='emptycart_img' style={{width:"15rem",padding:10}} /></div>}
-        {/* Product List */}
-        <div className='lg:col-span-2'>
+      <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3  lg:gap-x-10  lg:pt-16 lg:pb-24">
+        <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+          {/* <div>{`Name: ${shipping.shippingAddress.fullName}`}</div>
+          <div>{`Addres: ${shipping.shippingAddress.address}`}</div> */}
+        </div>
+
+        {/* Options */}
+        <div className="mt-4 lg:row-span-3 lg:col-span-1 lg:mt-0">
+          <form className="mt-10" onSubmit={(e) => e.preventDefault()}>
+            {/* Colors */}
+
+
+            <div className='bg-gray-bg w-[100%] lg:w-[100%] h-[100%] px-2 lg:px-4 lg:py-4 lg:max-h[50%]  rounded-xl' >
+          <p className='font-[600] text-gray-800 text-xl'>Order Summary</p>
+
+          {/* SubTotal */}
+          <div className='flex w-[100%] '>
+              <div className='flex-1 text-gray-600 text-lg'>Subtotal</div>
+               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${price}`}</div>              
+            </div>
+            <div className='mt-3 mb-3 lg:border-t lg:border-gray-400  '></div>
+
+
+          {/* Shipping Cost   */}
+          <div className='flex w-[100%]'>
+               <div className='flex-1 text-gray-600 text-lg'>Shipping Cost</div>
+               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${ship}`}</div>
+            </div>
+            <div className='mt-3 mb-3 lg:border-t lg:border-gray-400 '></div>
+
+          {/* Total   */}
+          <div className='flex w-[100%]'>
+               <div className='flex-1 font-[600] text-gray-800 text-lg'>Order Total</div>
+               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${total}`}</div>
+            </div>
+
+
+             {/* Checkout  */}
+             <button className='w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
+                  focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4'
+                  onClick={() => data.length === 0 ? warning : navigate('/checkout/shippingAddress')}
+                  >Checkout</button>
+          </div>
+
+          </form>
+        </div>
+
+        <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
         {data.map((item) => (
           <div className='w-[90%] mb-8  '
            key={item.id}>
             <div className='mb-8 lg:border-t lg:border-gray-300  '></div>
 
             <div className='flex w-[100%]'>
-            <img src={item.imgProduct !== undefined && item.imgProduct} alt="" 
+            {/* <img src={item.imgProduct !== undefined && item.imgProduct} alt="" 
+            className=' lg:h-[85%] lg:w-[35%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] : '/> */}
+ <img src='https://secure-images.nike.com/is/image/DotCom/DX1627_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg' alt="" 
             className=' lg:h-[85%] lg:w-[35%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] : '/>
-
             <div className='pl-[20px] lg:w-[35%]'>
             <div className=' lg:max-w-[100%] break-all font-[500] mb-2 text-lg'>{item.name}</div>
             {/* Color and Size */}
@@ -114,49 +167,9 @@ useEffect(() => {
                 </span>
             </div>          
           </div>
-        ))}       
+        ))}   
+          
         </div>
-
-
-        
-      </div>
-      <div className='bg-gray-bg max-w-sm h-[100%] grid lg:px-4 lg:py-4 lg:max-h[50%] w-[30%] lg:mt-16 rounded-xl' >
-          <p className='font-[600] text-gray-800 text-xl'>Order Summary</p>
-
-          {/* SubTotal */}
-            <div className='flex w-[100%] '>
-              <div className='flex-1 text-gray-600 text-lg'>Subtotal</div>
-               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${price}`}</div>              
-            </div>
-            <div className='mt-3 mb-3 lg:border-t lg:border-gray-400  '></div>
-
-
-          {/* Shipping Cost   */}
-            <div className='flex w-[100%]'>
-               <div className='flex-1 text-gray-600 text-lg'>Shipping Cost</div>
-               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${ship}`}</div>
-            </div>
-            <div className='mt-3 mb-3 lg:border-t lg:border-gray-400 '></div>
-
-
-          {/* Total   */}
-            <div className='flex w-[100%]'>
-               <div className='flex-1 font-[600] text-gray-800 text-lg'>Order Total</div>
-               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${total}`}</div>
-            </div>
-
-
-             {/* Checkout  */}
-          <button className='w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
-                  focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4'
-                  onClick={() => navigate('/checkout')}
-                  >Checkout</button>
-          </div>
-
-         
-
-
-
       </div>
     </div>
   )

@@ -1,10 +1,10 @@
-import { Tabs } from 'antd';
 import React from 'react';
 import CustomerList from './CustomerList';
 import AdminList from './AdminList';
 import moment from 'moment';
 import './style.scss'
 import { AUTH_ROLE } from '../../../consts/status'
+import { Tabs } from 'antd';
 const onChange = (key) => {
 };
 const AccountTab = () => {
@@ -13,7 +13,6 @@ const AccountTab = () => {
         setRefesh(moment())
     }
     const isMAdmin = JSON.parse(localStorage.getItem('userInfor')).role === AUTH_ROLE.MASTER_ADMIN
-
     return (
         <Tabs
             defaultActiveKey="1"
@@ -41,4 +40,5 @@ const AccountTab = () => {
         />
     );
 }
+
 export default AccountTab;

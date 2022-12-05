@@ -1,63 +1,35 @@
 import React from 'react';
-import { Select, Input, Form, Upload } from 'antd';
-import { HeartOutlined, DollarCircleOutlined, FormOutlined, UploadOutlined } from '@ant-design/icons';
+import { Select, Input, Form } from 'antd';
+import { HeartOutlined, DollarCircleOutlined, FormOutlined } from '@ant-design/icons';
 import InputImage from '../../../components/InputImage';
 import Button from '../../../components/Button';
 import './style.scss'
-import addProduct from '../../../services/addProduct';
-import { fetchProduct } from '../../../action';
-import { useDispatch } from 'react-redux';
 const { TextArea } = Input
 const brands = [{
-    key: 'nike',
-    label: 'Nike',
-    value: 'Nike',
+    label: 'Beijing',
+    value: 'Beijing',
 },
 {
-    key: 'adidas',
-    label: 'Adidas',
-    value: 'Adidas',
+    label: 'Shanghai',
+    value: 'Shanghai',
 },]
 const tags = [{
-    key: 'man',
-    label: 'Man',
-    value: 'man',
+    label: 'Beijing',
+    value: 'Beijing',
 },
 {
-    key: 'woman',
-    label: 'Woman',
-    value: 'woman',
-},
-{
-    key: 'kid',
-    label: 'Kid',
-    value: 'kid',
-},
-]
-
+    label: 'Shanghai',
+    value: 'Shanghai',
+},]
 const AddProductTab = () => {
-    const dispatch = useDispatch();
-    const Refetch = (callback) => {
-        return setTimeout(() => {
-            dispatch(callback);
-        }, 1000)
-    }
     const [form] = Form.useForm();
     const onFinish = (value) => {
-        addProduct(value)
-        Refetch(fetchProduct())
-        form.resetFields()
+        console.log(value)
     };
     const handleChange = () => {
         form.setFieldsValue({
             sights: [],
         });
-    };
-    const normFile = (e) => {
-        if (Array.isArray(e)) {
-            return e;
-        }
-        return e?.fileList;
     };
     return (
         <div
@@ -72,70 +44,57 @@ const AddProductTab = () => {
                     padding: "15px 15px 20px 15px"
                 }}
                 className="InputCart">
-                <Form.Item name="name" rules={[
+                <Form.Item name="product-name" rules={[
                     {
                         required: true,
-                        message: 'Please input name',
+                        message: 'Please input Product\'s name',
                     },
                 ]}>
                     <Input placeholder='Name of product' prefix={<HeartOutlined />} />
                 </Form.Item>
-                <Form.Item name="price" rules={[
+                <Form.Item name="product-price" rules={[
                     {
                         required: true,
-                        message: 'Please input price',
+                        message: 'Please input Product\'s price',
                     },
                 ]}>
-                    <Input placeholder='5.000' prefix={<DollarCircleOutlined />} type='number' />
+                    <Input placeholder='5.000.000' prefix={<DollarCircleOutlined />} suffix="VND" type='number' />
                 </Form.Item>
-                <Form.Item name="category" rules={[
+                <Form.Item name="product-type" rules={[
                     {
                         required: true,
-                        message: 'Please input type',
+                        message: 'Please input Product\'s type',
                     },
                 ]}>
                     <Select options={tags} mode="multiple" onChange={handleChange} placeholder="Type of product" />
                 </Form.Item>
-                <Form.Item name="brand" rules={[
+                <Form.Item name="product-brand" rules={[
                     {
                         required: true,
-                        message: 'Please input brand',
+                        message: 'Please input Product\'s brand',
                     },
                 ]}>
-                    <Select options={brands} placeholder="Brand of product" />
+                    <Select options={brands} mode="multiple" onChange={handleChange} placeholder="Brand of product" />
                 </Form.Item>
-                <Form.Item name="description" rules={[
+                <Form.Item name="product-description" rules={[
                     {
                         required: true,
-                        message: 'Please input description',
+                        message: 'Please input Product\'s description',
                     },
                 ]}>
 
-                    <TextArea autoSize={{ minRows: 5, maxRows: 5 }} placeholder="Description" />
+                    <TextArea rows={5} placeholder="Description" />
                 </Form.Item>
-                <Form.Item
-                    name='image'
-                    style={{
-                        width: 600,
-                        padding: "15px 7px 7px 15px",
-                        borderRadius: 2,
-                        marginBottom: 20
-                    }}
-                    valuePropName="fileList"
-                    getValueFromEvent={normFile}>
-                    <Upload listType='picture' customRequest={({ onSuccess }) => {
-                        setTimeout(() => {
-                            onSuccess("ok");
-                        }, 0);
-                    }}>
-                        <Button icon={<UploadOutlined />} type='link' style={{ display: 'flex', alignItem: 'center' }}>Upload</Button>
-                    </Upload>
-                </Form.Item>
-                <Form.Item
-                    wrapperCol={{
-                        offset: 10,
-                    }}
-                >
+                <div style={{
+                    width: 600,
+                    border: "1px solid #dadada",
+                    padding: "15px 7px 7px 15px",
+                    borderRadius: 2,
+                    marginBottom: 20
+                }}>
+                    <InputImage />
+                </div>
+                <Form.Item >
                     <Button style={{ width: 100 }} htmlType="submit"><FormOutlined />ADD</Button>
                 </Form.Item>
             </Form>
