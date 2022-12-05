@@ -6,6 +6,8 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Radio } from 'antd';
 import {  Group } from '@mantine/core';
 import { useBetween } from 'use-between';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 function Shipping({onClick}) {
 
@@ -58,10 +60,22 @@ const [country, setCountry] = useState(shipping.shippingAddress.country || '');
     navigate('/cart')
   }
 
+  const notify = () => {
+    toast.warn('Please type full your Information!', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+  }
   const handleNext = () => {
    if(fullName === "" || address === "" || city === "" || postalCode === "" || country === "")
    {
-    window.alert("Full fill information")
+    notify()
    }
    else
    {
@@ -152,6 +166,18 @@ const [country, setCountry] = useState(shipping.shippingAddress.country || '');
       </Form.Item> */}
     </Form>
       </div>
+      <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </div>
   )
 }

@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, deleteFromCart, removeFromCart} from '../../action';
 import { useNavigate } from 'react-router-dom';
-import {  message } from 'antd';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 import { Empty } from 'antd';
 
 function Cart() {
@@ -32,7 +33,7 @@ const data = useSelector(state => state.Cart.carts)
 const subTotal = () => {
   let price = 0;
   data.map((item) =>{
-      price = item.cost * item.quantity + price
+      price = item.price * item.quantity + price
   });
   setPrice(price);
 };
@@ -44,7 +45,7 @@ const totalAll = () => {
     if(data.length > 0)          
     {   
       setShip(14)                
-      price = item.cost * item.quantity + shipCost + price    
+      price = item.price * item.quantity + shipCost + price    
       setTotal(price)            
     }
     else {                       
@@ -70,13 +71,10 @@ useEffect(() => {
   totalAll()
 }, [totalAll])
 
-const [messageApi, contextHolder] = message.useMessage()
-const warning = () => {
-  messageApi.open({
-    type: 'warning',
-    content: 'This is a warning message',
-  });
-};
+
+const notify = () => {
+  toast("Cart is empty")
+}
 
   return (
     
@@ -85,8 +83,6 @@ const warning = () => {
       <div className='font-[800] text-gray-900 text-2xl'>Shopping Cart</div>
       <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3  lg:gap-x-10  lg:pt-16 lg:pb-24">
         <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-          {/* <div>{`Name: ${shipping.shippingAddress.fullName}`}</div>
-          <div>{`Addres: ${shipping.shippingAddress.address}`}</div> */}
         </div>
 
         {/* Options */}
@@ -123,17 +119,18 @@ const warning = () => {
              {/* Checkout  */}
              <button className='w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
                   focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4'
-                  onClick={() => data.length === 0 ? warning : navigate('/checkout/shippingAddress')}
+                  onClick={data.length === 0 ? notify :() => navigate('/checkout/shippingAddress')}
                   >Checkout</button>
+                  <ToastContainer position='bottom-right' />
           </div>
 
           </form>
         </div>
 
-        <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
+       {data.length === 0 ? <div className='lg:col-span-2 lg:mt-8'><Empty/></div> :  <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
         {data.map((item) => (
           <div className='w-[90%] mb-8  '
-           key={item.id}>
+           key={item._id}>
             <div className='mb-8 lg:border-t lg:border-gray-300  '></div>
 
             <div className='flex w-[100%]'>
@@ -141,7 +138,7 @@ const warning = () => {
             className=' lg:h-[85%] lg:w-[35%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] : '/> */}
  <img src='https://secure-images.nike.com/is/image/DotCom/DX1627_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg' alt="" 
             className=' lg:h-[85%] lg:w-[35%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] : '/>
-            <div className='pl-[20px] lg:w-[35%]'>
+            <div className='pl-[20px] lg:w-[40%]'>
             <div className=' lg:max-w-[100%] break-all font-[500] mb-2 text-lg'>{item.name}</div>
             {/* Color and Size */}
             <div className='flex '>
@@ -149,28 +146,29 @@ const warning = () => {
             <div className='text-gray-500 w-[40%] text-end'>Size 35</div>
             </div>
             {/* Cost */}
-            <div className='mt-4 font-[500]'>{item.cost}</div>
+            <div className='mt-4 font-[500]'>{item.price}</div>
             </div>
 
-            <div className=' lg:ml-10 text-center lg:w-[30%]'>
+            <div className=' lg:ml-10 text-center lg:w-[25%]'>
               <div className='font-[500] text-lg lg:mb-2 wid'>Quantity</div>
               <div className="">
-	                <button className="minus px-3 hover:bg-gray-button" onClick={item.quantity <= 1 ? () => handleDelAll(item.id) : () => handleDel(item)}>-</button>
-                  <span className='lg:ml-2'>{item.quantity}</span>
+	                <button className="minus px-3 hover:bg-gray-button" onClick={item.quantity <= 1 ? () => handleDelAll(item._id) : () => handleDel(item)}>-</button>
+                  <span className='lg:ml-2 lg:mr-2'>{item.quantity}</span>
 	                <button className="plus px-3 hover:bg-gray-button" onClick={() => handleAdd(item)}>+</button>
               </div>
             </div>
 
                 {/* Remove item */}
-                <span className='lg:ml-[200px] ' >
-                    <box-icon box-icon type='solid' name='trash-alt' onClick={() => handleDelAll(item.id)}></box-icon>
+                <span className='lg:ml-[200px]' >
+                    <box-icon box-icon type='solid' name='trash-alt' onClick={() => handleDelAll(item._id)}></box-icon>
                 </span>
             </div>          
           </div>
         ))}   
           
-        </div>
+        </div>}
       </div>
+      
     </div>
   )
 }

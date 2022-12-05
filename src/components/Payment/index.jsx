@@ -33,7 +33,7 @@ const handleNext = () => {
  
   onClickNext()
   dispatch(savePaymentMethod(value))
-
+  navigate('/checkout/placeOrder')
 }
   return (
     <div className='lg:mt-8 lg:px-8 lg:mb-20'>

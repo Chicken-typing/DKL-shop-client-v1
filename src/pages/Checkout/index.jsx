@@ -2,25 +2,16 @@ import { useState } from 'react';
 import { Stepper } from '@mantine/core';
 import Shipping from '../../components/Shipping';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveShippingAddress } from '../../action/Shipping';
 import Payment from '../../components/Payment';
-import { useNavigate } from 'react-router-dom';
-import { Button, Form, Input, Radio } from 'antd';
-import {  Group } from '@mantine/core';
 import PlaceOrder from '../../components/PlaceOrder';
 import PreviewOrder from '../../components/PreviewOrder';
-import { Prev } from 'react-bootstrap/esm/PageItem';
+
 
 
 function Checkout() {
   const [active, setActive] = useState(1);
   const nextStep = () => setActive((current) => (current < 4 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
-  const dispatch = useDispatch()
-  const shipping = useSelector(state => state.ShippingInfo.shippingAddress)
-  const handle = () => {
-    nextStep()
-  }
 
   return (
     <div className='mt-10 pt-8 px-20'>
@@ -48,11 +39,6 @@ function Checkout() {
         </Stepper.Completed>
 
       </Stepper>
-
-      {/* <Group position="center" mt="xl">
-        <Button variant="default" onClick={prevStep}>Back</Button>
-        <Button variant='default' onClick={handle} type='submit'>Next step</Button>
-      </Group> */}
      
     </div>
   )

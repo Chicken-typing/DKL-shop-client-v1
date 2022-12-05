@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, Space, Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -10,6 +10,7 @@ function PlaceOrder({onClickBack, onClickNext}) {
   const shipping = useSelector((state) => state.ShippingInfo);
   const payment = useSelector(state => state.PaymentMethod.paymentMethod)
   const navigate = useNavigate()
+
   const handleBack = () => {
     onClickBack()
     navigate('/checkout/payment')
@@ -81,28 +82,40 @@ const handleNext = () => {
             }}
           >
             <Card title="Shipping" size="small">
-              <p>{`Name: ${shipping.shippingAddress.fullName}`}</p>
-              <p>{`Addres: ${shipping.shippingAddress.address}`}</p>
-            </Card>
-            <Card title="Payment" size="small">
+             <Space direction="vertical">
+             <Space>
+                <div className="font-bold">Name:</div>
+                <div>{shipping.shippingAddress.fullName}</div>
+              </Space>
               <Space>
+                <div className="font-bold">Address:</div>
+                <div>{shipping.shippingAddress.address}</div>
+              </Space>
+              <a href="/payment">Edit</a>
+             </Space>
+            </Card>
+
+            <Card title="Payment" size="small">
+             <Space direction="vertical">
+             <Space >
                 <div className="font-bold">Method:</div>
                 <div>{payment}</div>
               </Space>
-              {/* <p>{`Method: ${payment}`}</p> */}
+              <a href="/checkout/payment">Edit</a>
+             </Space>
             </Card>
-            <Card title="Items" size="small">
 
+            <Card title="Items" size="small">
                   <Space direction="vertical">
                  {data.map(item => (
                     <Space>
-                      <img src='https://secure-images.nike.com/is/image/DotCom/DX1627_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg' alt="" />
-                      <div>{item.name}</div>
-                       <div>{item.price}</div>
+                      <img className="m-sm:w-[50%] m-sm:h-[50%]" src='https://secure-images.nike.com/is/image/DotCom/DX1627_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg' alt="" />              
+                     <div className="lg:ml-8 lg:mr-20">{item.name}</div>
+                     <div className="lg:mr-20">{item.quantity}</div>
+                       <div className="lg:ml-8 lg:mr-8">{item.price*item.quantity}</div>
                     </Space>
                  ))}
                   </Space>
-             
             </Card>
             <Button variant="default" onClick={handleBack}>Back</Button>
           </Space>
