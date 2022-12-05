@@ -135,11 +135,10 @@ const Register = () => {
 
                     ]}>
                     <Input.Password
-                        status={!isSame && 'error'}
+                        status={!isSame && password.length > 0 && 'error'}
                         onBlur={
-                            (e) => setIsSame(e.target.value === password)
+                            (e) => setIsSame(e.target.value === password && password.length > 0)
                         }
-                        addonAfter={!isSame && <Tag color="error">Not match</Tag>}
                     />
                 </Item>
                 <Item style={{ display: 'flex', justifyContent: 'center' }}>
