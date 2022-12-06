@@ -6,6 +6,7 @@ import fetchOrderReducer from "./fetchOrderReducer";
 import fetchAdvertiseReducer from "./fetchAdvertiseReducer";
 import CartReducer from "./CartReducer";
 import ShippingReducer from "./ShippingReducer"
+import fetchUserReducer from "./fetchUserReducer";
 import PaymentReducer from "./PaymentReducer";
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     fetchAdvertise: fetchAdvertiseReducer,
     Cart: CartReducer,
     ShippingInfo: ShippingReducer,
+    fetchUser: fetchUserReducer,
     PaymentMethod: PaymentReducer,
 });
 export default rootReducer;
