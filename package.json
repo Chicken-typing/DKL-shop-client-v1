@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@ant-design/plots": "^1.2.2",
-        "@craco/craco": "^6.4.5",
+        "@craco/craco": "^7.0.0",
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
         "@headlessui/react": "^1.7.2",
