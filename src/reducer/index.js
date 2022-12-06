@@ -5,16 +5,19 @@ import fetchStaticReducer from "./fetchStaticReducer";
 import fetchOrderReducer from "./fetchOrderReducer";
 import fetchAdvertiseReducer from "./fetchAdvertiseReducer";
 import CartReducer from "./CartReducer";
-import ShippingReducer from "./ShippingReducer";
+import ShippingReducer from "./ShippingReducer"
 import fetchUserReducer from "./fetchUserReducer";
+import PaymentReducer from "./PaymentReducer";
+
 const rootReducer = combineReducers({
-  fetch: fetchReducer,
-  fetchProduct: fetchProductReducer,
-  fetchStatic: fetchStaticReducer,
-  fetchOrder: fetchOrderReducer,
-  fetchAdvertise: fetchAdvertiseReducer,
-  Cart: CartReducer,
-  ShippingInfo: ShippingReducer,
-  fetchUser: fetchUserReducer,
+    fetch: fetchReducer,
+    fetchProduct: fetchProductReducer,
+    fetchStatic: fetchStaticReducer,
+    fetchOrder: fetchOrderReducer,
+    fetchAdvertise: fetchAdvertiseReducer,
+    Cart: CartReducer,
+    ShippingInfo: ShippingReducer,
+    fetchUser: fetchUserReducer,
+    PaymentMethod: PaymentReducer,
 });
 export default rootReducer;

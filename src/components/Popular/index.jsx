@@ -7,7 +7,7 @@ import './style.scss'
 
 function Popular({data}) {
 
-    let slidesToShow = 5;
+    let slidesToShow = 6;
 
   const PreviousBtn = (props) => {
     const { className, onClick, currentSlide } = props;

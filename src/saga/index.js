@@ -7,12 +7,12 @@ import fetchAdvertiseSaga from "./fetchAdvertiseSaga";
 import fetchUserSaga from "./fetchUserSaga";
 
 export default function* rootSaga() {
-  yield all([
-    fetchAPISaga(),
-    fetchProductSaga(),
-    fetchStaticSaga(),
-    fetchOrderSaga(),
-    fetchAdvertiseSaga(),
-    fetchUserSaga(),
-  ]);
+    yield all([
+        fetchAPISaga(),
+        fetchProductSaga(),
+        fetchStaticSaga(),
+        fetchOrderSaga(),
+        fetchAdvertiseSaga(),
+        fetchUserSaga(),
+    ]);
 }

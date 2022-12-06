@@ -1,10 +1,10 @@
-import { Tabs } from 'antd';
 import React from 'react';
 import CustomerList from './CustomerList';
 import AdminList from './AdminList';
 import moment from 'moment';
 import './style.scss'
 import { AUTH_ROLE } from '../../../consts/status'
+import { Tabs } from 'antd';
 const onChange = (key) => {
 };
 const AccountTab = () => {
@@ -41,4 +41,5 @@ const AccountTab = () => {
         />
     );
 }
+
 export default AccountTab;

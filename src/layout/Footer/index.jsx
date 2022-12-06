@@ -1,41 +1,222 @@
-import React from 'react'
-import './style.scss'
-import logo from '../../assets/icons/logo-dark.png'
+import React from "react";
+import "./style.scss";
+import logo from "../../assets/icons/logo-dark.png";
+
+import {
+  createStyles,
+  Text,
+  Container,
+  ActionIcon,
+  Group,
+} from "@mantine/core";
+import {
+  IconBrandTwitter,
+  IconBrandYoutube,
+  IconBrandInstagram,
+} from "@tabler/icons";
+
+
+const useStyles = createStyles((theme) => ({
+  footer: {
+    marginTop: 80,
+    paddingTop: theme.spacing.lg,
+    paddingBottom: theme.spacing.lg,
+    backgroundColor: "black",
+    borderTop: "1px solid black",
+    borderRadius: "14px",
+  },
+
+  logo: {
+    maxWidth: 200,
+
+    [theme.fn.smallerThan("sm")]: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+  },
+
+  description: {
+    marginTop: 5,
+
+    [theme.fn.smallerThan("sm")]: {
+      marginTop: theme.spacing.xs,
+      textAlign: "center",
+    },
+  },
+
+  inner: {
+    display: "flex",
+    justifyContent: "space-between",
+
+    [theme.fn.smallerThan("sm")]: {
+      flexDirection: "column",
+      alignItems: "center",
+    },
+  },
+
+  groups: {
+    display: "flex",
+    flexWrap: "wrap",
+
+    [theme.fn.smallerThan("sm")]: {
+      display: "none",
+    },
+  },
+
+  wrapper: {
+    width: 160,
+  },
+
+  link: {
+    display: "block",
+    fontSize: 18,
+    color:
+      'white',
+    paddingTop: 3,
+    paddingBottom: 3,
+    fontWeight: 100
+    
+  },
+
+  title: {
+    fontSize: theme.fontSizes.lg,
+    fontWeight: 700,
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    marginBottom: theme.spacing.xs / 2,
+    color: 'white',
+  },
+
+  afterFooter: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: theme.spacing.xl,
+    paddingTop: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
+    borderTop: `1px solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[2]
+    }`,
+
+    [theme.fn.smallerThan("sm")]: {
+      flexDirection: "column",
+    },
+  },
+
+  social: {
+    [theme.fn.smallerThan("sm")]: {
+      marginTop: theme.spacing.xs,
+    },
+  },
+}));
+
+
 function Footer() {
+  let groups = ''
+  let links = ''
+  const data = [
+    {
+      title: "ABOUT US",
+      links: [
+        {
+          label: "News",
+        },
+        {
+          label: "Carrer",
+        },
+        {
+          label: "Inventor",
+        },
+        {
+          label: "Sustainability",
+        },
+      ],
+    },
+    {
+      title: "GET HELP",
+      links: [
+        {
+          label: "Order status",
+        },
+        {
+          label: "Payment options",
+        },
+        {
+          label: "Contact Us",
+        },
+        {
+          label: "Delivery",
+        },
+      ],
+    },
+    {
+      title: "OPTION",
+      links: [
+        {
+          label: "FIND A STORE",
+        },
+        {
+          label: "BE COME A MEMBER",
+        },
+        {
+          label: "SIGN UP FOR EMAIL",
+        },
+        {
+          label: "SEND US FEEDBACK",
+        },
+      ],
+    },
+  ];
+  const { classes } = useStyles();
+    
+
   return (
-    <div className='Footer'>
-      <div className="foot-nav-title-list">
-      <ul>
-        <li className='foot-nav-title' >FIND A STORE</li>
-        <li className='foot-nav-title'>BE COME A MEMBER</li>
-        <li className='foot-nav-title'>SIGN UP FOR EMAIL</li>
-        <li className='foot-nav-title'>SEND US FEEDBACK</li>
-      </ul>
-      <ul>
-        <div className='foot-nav-title'>GET HELP</div>   
-        <li>Order status</li>
-        <li>Delivery</li>
-        <li>Return</li>
-        <li>Payment options</li>
-        <li>Contact Us</li>
-      </ul>
-      <ul>
-        <div className='foot-nav-title'>ABOUT US</div>
-        <li>News</li>
-        <li>Carrers</li>
-        <li>Inventor</li>
-        <li>Sustainability</li>
-        </ul>
-      </div>
-        <div id="strength-line"></div>
-        <div className="foot-nav-icon-list">
-          <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAR9JREFUSEvtV9FtwkAUszcoE8AGdIPCBIxAN6Ab0A26AiOwAbABnaCwAZ3AlVEuupx0kRAXgqK+rxwoz/J79nsXoqdgT7h4HmBJLwCmhStxJnmKczYYS5oA+CkMGtKNSF7CIQWeAdh1BDwnuR8M8C+ATwDHqFqvAL6ic3HG3wBmcf8MJiltW3HgRsLAsHNgkrVAJbm8KwB2h23pc4iijA8kXdJrSNoCWGRc0Smw7fI2OGCr+KNidSFZW6jqsXvreAewLNnjRl9zU06Sfb3uAzgV2t3i8pbZVEy8dcKzVe3yjqNS21YPsdMwVR3rKR0g/4zj6tyt6mGV+tbL3i3iyl/2qtWW7tHcVPTvbbM6fu/Uer1tQyj93/N8SZRmlsv3B2yG3h+XcgmJAAAAAElFTkSuQmCC" alt="facebook-icon"/></li>
-          <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVBJREFUSEvtleFRwzAMhZ8mgBHYADaAblA2KBNAJwAmoEwAG8AGlAkoGzACTPC4l5NL8Nlx0ySE3lV/E+vTe5Zkw0hhI3GxB/+Z8//DapJTANcu+9bMnrtYQPKslm9uZquQb62Y5AmAtwi0MLP5NnCSCwCXtbOfACYBXgdfAbhLQFTluZl9bFIAyUMATwCkNg6pVkE/40TypmZLfEDVXpSsd2sFFTwVuj5xNgaHJFnrC4WH81uDleCX9SSP3Fr1SCk6gZW8st4pDw3WxoV0BpeU5b7vBvgVwGlLibkzrRRP/A4fARwUCvgCMPMeeEn82w5sZkvvXq3Q4wz8HcBUi8bnuR9wgCVWoT7dm5k2XxWDgD2xHhNZr5jFG20wsMO1OJDa4YOCm5psZ8C5Z1Fv6LLNHDcoTj6LurPUuPQFXo9b1RttlPT57x7cp5uNuUaz+htRFsYfLJ/vVgAAAABJRU5ErkJggg==" alt="gmail-icon"/></li>
-          <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAg5JREFUSEvNl71u1EAUhb/zBMAT8NNAB6loKIJEBUIECXrokQgVCAqChBSJKpF4AHqQIAgaGohoKJMyoiB5ApInuOisxpJ31mOvvUbJVF57xt/cM9fn3hXHNHRMXE42OCLOAWfnVOdA0n7X3GLEEXEaeAk8AHzdZxwC74BXknw9MxrBEbEMfBwAzAGG3pX0I38wA06R/hkBWrEs+1IeeRN4A3jcR9ds7m76fbl2f1PSan1eE9jynBoI3pV0xWsjYgeo4PuSzhfBSea/HdDtlDhV5jofVhJkR9JSA9i3ztTlnoo4JdX3FvBDSc7WmRERa+kr8Ias2iTy2rheT7I+4Ak0Ii4B94Fr6aU/gfeS9mrwpr0NAm9LWo6Ii8Bb4Eb25m/AI0m/I8IRN5nNIPATSRsR8QJ4XTiK55LWW6IeBJ4sioivwM0C+LOkOxHhRLP55GMh8BfgVgG8JWllbHAl9TNgvQB+KunN2FJPDCAiLgB2ttsZfAtYdVUaO7nMqaK2A90Drib4L+BDgrbZ7aAzrgJ0VJu51LUSOuXHfQzEdbfLMv2dOjJ7sefboVyz3Sy0jbJlelXLGXW8t/Wxu5Kpjf2Psti0g7nKouWzjPP2WF1KHPg4OhuBJLfP7dMI8COXzLlan2r7KVNd6myBfaM30OVzrVezV/hc8vpakthmM7y97Tq4RZ+f7H8Si0bXtP4fkWfxH/jGYSoAAAAASUVORK5CYII=" alt="instagram-icon"/></li>
-      </div>
-      <img id='foot-nav-logo' src={ logo} alt="logo-icon" />
-    </div>
-  )
+    <footer className={classes.footer}>
+      <Container className={classes.inner}>
+        <div className={classes.logo}>
+          <img className="h-[150px] w-[150px]" src={logo} alt="logo-icon" />
+        </div>
+       <Text className={classes.title}>
+        ABOUT US
+        <Text className={classes.link}>News</Text>
+        <Text className={classes.link}>Carrers</Text>
+        <Text className={classes.link}>Inventor</Text>
+        <Text className={classes.link}>Sustainability</Text>
+       </Text>
+       <Text className={classes.title}>
+        GET HELP
+        <Text className={classes.link}>Order status</Text>
+        <Text className={classes.link}>Delivery</Text>
+        <Text className={classes.link}>Payment options</Text>
+        <Text className={classes.link}>Contact Us</Text>
+       </Text>
+       <Text className={classes.title}>
+        OPTIONS
+        <Text className={classes.link}>Find a store</Text>
+        <Text className={classes.link}>Become a Member</Text>
+        <Text className={classes.link}>Sign up by Email</Text>
+        <Text className={classes.link}>Send us feedback</Text>
+       </Text>
+      </Container>
+      <Container className={classes.afterFooter}>
+        <Text color="dimmed" size="sm">
+          © 2022 DKL Shoes Website. All rights reserved.
+        </Text>
+
+        <Group spacing={0} className={classes.social} position="left" noWrap>
+          <ActionIcon size="lg">
+            <IconBrandTwitter size={18} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon size="lg">
+            <IconBrandYoutube size={18} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon size="lg">
+            <IconBrandInstagram size={18} stroke={1.5} />
+          </ActionIcon>
+        </Group>
+      </Container>
+    </footer>
+  );
 }
 
-export default Footer
+export default Footer;

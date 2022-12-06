@@ -66,14 +66,12 @@ function Woman() {
       dispatch(fetchProduct())
   }, [])
   const res = useSelector(state => state.fetchProduct.products)
-
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState()
 
   useEffect(() => {
     setProducts(res)
   }, [res])
-
   const filterHighLow = () => {
       setFilter('HighLow')
       const datas = [...res]
@@ -90,27 +88,23 @@ function Woman() {
       })
       setProducts(datas)
 
-
-
   }
   const filterNike = () => {
     setFilter('nike')
     const datas = [...res]
-
-    datas.filter((val) =>  val.brand === 'tan')
-    setProducts( datas.filter((val) => val.brand === "tan"))
+    datas.filter((val) =>  val.brand === 'Nike')
+    setProducts( datas.filter((val) => val.brand === "Nike"))
 
   }
   const filterAdidas = () => {
     setFilter('adidas')
     const datas = [...res]
-    datas.filter((val) =>  val.brand === 'tan')
-    setProducts( datas.filter((val) => val.brand === "olive"))
+    datas.filter((val) =>  val.brand === 'Adidas')
+    setProducts( datas.filter((val) => val.brand === "Adidas"))
   }
   const all = () => {
     setFilter('all')
     setProducts(res)
-
   }
   return (
     <div>
@@ -119,13 +113,11 @@ function Woman() {
       <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
         <div className='flex justify-between '>
           <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Woman's Shoes</h2>
-
           <Filter filterHighLow={filterHighLow} filterLowHigh={filterLowHigh} filterNike={filterNike} filterAdidas={filterAdidas} all={all}/>
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
           <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
             {products.map((info) => {
-
               return <Item info={info} />
             })}
             {filter === 'HighLow' && products.map((info) => {
@@ -135,14 +127,12 @@ function Woman() {
               return <Item info={info} />
             })}
             {filter === 'nike' && products.map((info) => {
-
               return <Item info={info} />
             })}
              {filter === 'adidas' && products.map((info) => {
               return <Item info={info} />
             })}
              {filter === 'all' && products.map((info) => {
-
               return <Item info={info} />
             })}
           </div>

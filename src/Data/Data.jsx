@@ -75,7 +75,6 @@ export const Data = [
         name: 'Sneaker1',
         imgProduct: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/9f059ac0-7051-4f76-a056-a92e2a91c122/air-force-1-07-shoes-Bzrdk4.png',
         cost: 1240
-
       },
       
 ]

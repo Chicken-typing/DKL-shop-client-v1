@@ -11,7 +11,13 @@ const useStyles = createStyles(theme => ({
           justifyContent: "space-between",
           alignItems: "flex-start",
           backgroundSize: "cover",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
+          '@media (max-width: 414px)': {
+            width: '100%',
+            height: 320
+          },
+          
+
   },
 
   title: {
@@ -37,7 +43,7 @@ export function CardBrand({data}) {
   const { classes } = useStyles()
 
   return (
-    <div>
+    <div className="">
       {data.map((item, index) => (
          <Paper
          shadow="md"

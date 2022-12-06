@@ -5,7 +5,7 @@ import {
   fetchAccessionSuccess,
   fetchAPIFailure,
 } from "../action";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, takeLatest, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 import {
   API_ADMIN_REVENUE,

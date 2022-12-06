@@ -49,12 +49,12 @@ function Brand() {
           <ImageBackground info={info} />
         ))}
         <h2 className="mt-[20px] text-2xl font-bold tracking-tight text-gray-700 text-center">Our Brand</h2>
-       <div  className='flex justify-evenly mt-[20px] p-[25px]' id='main-title'>
-       <div className='relative'>
-            <CardBrand data={data} />
+       <div  className='lg:flex justify-evenly mt-[20px] lg:p-[25px]  m-md:flex m-md:flex-col m-md:justify-center m-md:items-center ' id='main-title'>
+       <div className='relative  '>
+            <CardBrand  data={data} />
             <button type='button' data-mdb-ripple="true" 
             data-mdb-ripple-color="light" 
-            className=' p-[15px] border-2 x] bg-gray-200 text-gray-700 font-[700] text-sm leading-tight uppercase rounded shadow-md
+            className=' p-[15px] border-2 x] bg-gray-200 text-gray-700 font-[700] text-sm leading-tight uppercase rounded-2xl shadow-md
              hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0
               active:bg-gray-400 active:shadow-lg
                transition duration-150 ease-in-out absolute bottom-[20px] left-[20px]' 
@@ -63,7 +63,7 @@ function Brand() {
         <div className='relative'>
             <CardBrand data={data1}/>
             <button ype='button' data-mdb-ripple="true" 
-            data-mdb-ripple-color="light" className='p-[15px] border-2 x] bg-gray-200 text-gray-700 font-[700] text-sm leading-tight uppercase rounded shadow-md
+            data-mdb-ripple-color="light" className='p-[15px] border-2 x] bg-gray-200 text-gray-700 font-[700] text-sm leading-tight uppercase rounded-2xl shadow-md
              hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0
               active:bg-gray-400 active:shadow-lg
                transition duration-150 ease-in-out absolute bottom-[20px] left-[20px]'

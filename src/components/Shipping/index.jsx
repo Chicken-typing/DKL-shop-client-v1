@@ -4,28 +4,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../../action/Shipping';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Radio } from 'antd';
+import {  Group } from '@mantine/core';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
-
-function Shipping() {
+function Shipping({onClick}) {
 
   // Use hooks to declare information
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const shipping = useSelector(state => state.ShippingInfo.shippingAddress)
-const [fullName, setFullName] = useState(shipping.fullName || '');
-const [address, setAddress] = useState(shipping.address || '');
-const [city, setCity] = useState(shipping.city || '');
+  const shipping = useSelector(state => state.ShippingInfo)
+
+const [fullName, setFullName] = useState(shipping.shippingAddress.fullName || "");
+const [address, setAddress] = useState(shipping.shippingAddress.address || '');
+const [city, setCity] = useState(shipping.shippingAddress.city || '');
 const [postalCode, setPostalCode] = useState(
-  shipping.postalCode || ''
+  shipping.shippingAddress.postalCode || ''
 );
-const [country, setCountry] = useState(shipping.country || '');
+const [country, setCountry] = useState(shipping.shippingAddress.country || '');
+
   
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(saveShippingAddress({fullName,address, city, postalCode, country }))
-    navigate('/payment')
-  }
+  
   const [form] = Form.useForm();
+
 
 
   const validateMessages = {
@@ -39,13 +40,51 @@ const [country, setCountry] = useState(shipping.country || '');
     },
   };
 
+
+    
   // Check User has login or not
   // useEffect(() => {
   //   if (!userInfo) {
   //     navigate('/signin?redirect=/shipping');
   //   }
   // }, [userInfo, navigate]);
-  
+
+
+  const submitHandler = (e) => {
+    dispatch(saveShippingAddress({fullName,address, city, postalCode, country }))
+    
+
+  }
+  const handleBack = () => {
+    navigate('/cart')
+  }
+
+  const notify = () => {
+    toast.warn('Please type full your Information!', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+  }
+  const handleNext = () => {
+   if(fullName === "" || address === "" || city === "" || postalCode === "" || country === "")
+   {
+    notify()
+   }
+   else
+   {
+    submitHandler()
+    onClick()
+    dispatch(saveShippingAddress({fullName,address, city, postalCode, country }))
+    navigate('/checkout/payment')
+   }
+  }
+
   return (
     <div>
      
@@ -55,19 +94,23 @@ const [country, setCountry] = useState(shipping.country || '');
         <Form
       form={form}
       layout="vertical"
-      onFinish={submitHandler} 
+      onFinish={() => {
+        submitHandler()
+        
+      }} 
+
       validateMessages={validateMessages}
       name="nest-messages" 
     >
-      <Form.Item label="Full Name"  name={['user', 'name']} required tooltip="Please input your Full Name" rules={[
+      <Form.Item  label="Full Name"   required tooltip="Please input your Full Name" rules={[
               {
                 required: true,
               },
             ]}>
-        <Input placeholder="Your FullName" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+        <Input placeholder="Your FullName"  value={fullName} onChange={(e) => setFullName(e.target.value)} />
       </Form.Item>
 
-      <Form.Item label="Address" name={['user', 'address']} required tooltip="Input your correct address" rules={[
+      <Form.Item label="Address" required tooltip="Input your correct address" rules={[
               {
                 required: true,
               },
@@ -75,7 +118,7 @@ const [country, setCountry] = useState(shipping.country || '');
         <Input placeholder="Your Address" value={address} onChange={(e) => setAddress(e.target.value)}  />
       </Form.Item>
 
-      <Form.Item label="City" required tooltip="Input your City" name={['user', 'city']} rules={[
+      <Form.Item label="City" required tooltip="Input your City" rules={[
               {
                 required: true,
               },
@@ -83,7 +126,7 @@ const [country, setCountry] = useState(shipping.country || '');
         <Input placeholder="Your City"value={city} onChange={(e) => setCity(e.target.value)} />
       </Form.Item>
 
-      <Form.Item label="Postal Code " required tooltip="Input correct Postal Code" name={['user', 'postal code']} rules={[
+      <Form.Item label="Postal Code " required tooltip="Input correct Postal Code"  rules={[
               {
                 required: true,
               },
@@ -91,7 +134,7 @@ const [country, setCountry] = useState(shipping.country || '');
         <Input placeholder="Postal Code" value={postalCode} onChange={(e) => setPostalCode(e.target.value)}/>
       </Form.Item>
 
-      <Form.Item label="Country " required tooltip="Input your country " name={['user', 'country']} rules={[
+      <Form.Item label="Country " required tooltip="Input your country "  rules={[
               {
                 required: true,
               },
@@ -108,11 +151,32 @@ const [country, setCountry] = useState(shipping.country || '');
         <Input placeholder="Your phone number" />
       </Form.Item> */}
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit"  onClick={submitHandler}>Submit</Button>
-      </Form.Item>
+
+
+     <Form.Item>
+     <Group position="center" mt="xl">
+        <Button type='primary' variant="default" onClick={handleBack}>Back</Button>
+        <Button type='primary' variant='default' onClick={handleNext} htmlType='submit' >Next step</Button>
+      </Group>
+     </Form.Item>
+
+      {/* <Form.Item>
+        <Button type="primary" htmlType="submit" onClick={() =>submitHandler }>Submit</Button>
+      </Form.Item> */}
     </Form>
       </div>
+      <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </div>
   )
 }
