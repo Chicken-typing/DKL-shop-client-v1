@@ -140,10 +140,10 @@ function ListNavigations() {
   }, []);
   const res = useSelector((state) => state.fetchProduct.products);
 
- 
+
 
   return (
-    <Disclosure as="nav" className={`scroll bg-black max-w-[100%] ${scrollNav && 'hidden'} `} style={{top: scroll ? '0' : '' , position: scroll ? 'fixed': ''}}>
+    <Disclosure as="nav" className={`scroll bg-black max-w-[100%] ${scrollNav && 'hidden'} `} style={{ top: scroll ? '0' : '', position: scroll ? 'fixed' : '' }}>
       {({ open }) => (
         <>
           <div className=" px-3 sm:px-6 lg:px-7">
@@ -205,23 +205,23 @@ function ListNavigations() {
                     >
                       {searchResult.length > 0
                         ? searchResult.map((item) => (
-                            <div
-                              onSelect={item}
-                              onClick={() => navigate(`/products/${item.name}`)}
-                              className={
-                                show ? "dropdown-row" : "dropdown_close"
-                              }
-                              style={{
-                                visibility: show ? "visible" : "hidden",
-                              }}
-                              key={item.id}
-                            >
-                              <img src={item.imgProduct} alt="" />
-                              <div className=" item_name z-[10]">
-                                {item.name}
-                              </div>
+                          <div
+                            onSelect={item}
+                            onClick={() => navigate(`/products/${item.name}`)}
+                            className={
+                              show ? "dropdown-row" : "dropdown_close"
+                            }
+                            style={{
+                              visibility: show ? "visible" : "hidden",
+                            }}
+                            key={item._id}
+                          >
+                            <img src={item.imgProduct} alt="" />
+                            <div className=" item_name z-[10]">
+                              {item.name}
                             </div>
-                          ))
+                          </div>
+                        ))
                         : "Can not find this product"}
                     </div>
                   </div>
@@ -275,16 +275,16 @@ function ListNavigations() {
               >
                 {searchResult.length > 0
                   ? searchResult.map((item) => (
-                      <div
-                        onSelect={item}
-                        onClick={() => navigate(`/products/${item.name}`)}
-                        className={show ? "dropdown-col" : "dropdown_close"}
-                        style={{ visibility: show ? "visible" : "hidden" }}
-                        key={item.id}
-                      >
-                        <div className=" item_name z-[10]">{item.name}</div>
-                      </div>
-                    ))
+                    <div
+                      onSelect={item}
+                      onClick={() => navigate(`/products/${item.name}`)}
+                      className={show ? "dropdown-col" : "dropdown_close"}
+                      style={{ visibility: show ? "visible" : "hidden" }}
+                      key={item._id}
+                    >
+                      <div className=" item_name z-[10]">{item.name}</div>
+                    </div>
+                  ))
                   : "Can not find this product"}
               </div>
             </div>

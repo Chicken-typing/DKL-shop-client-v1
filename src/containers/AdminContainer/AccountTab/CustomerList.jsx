@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../../action'
 import AccountItem from '../../../components/AccountItem'
 import AppBar from '../../../components/AppBar'
-import { API_USER_CUSTOMER } from '../../../linkTo'
+import { API_USER } from '../../../linkTo'
 import deleteUser from '../../../services/deleteUser'
 const { Header, Content } = Layout
 export default function CustomerList(props) {
@@ -16,7 +16,7 @@ export default function CustomerList(props) {
     }
     useEffect(() => {
         dispatch(fetchUser({
-            url: API_USER_CUSTOMER
+            url: API_USER
         }))
     }, []);
     const dataUser = useSelector(state => state.fetchUser.dataUser)
@@ -59,10 +59,10 @@ export default function CustomerList(props) {
                         paddingBottom: 20
                     }}>
                     {result.length > 0
-                        ? result.map(user => <AccountItem user={user} url={API_USER_CUSTOMER}
+                        ? result.map(user => <AccountItem user={user} url={API_USER}
                             hasEmail handleDeleteUser={deleteAccount}
                             reFetch={Refetch(fetchUser({
-                                url: API_USER_CUSTOMER
+                                url: API_USER
                             }))} />)
                         : searching ?
                             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="The user do not exist." />

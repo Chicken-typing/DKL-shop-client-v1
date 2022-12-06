@@ -5,19 +5,19 @@ import Button from './Button'
 import updateUser from '../services/updateUser';
 import ChatBox from './ChatBox';
 import { io } from 'socket.io-client';
-import { API_CHAT_ROOM,API_USER_CUSTOMER } from '../linkTo';
+import { API_CHAT_ROOM, API_USER } from '../linkTo';
 const { Meta } = Card;
 const { Item } = Form;
-const AccountItem = ({ url,user, hasEmail, handleDeleteUser, reFetch,key }) => {
+const AccountItem = ({ url, user, hasEmail, handleDeleteUser, reFetch, key }) => {
     const socket = io.connect(API_CHAT_ROOM)
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
     const handleCheckMail = () => {
-        socket.emit("join_room", user.id)
+        socket.emit("join_room", user._id)
         setOpenChat(!openChat)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
+
     const showModal = () => {
         setIsModalOpen(true);
         form.resetFields()
@@ -30,7 +30,7 @@ const AccountItem = ({ url,user, hasEmail, handleDeleteUser, reFetch,key }) => {
         setIsModalOpen(false);
     };
     const onFinish = (values) => {
-        updateUser(url,user.id, values)
+        updateUser(url, user._id, values)
         reFetch()
     };
     const handleCloseChatbox = () => {
@@ -45,14 +45,14 @@ const AccountItem = ({ url,user, hasEmail, handleDeleteUser, reFetch,key }) => {
                     width: "85%",
                     marginTop: 16,
                 }}
-                key={user.id}
+                key={user._id}
                 extra={
                     <Space>
                         <Popconfirm
                             placement="bottom"
                             title="Do you want to delete this account?"
                             onConfirm={() => {
-                                handleDeleteUser.handleDeleteUser(API_USER_CUSTOMER, user.id);
+                                handleDeleteUser.handleDeleteUser(API_USER, user._id);
                                 reFetch()
                             }}
                             okText="Accept"

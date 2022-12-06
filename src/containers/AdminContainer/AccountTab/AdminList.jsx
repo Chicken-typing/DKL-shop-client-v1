@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../../action'
 import AccountItem from '../../../components/AccountItem'
-import { API_USER_ADMIN } from '../../../linkTo'
+import { API_USER } from '../../../linkTo'
 import deleteUser from '../../../services/deleteUser'
 import { Layout, Skeleton, Affix, Modal, Form, Input } from 'antd'
 import Button from '../../../components/Button'
@@ -115,7 +115,7 @@ export default function AdminList() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchUser({
-            url: API_USER_ADMIN
+            url: API_USER
         }))
     }, []);
     const dataUser = useSelector(state => state.fetchUser.dataUser)
@@ -140,7 +140,7 @@ export default function AdminList() {
         addUser({ ...values, role: 'ADMIN', isActive: true })
 
         Refetch(fetchUser({
-            url: API_USER_ADMIN
+            url: API_USER
         }))
 
     };
@@ -180,10 +180,10 @@ export default function AdminList() {
                     }}
                 >
                     {dataUser.length > 0
-                        ? dataUser.map(user => <AccountItem user={user} url={API_USER_ADMIN} h
+                        ? dataUser.map(user => <AccountItem user={user} url={API_USER} h
                             andleDeleteUser={deleteAccount}
                             reFetch={Refetch(fetchUser({
-                                url: API_USER_ADMIN
+                                url: API_USER
                             }))} />)
                         : <Skeleton active avatar />
                     }

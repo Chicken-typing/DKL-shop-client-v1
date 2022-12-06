@@ -2,7 +2,7 @@
 import moment from "moment";
 const sendMessage = async (user, message, socket, getNewest) => {
   const messageData = {
-    room: user.id,
+    room: user._id,
     author: "admin",
     sentAt: moment()._d,
     message: message,

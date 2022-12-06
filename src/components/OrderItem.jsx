@@ -19,12 +19,12 @@ const OrderItem = props => {
     };
     const handleOk = () => {
         setIsModalOpen(false);
-        confirmOrder(item.id, { isConfirm: true })
+        confirmOrder(item._id, { isConfirm: true })
         Refetch(fetchOrders())
     };
     const handleCancel = () => {
         setIsModalOpen(false);
-        confirmOrder(item.id, { isConfirm: false })
+        confirmOrder(item._id, { isConfirm: false })
         Refetch(fetchOrders())
 
     };
@@ -38,7 +38,7 @@ const OrderItem = props => {
             <Form>
                 <Space split={<Divider orientation='horizontal' style={{ margin: 0 }} />} direction='vertical'>
                     <Form.Item label="Name">product.name</Form.Item>
-                    <Form.Item label="Seri">product.id {product}</Form.Item>
+                    <Form.Item label="Seri">product._id {product}</Form.Item>
                     <Form.Item label="Price">product.price</Form.Item>
                     <Form.Item label="Mount">product.quantity</Form.Item>
                 </Space>
@@ -56,7 +56,7 @@ const OrderItem = props => {
         <>
             <Item
                 onClick={showModal}
-                key={item.id}
+                key={item._id}
                 style={{
                     margin: 10,
                     width: 300
@@ -67,7 +67,7 @@ const OrderItem = props => {
                     justifyContent: 'space-between'
                 }}>
                     <Typography.Paragraph ellipsis>
-                        {item.id}
+                        {item._id}
                     </Typography.Paragraph>
                     {done(item.isConfirm)}
                 </div>} hoverable>
@@ -83,7 +83,7 @@ const OrderItem = props => {
                 </Card>
             </Item>
             <Modal
-                title={"Order:" + item.id}
+                title={"Order:" + item._id}
                 centered
                 open={isModalOpen}
                 onOk={handleOk}

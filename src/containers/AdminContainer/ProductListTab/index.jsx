@@ -18,7 +18,7 @@ const ProductListTab = () => {
     const res = useSelector(state => state.fetchProduct.products.map((item) => {
         return {
             ...item,
-            key: item.id
+            key: item._id
         }
     }
     ))
@@ -156,7 +156,7 @@ const ProductListTab = () => {
             ),
     });
     const confirm = (index) => {
-        deleteProduct(index.id)
+        deleteProduct(index._id)
 
         Refetch(fetchProduct())
 
