@@ -17,15 +17,17 @@ import {
   OrderTab,
   ProductListTab,
   SettingTab,
-  AddProductTab,
-} from "../containers/AdminContainer";
-import ProductDetail from "../containers/ProductDetail";
-import Cart from "../pages/Cart";
-import Checkout from "../pages/Checkout";
-import Shipping from "../components/Shipping";
-import Payment from "../components/Payment";
+  AddProductTab
+} from '../containers/AdminContainer'
+import ProductDetail from '../containers/ProductDetail';
+import Cart from '../pages/Cart';
+import Checkout from '../pages/Checkout';
+import Shipping from '../components/Shipping';
+import Payment from '../components/Payment';
+import ProtectedRoute from './ProtectedRoute';
 import PlaceOrder from "../components/PlaceOrder";
 function Router() {
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -48,17 +50,18 @@ function Router() {
         </Route>
       </Route>
       {/* admin page */}
-      <Route path="/admin" element={<Admin />}>
+      <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} >
         <Route path="" element={<Navigate to="dashboard" replace />} />
-        <Route path="product-list" element={<ProductListTab />} />
-        <Route path="setting" element={<SettingTab />} />
-        <Route path="add-product" element={<AddProductTab />} />
-        <Route path="accounts" element={<AccountTab />} />
-        <Route path="dashboard" element={<DasboardTab />} />
-        <Route path="order" element={<OrderTab />} />
+        <Route path="product-list" element={<ProtectedRoute><ProductListTab /></ProtectedRoute>} />
+        <Route path="setting" element={<ProtectedRoute><SettingTab /></ProtectedRoute>} />
+        <Route path="add-product" element={<ProtectedRoute><AddProductTab /></ProtectedRoute>} />
+        <Route path="accounts" element={<ProtectedRoute><AccountTab /></ProtectedRoute>} />
+        <Route path="dashboard" element={<ProtectedRoute><DasboardTab /></ProtectedRoute>} />
+        <Route path="order" element={<ProtectedRoute><OrderTab /></ProtectedRoute>} />
       </Route>
     </Routes>
-  );
+
+  )
 }
 
 export default Router;
