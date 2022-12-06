@@ -3,7 +3,6 @@ import {
     ShoppingOutlined,
     ShoppingCartOutlined,
     PlusCircleOutlined,
-    DollarOutlined,
     UserOutlined,
     UnorderedListOutlined,
     SettingOutlined
@@ -13,13 +12,12 @@ import logo from '../../assets/icons/logo-light.png'
 import { Layout, Menu, Affix } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Account from '../../components/Account';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import './style.scss'
-import Waiting from '../Waiting';
 const { Item, SubMenu } = Menu
 const { Header, Content, Sider } = Layout;
 const Admin = () => {
-    const [tabAdmin, setTabAdmin] = useState("")
+    const location = useLocation().pathname.split('/')
     return (
         <Layout
             hasSider
@@ -42,7 +40,8 @@ const Admin = () => {
 
                         }} />
                 </div>
-                <Menu theme="dark" mode="inline" onClick={value => setTabAdmin(value.key)} >
+
+                <Menu theme="dark" mode="inline" selectedKeys={[location[2]]}>
                     <Item key="dashboard">
                         <Link to={`/admin/dashboard`}>
                             <HomeOutlined />
@@ -53,7 +52,7 @@ const Admin = () => {
                     </Item>
                     <SubMenu key="product" title={
                         <>
-                            <ShoppingOutlined /> Product
+                            <ShoppingOutlined /> <div id='product-propdown'>Product</div>
                         </>
                     } className="subItem">
                         <Item key="product-list">

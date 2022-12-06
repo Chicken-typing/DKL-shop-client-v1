@@ -4,7 +4,7 @@ import { addToCart, deleteFromCart, removeFromCart} from '../../action';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-import { Empty } from 'antd';
+import { Empty,Typography  } from 'antd';
 
 function Cart() {
 
@@ -133,13 +133,13 @@ const notify = () => {
            key={item._id}>
             <div className='mb-8 lg:border-t lg:border-gray-300  '></div>
 
-            <div className='flex w-[100%]'>
+            <div className='flex w-[100%] m-sm:flex-col'>
             {/* <img src={item.imgProduct !== undefined && item.imgProduct} alt="" 
             className=' lg:h-[85%] lg:w-[35%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] : '/> */}
  <img src='https://secure-images.nike.com/is/image/DotCom/DX1627_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg' alt="" 
             className=' lg:h-[85%] lg:w-[35%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] : '/>
-            <div className='pl-[20px] lg:w-[40%]'>
-            <div className=' lg:max-w-[100%] break-all font-[500] mb-2 text-lg'>{item.name}</div>
+            <div className='pl-[20px] lg:w-[40%] lg:max-w-[40%] m-sm:block  m-sm:w-[60%]'>
+            <div  className=' lg:max-w-[100%] lg:break-all font-[500] mb-2 text-lg'>{item.name}</div>
             {/* Color and Size */}
             <div className='flex '>
             <div className='text-gray-500 lg:border-r lg:border-gray-300 w-[40%]'>Green</div>

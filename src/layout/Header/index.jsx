@@ -16,7 +16,7 @@ function classNames(...classes) {
 function Header() {
 
 
-const [isLoged, setIsLoged] = useState(false)
+const [isLoged, setIsLoged] = useState(true)
 
   return (
     

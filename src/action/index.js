@@ -9,6 +9,7 @@ import {
 } from "./fetchStatic";
 import { addToCart, removeFromCart, deleteFromCart } from "./Cart";
 import { savePaymentMethod, saveShippingAddress } from "./Shipping";
+import { fetchUser, fetchUserSuccess } from "./fetchUser";
 
 export {
     fetchAPI,
@@ -26,5 +27,7 @@ export {
     removeFromCart,
     deleteFromCart,
     savePaymentMethod,
-    saveShippingAddress
+    saveShippingAddress,
+    fetchUser,
+    fetchUserSuccess,
 };
