@@ -1,22 +1,31 @@
 import { Modal, List, Avatar, Card, Typography, Popover, Form, Divider, Space, Tag } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons'
-import Button from './Button'
 import React, { useState } from 'react';
+import confirmOrder from '../services/confirmProduct';
+import { useDispatch } from 'react-redux';
+import { fetchOrders } from '../action';
 const { Item } = List
 const OrderItem = props => {
     const { item } = props
+    const dispatch = useDispatch()
+    const Refetch = (callback) => {
+        return setTimeout(() => {
+            dispatch(callback);
+        }, 1000)
+    }
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isDone, setIsDone] = useState(false)
     const showModal = () => {
         setIsModalOpen(true);
     };
     const handleOk = () => {
         setIsModalOpen(false);
-        setIsDone(true)
+        confirmOrder(item.id, { isConfirm: true })
+        Refetch(fetchOrders())
     };
     const handleCancel = () => {
         setIsModalOpen(false);
-        setIsDone(false)
+        confirmOrder(item.id, { isConfirm: false })
+        Refetch(fetchOrders())
 
     };
     const content = (product) => (
@@ -36,7 +45,7 @@ const OrderItem = props => {
             </Form>
         </Card>)
     const done = (isDone) => (
-        isDone ? (<Tag icon={<CheckCircleOutlined />} color="success">
+        isDone ? (<Tag icon={<CheckCircleOutlined />} color="success" style={{ display: 'flex', alignItems: 'center' }}>
             DONE
         </Tag>) : ""
     )
@@ -47,7 +56,7 @@ const OrderItem = props => {
         <>
             <Item
                 onClick={showModal}
-                key={item.orderID}
+                key={item.id}
                 style={{
                     margin: 10,
                     width: 300
@@ -57,22 +66,24 @@ const OrderItem = props => {
                     display: 'flex',
                     justifyContent: 'space-between'
                 }}>
-                    {item.orderID}
-                    {done(isDone)}
+                    <Typography.Paragraph ellipsis>
+                        {item.id}
+                    </Typography.Paragraph>
+                    {done(item.isConfirm)}
                 </div>} hoverable>
                     <Item.Meta
                         title={<Typography.Paragraph ellipsis={true}>{item.userName}</Typography.Paragraph>}
                         avatar={<Avatar size='large' src={item.userImage} />}
                         description={<>
                             <Typography.Text keyboard>{item.totalPrice} VND</Typography.Text>
-                            {pay(item.paid)}
+                            {pay(item.isPaid)}
                         </>}
                     />
 
                 </Card>
             </Item>
             <Modal
-                title={"Order:" + item.orderID}
+                title={"Order:" + item.id}
                 centered
                 open={isModalOpen}
                 onOk={handleOk}
