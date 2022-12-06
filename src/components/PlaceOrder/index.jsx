@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
-function PlaceOrder({onClickBack, onClickNext}) {
+function PlaceOrder({onClickBack, onClickNext, handleEdit}) {
   const data = useSelector((state) => state.Cart.carts);
   const shipping = useSelector((state) => state.ShippingInfo);
   const payment = useSelector(state => state.PaymentMethod.paymentMethod)
@@ -91,7 +91,7 @@ const handleNext = () => {
                 <div className="font-bold">Address:</div>
                 <div>{shipping.shippingAddress.address}</div>
               </Space>
-              <a href="/payment">Edit</a>
+              <Button type="link" onClick={() => handleEdit.editInfo()}>Edit</Button>
              </Space>
             </Card>
 
@@ -101,7 +101,7 @@ const handleNext = () => {
                 <div className="font-bold">Method:</div>
                 <div>{payment}</div>
               </Space>
-              <a href="/checkout/payment">Edit</a>
+              <Button type="link" onClick={() => handleEdit.editPayment()}>Edit</Button>
              </Space>
             </Card>
 

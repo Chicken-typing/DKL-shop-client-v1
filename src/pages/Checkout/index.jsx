@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Payment from '../../components/Payment';
 import PlaceOrder from '../../components/PlaceOrder';
 import PreviewOrder from '../../components/PreviewOrder';
+import { useNavigate } from 'react-router';
+
 
 
 
@@ -12,7 +14,21 @@ function Checkout() {
   const [active, setActive] = useState(1);
   const nextStep = () => setActive((current) => (current < 4 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
+  const navigate = useNavigate()
+  const editPayment = () => {
+    setActive(2)
+    navigate('payment')
 
+  }
+  const editInfo = () => {
+    setActive(1)
+    navigate('shippingAddress')
+  }
+  const handleEdit = {
+    editPayment: editPayment,
+    editInfo: editInfo  
+    
+  }
   return (
     <div className='mt-10 pt-8 px-20'>
        
@@ -30,7 +46,7 @@ function Checkout() {
         </Stepper.Step>
 
         <Stepper.Step label="Final step" description="Get full access" allowStepSelect={active > 3}>
-          <PlaceOrder onClickBack={prevStep} onClickNext={nextStep}/>
+          <PlaceOrder onClickBack={prevStep} onClickNext={nextStep} handleEdit={handleEdit} />
         </Stepper.Step>
 
         <Stepper.Completed>
