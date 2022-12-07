@@ -15,21 +15,21 @@ const { Item } = Form
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isLogin, setIsLogin] = useState(false)
     const dispatch = useDispatch()
-    const success = () => {
-        message.success('Login success.');
-    };
-    const error = () => {
-        message.error('Wrong email or password.');
-    };
-
+    const success = () => message.success('Login success.');
+    const error = () => message.error('Wrong email or password.');
     const path = useSelector(state => state.path.pathname)
+    const user = useSelector(state => state.User.userInfor)
     const navigate = useNavigate()
-    const handleLogin = ({email, password}) => {
-        dispatch(login({email, password}))
-        loginUser({email, password})
+    const handleGetRes = (res) => dispatch(login(res))
+    const handleLogin = (value) => {
+        loginUser(value, handleGetRes)
+        setIsLogin(true)
+    }
+    if (isLogin) {
+        setIsLogin(false)
         setTimeout(() => {
-            const user = JSON.parse(localStorage.getItem('userInfor'))
             if (_.isEmpty(user)) {
                 error()
             } else {
@@ -42,8 +42,10 @@ const Login = () => {
     }
     const responseFacebook = (res) => { }
     return (
-        
-            <div className='form-container'>
+
+
+        <div className='form-container'>
+
             <h1>Login</h1>
             <Form
                 layout='vertical'
