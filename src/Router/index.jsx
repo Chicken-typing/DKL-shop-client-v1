@@ -25,7 +25,7 @@ import Checkout from '../pages/Checkout';
 import Shipping from '../components/Shipping';
 import Payment from '../components/Payment';
 import ProtectedRoute from './ProtectedRoute';
-
+import PlaceOrder from "../components/PlaceOrder";
 import Protected from "./Protected";
 
 function Router() {
