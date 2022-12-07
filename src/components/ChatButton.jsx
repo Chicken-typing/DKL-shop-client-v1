@@ -32,8 +32,8 @@ export default function ChatButton() {
                     <Button onClick={handleChat} type='link'
                         icon={
                             <>
-                                <ArrowDownOutlined style={{ fontSize: 48 }} />
-                                <MailOutlined style={{ fontSize: 56 }} />
+                                <MailOutlined style={{ fontSize: 74 }} />
+
                             </>}
                         style={{
                             display: 'flex',
