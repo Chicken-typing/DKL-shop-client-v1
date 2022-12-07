@@ -58,9 +58,11 @@ function Cart() {
     }
     else {
       setShip(14)
+
       data.map(item => price += item.price * item.quantity)
     }
     return price + ship
+
   }
 
   const location = useLocation().pathname.split('/')
