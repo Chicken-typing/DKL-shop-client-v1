@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+
 import { addToCart, deleteFromCart, removeFromCart } from '../../action';
+
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+
 import { Empty, notification, Button } from 'antd';
 import { getPath } from '../../action';
 import _ from 'lodash'
+
 
 
 function Cart() {
@@ -16,10 +20,12 @@ function Cart() {
 
 
   // UseState
+
   const [price, setPrice] = useState(0)
   const [total, setTotal] = useState(0)
   const [ship, setShip] = useState(0)
   const token = useSelector(state => state.User.userInfor.token)
+
   // Function
   const navigate = useNavigate()
   const history = useNavigate();
@@ -42,6 +48,7 @@ function Cart() {
     data.map((item) => price += item.price * item.quantity);
     return price
   };
+
 
   const totalAll = () => {
     let price = 0
@@ -87,6 +94,26 @@ function Cart() {
   };
 
 
+const openNotification = () => {
+
+  const btn = (
+    <Button type="primary" size="small" onClick={() => {
+      navigate('/login')
+      notification.close()
+    }}>
+      Click here!
+    </Button>
+  );
+  notification.open({
+    message: 'Notification Title',
+    description:
+      'Please Sign In to Checkout',
+    btn,
+    duration: 2,
+  });
+};
+
+
   return (
 
     <div className='py-14 px-10'>
@@ -130,6 +157,7 @@ function Cart() {
               {/* Checkout  */}
               <button className='w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
                   focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4'
+
                 onClick={
                   () => data.length === 0
                     ? notify()
@@ -141,6 +169,7 @@ function Cart() {
               <ToastContainer position='bottom-right' />
 
             </div>
+
 
           </form>
         </div>

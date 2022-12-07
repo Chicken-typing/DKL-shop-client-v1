@@ -12,3 +12,4 @@ export const logout = () => {
     type: SIGNOUT_USER,
   };
 };
+

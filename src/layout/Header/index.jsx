@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from "react";
 
-import { json, Link, useNavigate } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
+
 
 import Nike from "../../assets/images/nike.png";
 import Adidas from "../../assets/images/adidas.png";
@@ -23,6 +25,7 @@ function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const token = useSelector(state => state.User.userInfor)
+
   return (
 
 
@@ -96,6 +99,7 @@ function Header() {
           </Menu.Items>
         </Transition>
       </Menu>}
+
     </div>
   );
 }

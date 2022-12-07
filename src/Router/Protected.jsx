@@ -5,6 +5,7 @@ function Protected({ children }) {
     const token = useSelector(state => state.User.userInfor)
     if (!token.token) {
         return <UnAuthPage />
+
     }
     return children
 }
