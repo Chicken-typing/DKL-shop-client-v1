@@ -7,9 +7,10 @@ import { fetchAdvertise } from '../../../action/fetchAdvertises';
 import {fetchProduct} from "../../../action/fetchProducts"
 import Item from '../../../components/Item';
 import Filter from '../../../components/Filter';
-
 import {BackTop} from 'antd'
-
+import { useLocation } from 'react-router';
+import { getPath } from '../../../action';
+import { advertise } from '../../../Data/DataSlider';
 
 function Kid() {
   const DataSlider = [
@@ -44,10 +45,15 @@ function Kid() {
     dispatch(fetchAdvertise())
       dispatch(fetchProduct())
   }, [])
+  const location = useLocation().pathname.split('/')
+  useEffect(() => {
+    dispatch(getPath(location[1]))
+  })
   const res = useSelector(state => state.fetchProduct.products)
-  const advertise = useSelector(state => state.fetchAdvertise.products)
+
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState()
+
 
   useEffect(() => {
     setProducts(res)

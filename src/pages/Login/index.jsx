@@ -1,21 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import './style.scss'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Divider, Form, Input, message, Typography } from 'antd';
 import loginUser from '../../services/loginUser';
 import _ from 'lodash'
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../action';
+
+
+
 const { Item } = Form
+
 const Login = () => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const dispatch = useDispatch()
     const success = () => {
         message.success('Login success.');
     };
     const error = () => {
         message.error('Wrong email or password.');
     };
+
+    const path = useSelector(state => state.path.pathname)
     const navigate = useNavigate()
-    const handleLogin = (value) => {
-        loginUser(value)
+    const handleLogin = ({email, password}) => {
+        dispatch(login({email, password}))
+        loginUser({email, password})
         setTimeout(() => {
             const user = JSON.parse(localStorage.getItem('userInfor'))
             if (_.isEmpty(user)) {
@@ -23,14 +35,15 @@ const Login = () => {
             } else {
                 success()
                 user.role === 'customer'
-                    ? navigate('/')
+                    ? navigate(`/${path}`)
                     : navigate('/admin')
             }
         }, 1000)
     }
     const responseFacebook = (res) => { }
     return (
-        <div className='form-container'>
+        
+            <div className='form-container'>
             <h1>Login</h1>
             <Form
                 layout='vertical'
@@ -45,7 +58,7 @@ const Login = () => {
                         type: 'email'
                     }]}
                 >
-                    <Input />
+                    <Input value={email} onChange={(e) => setEmail(e.target.value)} />
                 </Item>
                 <Item label='Password'
                     name='password'
@@ -53,7 +66,7 @@ const Login = () => {
                         required: true,
                         message: 'Please input password'
                     }]}>
-                    <Input.Password />
+                    <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} />
                 </Item>
                 <Typography.Link>Forgot password?</Typography.Link>
                 <Item>
@@ -76,6 +89,7 @@ const Login = () => {
             </Form>
 
         </div>
+
     )
 
 }

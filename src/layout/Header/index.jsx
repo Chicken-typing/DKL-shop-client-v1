@@ -1,5 +1,7 @@
 import React, { useState, Fragment } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+
+import { Link,  useNavigate } from "react-router-dom";
+
 import Nike from "../../assets/images/nike.png";
 import Adidas from "../../assets/images/adidas.png";
 import "./style.scss";
@@ -7,6 +9,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Button } from 'antd';
 
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../action";
 
 
 function classNames(...classes) {
@@ -16,16 +20,20 @@ function classNames(...classes) {
 function Header() {
 
 
-const [isLoged, setIsLoged] = useState(true)
-
+const dispatch = useDispatch()
+const navigate = useNavigate()
+const token = useSelector(state => state.User)
   return (
-    
+
+
     <div className="top-nav">
                 <div className="icon-brand">
                     <Link to='/main-page' className='imgNike'><img src={Nike} alt="Nike-icon"/></Link>
                     <Link to='/main-page' className="imgAdidas"><img src={Adidas} alt="" /></Link>
                 </div>
-              {isLoged ? <div className="singin-singup">
+
+              {!token.token ? <div className="singin-singup">
+
                     <Link to="/login" className='signin'>Sign In</Link>
                      <Link to="/register" className='signup'>Sign Up</Link>
             </div>: <Menu as="div" className="relative ml-3 mt-2 text-black">
@@ -73,6 +81,12 @@ const [isLoged, setIsLoged] = useState(true)
                           <div
                             href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+
+                            onClick={() => {
+                              dispatch(logout())
+                              navigate('/')
+                            }}
+
                           >
                             Sign out
                           </div>

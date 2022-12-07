@@ -7,7 +7,8 @@ import { CardBrand } from './CardBrand';
 import {Data} from '../../../Data/Data'
 import ImageBackground from './ImageBackground';
 import { BackTop } from 'antd';
-
+import { useLocation } from 'react-router';
+import { getPath } from '../../../action';
 
 function Brand() {
 
@@ -21,6 +22,10 @@ function Brand() {
     }, [])
     const res = useSelector(state => state.fetchProduct.products)
     const advertise = useSelector(state => state.fetchAdvertise.products)
+    const location = useLocation().pathname.split('/')
+    useEffect(() => {
+      dispatch(getPath(location[1]))
+    })
     const data = [
         {
             image:
