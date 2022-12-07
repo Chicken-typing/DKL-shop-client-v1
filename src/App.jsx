@@ -1,10 +1,13 @@
 
 import "./styles/App.scss";
 import Router from "./Router";
-
+import { useSelector } from "react-redux";
+import _ from 'lodash'
 
 function App() {
-  localStorage.setItem('userInfor', JSON.stringify({}))
+  const user = useSelector(state => state.User.userInfor)
+  if (_.isEmpty(user))
+    localStorage.setItem('userInfor', JSON.stringify(user))
   return (
     <div className="App">
       <Router>

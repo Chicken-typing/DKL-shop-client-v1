@@ -7,6 +7,8 @@ import { Data } from '../../../Data/Data'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../../action';
 import { BackTop } from 'antd';
+import { useLocation } from 'react-router';
+import { getPath } from '../../../action';
 
 function Woman() {
 
@@ -68,6 +70,10 @@ function Woman() {
   const res = useSelector(state => state.fetchProduct.products)
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState()
+  const location = useLocation().pathname.split('/')
+  useEffect(() => {
+    dispatch(getPath(location[1]))
+  })
 
   useEffect(() => {
     setProducts(res)
