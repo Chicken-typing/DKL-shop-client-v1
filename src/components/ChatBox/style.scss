@@ -1,7 +1,7 @@
 #chatbox {
   height: 100%;
   #chatbox-header {
-    background-color: #1976d2;
+    background-color: #686b6e;
     padding: 10px;
     display: flex;
     align-content: center;
@@ -57,9 +57,8 @@
         }
       }
     }
-    #chatbox-input:focus-within{
-    background-color: #d1daf1e7;
-
+    #chatbox-input:focus-within {
+      background-color: #d1daf1e7;
     }
   }
 }

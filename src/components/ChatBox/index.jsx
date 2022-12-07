@@ -42,13 +42,12 @@ const ChatBox = ({ user, handleCloseChatbox, open, socket }) => {
                 setCurrentMessage("")
             }}
             maskClosable={false}
-            size='large'
             headerStyle={{
                 padding: 0,
                 position: 'fixed',
                 right: 0,
                 marginTop: 20,
-                border: 0
+                border: 0,
             }}
         >
             <Layout id='chatbox'>

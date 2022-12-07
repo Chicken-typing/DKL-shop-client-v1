@@ -182,14 +182,17 @@ const ProductListTab = () => {
             render: (_, { category }) =>
             (
                 <>
-                    {category.map((tag) =>
-                        <Tag color={tag === "man"
-                            ? 'red' : tag === "woman"
-                                ? 'cyan'
-                                : 'green'}>
-                            {tag}
-                        </Tag>
-                    )
+                    {
+                        category.length > 0
+                            ? category.map((tag) =>
+                                <Tag color={tag === "man"
+                                    ? 'red' : tag === "woman"
+                                        ? 'cyan'
+                                        : 'green'}>
+                                    {tag}
+                                </Tag>
+                            )
+                            : <Tag color='#108ee9'>Default</Tag>
                     }
                 </>
             ),
