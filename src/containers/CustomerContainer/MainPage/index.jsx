@@ -7,7 +7,7 @@ import { BackTop } from 'antd';
 import './style.scss'
 import MainBackground from '../../../components/MainBackground'
 import ChatButton from '../../../components/ChatButton'
-function MainPage() {
+
 
 
 function MainPage() {
