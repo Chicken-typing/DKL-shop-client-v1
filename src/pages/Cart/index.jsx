@@ -74,24 +74,6 @@ function Cart() {
     toast("Cart is empty")
   }
 
-  const openNotification = () => {
-
-    const btn = (
-      <Button type="primary" size="small" onClick={() => {
-        navigate('/login')
-        notification.close()
-      }}>
-        Click here!
-      </Button>
-    );
-    notification.open({
-      message: 'Notification Title',
-      description:
-        'Please Sign In to Checkout',
-      btn,
-      duration: 2,
-    });
-  };
 
 
 const openNotification = () => {
