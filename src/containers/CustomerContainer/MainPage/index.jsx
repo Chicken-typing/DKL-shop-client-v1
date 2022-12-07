@@ -10,6 +10,8 @@ import ChatButton from '../../../components/ChatButton'
 function MainPage() {
 
 
+function MainPage() {
+
 
   return (
     <div className="main-page  ">
@@ -20,6 +22,7 @@ function MainPage() {
       <div id='news' className='justify-center items-center'><News /></div>
       <ChatButton />
       <BackTop style={{ right: '50px' }} />
+
     </div>
   )
 }
