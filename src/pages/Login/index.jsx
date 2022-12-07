@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
@@ -16,30 +16,31 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLogin, setIsLogin] = useState(false)
+    const user = useSelector(state => state.User.userInfor)
     const dispatch = useDispatch()
     const success = () => message.success('Login success.');
     const error = () => message.error('Wrong email or password.');
     const path = useSelector(state => state.path.pathname)
-    const user = useSelector(state => state.User.userInfor)
     const navigate = useNavigate()
-    const handleGetRes = (res) => dispatch(login(res))
+    const handleGetRes = (res) => {
+        dispatch(login(res))
+        _.isEmpty(res) ? error() : success()
+    }
     const handleLogin = (value) => {
         loginUser(value, handleGetRes)
         setIsLogin(true)
     }
-    if (isLogin) {
-        setIsLogin(false)
-        setTimeout(() => {
-            if (_.isEmpty(user)) {
-                error()
-            } else {
-                success()
-                user.role === 'customer'
-                    ? navigate(`/${path}`)
-                    : navigate('/admin')
-            }
-        }, 1000)
-    }
+    useEffect(() => {
+        const localUser = JSON.parse(localStorage.getItem("userInfor"))
+        if (isLogin && !_.isEmpty(localUser)) {
+            success()
+            localUser.role === 'customer'
+                ? navigate(`/${path}`)
+                : navigate('/admin')
+            setIsLogin(false)
+        }
+    }, [user])
+
     const responseFacebook = (res) => { }
     return (
 
