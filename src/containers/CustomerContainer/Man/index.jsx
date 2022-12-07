@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../../action';
 import { BackTop } from 'antd';
 
+
 import { useLocation } from 'react-router';
 import { getPath } from '../../../action';
 
@@ -49,6 +50,7 @@ function Man() {
   useEffect(() => {
       dispatch(fetchProduct())
   }, [])
+
 
   const location = useLocation().pathname.split('/')
   useEffect(() => {

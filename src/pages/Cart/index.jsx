@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
+
 import { addToCart, deleteFromCart, removeFromCart } from '../../action';
 
 
@@ -11,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Empty, notification, Button } from 'antd';
 import { getPath } from '../../action';
 import _ from 'lodash'
+
 
 
 
@@ -40,6 +42,7 @@ function Cart() {
   const handleDelAll = id => {
     dispatch(deleteFromCart(id))
   }
+
   const dispatch = useDispatch();
   const data = useSelector(state => state.Cart.carts)
 
@@ -60,6 +63,7 @@ function Cart() {
       setShip(14)
 
       data.map(item => price += item.price * item.quantity)
+
     }
     return price + ship
 
@@ -97,6 +101,9 @@ function Cart() {
     });
   };
 
+const notify = () => {
+  toast("Cart is empty")
+}
 
   return (
 
@@ -113,8 +120,10 @@ function Cart() {
             {/* Colors */}
 
 
+
             <div className='bg-gray-bg w-[100%] lg:w-[100%] h-[100%] px-2 lg:px-4 lg:py-4 lg:max-h[50%]  rounded-xl' >
               <p className='font-[600] text-gray-800 text-xl'>Order Summary</p>
+
 
               {/* SubTotal */}
               <div className='flex w-[100%] '>
@@ -122,6 +131,7 @@ function Cart() {
                 <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${price}`}</div>
               </div>
               <div className='mt-3 mb-3 lg:border-t lg:border-gray-400  '></div>
+
 
 
               {/* Shipping Cost   */}
@@ -199,6 +209,7 @@ function Cart() {
 
         </div>}
       </div>
+
 
     </div>
   )

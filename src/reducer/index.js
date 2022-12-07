@@ -9,8 +9,10 @@ import ShippingReducer from "./ShippingReducer"
 import fetchUserReducer from "./fetchUserReducer";
 import PaymentReducer from "./PaymentReducer";
 
+
 import userReducer from "./userReducer";
 import getPathnameReducer from "./getPathnameReducer";
+
 
 
 const rootReducer = combineReducers({
@@ -24,8 +26,10 @@ const rootReducer = combineReducers({
     fetchUser: fetchUserReducer,
     PaymentMethod: PaymentReducer,
 
+
     User: userReducer,
     path: getPathnameReducer,
+
 
 });
 export default rootReducer;

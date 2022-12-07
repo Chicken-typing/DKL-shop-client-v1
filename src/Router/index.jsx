@@ -26,7 +26,9 @@ import Shipping from '../components/Shipping';
 import Payment from '../components/Payment';
 import ProtectedRoute from './ProtectedRoute';
 import PlaceOrder from "../components/PlaceOrder";
+
 import Protected from "./Protected";
+
 
 function Router() {
 
@@ -43,12 +45,14 @@ function Router() {
         <Route path="brand" element={<Brand />} />
         <Route path="/products/:productName" element={<ProductDetail />} />
 
+
         <Route path="/cart" element={<Cart/>} />
         <Route path="/checkout" element={<Protected><Checkout/></Protected>}>
           {/* <Route path="" element={<Navigate to="checkout" replace />}/> */}
           <Route path="shippingAddress" element={<Protected><Shipping/></Protected>} />
           <Route path='payment' element={<Protected><Payment/></Protected>}/>
           <Route path="placeOrder" element={<Protected><PlaceOrder/></Protected>} />
+
 
         </Route>
       </Route>

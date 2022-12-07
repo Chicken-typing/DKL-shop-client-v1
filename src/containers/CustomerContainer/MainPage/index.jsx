@@ -7,6 +7,7 @@ import { BackTop } from 'antd';
 import './style.scss'
 import MainBackground from '../../../components/MainBackground'
 
+
 import { useLocation } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { getPath } from '../../../action'
@@ -18,6 +19,7 @@ function MainPage() {
   useEffect(() => {
     dispatch(getPath(location[1]))
   })
+
 
   return (
     <div className="main-page  ">
@@ -32,4 +34,5 @@ function MainPage() {
     </div>
   )
 }
+
 export default MainPage
