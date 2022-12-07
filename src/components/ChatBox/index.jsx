@@ -53,7 +53,7 @@ const ChatBox = ({ user, handleCloseChatbox, open, socket }) => {
             <Layout id='chatbox'>
                 <Header id='chatbox-header'>
                     <Meta
-                        avatar={user.avatar ? <Avatar src={user.avatar} size={32} /> : <Avatar size={32} icon={<UserOutlined />} />}
+                        avatar={user.avatar ? <Avatar src={user.avatar} size={32} /> : <Avatar size={32} icon={<UserOutlined />} style={{ backgroundColor: 'black' }} />}
                         title={<Text strong style={{ color: "white" }}>{user.userName}</Text>}
                         description={user.phoneNumber}
                         style={{ color: "white" }}

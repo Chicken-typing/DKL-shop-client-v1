@@ -1,5 +1,5 @@
-import { MailOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import { MailOutlined, ArrowDownOutlined } from '@ant-design/icons'
+import { Button, Divider, Tooltip } from 'antd'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { io } from 'socket.io-client'
@@ -13,7 +13,7 @@ export default function ChatButton() {
         // _id: currentUser._id
         _id: 1,
         avatar: "",
-        userName: "Admin"
+        userName: "DKL store"
     }
     const socket = io.connect(API_CHAT_ROOM)
     const [openChat, setOpenChat] = useState(false)
@@ -27,14 +27,28 @@ export default function ChatButton() {
 
     return (
         <>
-            <Button onClick={handleChat} type='link'>
-                <MailOutlined style={{
-                    fontSize: 72,
-                    color: 'black'
-                }} />
-            </Button>
-            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} socket={socket} />
-
+            <Divider>
+                <Tooltip placement='top' arrowPointAtCenter title='Message to us!'>
+                    <Button onClick={handleChat} type='link'
+                        icon={
+                            <>
+                                <ArrowDownOutlined style={{ fontSize: 48 }} />
+                                <MailOutlined style={{ fontSize: 56 }} />
+                            </>}
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyItems: 'center',
+                            justifyContent: 'center',
+                            color: 'black',
+                            height: 100,
+                            width: 100
+                        }}>
+                    </Button>
+                </Tooltip>
+                <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} socket={socket} />
+            </Divider>
         </>
     )
 }
