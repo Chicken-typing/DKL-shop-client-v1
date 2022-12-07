@@ -13,7 +13,7 @@ export default function ChatButton() {
         // _id: currentUser._id
         _id: 1,
         avatar: "",
-        userName: "Admin"
+        userName: "DKL store"
     }
     const socket = io.connect(API_CHAT_ROOM)
     const [openChat, setOpenChat] = useState(false)
