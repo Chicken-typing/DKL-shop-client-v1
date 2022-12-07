@@ -6,8 +6,10 @@ import Filter from '../../../components/Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../../action';
 import { BackTop } from 'antd';
+
 import { useLocation } from 'react-router';
 import { getPath } from '../../../action';
+
 
 
 function Man() {
@@ -47,10 +49,12 @@ function Man() {
   useEffect(() => {
       dispatch(fetchProduct())
   }, [])
+
   const location = useLocation().pathname.split('/')
   useEffect(() => {
     dispatch(getPath(location[1]))
   })
+
   const res = useSelector(state => state.fetchProduct.products)
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState()

@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, deleteFromCart, removeFromCart} from '../../action';
+
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { Empty, notification, Button  } from 'antd';
 import { getPath } from '../../action';
+
 
 
 function Cart() {
@@ -85,6 +87,7 @@ useEffect(() => {
 const notify = () => {
   toast("Cart is empty")
 }
+
 const openNotification = () => {
 
   const btn = (
@@ -103,6 +106,7 @@ const openNotification = () => {
     duration: 2,
   });
 };
+
 
   return (
     
@@ -147,6 +151,7 @@ const openNotification = () => {
              {/* Checkout  */}
              <button className='w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
                   focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4'
+
                   onClick={data.length === 0 ? notify :() => {
                     {token ? navigate('/checkout/shippingAddress')
                     : openNotification()}     
