@@ -1,35 +1,36 @@
 import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
-import { Dropdown, Menu, Avatar, Popconfirm, Button } from 'antd';
-import { Link, redirect } from 'react-router-dom'
-const confirm = () =>
-    new Promise((resolve) => {
-        return redirect("/")
-    });
-const menu = (
-    <Menu
-        items={[
-            {
-                key: '1',
-                label: (
-                    <Link to="/admin/my-account">My account</Link>
-                ),
-            },
-            {
-                key: '2',
-                label: (
-                    <Popconfirm title="Title" onConfirm={confirm}>
-                        <div style={{ border: 0, width: "100%" }}>Log out</div>
-                    </Popconfirm>
-                ),
-            }
-        ]}
-    />
-);
+import { Dropdown, Menu, Avatar, Button } from 'antd';
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../action';
+
 const Account = (props) => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const handleLogout = () => {
+        dispatch(logout())
+        navigate('/login')
+        localStorage.setItem('userInfor', JSON.stringify({}))
+    }
+
+    const items = [
+        {
+            key: '1',
+            label: (
+                <Button style={{ color: 'black' }} type='link'>My account</Button>
+            ),
+        },
+        {
+            key: '2',
+            label: (
+                <Button style={{ color: 'red' }} type='link' onClick={handleLogout}>Log out</Button>
+            ),
+        }
+    ]
+
     return (
-        <Dropdown overlay={menu}
-        >
+        <Dropdown menu={{ items }}>
             <span
                 style={{
                     ...props.style
