@@ -58,9 +58,11 @@ function Cart() {
     }
     else {
       setShip(14)
-      data.map(item => price += item.price * item.quantity + ship)
+
+      data.map(item => price += item.price * item.quantity)
     }
-    return price
+    return price + ship
+
   }
 
   const location = useLocation().pathname.split('/')
@@ -76,24 +78,24 @@ function Cart() {
 
 
 
-const openNotification = () => {
+  const openNotification = () => {
 
-  const btn = (
-    <Button type="primary" size="small" onClick={() => {
-      navigate('/login')
-      notification.close()
-    }}>
-      Click here!
-    </Button>
-  );
-  notification.open({
-    message: 'Notification Title',
-    description:
-      'Please Sign In to Checkout',
-    btn,
-    duration: 2,
-  });
-};
+    const btn = (
+      <Button type="primary" size="small" onClick={() => {
+        navigate('/login')
+        notification.close()
+      }}>
+        Click here!
+      </Button>
+    );
+    notification.open({
+      message: 'Notification Title',
+      description:
+        'Please Sign In to Checkout',
+      btn,
+      duration: 2,
+    });
+  };
 
 
   return (
