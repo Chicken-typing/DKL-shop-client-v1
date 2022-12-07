@@ -118,7 +118,7 @@ export default function AdminList() {
             url: API_USER
         }))
     }, []);
-    const dataUser = useSelector(state => state.fetchUser.dataUser)
+    const dataUser = useSelector(state => state.fetchUser.dataUser.filter(user => user.role === 'admin'))
     const Refetch = (callback) => {
         return setTimeout(() => {
             dispatch(callback);

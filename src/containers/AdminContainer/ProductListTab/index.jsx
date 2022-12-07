@@ -12,7 +12,9 @@ const { Item } = Form
 const ProductListTab = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchProduct())
+        dispatch(fetchProduct({
+            pathName: 'admin'
+        }))
     }, [])
 
     const res = useSelector(state => state.fetchProduct.products.map((item) => {
