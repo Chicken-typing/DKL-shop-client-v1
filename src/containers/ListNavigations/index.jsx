@@ -142,8 +142,10 @@ function ListNavigations() {
 
 
 
+
   return (
     <Disclosure as="nav" className={`scroll bg-black max-w-[100%] ${scrollNav && 'hidden'} `} style={{ top: scroll ? '0' : '', position: scroll ? 'fixed' : '' }}>
+
       {({ open }) => (
         <>
           <div className=" px-3 sm:px-6 lg:px-7">
@@ -222,6 +224,7 @@ function ListNavigations() {
                             </div>
                           </div>
                         ))
+
                         : "Can not find this product"}
                     </div>
                   </div>
@@ -285,6 +288,7 @@ function ListNavigations() {
                       <div className=" item_name z-[10]">{item.name}</div>
                     </div>
                   ))
+
                   : "Can not find this product"}
               </div>
             </div>
