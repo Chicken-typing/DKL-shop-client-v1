@@ -10,7 +10,8 @@ import {
 import { addToCart, removeFromCart, deleteFromCart } from "./Cart";
 import { savePaymentMethod, saveShippingAddress } from "./Shipping";
 import { fetchUser, fetchUserSuccess } from "./fetchUser";
-
+import { login, logout } from "./authenUser";
+import { getPath } from "./getPathname";
 export {
     fetchAPI,
     fetchAPISuccess,
@@ -30,4 +31,7 @@ export {
     saveShippingAddress,
     fetchUser,
     fetchUserSuccess,
+    login,
+    logout,
+    getPath,
 };
