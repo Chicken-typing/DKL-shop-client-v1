@@ -101,9 +101,6 @@ function Cart() {
     });
   };
 
-const notify = () => {
-  toast("Cart is empty")
-}
 
   return (
 
