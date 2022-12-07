@@ -33,6 +33,7 @@ export default function ChatButton() {
                         icon={
                             <>
                                 <MailOutlined style={{ fontSize: 74 }} />
+
                             </>}
                         style={{
                             display: 'flex',
