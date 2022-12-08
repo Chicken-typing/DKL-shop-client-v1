@@ -1,33 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Pie } from '@ant-design/plots';
-
+import { useSelector } from 'react-redux';
+import Waiting from '../../../pages/Waiting'
 const PieChart = () => {
-    const data = [
-        {
-            type: '分类一',
-            value: 27,
-        },
-        {
-            type: '分类二',
-            value: 25,
-        },
-        {
-            type: '分类三',
-            value: 18,
-        },
-        {
-            type: '分类四',
-            value: 15,
-        },
-        {
-            type: '分类五',
-            value: 10,
-        },
-        {
-            type: '其他',
-            value: 5,
-        },
-    ];
+    const data = useSelector(state => state.fetchStatic.dataStatistic.productCategories)
+    console.log(data)
     const config = {
         appendPadding: 10,
         data,
@@ -49,7 +26,7 @@ const PieChart = () => {
             },
         ],
     };
-    return <Pie {...config} />;
+    return data ? <Pie {...config} /> : <Waiting />;
 };
 export default PieChart
 

@@ -8,10 +8,6 @@ import { Tabs } from 'antd';
 const onChange = (key) => {
 };
 const AccountTab = () => {
-    const [refresh, setRefesh] = React.useState(moment())
-    const refreshPage = () => {
-        setRefesh(moment())
-    }
     const isMAdmin = JSON.parse(localStorage.getItem('userInfor')).role === AUTH_ROLE.MASTER_ADMIN
 
     return (
@@ -29,7 +25,7 @@ const AccountTab = () => {
                 {
                     label: `Customer accounts`,
                     key: '1',
-                    children: <CustomerList refreshPage={refreshPage} />,
+                    children: <CustomerList />,
                 },
                 {
                     label: `Admin accounts`,

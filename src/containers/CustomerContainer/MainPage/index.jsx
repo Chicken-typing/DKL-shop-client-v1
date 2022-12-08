@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Slider from '../../../components/Slider'
 import ListPopular from '../../../components/ListPouplar'
 import News from './News'
