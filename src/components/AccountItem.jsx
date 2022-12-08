@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import { DeleteOutlined, SettingOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Badge, Card, Space, Popconfirm, Modal, Form, Input, Switch } from 'antd';
-import Button from './Button'
+import { Avatar, Badge, Card, Space, Popconfirm, Modal, Form, Input, Switch, Button, Divider } from 'antd';
 import updateUser from '../services/updateUser';
 import ChatBox from './ChatBox';
-import { io } from 'socket.io-client';
 import { API_CHAT_ROOM, API_USER } from '../linkTo';
 import { useDispatch } from 'react-redux';
 import { fetchUser } from '../action';
 const { Meta } = Card;
 const { Item } = Form;
-const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
-    const socket = io.connect(API_CHAT_ROOM)
+const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
     const handleCheckMail = () => {
-        socket.emit("join_room", user._id)
+
         setOpenChat(!openChat)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +41,6 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
                     width: "85%",
                     marginTop: 16,
                 }}
-                key={user._id}
                 extra={
                     <Space>
                         <Popconfirm
@@ -67,7 +63,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
                         {
                             hasEmail ?
                                 <Badge dot={!(user.sentEmail === 0)}>
-                                    <Button title="Email" type='link' onClick={() => handleCheckMail(user)}>
+                                    <Button disabled={isDisable} title="Email" type='link' onClick={() => handleCheckMail(user)}>
                                         <MailOutlined />
                                     </Button>
                                 </Badge> : ""
@@ -82,7 +78,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
                     description={user.phone ? user.phone : ''}
                 />
             </Card>
-            <Modal title="Edit account" open={isModalOpen} footer={false} destroyOnClose={true}>
+            <Modal title="Edit account" open={isModalOpen} footer={false} closable={false} destroyOnClose={true}>
                 <Form
                     name="basic"
                     labelCol={{
@@ -91,6 +87,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
                     wrapperCol={{
                         span: 16,
                     }}
+
                     initialValues={{
                         remember: true,
                     }}
@@ -107,13 +104,12 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
                     <Item label="Active" name="isActive" valuePropName='checked' initialValue={user.isActive}>
                         <Switch />
                     </Item>
-                    <Item>
-                        <Button htmlType='submit'>Update</Button>
-                        <Button onClick={handleCancel}></Button>
+                    <Item label={<Button onClick={handleCancel} type='default'>Cancel</Button>} colon={false}>
+                        <Button htmlType='submit' type='primary'>Update</Button>
                     </Item>
                 </Form>
             </Modal>
-            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} socket={socket} />
+            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} />
 
         </>
     );

@@ -1,35 +1,54 @@
-import { MailOutlined, ArrowDownOutlined } from '@ant-design/icons'
-import { Button, Divider, Tooltip } from 'antd'
+import { MailOutlined } from '@ant-design/icons'
+import { Button, Divider, message, notification, Tooltip } from 'antd'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { io } from 'socket.io-client'
-import { API_CHAT_ROOM } from '../linkTo'
+import { useNavigate } from 'react-router-dom'
 import ChatBox from './ChatBox'
+import _ from 'lodash'
+import { useSelector } from 'react-redux'
 
-
-export default function ChatButton() {
-    // const currentUser=useSelector(state=>state)
+export default function ChatButton(props) {
+    const currentUser = useSelector(state => state.User.userInfor)
     const user = {
-        // _id: currentUser._id
-        _id: 1,
+        _id: "dkl_admin",
         avatar: "",
         userName: "DKL store"
     }
-    const socket = io.connect(API_CHAT_ROOM)
     const [openChat, setOpenChat] = useState(false)
     const handleChat = () => {
-        socket.emit("join_room", user._id)
         setOpenChat(!openChat)
     }
     const handleCloseChatbox = () => {
         setOpenChat(!openChat)
     }
+    const userData = JSON.parse(localStorage.getItem('userInfor'))
+    const navigate = useNavigate()
 
+    const openNotification = () => {
+        const key = `Notice${Date.now()}`;
+        const btn = (
+            <Button type="primary" size="small" onClick={() => {
+                notification.close(key)
+                navigate("/login")
+            }}>
+                Log in
+            </Button>
+        );
+        notification.open({
+            message: 'You have not logged in.',
+            btn,
+            key,
+        });
+    };
     return (
         <>
             <Divider>
                 <Tooltip placement='top' arrowPointAtCenter title='Message to us!'>
-                    <Button onClick={handleChat} type='link'
+                    <Button disabled={props.isDisable}
+                        onClick={() => {
+                            _.isEmpty(userData)
+                                ? openNotification()
+                                : handleChat()
+                        }} type='link'
                         icon={
                             <>
                                 <MailOutlined style={{ fontSize: 74 }} />
@@ -47,7 +66,7 @@ export default function ChatButton() {
                         }}>
                     </Button>
                 </Tooltip>
-                <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} socket={socket} />
+                <ChatBox user={currentUser} handleCloseChatbox={handleCloseChatbox} open={openChat} />
             </Divider>
         </>
     )
