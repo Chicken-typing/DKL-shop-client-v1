@@ -1,31 +1,18 @@
 import React, { useState, Fragment } from "react";
-
-
-
 import { Link, useNavigate } from "react-router-dom";
-
-
-
 import Nike from "../../assets/images/nike.png";
 import Adidas from "../../assets/images/adidas.png";
 import "./style.scss";
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Button } from 'antd';
-
-
+import { Avatar, Button } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../action";
-
-
+import { AccountCircleOutlined } from "@mui/icons-material";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
 function Header() {
-
-
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -48,11 +35,7 @@ function Header() {
         <div>
           <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
             <span className="sr-only">Open user menu</span>
-            <img
-              className="h-8 w-8 rounded-full"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+            <Avatar icon={<AccountCircleOutlined />} size={32} shape='circle' style={{ color: 'black', backgroundColor: 'white' }} />
           </Menu.Button>
         </div>
         <Transition
