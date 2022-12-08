@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DeleteOutlined, SettingOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Badge, Card, Space, Popconfirm, Modal, Form, Input, Switch } from 'antd';
-import Button from './Button'
+import { Avatar, Badge, Card, Space, Popconfirm, Modal, Form, Input, Switch, Button, Divider } from 'antd';
 import updateUser from '../services/updateUser';
 import ChatBox from './ChatBox';
 import { API_CHAT_ROOM, API_USER } from '../linkTo';
@@ -41,7 +40,6 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     width: "85%",
                     marginTop: 16,
                 }}
-                key={user._id}
                 extra={
                     <Space>
                         <Popconfirm
@@ -79,7 +77,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     description={user.phone ? user.phone : ''}
                 />
             </Card>
-            <Modal title="Edit account" open={isModalOpen} footer={false} destroyOnClose={true}>
+            <Modal title="Edit account" open={isModalOpen} footer={false} closable={false} destroyOnClose={true}>
                 <Form
                     name="basic"
                     labelCol={{
@@ -88,6 +86,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     wrapperCol={{
                         span: 16,
                     }}
+
                     initialValues={{
                         remember: true,
                     }}
@@ -104,9 +103,8 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     <Item label="Active" name="isActive" valuePropName='checked' initialValue={user.isActive}>
                         <Switch />
                     </Item>
-                    <Item>
-                        <Button htmlType='submit'>Update</Button>
-                        <Button onClick={handleCancel}></Button>
+                    <Item label={<Button onClick={handleCancel} type='default'>Cancel</Button>} colon={false}>
+                        <Button htmlType='submit' type='primary'>Update</Button>
                     </Item>
                 </Form>
             </Modal>

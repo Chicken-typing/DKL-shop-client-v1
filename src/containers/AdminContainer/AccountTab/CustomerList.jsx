@@ -1,24 +1,20 @@
 import { Layout, Skeleton, Empty } from 'antd'
-import React, { useState, useEffect, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchUser } from '../../../action'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import AccountItem from '../../../components/AccountItem'
 import AppBar from '../../../components/AppBar'
 import { API_USER } from '../../../linkTo'
 import deleteUser from '../../../services/deleteUser'
 const { Header, Content } = Layout
 export default function CustomerList(props) {
-    const dispatch = useDispatch()
     const [result, setResult] = useState([])
     const [searching, setSearching] = useState(false)
+    const [refresh, isRefresh] = useState(Date.now())
     const mail = {
         data: []
     }
-    useEffect(() => {
-        dispatch(fetchUser())
-    }, []);
     const dataUser = useSelector(state => state.fetchUser.dataUser.filter(user => user.role === 'customer'))
-    useEffect(() => setResult(dataUser), [])
+    useEffect(() => setResult(dataUser), [refresh])
     const handleSearch = (text) => {
         setResult([...dataUser.filter(object => object.username.toLowerCase().includes(text.toLowerCase()))])
         setSearching(true)
@@ -33,11 +29,14 @@ export default function CustomerList(props) {
     const deleteAccount = {
         handleDeleteUser: handleDeleteUser
     }
+    const handleRefresh = () => {
+        isRefresh(Date.now())
+    }
     return (
         <>
             <Layout>
                 <Header style={{ padding: 0 }}>
-                    <AppBar hasSearch={search} affix={64} />
+                    <AppBar hasSearch={search} affix={64} handleRefresh={handleRefresh} />
                 </Header>
                 <Content
                     style={{
@@ -49,8 +48,8 @@ export default function CustomerList(props) {
                         paddingBottom: 20
                     }}>
                     {result.length > 0
-                        ? result.map(user => <AccountItem user={user} url={API_USER}
-                            hasEmail handleDeleteUser={deleteAccount} isDisable={true} />)
+                        ? result.map((user, index) => <AccountItem user={user} url={API_USER}
+                            hasEmail handleDeleteUser={deleteAccount} isDisable={true} key={index} />)
                         : searching ?
                             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="The user do not exist." />
                             : <Skeleton active avatar />
