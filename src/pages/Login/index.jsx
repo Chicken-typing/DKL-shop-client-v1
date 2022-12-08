@@ -15,35 +15,38 @@ const { Item } = Form
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isLogin, setIsLogin] = useState(false)
+    const user = useSelector(state => state.User.userInfor)
     const dispatch = useDispatch()
-    const success = () => {
-        message.success('Login success.');
-    };
-    const error = () => {
-        message.error('Wrong email or password.');
-    };
-
+    const success = () => message.success('Login success.');
+    const error = () => message.error('Wrong email or password.');
     const path = useSelector(state => state.path.pathname)
     const navigate = useNavigate()
-    const handleLogin = ({email, password}) => {
-        dispatch(login({email, password}))
-        loginUser({email, password})
-        setTimeout(() => {
-            const user = JSON.parse(localStorage.getItem('userInfor'))
-            if (_.isEmpty(user)) {
-                error()
-            } else {
-                success()
-                user.role === 'customer'
-                    ? navigate(`/${path}`)
-                    : navigate('/admin')
-            }
-        }, 1000)
+    const handleGetRes = (res) => {
+        dispatch(login(res))
+        _.isEmpty(res) ? error() : success()
     }
+    const handleLogin = (value) => {
+        loginUser(value, handleGetRes)
+        setIsLogin(true)
+    }
+    useEffect(() => {
+        const localUser = JSON.parse(localStorage.getItem("userInfor"))
+        if (isLogin && !_.isEmpty(localUser)) {
+            success()
+            localUser.role === 'customer'
+                ? navigate(`/${path}`)
+                : navigate('/admin')
+            setIsLogin(false)
+        }
+    }, [user])
+
     const responseFacebook = (res) => { }
     return (
-        
-            <div className='form-container'>
+
+
+        <div className='form-container'>
+
             <h1>Login</h1>
             <Form
                 layout='vertical'

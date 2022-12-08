@@ -11,6 +11,12 @@ import PaymentReducer from "./PaymentReducer";
 import userReducer from "./userReducer";
 import getPathnameReducer from "./getPathnameReducer";
 
+
+
+
+
+
+
 const rootReducer = combineReducers({
     fetch: fetchReducer,
     fetchProduct: fetchProductReducer,
