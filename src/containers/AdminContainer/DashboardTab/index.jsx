@@ -25,20 +25,17 @@ const DasboardTab = () => {
         width: "100%"
       }}
     >
-      <CardWrapper title="Needed buying">
-        <PieChart />
-      </CardWrapper>
-      <CardWrapper
-        title="Revenue"
-      >
-        <ColumnChart />
-      </CardWrapper>
-      <CardWrapper
-        title="Accession rate"
-
-      >
+      <CardWrapper title="Daily Revenue">
         <AreaChart />
       </CardWrapper>
+      <CardWrapper title="Daily Orders">
+        <ColumnChart />
+      </CardWrapper>
+      <CardWrapper title="Proportion Category">
+        <PieChart />
+      </CardWrapper>
+
+
     </Space>
   )
 };
