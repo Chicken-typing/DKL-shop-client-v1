@@ -1,9 +1,10 @@
 import { Modal, List, Avatar, Card, Typography, Popover, Form, Divider, Space, Tag } from 'antd';
-import { CheckCircleOutlined } from '@ant-design/icons'
+import { CheckCircleOutlined, UserOutlined, DollarCircleOutlined } from '@ant-design/icons'
 import React, { useState } from 'react';
 import confirmOrder from '../services/confirmProduct';
 import { useDispatch } from 'react-redux';
 import { fetchOrders } from '../action';
+import _ from 'lodash'
 const { Item } = List
 const OrderItem = props => {
     const { item } = props
@@ -19,13 +20,11 @@ const OrderItem = props => {
     };
     const handleOk = () => {
         setIsModalOpen(false);
-        confirmOrder(item._id, { isConfirm: true })
+        confirmOrder(item._id)
         Refetch(fetchOrders())
     };
     const handleCancel = () => {
         setIsModalOpen(false);
-        confirmOrder(item._id, { isConfirm: false })
-        Refetch(fetchOrders())
 
     };
     const content = (product) => (
@@ -37,10 +36,10 @@ const OrderItem = props => {
         >
             <Form>
                 <Space split={<Divider orientation='horizontal' style={{ margin: 0 }} />} direction='vertical'>
-                    <Form.Item label="Name">product.name</Form.Item>
-                    <Form.Item label="Seri">product._id {product}</Form.Item>
-                    <Form.Item label="Price">product.price</Form.Item>
-                    <Form.Item label="Mount">product.quantity</Form.Item>
+                    <Form.Item label="Name">{product.name}</Form.Item>
+                    <Form.Item label="Seri">{product._id}</Form.Item>
+                    <Form.Item label="Price">{product.price}</Form.Item>
+                    <Form.Item label="Mount">{product.quantity}</Form.Item>
                 </Space>
             </Form>
         </Card>)
@@ -69,13 +68,13 @@ const OrderItem = props => {
                     <Typography.Paragraph ellipsis>
                         {item._id}
                     </Typography.Paragraph>
-                    {done(item.isConfirm)}
+                    {done(item.isDelivered)}
                 </div>} hoverable>
                     <Item.Meta
-                        title={<Typography.Paragraph ellipsis={true}>{item.userName}</Typography.Paragraph>}
-                        avatar={<Avatar size='large' src={item.userImage} />}
+                        title={<Typography.Paragraph ellipsis={true}>{item.shippingAddress.fullName}</Typography.Paragraph>}
+                        avatar={<Avatar size='large' icon={<UserOutlined />} />}
                         description={<>
-                            <Typography.Text keyboard>{item.totalPrice} VND</Typography.Text>
+                            <Typography.Text keyboard >{item.totalPrice}</Typography.Text>
                             {pay(item.isPaid)}
                         </>}
                     />
@@ -90,10 +89,9 @@ const OrderItem = props => {
                 onCancel={handleCancel}
             >
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div>Customer name: {item.userName}</div>
-                    <div>Address: {item.address}</div>
-                    <div>Phone number: {item.phone}</div>
-                </div>
+                    <div>Customer name: {item.shippingAddress.fullName}</div>
+                    <div>Address: {item.shippingAddress.address}</div>
+                    <div>Phone number: {item.shippingAddress.phone}</div>                </div>
                 <div style={{
                     display: 'flex',
                     overflow: 'auto',
@@ -101,7 +99,7 @@ const OrderItem = props => {
                     marginTop: 35
                 }}>
                     {
-                        item.products.map(product => (
+                        item.orderItems.map(product => (
                             <Popover placement="left" content={content(product)}>
                                 <Card
                                     hoverable
@@ -118,7 +116,7 @@ const OrderItem = props => {
                         ))
                     }
                 </div>
-                <div>Price: {<Typography.Text type='danger'>{item.totalPrice} VND</Typography.Text>}</div>
+                <div>Price: {<Typography.Text type='danger' >${item.totalPrice}</Typography.Text>}</div>
             </Modal>
         </>
     );

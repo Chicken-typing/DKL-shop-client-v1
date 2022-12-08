@@ -1,5 +1,5 @@
 import { Layout, Skeleton, Empty } from 'antd'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../../action'
 import AccountItem from '../../../components/AccountItem'
@@ -15,27 +15,17 @@ export default function CustomerList(props) {
         data: []
     }
     useEffect(() => {
-        dispatch(fetchUser({
-            url: API_USER
-        }))
+        dispatch(fetchUser())
     }, []);
     const dataUser = useSelector(state => state.fetchUser.dataUser.filter(user => user.role === 'customer'))
-    useEffect(() => {
-        setResult(dataUser)
-    }, [dataUser])
-
+    useEffect(() => setResult(dataUser), [])
     const handleSearch = (text) => {
-        setResult([...dataUser.filter(object => object.userName.toLowerCase().includes(text.toLowerCase()))])
+        setResult([...dataUser.filter(object => object.username.toLowerCase().includes(text.toLowerCase()))])
         setSearching(true)
     }
     const search = {
 
         handleSearch: handleSearch
-    }
-    const Refetch = (callback) => {
-        return setTimeout(() => {
-            dispatch(callback);
-        }, 1000)
     }
     const handleDeleteUser = (url, id) => {
         deleteUser(url, id)
@@ -47,7 +37,7 @@ export default function CustomerList(props) {
         <>
             <Layout>
                 <Header style={{ padding: 0 }}>
-                    <AppBar hasMail={mail} hasSearch={search} affix={64} />
+                    <AppBar hasSearch={search} affix={64} />
                 </Header>
                 <Content
                     style={{
@@ -60,10 +50,7 @@ export default function CustomerList(props) {
                     }}>
                     {result.length > 0
                         ? result.map(user => <AccountItem user={user} url={API_USER}
-                            hasEmail handleDeleteUser={deleteAccount}
-                            reFetch={Refetch(fetchUser({
-                                url: API_USER
-                            }))} />)
+                            hasEmail handleDeleteUser={deleteAccount} />)
                         : searching ?
                             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="The user do not exist." />
                             : <Skeleton active avatar />

@@ -149,7 +149,7 @@ const ProductListTab = () => {
                         backgroundColor: '#ffc069',
                         padding: 0,
                     }}
-                    searchWords={[searchText]}
+                    searchWords={[searchText]} handleClose
                     autoEscape
                     textToHighlight={text ? text.toString() : ''}
                 />
@@ -259,7 +259,7 @@ const ProductListTab = () => {
     );
 }
 const EditForm = (item, open, handleSubmit, handleClose) => {
-    const { id, name, brand, category, price } = item
+    const { _id, name, brand, category, price } = item
     if (item) {
         return (
             <Modal
@@ -269,7 +269,7 @@ const EditForm = (item, open, handleSubmit, handleClose) => {
                 footer={null}
                 title={<>Edit: <Tag color='geekblue' style={{ marginLeft: 5 }}>{name}</Tag></>}>
                 <Form
-                    onFinish={(value) => handleSubmit(id, value)}
+                    onFinish={(value) => handleSubmit(_id, value)}
                     labelCol={{
                         span: 5,
                     }}

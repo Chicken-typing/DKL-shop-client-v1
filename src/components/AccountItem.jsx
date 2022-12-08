@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { DeleteOutlined, SettingOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Badge, Card, Space, Popconfirm, Modal, Form, Input, Switch } from 'antd';
 import Button from './Button'
@@ -6,32 +6,31 @@ import updateUser from '../services/updateUser';
 import ChatBox from './ChatBox';
 import { io } from 'socket.io-client';
 import { API_CHAT_ROOM, API_USER } from '../linkTo';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from '../action';
 const { Meta } = Card;
 const { Item } = Form;
-const AccountItem = ({ url, user, hasEmail, handleDeleteUser, reFetch, key }) => {
-    const socket = io.connect(API_CHAT_ROOM)
+const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
+    // const socket = io.connect(API_CHAT_ROOM)
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
     const handleCheckMail = () => {
-        socket.emit("join_room", user._id)
+        // socket.emit("join_room", user._id)
         setOpenChat(!openChat)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const dispatch = useDispatch()
     const showModal = () => {
         setIsModalOpen(true);
         form.resetFields()
-    };
-    const handleOk = () => {
-        setIsModalOpen(false);
-        form.submit()
     };
     const handleCancel = () => {
         setIsModalOpen(false);
     };
     const onFinish = (values) => {
         updateUser(url, user._id, values)
-        reFetch()
+        setIsModalOpen(false);
+        dispatch(fetchUser());
     };
     const handleCloseChatbox = () => {
         setOpenChat(!openChat)
@@ -53,7 +52,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, reFetch, key }) =>
                             title="Do you want to delete this account?"
                             onConfirm={() => {
                                 handleDeleteUser.handleDeleteUser(API_USER, user._id);
-                                reFetch()
+                                dispatch(fetchUser());
                             }}
                             okText="Accept"
                             cancelText="Cancel"
@@ -77,14 +76,14 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, reFetch, key }) =>
                 }
             >
                 <Meta
-                    avatar={user.avatar ? <Avatar src={user.avatar} size={76} /> : <Avatar size={76} icon={<UserOutlined />} />}
-                    title={user.userName}
-                    description={user.phoneNumber}
+                    // avatar={user.avatar ? <Avatar src={user.avatar} size={76} /> : <Avatar size={76} icon={<UserOutlined />} />}
+                    avatar={<Avatar size={76} icon={<UserOutlined />} />}
+                    title={user.username}
+                    description={user.phone ? user.phone : ''}
                 />
             </Card>
-            <Modal title="Edit account" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} destroyOnClose={true}>
+            <Modal title="Edit account" open={isModalOpen} footer={false} destroyOnClose={true}>
                 <Form
-                    form={form}
                     name="basic"
                     labelCol={{
                         span: 8,
@@ -95,7 +94,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, reFetch, key }) =>
                     initialValues={{
                         remember: true,
                     }}
-                    onFinish={onFinish}
+                    onFinish={value => onFinish(value)}
                     autoComplete="off">
                     <Item label="Password" name="password" initialValue={user.password} rules={[
                         {
@@ -108,9 +107,13 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, reFetch, key }) =>
                     <Item label="Active" name="isActive" valuePropName='checked' initialValue={user.isActive}>
                         <Switch />
                     </Item>
+                    <Item>
+                        <Button htmlType='submit'>Update</Button>
+                        <Button onClick={handleCancel}></Button>
+                    </Item>
                 </Form>
             </Modal>
-            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} socket={socket} />
+            {/* <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} socket={socket} /> */}
 
         </>
     );
