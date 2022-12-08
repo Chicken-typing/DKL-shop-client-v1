@@ -12,6 +12,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
     const handleCheckMail = () => {
+
         setOpenChat(!openChat)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
