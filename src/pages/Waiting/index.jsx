@@ -1,8 +1,8 @@
 import React from 'react'
 import './style.scss'
-export default function Waiting(props) {
+export default function Waiting() {
     return (
-        <div className="waiting"><span className="title">{props.label}</span></div>
+        <div className="waiting"><span className="title">DKL STORE</span></div>
     )
 }
 
