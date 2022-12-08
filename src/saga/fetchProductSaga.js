@@ -4,9 +4,10 @@ import axios from "axios";
 import { FETCH_API_PRODUCT } from "../ActionType";
 import { API_PRODUCT } from "../linkTo";
 
-function* fetchPost() {
+function* fetchPost(action) {
+  const apiProduct = `${API_PRODUCT}/${action.params.pathName}`;
   try {
-    const res = (yield call(axios.get, API_PRODUCT)).data;
+    const res = (yield call(axios.get, apiProduct)).data;
     yield put(fetchProductSuccess(res));
   } catch (e) {
     yield put(fetchAPIFailure(e.message));

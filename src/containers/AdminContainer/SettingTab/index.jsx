@@ -10,8 +10,10 @@ const SettingTab = () => {
                 <Descriptions
                     column={1}
                     labelStyle={{
-                        width: "12%",
-                        fontWeight: 'bolder'
+                        minWidth: "12%",
+                        fontWeight: 'bolder',
+                        marginRight: 10
+
                     }}
                     contentStyle={{
                         width: '70%'

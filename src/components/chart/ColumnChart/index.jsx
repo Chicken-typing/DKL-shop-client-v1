@@ -1,20 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Column } from '@ant-design/plots';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchStatic } from '../../../action';
-import { API_ADMIN_REVENUE } from '../../../linkTo';
+import { useSelector } from 'react-redux';
+import Waiting from '../../../pages/Waiting'
+
 const ColumnChart = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchStatic({
-            url: API_ADMIN_REVENUE
-        }));
-    }, []);
-    const dataRevenue = useSelector(state => state.fetchStatic.dataRevenue)
+    const dataRevenue = useSelector(state => state.fetchStatic.dataStatistic.dailyOrders)
     const configStaticRevenue = {
         data: dataRevenue,
-        xField: 'date',
-        yField: 'revenue',
+        xField: '_id',
+        yField: 'orders',
         label: {
 
             position: 'middle',
@@ -31,14 +25,14 @@ const ColumnChart = () => {
             },
         },
         date: {
-            type: {
-                alias: 'Month',
+            __staticRouterHydrationData: {
+                alias: 'Date',
             },
-            revenue: {
-                alias: 'Revenue',
+            orders: {
+                alias: 'Order',
             },
         },
     };
-    return dataRevenue ? <Column {...configStaticRevenue} /> : ""
+    return dataRevenue ? <Column {...configStaticRevenue} /> : <Waiting />
 }
 export default ColumnChart

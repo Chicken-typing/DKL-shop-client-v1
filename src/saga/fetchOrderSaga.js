@@ -4,8 +4,12 @@ import { call, takeLatest, put } from "redux-saga/effects";
 import axios from "axios";
 import { API_ORDER } from "../linkTo";
 function* fetchPost() {
+  const user = JSON.parse(localStorage.getItem("userInfor"));
+  const header = {
+    Authorization: `Bearer ${user.token}`,
+  };
   try {
-    const res = (yield call(axios.get, API_ORDER)).data;
+    const res = (yield call(axios.get, API_ORDER, { headers: header })).data;
     yield put(fetchOrdersSuccess(res));
   } catch (e) {
     yield put(fetchAPIFailure(e.message));

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Select, Input, Form, Upload } from 'antd';
-import { HeartOutlined, DollarCircleOutlined, FormOutlined, UploadOutlined } from '@ant-design/icons';
+import { Select, Input, Form, Upload, InputNumber } from 'antd';
+import { HeartOutlined, DollarCircleOutlined, FormOutlined, UploadOutlined, DropboxOutlined } from '@ant-design/icons';
 import InputImage from '../../../components/InputImage';
 import Button from '../../../components/Button';
 import './style.scss'
@@ -86,7 +86,28 @@ const AddProductTab = () => {
                         message: 'Please input price',
                     },
                 ]}>
-                    <Input placeholder='5.000' prefix={<DollarCircleOutlined />} type='number' />
+                    <InputNumber formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                        placeholder='5.000'
+                        prefix={<DollarCircleOutlined />}
+                        style={{
+                            width: '100%',
+                        }} />
+                </Form.Item>
+                <Form.Item name="countInStock" rules={[
+                    {
+                        required: true,
+                        message: 'Please input the quantity of product',
+                    },
+                ]}>
+                    <InputNumber
+                        formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                        placeholder='Quantity of product'
+                        prefix={<DropboxOutlined />}
+                        style={{
+                            width: '100%',
+                        }} />
                 </Form.Item>
                 <Form.Item name="category" rules={[
                     {
@@ -114,7 +135,7 @@ const AddProductTab = () => {
                     <TextArea autoSize={{ minRows: 5, maxRows: 5 }} placeholder="Description" />
                 </Form.Item>
                 <Form.Item
-                    name='image'
+                    name='images'
                     style={{
                         width: 600,
                         padding: "15px 7px 7px 15px",
