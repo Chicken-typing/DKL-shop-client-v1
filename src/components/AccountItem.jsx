@@ -4,7 +4,6 @@ import { Avatar, Badge, Card, Space, Popconfirm, Modal, Form, Input, Switch } fr
 import Button from './Button'
 import updateUser from '../services/updateUser';
 import ChatBox from './ChatBox';
-import { io } from 'socket.io-client';
 import { API_CHAT_ROOM, API_USER } from '../linkTo';
 import { useDispatch } from 'react-redux';
 import { fetchUser } from '../action';

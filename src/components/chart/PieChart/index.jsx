@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import Waiting from '../../../pages/Waiting'
 const PieChart = () => {
     const data = useSelector(state => state.fetchStatic.dataStatistic.productCategories)
-    console.log(data)
     const config = {
         appendPadding: 10,
         data,
