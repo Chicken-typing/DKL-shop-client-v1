@@ -19,7 +19,7 @@ function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const token = useSelector(state => state.User.userInfor)
+  const token = useSelector(state => state.User)
 
   return (
 
@@ -30,7 +30,7 @@ function Header() {
         <Link to='/main-page' className="imgAdidas"><img src={Adidas} alt="" /></Link>
       </div>
 
-      {!token ? <div className="singin-singup">
+      {!token.token ? <div className="singin-singup">
 
         <Link to="/login" className='signin'>Sign In</Link>
         <Link to="/register" className='signup'>Sign Up</Link>
