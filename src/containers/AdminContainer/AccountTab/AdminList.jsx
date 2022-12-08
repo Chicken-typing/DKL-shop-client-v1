@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../../action'
 import AccountItem from '../../../components/AccountItem'
-import { API_USER_ADMIN } from '../../../linkTo'
+import { API_USER } from '../../../linkTo'
 import deleteUser from '../../../services/deleteUser'
-import { Layout, Skeleton, Affix, Modal, Form, Input } from 'antd'
+import { Layout, Skeleton, Affix, Modal, Form, Input, DatePicker } from 'antd'
 import Button from '../../../components/Button'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import addUser from '../../../services/addUser'
@@ -37,7 +37,7 @@ const CreateAdminForm = (open, handleFinish, handleTurnOff) => {
             >
                 <Form.Item
                     label="User Name"
-                    name="userName"
+                    name="username"
                     rules={[
                         {
                             required: true,
@@ -70,6 +70,19 @@ const CreateAdminForm = (open, handleFinish, handleTurnOff) => {
                     ]}
                 >
                     <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Birthday"
+                    name='birthday'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your birthday.',
+                            type: 'object'
+                        }
+
+                    ]}>
+                    <DatePicker format={'DD/MM/YY'} />
                 </Form.Item>
                 <Form.Item
                     label="Email"
@@ -114,16 +127,9 @@ const CreateAdminForm = (open, handleFinish, handleTurnOff) => {
 export default function AdminList() {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(fetchUser({
-            url: API_USER_ADMIN
-        }))
+        dispatch(fetchUser())
     }, []);
-    const dataUser = useSelector(state => state.fetchUser.dataUser)
-    const Refetch = (callback) => {
-        return setTimeout(() => {
-            dispatch(callback);
-        }, 1000)
-    }
+    const dataUser = useSelector(state => state.fetchUser.dataUser.filter(user => user.role === 'admin'))
     const handleDeleteUser = (url, id) => {
         deleteUser(url, id)
     }
@@ -138,10 +144,7 @@ export default function AdminList() {
     const handleFinish = (values) => {
         handleTurnOff()
         addUser({ ...values, role: 'ADMIN', isActive: true })
-
-        Refetch(fetchUser({
-            url: API_USER_ADMIN
-        }))
+        dispatch(fetchUser())
 
     };
 
@@ -180,11 +183,8 @@ export default function AdminList() {
                     }}
                 >
                     {dataUser.length > 0
-                        ? dataUser.map(user => <AccountItem user={user} url={API_USER_ADMIN} h
-                            andleDeleteUser={deleteAccount}
-                            reFetch={Refetch(fetchUser({
-                                url: API_USER_ADMIN
-                            }))} />)
+                        ? dataUser.map(user => <AccountItem user={user} url={API_USER}
+                            handleDeleteUser={deleteAccount} />)
                         : <Skeleton active avatar />
                     }
                 </Content>

@@ -1,20 +1,7 @@
-import {
-  fetchStatic,
-  fetchAccessionSuccess,
-  fetchRevenueSuccess,
-  fetchNeededSuccess,
-} from "../action";
-import {
-  FETCH_API_STATIC,
-  FETCH_API_STATIC_ACCESSION_SUCCESS,
-  FETCH_API_STATIC_NEEDED_SUCCESS,
-  FETCH_API_STATIC_REVENUE_SUCCESS,
-} from "../ActionType";
+import { FETCH_API_STATIC, FETCH_API_STATIC_SUCCESS } from "../ActionType";
 
 const initialize = {
-  dataRevenue: [],
-  dataAccession: [],
-  dataNeeded: [],
+  dataStatistic: {},
 };
 const fetchStaticReducer = (state = initialize, action) => {
   switch (action.type) {
@@ -22,22 +9,11 @@ const fetchStaticReducer = (state = initialize, action) => {
       return {
         ...state,
       };
-    case FETCH_API_STATIC_REVENUE_SUCCESS:
+    case FETCH_API_STATIC_SUCCESS:
       return {
         ...state,
-        dataRevenue: action.payload.dataRevenue,
+        dataStatistic: action.payload.dataStatistic,
       };
-    case FETCH_API_STATIC_ACCESSION_SUCCESS:
-      return {
-        ...state,
-        dataAccession: action.payload.dataAccession,
-      };
-    case FETCH_API_STATIC_NEEDED_SUCCESS:
-      return {
-        ...state,
-        dataNeeded: action.payload.dataNeeded,
-      };
-
     default:
       return {
         ...state,

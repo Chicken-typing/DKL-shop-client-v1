@@ -2,8 +2,8 @@
 import moment from "moment";
 const sendMessage = async (user, message, socket, getNewest) => {
   const messageData = {
-    room: user.id,
-    author: user.id,
+    room: user._id,
+    author: user._id,
     sentAt: moment()._d,
     message: message,
   };

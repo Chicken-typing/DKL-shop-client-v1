@@ -22,10 +22,10 @@ function Header() {
 
 
     <div className="top-nav">
-      <div className="icon-brand">
-        <Link to='/main-page' className='imgNike'><img src={Nike} alt="Nike-icon" /></Link>
-        <Link to='/main-page' className="imgAdidas"><img src={Adidas} alt="" /></Link>
-      </div>
+      <Button type="link" onClick={() => navigate('/')} className="icon-brand">
+        <img src={Nike} alt="Nike-icon" className="img-logo" />
+        <img src={Adidas} alt="Adidas-icon" className="img-logo" />
+      </Button>
 
       {!token.token ? <div className="singin-singup">
 
