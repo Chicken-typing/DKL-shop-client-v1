@@ -11,11 +11,11 @@ import { fetchUser } from '../action';
 const { Meta } = Card;
 const { Item } = Form;
 const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
-    // const socket = io.connect(API_CHAT_ROOM)
+    const socket = io.connect(API_CHAT_ROOM)
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
     const handleCheckMail = () => {
-        // socket.emit("join_room", user._id)
+        socket.emit("join_room", user._id)
         setOpenChat(!openChat)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -113,7 +113,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
                     </Item>
                 </Form>
             </Modal>
-            {/* <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} socket={socket} /> */}
+            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} socket={socket} />
 
         </>
     );
