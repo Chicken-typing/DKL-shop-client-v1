@@ -1,9 +1,7 @@
 // todo: DEFAULT API FORMAT: `${BASE_URL}/route`
 export const BASE_URL = "http://dkl-store-api.herokuapp.com/api";
 // Statistic
-export const API_ADMIN_REVENUE = `${BASE_URL}/orders/summary`;
-export const API_ADMIN_ACCESS = `${BASE_URL}/orders/summary`;
-export const API_ADMIN_NEEDED = `${BASE_URL}/products`;
+export const API_ADMIN_STATISTIC = `${BASE_URL}/orders/summary`;
 
 export const API_PRODUCT = `${BASE_URL}/products`;
 export const API_ORDER = `${BASE_URL}/orders`;
