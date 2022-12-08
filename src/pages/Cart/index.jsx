@@ -76,9 +76,8 @@ function Cart() {
     setTotal(totalAll())
   })
 
-  const notify = () => {
-    toast("Cart is empty")
-  }
+  const notify = () => toast("Cart is empty")
+  
 
 
 

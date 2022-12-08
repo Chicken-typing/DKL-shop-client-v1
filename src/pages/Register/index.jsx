@@ -64,7 +64,7 @@ const Register = () => {
                 </Item>
                 <Item
                     label="Full name"
-                    name='fullname'
+                    name='username'
                     rules={[
                         {
                             required: true,
