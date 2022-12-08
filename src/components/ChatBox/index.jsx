@@ -6,17 +6,17 @@ import { SendOutlined } from '@mui/icons-material';
 import MessagePiece from '../MessagePiece';
 import sendMessage from '../../services/sendMessage';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import moment from 'moment';
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
+import { io } from 'socket.io-client';
 const { Text } = Typography
 const { Meta } = Card
 const { Header, Footer, Content } = Layout;
 const { TextArea } = Input;
 
-const ChatBox = ({ user, handleCloseChatbox, open, socket }) => {
+const ChatBox = ({ user, handleCloseChatbox, open }) => {
+    const socket = io.connect("http://localhost:5001 ")
     const [currentMessage, setCurrentMessage] = useState("")
     const [messageList, setMessageList] = useState([])
-    const sendNewMessage = () => {
+    const sendNewMessage = async () => {
         if (currentMessage !== "") {
             sendMessage(user, currentMessage, socket, (messageData) => {
                 setMessageList([...messageList, messageData])
@@ -30,6 +30,7 @@ const ChatBox = ({ user, handleCloseChatbox, open, socket }) => {
     }, [socket])
     return (
         <Drawer
+            // afterOpenChange={() => open ? socket.emit("join_room", user._id) : socket.emit("disconnect")}
             closable
             closeIcon={
                 <CloseCircleOutlined style={{ fontSize: 24, color: "white" }} />

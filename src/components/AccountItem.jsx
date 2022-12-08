@@ -10,12 +10,10 @@ import { useDispatch } from 'react-redux';
 import { fetchUser } from '../action';
 const { Meta } = Card;
 const { Item } = Form;
-const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
-    const socket = io.connect(API_CHAT_ROOM)
+const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
     const handleCheckMail = () => {
-        socket.emit("join_room", user._id)
         setOpenChat(!openChat)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,7 +65,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
                         {
                             hasEmail ?
                                 <Badge dot={!(user.sentEmail === 0)}>
-                                    <Button title="Email" type='link' onClick={() => handleCheckMail(user)}>
+                                    <Button disabled={isDisable} title="Email" type='link' onClick={() => handleCheckMail(user)}>
                                         <MailOutlined />
                                     </Button>
                                 </Badge> : ""
@@ -113,7 +111,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser }) => {
                     </Item>
                 </Form>
             </Modal>
-            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} socket={socket} />
+            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} />
 
         </>
     );

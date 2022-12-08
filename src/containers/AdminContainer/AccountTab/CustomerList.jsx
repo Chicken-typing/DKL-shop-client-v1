@@ -50,7 +50,7 @@ export default function CustomerList(props) {
                     }}>
                     {result.length > 0
                         ? result.map(user => <AccountItem user={user} url={API_USER}
-                            hasEmail handleDeleteUser={deleteAccount} />)
+                            hasEmail handleDeleteUser={deleteAccount} isDisable={true} />)
                         : searching ?
                             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="The user do not exist." />
                             : <Skeleton active avatar />
