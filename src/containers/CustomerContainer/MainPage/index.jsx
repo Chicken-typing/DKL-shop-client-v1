@@ -21,7 +21,7 @@ function MainPage() {
     <div className="main-page  ">
       <div className='popular_container m-s:px-[10px] '>
         <MainBackground />
-        <ListPopular dataPopular={DataPopular} />
+        <ListPopular  />
       </div>
       <div id='news' className='justify-center items-center'><News /></div>
       <ChatButton />

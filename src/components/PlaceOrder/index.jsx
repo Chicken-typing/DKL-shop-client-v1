@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Space, Button } from "antd";
 import { Link, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,9 @@ function PlaceOrder({onClickBack, onClickNext, handleEdit}) {
   const data = useSelector((state) => state.Cart.carts);
   const shipping = useSelector((state) => state.ShippingInfo);
   const payment = useSelector(state => state.PaymentMethod.paymentMethod)
+  const [price, setPrice] = useState(0)
+  const [total, setTotal] = useState(0)
+  const [ship, setShip] = useState(0)
   const navigate = useNavigate()
 
   const handleBack = () => {
@@ -19,6 +22,49 @@ const handleNext = () => {
   onClickNext()
 
 }
+const subTotal = () => {
+  let price = 0;
+  data.map((item) =>{
+      price = item.price * item.quantity + price
+  });
+  setPrice(price);
+};
+
+const totalAll = () => {
+  let price = 0                  
+  let shipCost = ship            
+  data.map(item => {             
+    if(data.length > 0)          
+    {   
+      setShip(14)                
+      price = item.price * item.quantity + shipCost + price    
+      setTotal(price)            
+    }
+    else {                       
+      setShip(0)                 
+      setTotal(0)                
+    }
+  })
+}
+
+
+
+useEffect(() => {
+  {data.length === 0 && setShip(0)}
+})
+
+useEffect(() => {
+  {data.length === 0 && setTotal(0)}
+})
+
+useEffect(()=>{
+  subTotal();
+},[subTotal])
+
+useEffect(() => {
+  totalAll()
+}, [totalAll])
+
 
   return (
     <div>
@@ -43,7 +89,7 @@ const handleNext = () => {
           {/* SubTotal */}
             <div className='flex w-[100%] '>
               <div className='flex-1 text-gray-600 text-lg'>Subtotal</div>
-               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>price</div>              
+               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${price}`}</div>              
             </div>
             <div className='mt-3 mb-3 lg:border-t lg:border-gray-400  '></div>
 
@@ -51,7 +97,7 @@ const handleNext = () => {
           {/* Shipping Cost   */}
             <div className='flex w-[100%]'>
                <div className='flex-1 text-gray-600 text-lg'>Shipping Cost</div>
-               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>ship</div>
+               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${ship}`}</div>
             </div>
             <div className='mt-3 mb-3 lg:border-t lg:border-gray-400 '></div>
 
@@ -59,7 +105,7 @@ const handleNext = () => {
           {/* Total   */}
             <div className='flex w-[100%]'>
                <div className='flex-1 font-[600] text-gray-800 text-lg'>Order Total</div>
-               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>total</div>
+               <div className='flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]'>{`$${total}`}</div>
             </div>
 
 
