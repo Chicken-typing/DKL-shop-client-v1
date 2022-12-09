@@ -10,6 +10,7 @@ import { getPath } from "./getPathname";
 import { clearCart } from "./Cart";
 import { clearPayment, clearShippingAddress } from "./Shipping";
 export {
+
     fetchAPI,
     fetchAPISuccess,
     fetchAPIFailure,
@@ -33,3 +34,4 @@ export {
     clearShippingAddress,
     clearPayment,
 };
+

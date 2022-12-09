@@ -211,7 +211,9 @@ function ListNavigations() {
                             }}
                             key={item._id}
                           >
+
                             <img src={item.defaultImage.thumbUrl} alt="" />
+
                             <div className=" item_name z-[10]">
                               {item.name}
                             </div>

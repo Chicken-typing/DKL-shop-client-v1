@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';

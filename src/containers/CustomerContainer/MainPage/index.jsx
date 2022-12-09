@@ -17,6 +17,8 @@ function MainPage() {
   useEffect(() => {
     dispatch(getPath(location[1]))
   })
+
+
   return (
     <div className="main-page  ">
       <div className='popular_container m-s:px-[10px] '>

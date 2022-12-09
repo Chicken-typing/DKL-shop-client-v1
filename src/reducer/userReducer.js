@@ -4,6 +4,7 @@ const initialize = {
     userInfor: {},
 };
 const userReducer = (state = initialize, action) => {
+
     switch (action.type) {
         case SIGNIN_USER:
             return {
@@ -20,3 +21,4 @@ const userReducer = (state = initialize, action) => {
     }
 };
 export default userReducer;
+

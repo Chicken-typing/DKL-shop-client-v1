@@ -1,5 +1,7 @@
 import React, { useState, Fragment } from "react";
+
 import { Link,  useNavigate } from "react-router-dom";
+
 import Nike from "../../assets/images/nike.png";
 import Adidas from "../../assets/images/adidas.png";
 import "./style.scss";
