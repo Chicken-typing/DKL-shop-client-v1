@@ -24,7 +24,7 @@ function MainPage() {
         <ListPopular  />
       </div>
       <div id='news' className='justify-center items-center'><News /></div>
-      <ChatButton />
+      <ChatButton isDisable={true} />
       <BackTop style={{ right: '50px' }} />
     </div>
   )

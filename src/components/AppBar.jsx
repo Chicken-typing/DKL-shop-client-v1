@@ -13,6 +13,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import PropTypes from "prop-types"
 import { Affix, Dropdown } from 'antd';
 import Button from './Button'
+import { RefreshOutlined } from '@mui/icons-material';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -54,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const AppBar = props => {
-    const { hasMail, hasNotification, hasAccount, hasSearch } = props
+    const { hasMail, hasNotification, hasAccount, hasSearch, handleRefresh } = props
     const menuId = 'primary-search-account-menu';
     //Notification
     const NotificationFeature = hasNotification => {
@@ -158,7 +159,6 @@ const AppBar = props => {
                 />
             </Search> : ""
         )
-
     }
     return (
         <Affix offsetTop={props.affix}>
@@ -171,6 +171,7 @@ const AppBar = props => {
                             {NotificationFeature(hasNotification)}
                             {MailFeature(hasMail)}
                             {AccountFeature(hasAccount)}
+                            <Button onClick={() => handleRefresh()} icon={<RefreshOutlined />} type='link' style={{ color: 'white' }}></Button>
                         </Box>
                     </Toolbar>
                 </AppBarMUI>

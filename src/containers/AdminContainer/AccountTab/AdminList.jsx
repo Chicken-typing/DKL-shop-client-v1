@@ -126,9 +126,6 @@ const CreateAdminForm = (open, handleFinish, handleTurnOff) => {
 
 export default function AdminList() {
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(fetchUser())
-    }, []);
     const dataUser = useSelector(state => state.fetchUser.dataUser.filter(user => user.role === 'admin'))
     const handleDeleteUser = (url, id) => {
         deleteUser(url, id)
@@ -183,8 +180,8 @@ export default function AdminList() {
                     }}
                 >
                     {dataUser.length > 0
-                        ? dataUser.map(user => <AccountItem user={user} url={API_USER}
-                            handleDeleteUser={deleteAccount} />)
+                        ? dataUser.map((user, index) => <AccountItem user={user} url={API_USER}
+                            handleDeleteUser={deleteAccount} key={index} />)
                         : <Skeleton active avatar />
                     }
                 </Content>

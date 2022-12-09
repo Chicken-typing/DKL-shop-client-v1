@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CustomerList from './CustomerList';
 import AdminList from './AdminList';
-import moment from 'moment';
+import { fetchUser } from '../../../action'
 import './style.scss'
 import { AUTH_ROLE } from '../../../consts/status'
 import { Tabs } from 'antd';
+import { useDispatch } from 'react-redux';
 const onChange = (key) => {
 };
 const AccountTab = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(fetchUser())
+    }, []);
     const isMAdmin = JSON.parse(localStorage.getItem('userInfor')).role === AUTH_ROLE.MASTER_ADMIN
-
     return (
         <Tabs
             defaultActiveKey="1"
