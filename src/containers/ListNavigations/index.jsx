@@ -169,14 +169,6 @@ function ListNavigations() {
                     <Tab label="Man" url="/man" />
                     <Tab label="Kid" url="/kid" />
                     <Tab label="Brand" url="/brand" />
-                    {/* <Autocomplete
-            className={classes.search}
-            placeholder="Search"
-            icon={<IconSearch size={16} stroke={1.5} />}
-            // data={() => handle}
-            onChange={() => handle}
-            value={keyword}
-                /> */}
                     <li className="search-engine m-sm:hidden">
                       <Tooltip title="search">
                         <Button
@@ -218,7 +210,7 @@ function ListNavigations() {
                             }}
                             key={item._id}
                           >
-                            <img src={item.imgProduct} alt="" />
+                            <img src={item.defaultImage.thumbUrl} alt="" />
                             <div className=" item_name z-[10]">
                               {item.name}
                             </div>

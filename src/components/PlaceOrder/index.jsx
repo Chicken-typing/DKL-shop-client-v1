@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, Space, Button } from "antd";
 import { Link, useNavigate} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-
+import {  useSelector } from "react-redux";
 
 
 function PlaceOrder({onClickBack, onClickNext, handleEdit}) {
@@ -13,14 +12,12 @@ function PlaceOrder({onClickBack, onClickNext, handleEdit}) {
   const [total, setTotal] = useState(0)
   const [ship, setShip] = useState(0)
   const navigate = useNavigate()
-
   const handleBack = () => {
     onClickBack()
     navigate('/checkout/payment')
   }
 const handleNext = () => {
   onClickNext()
-
 }
 const subTotal = () => {
   let price = 0;
@@ -114,6 +111,13 @@ useEffect(() => {
                   focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4'
                   onClick={handleNext}
                   >Checkout</button>
+           <button
+                className="w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
+                  focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4"
+                  onClick={() => navigate('/')}
+              >
+                Continue Shopping
+              </button>        
           </div>
 
           </form>
@@ -155,7 +159,7 @@ useEffect(() => {
                   <Space direction="vertical">
                  {data.map(item => (
                     <Space>
-                      <img className="m-sm:w-[50%] m-sm:h-[50%]" src='https://secure-images.nike.com/is/image/DotCom/DX1627_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg' alt="" />              
+                      <img className="m-sm:w-[50%] m-sm:h-[50%] lg:w-[60%] lg:h-[60%] bg-gray-nike" src={item.defaultImage.thumbUrl} alt="" />              
                      <div className="lg:ml-8 lg:mr-20">{item.name}</div>
                      <div className="lg:mr-20">{item.quantity}</div>
                        <div className="lg:ml-8 lg:mr-8">{item.price*item.quantity}</div>

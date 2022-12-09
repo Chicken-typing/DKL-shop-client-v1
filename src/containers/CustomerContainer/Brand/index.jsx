@@ -21,7 +21,8 @@ function Brand() {
         dispatch(fetchAdvertise())
     }, [])
     const res = useSelector(state => state.fetchProduct.products)
-    const advertise = useSelector(state => state.fetchAdvertise.products)
+    const nike = res.filter(val => val.brand === 'Nike')
+    const adidas = res.filter(val => val.brand === 'Adidas')
     const location = useLocation().pathname.split('/')
     useEffect(() => {
       dispatch(getPath(location[1]))
@@ -76,10 +77,10 @@ function Brand() {
         </div>
        </div>
        <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]  grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
-        {active ===  'Nike' && res.map((info) => {
+        {active ===  'Nike' && nike.map((info) => {
             return <Item info={info} />
         })}
-        {active === 'Adidas' && Data.map((info) => {
+        {active === 'Adidas' && adidas.map((info) => {
             return <Item info={info} />
         })}
        </div>   

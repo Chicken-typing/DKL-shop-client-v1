@@ -31,7 +31,7 @@ const product = {
     { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
   ],
   sizes: [
-    { name: '35', inStock: false },
+    { name: '35', inStock: true },
     { name: '36', inStock: true },
     { name: '37', inStock: true },
     { name: '38', inStock: true },
@@ -102,50 +102,16 @@ export default function ProductDetail() {
           </ol>
         </nav>
 
-        {/* Image gallery */}
-        {/* <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
-            <img
-              src={product.images[0].src}
-              alt={product.images[0].alt}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-          <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-              <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-              <img
-                src={product.images[2].src}
-                alt={product.images[2].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-          </div>
-          <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
-            <img
-              src={product.images[3].src}
-              alt={product.images[3].alt}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-        </div> */}
         <div className=" flex justify-center mt-6 aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
             <img
-              // src={product.images[3].src}
-              // alt={product.images[3].alt}
-              src={thisProduct.image}
+              alt='Default image'
+              src={thisProduct.defaultImage.thumbUrl}
               className="h-[40%] w-[40%] object-cover object-center mr-[20px] "
             />
              <img
               // src={product.images[2].src}
               // alt={product.images[2].alt}
-              src={thisProduct.image}
+              src={thisProduct.images[1].thumbUrl}
               className="h-[40%] w-[40%] object-cover object-center "
             />
           </div>
@@ -158,7 +124,7 @@ export default function ProductDetail() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{thisProduct.price}</p>
+            <p className="text-3xl tracking-tight text-gray-900">{`$${thisProduct.price}`}</p>
 
             {/* Reviews */}
             {/* <div className="mt-6">
