@@ -4,6 +4,7 @@ import { Dropdown, Menu, Avatar, Button } from 'antd';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { logout } from '../../action';
+import { OpenInNewOutlined } from '@mui/icons-material';
 
 const Account = (props) => {
     const navigate = useNavigate()
@@ -25,6 +26,12 @@ const Account = (props) => {
             key: '2',
             label: (
                 <Button style={{ color: 'red' }} type='link' onClick={handleLogout}>Log out</Button>
+            ),
+        },
+        {
+            key: '3',
+            label: (
+                <Button type='primary' onClick={() => navigate('/')}>Go to store <OpenInNewOutlined /></Button>
             ),
         }
     ]
