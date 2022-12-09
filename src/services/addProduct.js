@@ -1,7 +1,9 @@
 import axios from "axios";
 import { API_PRODUCT } from "../linkTo";
+import store from "../store";
 const addProduct = async (data) => {
-  const user = JSON.parse(localStorage.getItem("userInfor"));
+  const state = store.getState();
+  const user = state?.User?.userInfor;
   console.log(data);
   return await axios
     .post(

@@ -5,7 +5,7 @@ import { fetchUser } from '../../../action'
 import './style.scss'
 import { AUTH_ROLE } from '../../../consts/status'
 import { Tabs } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const onChange = (key) => {
 };
 const AccountTab = () => {
@@ -13,7 +13,7 @@ const AccountTab = () => {
     useEffect(() => {
         dispatch(fetchUser())
     }, []);
-    const isMAdmin = JSON.parse(localStorage.getItem('userInfor')).role === AUTH_ROLE.MASTER_ADMIN
+    const isMAdmin = useSelector((state) => state.User.userInfor).role === AUTH_ROLE.MASTER_ADMIN
     return (
         <Tabs
             defaultActiveKey="1"

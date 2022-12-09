@@ -1,7 +1,9 @@
 import axios from "axios";
 import { API_USER } from "../linkTo";
+import store from "../store";
 const addUser = async (data) => {
-  const user = JSON.parse(localStorage.getItem("userInfor"));
+  const state = store.getState();
+  const user = state?.User?.userInfor;
   const header = {
     authorization: `Bearer ${user.token}`,
   };

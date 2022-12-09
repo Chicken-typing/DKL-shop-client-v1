@@ -20,7 +20,7 @@ export default function ChatButton(props) {
     const handleCloseChatbox = () => {
         setOpenChat(!openChat)
     }
-    const userData = JSON.parse(localStorage.getItem('userInfor'))
+    const userData = useSelector((state) => state.User.userInfor);
     const navigate = useNavigate()
 
     const openNotification = () => {

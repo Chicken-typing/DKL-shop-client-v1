@@ -1,7 +1,9 @@
 import axios from "axios";
 import { API_PRODUCT } from "../linkTo";
+import store from "../store";
 const updateProduct = (id, value) => {
-  const user = JSON.parse(localStorage.getItem("userInfor"));
+  const state = store.getState();
+  const user = state?.User?.userInfor;
   const header = {
     authorization: `Bearer ${user.token}`,
   };
