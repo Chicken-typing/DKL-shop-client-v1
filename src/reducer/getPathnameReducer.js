@@ -1,7 +1,7 @@
 import { GET_PATHNAME } from "../ActionType";
 
 const initialize = {
-    pathname: "/"
+    pathname: ""
 };
 
 const getPathnameReducer = (state = initialize, action) => {

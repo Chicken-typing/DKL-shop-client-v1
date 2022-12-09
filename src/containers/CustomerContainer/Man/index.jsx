@@ -6,11 +6,8 @@ import Filter from '../../../components/Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../../action';
 import { BackTop } from 'antd';
-
-
 import { useLocation } from 'react-router';
 import { getPath } from '../../../action';
-
 
 
 function Man() {
@@ -44,60 +41,60 @@ function Man() {
   ]
 
 
-  // })
+
   
   const dispatch = useDispatch();
   useEffect(() => {
       dispatch(fetchProduct())
   }, [])
-
-
   const location = useLocation().pathname.split('/')
   useEffect(() => {
     dispatch(getPath(location[1]))
   })
 
-  const res = useSelector(state => state.fetchProduct.products)
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState()
+  const res = useSelector(state => state.fetchProduct.products)
+  const check = res.filter(item => item.category.includes('man'))
 
   useEffect(() => {
-    setProducts(res)
+    setFilter(all)
+    setProducts(check)
   }, [res])
 
   const filterHighLow = () => {
       setFilter('HighLow')
-      const datas = [...res]
+      const datas = [...check]
       datas.sort((a,b) => {
-        return a.cost - b.cost
+        return a.price - b.price
       })
       setProducts(datas)
   }
   const filterLowHigh = () => {
     setFilter('lowhigh')
-      const datas = [...res]
+      const datas = [...check]
       datas.sort((a,b) => {
-        return b.cost - a.cost
+        return b.price - a.price
       })
       setProducts(datas)
 
   }
   const filterNike = () => {
     setFilter('nike')
-    const datas = [...res]
+    const datas = [...check]
     datas.filter((val) =>  val.brand === 'tan')
-    setProducts( datas.filter((val) => val.brand === "tan"))
+    setProducts( datas.filter((val) => val.brand === "Nike"))
 
   }
   const filterAdidas = () => {
     setFilter('adidas')
-    const datas = [...res]
+    const datas = [...check]
     datas.filter((val) =>  val.brand === 'tan')
-    setProducts( datas.filter((val) => val.brand === "olive"))
+    setProducts( datas.filter((val) => val.brand === "Adidas"))
   }
   const all = () => {
     setFilter('all')
-    setProducts(res)
+    setProducts(check)
   }
   return (
     <div>
@@ -111,7 +108,7 @@ function Man() {
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
           <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
-            {products.map((info) => {
+          {filter === 'all' && products.map((info) => {
               return <Item info={info} />
             })}
             {filter === 'HighLow' && products.map((info) => {
@@ -124,9 +121,6 @@ function Man() {
               return <Item info={info} />
             })}
              {filter === 'adidas' && products.map((info) => {
-              return <Item info={info} />
-            })}
-             {filter === 'all' && products.map((info) => {
               return <Item info={info} />
             })}
           </div>

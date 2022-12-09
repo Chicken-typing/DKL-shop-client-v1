@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, DELETE_FROM_CART } from "../ActionType";
+import { ADD_TO_CART, REMOVE_FROM_CART, DELETE_FROM_CART, CLEAR_CART } from "../ActionType";
 
 
 // const carts = localStorage.getItem('carts') !== null ? JSON.parse(localStorage.getItem('carts')) : []
@@ -54,6 +54,11 @@ const CartReducer = (state = initialize, action) => {
             return {
                 ...state,
                 carts: data
+            }
+        case CLEAR_CART:
+            return {
+                ...state,
+                carts: []
             }
         default:
             return state

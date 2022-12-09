@@ -1,4 +1,4 @@
-import { SAVE_PAYMENT_METHOD } from "../ActionType";
+import { SAVE_PAYMENT_METHOD, CLEAR_PAYMENT_METHOD } from "../ActionType";
 
 
 const initialize = {
@@ -14,7 +14,11 @@ const PaymentReducer = (state = initialize, action) => {
                 ...state,
                 paymentMethod: action.payload
             }
-
+        case CLEAR_PAYMENT_METHOD:
+            return {
+                ...state,
+                paymentMethod: {}
+            }
         default:
             return state
     }

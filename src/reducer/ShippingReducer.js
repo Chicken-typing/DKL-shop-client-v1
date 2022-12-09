@@ -1,4 +1,4 @@
-import { SAVE_SHIPPING_ADDRESS, SAVE_PAYMENT_METHOD } from "../ActionType";
+import { SAVE_SHIPPING_ADDRESS, SAVE_PAYMENT_METHOD, CLEAR_SHIPPING_ADDRESS } from "../ActionType";
 
 const initialize = {
     shippingAddress: {},
@@ -20,7 +20,11 @@ const ShippingReducer = (state = initialize, action) => {
                 ...state,
                 paymentMethod: action.payload
             }
-
+        case CLEAR_SHIPPING_ADDRESS:
+            return {
+                ...state,
+                shippingAddress: {}
+            }
         default:
             return state
     }
