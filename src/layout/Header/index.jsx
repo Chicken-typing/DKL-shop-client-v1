@@ -7,7 +7,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Avatar, Button } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../action";
-import { AccountCircleOutlined } from "@mui/icons-material";
+import { AccountCircleOutlined, OpenInNewOutlined } from "@mui/icons-material";
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -16,7 +17,7 @@ function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const token = useSelector(state => state.User.userInfor)
+  const user = useSelector(state => state.User.userInfor)
 
   return (
 
@@ -27,7 +28,7 @@ function Header() {
         <img src={Adidas} alt="Adidas-icon" className="img-logo" />
       </Button>
 
-      {!token.token ? <div className="singin-singup">
+      {!user.token ? <div className="singin-singup">
 
         <Link to="/login" className='signin'>Sign In</Link>
         <Link to="/register" className='signup'>Sign Up</Link>
@@ -47,7 +48,7 @@ function Header() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-center"
             id="custom">
             <Menu.Item  >
               {({ active }) => (
@@ -70,7 +71,7 @@ function Header() {
             <Menu.Item>
               {({ active }) => (
                 <div
-                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+                  className={classNames(active ? 'bg-gray-100  text-rose-550' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
                   onClick={() => {
                     dispatch(logout())
                     navigate('/')
@@ -82,6 +83,21 @@ function Header() {
                 </div>
               )}
             </Menu.Item>
+            {
+              user.role !== 'customer' ? (<Menu.Item>
+                {({ active }) => (
+                  <div
+                    className={classNames(active ? 'bg-gray-100 text-blue-500' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+                    onClick={() => {
+                      navigate('/admin')
+                    }}
+
+                  >
+                    Go to admin <OpenInNewOutlined />
+                  </div>
+                )}
+              </Menu.Item>) : <></>
+            }
           </Menu.Items>
         </Transition>
       </Menu>}

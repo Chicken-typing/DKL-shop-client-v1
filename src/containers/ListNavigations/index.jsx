@@ -194,6 +194,7 @@ function ListNavigations() {
                           className={show ? "show-box" : "search-box disable"}
                           // className="hidden"
                           onChange={handle}
+                          style={{ paddingLeft: 10 }}
                           type="text"
                         />
                       </Tooltip>
@@ -265,6 +266,7 @@ function ListNavigations() {
                     className={show ? "show-box" : "search-box disable"}
                     // className="hidden"
                     onChange={handle}
+                    style={{ paddingLeft: 5 }}
                     type="text"
                   />
                 </Tooltip>
