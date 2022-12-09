@@ -1,6 +1,8 @@
 import axios from "axios";
+import store from "../store";
 const deleteUser = (url, id) => {
-  const user = JSON.parse(localStorage.getItem("userInfor"));
+  const state = store.getState();
+  const user = state?.User?.userInfor;
   const header = {
     authorization: `Bearer ${user.token}`,
   };
