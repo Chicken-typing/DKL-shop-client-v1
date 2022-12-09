@@ -13,33 +13,7 @@ import { getPath } from '../../../action';
 import { advertise } from '../../../Data/DataSlider';
 
 function Kid() {
-  const DataSlider = [
-    {
-      id: 1,
-      img: 'https://images.unsplash.com/photo-1579298245158-33e8f568f7d3?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb'
-    },
-    {
-      id: 2,
-      img: 'https://wallpaperaccess.com/full/1597753.jpg'
-    },
-    {
-      id: 3,
-      img: "https://raritysniper.com/news/wp-content//uploads/2022/04/rtfkt-announces-metaverse-ready-nike-dunks-nfts-758x379.jpg"
-    },
-    {
-      id: 4,
-      img: "https://wallpapercave.com/wp/4DvmzwJ.jpg"
-    }
-  ]
-
-  // useEffect(() => {
-  //   axios.get(`https://633c4d6a74afaef164068be4.mockapi.io/products/dataSlider`)
-  //     .then(res => {
-  //       const slider = res.data
-  //       setSlider(slider)
-  //     })
-  //     .catch(error => console.log(error))
-  // })
+  
   const dispatch = useDispatch();
   useEffect(() => {      
     dispatch(fetchAdvertise())
@@ -49,48 +23,53 @@ function Kid() {
   useEffect(() => {
     dispatch(getPath(location[1]))
   })
-  const res = useSelector(state => state.fetchProduct.products)
+
 
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState()
 
 
+  const res = useSelector(state => state.fetchProduct.products)
+  const check = res.filter(item => item.category.includes('kid'))
+
   useEffect(() => {
-    setProducts(res)
+    setFilter(all)
+    setProducts(check)
   }, [res])
+
   const filterHighLow = () => {
       setFilter('HighLow')
-      const datas = [...res]
+      const datas = [...check]
       datas.sort((a,b) => {
-        return a.cost - b.cost
+        return a.price - b.price
       })
       setProducts(datas)
   }
   const filterLowHigh = () => {
     setFilter('lowhigh')
-      const datas = [...res]
+      const datas = [...check]
       datas.sort((a,b) => {
-        return b.cost - a.cost
+        return b.price - a.price
       })
       setProducts(datas)
 
   }
   const filterNike = () => {
     setFilter('nike')
-    const datas = [...res]
-    datas.filter((val) =>  val.brand === 'tan')
-    setProducts( datas.filter((val) => val.brand === "tan"))
+    const datas = [...check]
+    datas.filter((val) =>  val.brand === 'Nike')
+    setProducts( datas.filter((val) => val.brand === "Nike"))
 
   }
   const filterAdidas = () => {
     setFilter('adidas')
-    const datas = [...res]
-    datas.filter((val) =>  val.brand === 'tan')
-    setProducts( datas.filter((val) => val.brand === "olive"))
+    const datas = [...check]
+    datas.filter((val) =>  val.brand === 'Adidas')
+    setProducts( datas.filter((val) => val.brand === "Adidas"))
   }
   const all = () => {
     setFilter('all')
-    setProducts(res)
+    setProducts(check)
   }
   return (
     <div>
@@ -103,7 +82,7 @@ function Kid() {
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
           <div className='grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
-          {products.map((info) => {
+          {filter === 'all' && products.map((info) => {
               return <Item info={info} />
             })}
             {filter === 'HighLow' && products.map((info) => {
@@ -116,9 +95,6 @@ function Kid() {
               return <Item info={info} />
             })}
              {filter === 'adidas' && products.map((info) => {
-              return <Item info={info} />
-            })}
-             {filter === 'all' && products.map((info) => {
               return <Item info={info} />
             })}
           </div>

@@ -22,12 +22,10 @@ function Cart() {
 
 
   // UseState
-
-  const [price, setPrice] = useState(0)
-  const [total, setTotal] = useState(0)
-  const [ship, setShip] = useState(0)
-  const token = useSelector(state => state.User.userInfor.token)
-
+    const [price, setPrice] = useState(0)
+    const [total, setTotal] = useState(0)
+    const [ship, setShip] = useState(0)
+    const token = useSelector(state => state.User.userInfor)
   // Function
   const navigate = useNavigate()
   const history = useNavigate();
@@ -151,7 +149,7 @@ function Cart() {
                 onClick={
                   () => data.length === 0
                     ? notify()
-                    : token
+                    : token.token
                       ? navigate('/checkout/shippingAddress')
                       : openNotification()}>
                 Checkout
@@ -173,9 +171,9 @@ function Cart() {
               <div className='flex w-[100%] m-sm:flex-col'>
                 {/* <img src={item.imgProduct !== undefined && item.imgProduct} alt="" 
             className=' lg:h-[85%] lg:w-[35%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] : '/> */}
-                <img src='https://secure-images.nike.com/is/image/DotCom/DX1627_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg' alt=""
-                  className=' lg:h-[85%] lg:w-[35%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] : ' />
-                <div className='pl-[20px] lg:w-[40%] lg:max-w-[40%] m-sm:block  m-sm:w-[60%]'>
+                <img src={item.defaultImage.thumbUrl} alt="image product"
+                  className=' lg:h-[85%] lg:w-[25%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] bg-gray-nike  ' /> 
+                <div className='pl-[20px] lg:w-[40%] lg:max-w-[45%] m-sm:block  m-sm:w-[60%]'>
                   <div className=' lg:max-w-[100%] lg:break-all font-[500] mb-2 text-lg'>{item.name}</div>
                   {/* Color and Size */}
                   <div className='flex '>
@@ -183,10 +181,10 @@ function Cart() {
                     <div className='text-gray-500 w-[40%] text-end'>Size 35</div>
                   </div>
                   {/* Cost */}
-                  <div className='mt-4 font-[500]'>{item.price}</div>
+                  <div className='mt-4 font-[500]'>{`$${item.price}`}</div>
                 </div>
 
-                <div className=' lg:ml-10 text-center lg:w-[25%]'>
+                <div className=' lg:ml-10 text-center lg:w-[35%]'>
                   <div className='font-[500] text-lg lg:mb-2 wid'>Quantity</div>
                   <div className="">
                     <button className="minus px-3 hover:bg-gray-button" onClick={item.quantity <= 1 ? () => handleDelAll(item._id) : () => handleDel(item)}>-</button>

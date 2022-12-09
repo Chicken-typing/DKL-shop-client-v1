@@ -6,8 +6,6 @@ import { DataPopular } from '../../../Data/DataPopular'
 import { BackTop } from 'antd';
 import './style.scss'
 import MainBackground from '../../../components/MainBackground'
-
-
 import { useLocation } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { getPath } from '../../../action'
@@ -20,18 +18,17 @@ function MainPage() {
     dispatch(getPath(location[1]))
   })
 
+
   return (
     <div className="main-page  ">
       <div className='popular_container m-s:px-[10px] '>
         <MainBackground />
-        <ListPopular dataPopular={DataPopular} />
+        <ListPopular  />
       </div>
       <div id='news' className='justify-center items-center'><News /></div>
       <ChatButton isDisable={true} />
       <BackTop style={{ right: '50px' }} />
-
     </div>
   )
 }
-
 export default MainPage
