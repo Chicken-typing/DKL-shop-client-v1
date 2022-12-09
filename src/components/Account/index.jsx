@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../action';
 import { OpenInNewOutlined } from '@mui/icons-material';
 
+
 const Account = (props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -33,6 +34,7 @@ const Account = (props) => {
             label: (
                 <Button type='primary' onClick={() => navigate('/')}>Go to store <OpenInNewOutlined /></Button>
             ),
+
         }
     ]
 
