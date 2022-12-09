@@ -25,7 +25,7 @@ function Cart() {
     const [price, setPrice] = useState(0)
     const [total, setTotal] = useState(0)
     const [ship, setShip] = useState(0)
-    const token = useSelector(state => state.User.token)
+    const token = useSelector(state => state.User.userInfor)
   // Function
   const navigate = useNavigate()
   const history = useNavigate();
@@ -149,7 +149,7 @@ function Cart() {
                 onClick={
                   () => data.length === 0
                     ? notify()
-                    : token
+                    : token.token
                       ? navigate('/checkout/shippingAddress')
                       : openNotification()}>
                 Checkout
