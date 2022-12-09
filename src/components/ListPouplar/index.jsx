@@ -17,6 +17,7 @@ function ListPopular() {
   return (
     <section className="popular-container">
 
+
       <div className="container">
         <h3 className="label font-medium text-gray-500 text-2xl">Popular Right Now</h3>
         <div className="content" id='popular'>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import './style.scss'
 import { DollarCircleOutlined } from '@ant-design/icons';
 
+
 function ItemSlider({ item }) {
 
   const { _id, name, defaultImage, brand, price } = item
