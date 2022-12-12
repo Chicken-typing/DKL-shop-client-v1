@@ -10,8 +10,8 @@ import { Avatar, Button } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../action";
 import { AccountCircleOutlined, OpenInNewOutlined } from "@mui/icons-material";
-
-
+import logo from "../../assets/icons/logo-dark.png";
+import { clearShippingAddress, clearPayment } from "../../action";
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -26,8 +26,7 @@ function Header() {
 
     <div className="top-nav">
       <Button type="link" onClick={() => navigate('/')} className="icon-brand">
-        <img src={Nike} alt="Nike-icon" className="img-logo" />
-        <img src={Adidas} alt="Adidas-icon" className="img-logo" />
+        <img src={logo} alt="Nike-icon" className="img-logo" />
       </Button>
 
       {!user.token ? <div className="singin-singup">
@@ -76,7 +75,10 @@ function Header() {
                   className={classNames(active ? 'bg-gray-100  text-rose-550' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
                   onClick={() => {
                     dispatch(logout())
+                    dispatch(clearShippingAddress())
+                    dispatch(clearPayment())
                     navigate('/')
+
                     localStorage.setItem('userInfor', JSON.stringify({}))
                   }}
 

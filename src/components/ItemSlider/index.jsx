@@ -4,7 +4,7 @@ import { addToCart } from '../../action';
 import { Link } from 'react-router-dom'
 import './style.scss'
 import { DollarCircleOutlined } from '@ant-design/icons';
-
+import { Typography } from 'antd';
 
 function ItemSlider({ item }) {
 
@@ -19,7 +19,7 @@ function ItemSlider({ item }) {
       <div className="name-cost">
         <div className="costProduct"><DollarCircleOutlined /> {price}</div>
         <div className="name font-Helvetical">
-          <Link to={`/products/${item.name}`}>{name}</Link>
+          <Typography.Paragraph ellipsis >{name}</Typography.Paragraph>
           <div className='type'>{brand}</div>
         </div>
       </div>

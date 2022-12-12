@@ -9,13 +9,10 @@ import Tab from "../../components/Tab";
 import { SearchOutlined } from "@ant-design/icons";
 import { fetchProduct } from "../../action";
 import { useRef } from "react";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip, Modal, Form, Input } from "antd";
 import { createStyles } from "@mantine/core";
 
 import "./style.scss";
-
-
-
 
 function ListNavigations() {
   const data = useSelector((state) => state.Cart.carts);
@@ -139,13 +136,19 @@ function ListNavigations() {
     dispatch(fetchProduct());
   }, []);
   const res = useSelector((state) => state.fetchProduct.products);
-
-
-
+  const handleOk = () => {
+    setShow(false);
+  };
+  const handleCancel = () => {
+    setShow(false);
+  };
 
   return (
-    <Disclosure as="nav" className={`scroll bg-black max-w-[100%] ${scrollNav && 'hidden'} `} style={{ top: scroll ? '0' : '', position: scroll ? 'fixed' : '' }}>
-
+    <Disclosure
+      as="nav"
+      className={`scroll bg-black max-w-[100%] ${scrollNav && "hidden"} `}
+      style={{ top: scroll ? "0" : "", position: scroll ? "fixed" : "" }}
+    >
       {({ open }) => (
         <>
           <div className=" px-3 sm:px-6 lg:px-7">
@@ -179,49 +182,58 @@ function ListNavigations() {
                           onClick={handleShow}
                           style={{ top: "-5px" }}
                         />
-                        <input
-                          value={keyword}
-                          onKeyDown={handleKeyDown}
-                          onFocus={() => setKeyword("")}
-                          className={show ? "show-box" : "search-box disable"}
-                          // className="hidden"
-                          onChange={handle}
-                          style={{ paddingLeft: 10 }}
-                          type="text"
-                        />
                       </Tooltip>
                     </li>
-                    <div
-                      className="dropdown"
-                      style={{
-                        display: keyword.length > 0 ? "block" : "none",
-                        visibility: show ? "visible" : "hidden",
-                      }}
-                    >
-                      {searchResult.length > 0
-                        ? searchResult.map((item) => (
-                          <div
-                            onSelect={item}
-                            onClick={() => navigate(`/products/${item.name}`)}
-                            className={
-                              show ? "dropdown-row" : "dropdown_close"
-                            }
-                            style={{
-                              visibility: show ? "visible" : "hidden",
-                            }}
-                            key={item._id}
-                          >
+                    <Modal
+                          title="Search Box"
+                          width={400}
+                          open={show}
+                          onOk={handleOk}
+                          onCancel={handleCancel}
+                        >
+                            <Input
+                              value={keyword}
+                              onFocus={() => setKeyword("")}
+                              onChange={handle}
+                              placeholder='product you want to find'
+                              style={{ paddingLeft: 10 }}
+                              type="text"
+                            />
+                            <div
+                              className="dropdown"
+                              style={{
+                                display: keyword.length > 0 ? "block" : "none",
+                                visibility: show ? "visible" : "hidden",
+                              }}
+                            >
+                              {searchResult.length > 0
+                                ? searchResult.map((item) => (
+                                    <div
+                                      onSelect={item}
+                                      onClick={() =>
+                                        navigate(`/products/${item.name}`)
+                                      }
+                                      className={
+                                        show ? "dropdown-row" : "dropdown_close"
+                                      }
+                                      style={{
+                                        visibility: show ? "visible" : "hidden",
+                                      }}
+                                      key={item._id}
+                                    >
+                                      <img
+                                        src={item.defaultImage.thumbUrl}
+                                        alt=""
+                                      />
 
-                            <img src={item.defaultImage.thumbUrl} alt="" />
-
-                            <div className=" item_name z-[10]">
-                              {item.name}
+                                      <div className=" item_name z-[10]">
+                                        {item.name}
+                                      </div>
+                                    </div>
+                                  ))
+                                : "Can not find this product"}
                             </div>
-                          </div>
-                        ))
-
-                        : "Can not find this product"}
-                    </div>
+                        </Modal>
                   </div>
                 </div>
               </div>
@@ -236,10 +248,11 @@ function ListNavigations() {
             </div>
           </div>
 
-          <Disclosure.Panel className='nmd:hidden'>
+          <Disclosure.Panel className="nmd:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3 relative">
               <Tab label="Home" url="/home" />
-              <Tab label="Woman" url="/woman" />-=
+              <Tab label="Woman" url="/woman" />
+              -=
               <Tab label="Man" url="/man" />
               <Tab label="Kid" url="/kid" />
               <Tab label="Brand" url="/brand" />
@@ -253,40 +266,57 @@ function ListNavigations() {
                     onClick={handleShow}
                     style={{ top: "-5px" }}
                   />
-                  <input
-                    value={keyword}
-                    onKeyDown={handleKeyDown}
-                    onFocus={() => setKeyword("")}
-                    className={show ? "show-box" : "search-box disable"}
-                    // className="hidden"
-                    onChange={handle}
-                    style={{ paddingLeft: 5 }}
-                    type="text"
-                  />
                 </Tooltip>
               </li>
-              <div
-                className="dropdowns"
-                style={{
-                  display: keyword.length > 0 ? "block" : "none",
-                  visibility: show ? "visible" : "hidden",
-                }}
-              >
-                {searchResult.length > 0
-                  ? searchResult.map((item) => (
-                    <div
-                      onSelect={item}
-                      onClick={() => navigate(`/products/${item.name}`)}
-                      className={show ? "dropdown-col" : "dropdown_close"}
-                      style={{ visibility: show ? "visible" : "hidden" }}
-                      key={item._id}
-                    >
-                      <div className=" item_name z-[10]">{item.name}</div>
-                    </div>
-                  ))
+              <Modal
+                          title="Basic Modal"
+                          width={400}
+                          open={show}
+                          onOk={handleOk}
+                          onCancel={handleCancel}
+                        >
+                            <Input
+                              value={keyword}
+                              onFocus={() => setKeyword("")}
+                              onChange={handle}
+                              style={{ paddingLeft: 10 }}
+                              type="text"
+                            />
+                            <div
+                              className="dropdown"
+                              style={{
+                                display: keyword.length > 0 ? "block" : "none",
+                                visibility: show ? "visible" : "hidden",
+                              }}
+                            >
+                              {searchResult.length > 0
+                                ? searchResult.map((item) => (
+                                    <div
+                                      onSelect={item}
+                                      onClick={() =>
+                                        navigate(`/products/${item.name}`)
+                                      }
+                                      className={
+                                        show ? "dropdown-row" : "dropdown_close"
+                                      }
+                                      style={{
+                                        visibility: show ? "visible" : "hidden",
+                                      }}
+                                      key={item._id}
+                                    >
+                                      <img
+                                        src={item.defaultImage.thumbUrl}
+                                        alt=""
+                                      />
 
-                  : "Can not find this product"}
-              </div>
+                                      <div className=" item_name z-[10]">
+                                        {item.name}
+                                      </div>
+                                    </div>
+                                  ))
+                                : "Can not find this product"}
+                            </div>
+                        </Modal>
             </div>
           </Disclosure.Panel>
         </>
