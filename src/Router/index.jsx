@@ -27,6 +27,7 @@ import Payment from '../components/Payment';
 import ProtectedRoute from './ProtectedRoute';
 import PlaceOrder from "../components/PlaceOrder";
 import Protected from "./Protected";
+import ThanksPage from "../pages/ThanksPage";
 function Router() {
 
   return (
@@ -49,6 +50,8 @@ function Router() {
           <Route path="placeOrder" element={<Protected><PlaceOrder/></Protected>} />
         </Route>
       </Route>
+      <Route path="/thanks" element={<Protected><ThanksPage /></Protected>} />
+
       {/* admin page */}
       <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} >
         <Route path="" element={<Navigate to="dashboard" replace />} />
