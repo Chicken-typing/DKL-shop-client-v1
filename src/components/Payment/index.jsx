@@ -11,7 +11,6 @@ function Payment({onClickBack, onClickNext}) {
   const payment = useSelector(state => state.PaymentMethod.paymentMethod)
   const [value, setValue] = useState(payment || 'Paypal');
   const onChange = (e) => {
-    console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
   const navigate = useNavigate()
