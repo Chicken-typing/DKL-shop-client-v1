@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Space, Button } from "antd";
+import { Card, Space, Button, Typography } from "antd";
 import { Link, useNavigate} from "react-router-dom";
 import {  useSelector } from "react-redux";
 
@@ -156,14 +156,14 @@ useEffect(() => {
             </Card>
 
             <Card title="Items" size="small">
-                  <Space direction="vertical">
+                  <Space direction="vertical" className="w-[100%]">
                  {data.map(item => (
-                    <Space>
-                      <img className="m-sm:w-[50%] m-sm:h-[50%] lg:w-[60%] lg:h-[60%] bg-gray-nike" src={item.defaultImage.thumbUrl} alt="" />              
-                     <div className="lg:ml-8 lg:mr-20">{item.name}</div>
-                     <div className="lg:mr-20">{item.quantity}</div>
-                       <div className="lg:ml-8 lg:mr-8">{item.price*item.quantity}</div>
-                    </Space>
+                    <div className="lg:flex lg:justify-between w-[100%]">
+                      <img className="m-sm:w-[50%] m-sm:h-[50%] lg:w-[20%] lg:h-[20%] bg-gray-nike" src={item.defaultImage.thumbUrl} alt="" />              
+                     <div ellipsis className="lg:ml-8 lg:mr-20 lg:flex-[0.6] flex-[0.5]">{item.name}</div>
+                     <div className="flex-[0.3] lg:text-center">{item.quantity}</div>
+                       <div className="lg:ml-8 lg:mr-8 lg:text-center">{item.price*item.quantity}</div>
+                    </div>
                  ))}
                   </Space>
             </Card>

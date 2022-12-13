@@ -5,8 +5,8 @@
     color: black;
     position: relative;
     min-height: 350px;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
     .overplayed {
         position: absolute;
         top: 20px;
@@ -118,6 +118,7 @@
             padding: 2px 8px;
             margin: 10px 0px;
             text-align: right;
+            cursor: pointer;
             a {
                 color: black;
                 text-decoration: none;

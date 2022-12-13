@@ -82,14 +82,14 @@ function Man() {
   const filterNike = () => {
     setFilter('nike')
     const datas = [...check]
-    datas.filter((val) =>  val.brand === 'tan')
+    datas.filter((val) =>  val.brand === 'Nike')
     setProducts( datas.filter((val) => val.brand === "Nike"))
 
   }
   const filterAdidas = () => {
     setFilter('adidas')
     const datas = [...check]
-    datas.filter((val) =>  val.brand === 'tan')
+    datas.filter((val) =>  val.brand === 'Adidas')
     setProducts( datas.filter((val) => val.brand === "Adidas"))
   }
   const all = () => {
@@ -101,7 +101,7 @@ function Man() {
       <Slider Data={DataSlider} />
       <h3 className='mt-[30px] text-center font-normal font-Helvetical text-3xl italic text-light-black'>More Information</h3>
       <Advertise DataInfo={listAdvertise} />
-      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
+      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px] lg:px-[200px] '>
         <div className='flex justify-between'>
           <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Man's Shoes</h2>
           <Filter filterHighLow={filterHighLow} filterLowHigh={filterLowHigh} filterNike={filterNike} filterAdidas={filterAdidas} all={all}/>

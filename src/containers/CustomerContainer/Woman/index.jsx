@@ -24,7 +24,7 @@ function Woman() {
     },
     {
       id: 3,
-      img: "https://raritysniper.com/news/wp-content//uploads/2022/04/rtfkt-announces-metaverse-ready-nike-dunks-nfts-758x379.jpg"
+      img: "https://wallpaper.dog/large/10955314.png"
     },
     {
       id: 4,
@@ -114,7 +114,7 @@ function Woman() {
     <div>
       <Slider Data={DataSlider} />
       <Advertise DataInfo={listAdvertise} />
-      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
+      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px] lg:px-[200px]'>
         <div className='flex justify-between '>
           <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Woman's Shoes</h2>
           <Filter filterHighLow={filterHighLow} filterLowHigh={filterLowHigh} filterNike={filterNike} filterAdidas={filterAdidas} all={all}/>
