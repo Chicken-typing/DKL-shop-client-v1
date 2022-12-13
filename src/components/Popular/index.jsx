@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ItemSlider from '../ItemSlider';
 import './style.scss'
-import { style } from '@mui/system';
 function Popular({data}) {
 
     let slidesToShow = 5;
@@ -27,9 +26,8 @@ function Popular({data}) {
     return (
       <>
         {currentSlide !== slideCount - slidesToShow && (
-          <div className={className} onClick={onClick} style={{ position: 'absolute', right: '-44px' ,zIndex: '40'}} >     
+          <div className={className} onClick={onClick}    >     
           <box-icon name='right-arrow-square' type='solid' size='lg'></box-icon> 
-          {/* <img src="M3 5v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2zm4 6h5V7l5 5-5 5v-4H7v-2z" alt="" />                     */}
           </div>
         )}
       </>
