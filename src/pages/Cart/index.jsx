@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-
-
-import { addToCart, deleteFromCart, removeFromCart } from '../../action';
-
-
+import { addToCart, deleteFromCart, removeFromCart, clearCart } from '../../action';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-
 import { Empty, notification, Button } from 'antd';
 import { getPath } from '../../action';
-import _ from 'lodash'
-
-
 
 
 function Cart() {
@@ -43,7 +35,6 @@ function Cart() {
 
   const dispatch = useDispatch();
   const data = useSelector(state => state.Cart.carts)
-
   const subTotal = () => {
     let price = 0;
     data.map((item) => price += item.price * item.quantity);
@@ -163,6 +154,7 @@ function Cart() {
         </div>
 
         {data.length === 0 ? <div className='lg:col-span-2 lg:mt-8'><Empty /></div> : <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
+        <Button danger type='link' onClick={() => dispatch(clearCart())}>Clear all item</Button>
           {data.map((item) => (
             <div className='w-[90%] mb-8  '
               key={item._id+item.size}>
@@ -173,18 +165,19 @@ function Cart() {
             className=' lg:h-[85%] lg:w-[35%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] : '/> */}
                 <img src={item.defaultImage.thumbUrl} alt="image product"
                   className=' lg:h-[85%] lg:w-[25%] rounded-2xl mt-1 min-[370px]:h-[120px] min-[370px]:w-[100px] bg-gray-nike  ' /> 
-                <div className='pl-[20px] lg:w-[40%] lg:max-w-[45%] m-sm:block  m-sm:w-[60%]'>
+                <div className='pl-[20px] lg:w-[70%] lg:max-w-[45%] m-sm:block  m-sm:w-[60%]'>
                   <div className=' lg:max-w-[100%] lg:break-all font-[500] mb-2 text-lg'>{item.name}</div>
                   {/* Color and Size */}
                   <div className='flex '>
                     <div className='text-gray-500 lg:border-r lg:border-gray-300 w-[40%]'>Green</div>
-                    <div className='text-gray-500 w-[40%] text-end'>{item.size}</div>
+                    <div className='text-gray-500 w-[40%] text-end'>{`Size ${item.size}`}</div>
+
                   </div>
                   {/* Cost */}
                   <div className='mt-4 font-[500]'>{`$${item.price}`}</div>
                 </div>
 
-                <div className=' lg:ml-10 text-center lg:w-[35%]'>
+                <div className=' lg:ml-10 text-center lg:w-[55%]'>
                   <div className='font-[500] text-lg lg:mb-2 wid'>Quantity</div>
                   <div className="">
                     <button className="minus px-3 hover:bg-gray-button" onClick={item.quantity <= 1 ? () => handleDelAll(item) : () => handleDel(item)}>-</button>
