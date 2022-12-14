@@ -37,8 +37,8 @@ function Cart() {
     history("/cart");
   };
 
-  const handleDelAll = id => {
-    dispatch(deleteFromCart(id))
+  const handleDelAll = item => {
+    dispatch(deleteFromCart(item))
   }
 
   const dispatch = useDispatch();
@@ -165,7 +165,7 @@ function Cart() {
         {data.length === 0 ? <div className='lg:col-span-2 lg:mt-8'><Empty /></div> : <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
           {data.map((item) => (
             <div className='w-[90%] mb-8  '
-              key={item._id}>
+              key={item._id+item.size}>
               <div className='mb-8 lg:border-t lg:border-gray-300  '></div>
 
               <div className='flex w-[100%] m-sm:flex-col'>
@@ -178,7 +178,7 @@ function Cart() {
                   {/* Color and Size */}
                   <div className='flex '>
                     <div className='text-gray-500 lg:border-r lg:border-gray-300 w-[40%]'>Green</div>
-                    <div className='text-gray-500 w-[40%] text-end'>Size 35</div>
+                    <div className='text-gray-500 w-[40%] text-end'>{item.size}</div>
                   </div>
                   {/* Cost */}
                   <div className='mt-4 font-[500]'>{`$${item.price}`}</div>
@@ -187,7 +187,7 @@ function Cart() {
                 <div className=' lg:ml-10 text-center lg:w-[35%]'>
                   <div className='font-[500] text-lg lg:mb-2 wid'>Quantity</div>
                   <div className="">
-                    <button className="minus px-3 hover:bg-gray-button" onClick={item.quantity <= 1 ? () => handleDelAll(item._id) : () => handleDel(item)}>-</button>
+                    <button className="minus px-3 hover:bg-gray-button" onClick={item.quantity <= 1 ? () => handleDelAll(item) : () => handleDel(item)}>-</button>
                     <span className='lg:ml-2 lg:mr-2'>{item.quantity}</span>
                     <button className="plus px-3 hover:bg-gray-button" onClick={() => handleAdd(item)}>+</button>
                   </div>
@@ -195,7 +195,7 @@ function Cart() {
 
                 {/* Remove item */}
                 <span className='lg:ml-[200px]' >
-                  <box-icon box-icon type='solid' name='trash-alt' onClick={() => handleDelAll(item._id)}></box-icon>
+                  <box-icon box-icon type='solid' name='trash-alt' onClick={() => handleDelAll(item)}></box-icon>
                 </span>
               </div>
             </div>
