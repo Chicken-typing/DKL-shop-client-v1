@@ -166,6 +166,7 @@ function PreviewOrder() {
             </Card>
 
             <Card title="Items" size="small">
+
                   <Space direction="vertical" className="w-[100%]">
                  {data.map(item => (
                     <div className="lg:flex lg:justify-between w-[100%]">
@@ -176,6 +177,7 @@ function PreviewOrder() {
                     </div>
                  ))}
                   </Space>              
+
             </Card>
 
           </Space>

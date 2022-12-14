@@ -4,7 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { addToCart } from '../../action';
 import './style.scss'
 import { DollarCircleOutlined } from '@ant-design/icons';
+
 import { Typography } from 'antd';
+
 import SizeSelection from '../SizeSelection';
 
 export default function Item({ info }) {
@@ -26,10 +28,12 @@ export default function Item({ info }) {
         <Link to={`/products/${_id}`} className='overplays'><input type="button" value='More Detail' className='adds'
         /></Link>
         <div className="name-cost">
+
           <div className="costProduct"><DollarCircleOutlined />{price}</div>
           <div className="name font-Helvetical" onClick={() => navigate(`/products/${name}`)}>
         <Typography.Paragraph ellipsis >{name}</Typography.Paragraph>
           <div className='type'>{brand}</div>
+
         </div>
         </div>
       </div>

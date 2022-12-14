@@ -170,7 +170,9 @@ function Cart() {
                   {/* Color and Size */}
                   <div className='flex '>
                     <div className='text-gray-500 lg:border-r lg:border-gray-300 w-[40%]'>Green</div>
+
                     <div className='text-gray-500 w-[40%] text-end'>{`Size ${item.size}`}</div>
+
                   </div>
                   {/* Cost */}
                   <div className='mt-4 font-[500]'>{`$${item.price}`}</div>
