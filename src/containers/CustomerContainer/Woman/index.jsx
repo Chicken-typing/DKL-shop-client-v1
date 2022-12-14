@@ -24,7 +24,7 @@ function Woman() {
     },
     {
       id: 3,
-      img: "https://raritysniper.com/news/wp-content//uploads/2022/04/rtfkt-announces-metaverse-ready-nike-dunks-nfts-758x379.jpg"
+      img: "https://free4kwallpapers.com/uploads/originals/2015/07/18/nike-basketball-shoes.jpg"
     },
     {
       id: 4,
@@ -78,7 +78,7 @@ function Woman() {
       setFilter('HighLow')
       const datas = [...check]
       datas.sort((a,b) => {
-        return a.price - b.price
+        return b.price - a.price
       })
       setProducts(datas)
   }
@@ -86,7 +86,7 @@ function Woman() {
     setFilter('lowhigh')
       const datas = [...check]
       datas.sort((a,b) => {
-        return b.price - a.price
+        return a.price - b.price
       })
       setProducts(datas)
 
@@ -114,9 +114,9 @@ function Woman() {
     <div>
       <Slider Data={DataSlider} />
       <Advertise DataInfo={listAdvertise} />
-      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
+      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[60px] lg:px-[200px] smd:px-[160px]'>
         <div className='flex justify-between '>
-          <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Woman's Shoes</h2>
+          <h2 className='mt-[20px] lg:text-4xl font-medium font-Helvetical text-2xl'>Woman's Shoes</h2>
           <Filter filterHighLow={filterHighLow} filterLowHigh={filterLowHigh} filterNike={filterNike} filterAdidas={filterAdidas} all={all}/>
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>

@@ -76,7 +76,7 @@ function Brand() {
              onClick={() => setActive('Adidas')}>More Product</button>
         </div>
        </div>
-       <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]  grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
+       <div className='contain xl:px-[160px] s:px-[40px] ss:px-[60px] smd:px-[160px] grid grid-cols-4  gap-y-[24px] gap-x-[24px] xl:grid-cols-4 sm:grid-cols-1 s:grid-cols-1 md:grid-cols-2'>
         {active ===  'Nike' && nike.map((info) => {
             return <Item info={info} />
         })}

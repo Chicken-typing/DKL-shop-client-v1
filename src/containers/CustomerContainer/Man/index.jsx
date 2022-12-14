@@ -66,7 +66,7 @@ function Man() {
       setFilter('HighLow')
       const datas = [...check]
       datas.sort((a,b) => {
-        return a.price - b.price
+        return b.price - a.price
       })
       setProducts(datas)
   }
@@ -74,7 +74,7 @@ function Man() {
     setFilter('lowhigh')
       const datas = [...check]
       datas.sort((a,b) => {
-        return b.price - a.price
+        return a.price - b.price
       })
       setProducts(datas)
 
@@ -82,14 +82,14 @@ function Man() {
   const filterNike = () => {
     setFilter('nike')
     const datas = [...check]
-    datas.filter((val) =>  val.brand === 'tan')
+    datas.filter((val) =>  val.brand === 'Nike')
     setProducts( datas.filter((val) => val.brand === "Nike"))
 
   }
   const filterAdidas = () => {
     setFilter('adidas')
     const datas = [...check]
-    datas.filter((val) =>  val.brand === 'tan')
+    datas.filter((val) =>  val.brand === 'Adidas')
     setProducts( datas.filter((val) => val.brand === "Adidas"))
   }
   const all = () => {
@@ -101,9 +101,9 @@ function Man() {
       <Slider Data={DataSlider} />
       <h3 className='mt-[30px] text-center font-normal font-Helvetical text-3xl italic text-light-black'>More Information</h3>
       <Advertise DataInfo={listAdvertise} />
-      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]'>
+      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[60px] lg:px-[200px] smd:px-[160px]'>
         <div className='flex justify-between'>
-          <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Man's Shoes</h2>
+          <h2 className='mt-[20px] lg:text-4xl font-medium font-Helvetical text-2xl  '>Man's Shoes</h2>
           <Filter filterHighLow={filterHighLow} filterLowHigh={filterLowHigh} filterNike={filterNike} filterAdidas={filterAdidas} all={all}/>
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
