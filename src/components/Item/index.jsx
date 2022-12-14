@@ -27,7 +27,7 @@ export default function Item({ info }) {
         /></Link>
         <div className="name-cost">
           <div className="costProduct"><DollarCircleOutlined />{price}</div>
-          <div className="name font-Helvetical" onClick={() => navigate(`/products/${name}`)}>
+          <div className="name font-Helvetical" onClick={() => navigate(`/products/${_id}`)}>
         <Typography.Paragraph ellipsis >{name}</Typography.Paragraph>
           <div className='type'>{brand}</div>
         </div>

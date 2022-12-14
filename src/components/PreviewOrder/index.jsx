@@ -151,7 +151,6 @@ function PreviewOrder() {
                   <div className="font-bold">Address:</div>
                   <div>{shipping.shippingAddress.address}</div>
                 </Space>
-                <a href="/payment">Edit</a>
               </Space>
             </Card>
 
@@ -161,7 +160,6 @@ function PreviewOrder() {
                   <div className="font-bold">Method:</div>
                   <div>{payment}</div>
                 </Space>
-                <a href="/checkout/payment">Edit</a>
               </Space>
             </Card>
 

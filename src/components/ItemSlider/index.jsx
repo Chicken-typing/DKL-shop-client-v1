@@ -26,7 +26,7 @@ function ItemSlider({ item }) {
         <Link to={`/products/${_id}`} className='overplayss'><input type="button" value='More Detail' className='adds' /></Link>
         <div className="name-cost">
           <div className="costProduct"><DollarCircleOutlined /> {price}</div>
-          <div className="name font-Helvetical" onClick={() => navigate(`/products/${name}`)}>
+          <div className="name font-Helvetical" onClick={() => navigate(`/products/${_id}`)}>
         <Typography.Paragraph ellipsis >{name}</Typography.Paragraph>
           <div className='type'>{brand}</div>
         </div>
