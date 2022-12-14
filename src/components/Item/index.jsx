@@ -4,7 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { addToCart } from '../../action';
 import './style.scss'
 import { DollarCircleOutlined } from '@ant-design/icons';
+
 import { Typography } from 'antd';
+
 import SizeSelection from '../SizeSelection';
 
 export default function Item({ info }) {
