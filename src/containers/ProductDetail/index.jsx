@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../action';
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { addToCart } from '../../action';
-
+import { Divider, message} from 'antd';
+import { DollarCircleFilled } from'@ant-design/icons'
 
 const product = {
   name: 'Nike Air Zoom Pegasus 39 Premium',
@@ -13,17 +14,6 @@ const product = {
   breadcrumbs: [
     { id: 1, name: 'Men', href: '#' },
     { id: 2, name: 'Shoes', href: '#' },
-  ],
-  images: [
-
-    {
-      src: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/f5d4d99e-0fb5-4a2a-81bf-4a6530bf05ef/air-zoom-pegasus-39-road-running-shoes-H2wpv0.png',
-      alt: 'Model wearing plain gray basic tee.',
-    },
-    {
-      src: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/d3cafd13-160c-41d7-ae22-a800b001d21d/air-zoom-pegasus-39-road-running-shoes-H2wpv0.png',
-      alt: 'Model wearing plain white basic tee.',
-    },
   ],
   colors: [
     { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -39,6 +29,7 @@ const product = {
     { name: '40', inStock: true },
     { name: '41', inStock: true },
     { name: '42', inStock: true },
+    { name: '43', inStock: true },
   ],
   description:
     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
@@ -59,16 +50,15 @@ function classNames(...classes) {
 
 export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const [selectedSize, setSelectedSize] = useState(0)
 
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(fetchProduct())
+    dispatch(fetchProduct())
   }, [])
   const res = useSelector(state => state.fetchProduct.products)
-  const {productName} = useParams()
-  const thisProduct = res.find(prod => prod.name === productName)
-
+  const { id } = useParams()
+  const thisProduct = res.find(prod => prod._id === id)
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -103,18 +93,18 @@ export default function ProductDetail() {
         </nav>
 
         <div className=" flex justify-center mt-6 aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
-            <img
-              alt='Default image'
-              src={thisProduct.defaultImage.thumbUrl}
-              className="h-[40%] w-[40%] object-cover object-center mr-[20px] "
-            />
-             <img
-              // src={product.images[2].src}
-              // alt={product.images[2].alt}
-              src={thisProduct.images[1].thumbUrl}
-              className="h-[40%] w-[40%] object-cover object-center "
-            />
-          </div>
+          <img
+            alt='Default image'
+            src={thisProduct.defaultImage.thumbUrl}
+            className="h-[40%] w-[40%] object-cover object-center mr-[20px] "
+          />
+          <img
+            // src={product.images[2].src}
+            // alt={product.images[2].alt}
+            src={thisProduct.images[1].thumbUrl}
+            className="h-[40%] w-[40%] object-cover object-center "
+          />
+        </div>
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
@@ -124,31 +114,8 @@ export default function ProductDetail() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{`$${thisProduct.price}`}</p>
-
-            {/* Reviews */}
-            {/* <div className="mt-6">
-              <h3 className="sr-only">Reviews</h3>
-              <div className="flex items-center">
-                <div className="flex items-center">
-                  {[0, 1, 2, 3, 4].map((rating) => (
-                    <StarIcon
-                      key={rating}
-                      className={classNames(
-                        reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                        'h-5 w-5 flex-shrink-0'
-                      )}
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-                <p className="sr-only">{reviews.average} out of 5 stars</p>
-                <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                  {reviews.totalCount} reviews
-                </a>
-              </div>
-            </div> */}
-
+            <div className="text-3xl tracking-tight text-gray-900 pt-6 font-bold flex items-center"><DollarCircleFilled /> <span className='ml-2'>{thisProduct.price}</span></div>
+            <Divider />
             <form className="mt-10" onSubmit={(e) => e.preventDefault()}>
               {/* Colors */}
 
@@ -161,14 +128,14 @@ export default function ProductDetail() {
                   </a>
                 </div>
 
-                <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
+                <RadioGroup value={selectedSize} onChange={(e) => setSelectedSize(e * 1)} className="mt-4">
                   <RadioGroup.Label className="sr-only"> Choose a size </RadioGroup.Label>
                   <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                     {product.sizes.map((size) => (
                       <RadioGroup.Option
                         key={size.name}
-                        value={size}
-                        disabled={!size.inStock}
+                        value={size.name}
+                        disabled={!product.sizes.includes(size)}
                         className={({ active }) =>
                           classNames(
                             size.inStock
@@ -182,7 +149,7 @@ export default function ProductDetail() {
                         {({ active, checked }) => (
                           <>
                             <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
-                            {size.inStock ? (
+                            {product.sizes.includes(size) ? (
                               <span
                                 className={classNames(
                                   active ? 'border' : 'border-2',
@@ -219,8 +186,19 @@ export default function ProductDetail() {
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent
                  bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700
                   focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  onClick={() => {dispatch(addToCart(thisProduct))
-                    console.log(res);}}
+                onClick={() => {
+                  if (selectedSize === 0) {
+                    message.warning("Please select the size of shoes!")
+                  } else {
+                    const selectItem = {
+                      ...thisProduct,
+                      size: selectedSize
+                    }
+                    dispatch(addToCart(selectItem))
+                    message.success("Add to cart success")
+                  }
+                }
+                }
               >
                 Add to Cart
               </button>

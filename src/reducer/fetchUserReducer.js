@@ -10,7 +10,7 @@ const fetchUserReducer = (state = initialize, action) => {
                 dataUser: action.payload,
             };
         default:
-            return {...state };
+            return state ;
     }
 };
 export default fetchUserReducer;

@@ -41,7 +41,7 @@ function Router() {
         <Route path="man" element={<Man />} />
         <Route path="kid" element={<Kid />} />
         <Route path="brand" element={<Brand />} />
-        <Route path="/products/:productName" element={<ProductDetail />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart/>} />
         <Route path="/checkout" element={<Protected><Checkout/></Protected>}>
           {/* <Route path="" element={<Navigate to="checkout" replace />}/> */}
