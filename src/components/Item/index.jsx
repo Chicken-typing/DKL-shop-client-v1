@@ -26,11 +26,11 @@ export default function Item({ info }) {
         <Link to={`/products/${_id}`} className='overplays'><input type="button" value='More Detail' className='adds'
         /></Link>
         <div className="name-cost">
-          <div className="costProduct"><DollarCircleOutlined /> {price}</div>
-          <div className="name font-Helvetical">
-            <Link to={`/products/${_id}`}>{name}</Link>
-            <div className='type'>{brand}</div>
-          </div>
+          <div className="costProduct"><DollarCircleOutlined />{price}</div>
+          <div className="name font-Helvetical" onClick={() => navigate(`/products/${name}`)}>
+        <Typography.Paragraph ellipsis >{name}</Typography.Paragraph>
+          <div className='type'>{brand}</div>
+        </div>
         </div>
       </div>
       <SizeSelection open={showModal} item={info} addItem={handleAddToCart} handleClose={onCloseModal} />

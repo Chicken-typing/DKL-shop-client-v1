@@ -211,7 +211,7 @@ function ListNavigations() {
                                     <div
                                       onSelect={item}
                                       onClick={() =>
-                                        navigate(`/products/${item.name}`)
+                                        navigate(`/products/${item._id}`)
                                       }
                                       className={
                                         show ? "dropdown-row" : "dropdown_close"
@@ -294,7 +294,7 @@ function ListNavigations() {
                                     <div
                                       onSelect={item}
                                       onClick={() =>
-                                        navigate(`/products/${item.name}`)
+                                        navigate(`/products/${item._id}`)
                                       }
                                       className={
                                         show ? "dropdown-row" : "dropdown_close"

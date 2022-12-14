@@ -37,15 +37,15 @@ function Checkout() {
        
        <Stepper active={active} onStepClick={setActive} breakpoint="sm">
 
-        <Stepper.Step label="Second step" description="Shipping Information" allowStepSelect={active > 0}>
+        <Stepper.Step label="Shipping Information"  allowStepSelect={active > 0}>
           <Shipping onClick={nextStep}/>
         </Stepper.Step>
 
-        <Stepper.Step label="Third step" description="Payment Method" allowStepSelect={active > 1}>
+        <Stepper.Step label="Payment Method"  allowStepSelect={active > 1}>
           <Payment onClickBack={prevStep} onClickNext={nextStep}/>
         </Stepper.Step>
 
-        <Stepper.Step label="Final step" description="PlaceOrder" allowStepSelect={active > 2}>
+        <Stepper.Step label="PlaceOrder"  allowStepSelect={active > 2}>
           <PlaceOrder onClickBack={prevStep} onClickNext={nextStep} handleEdit={handleEdit} />
         </Stepper.Step>
 

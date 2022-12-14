@@ -35,7 +35,6 @@ function Cart() {
 
   const dispatch = useDispatch();
   const data = useSelector(state => state.Cart.carts)
-
   const subTotal = () => {
     let price = 0;
     data.map((item) => price += item.price * item.quantity);
@@ -155,7 +154,7 @@ function Cart() {
         </div>
 
         {data.length === 0 ? <div className='lg:col-span-2 lg:mt-8'><Empty /></div> : <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
-        <Button type='primary' onClick={() => dispatch(clearCart())}>Clear Cart</Button>
+        <Button danger type='link' onClick={() => dispatch(clearCart())}>Clear all item</Button>
           {data.map((item) => (
             <div className='w-[90%] mb-8  '
               key={item._id+item.size}>
@@ -171,7 +170,7 @@ function Cart() {
                   {/* Color and Size */}
                   <div className='flex '>
                     <div className='text-gray-500 lg:border-r lg:border-gray-300 w-[40%]'>Green</div>
-                    <div className='text-gray-500 w-[40%] text-end'>{item.size}</div>
+                    <div className='text-gray-500 w-[40%] text-end'>{`Size ${item.size}`}</div>
                   </div>
                   {/* Cost */}
                   <div className='mt-4 font-[500]'>{`$${item.price}`}</div>
