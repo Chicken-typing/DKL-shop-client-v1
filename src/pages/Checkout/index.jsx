@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Stepper } from '@mantine/core';
 import Shipping from '../../components/Shipping';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,12 +8,14 @@ import PreviewOrder from '../../components/PreviewOrder';
 import { useNavigate } from 'react-router';
 
 
-
-
 function Checkout() {
-  const [active, setActive] = useState(0);
+  const getStep = JSON.parse(localStorage.getItem('stepCheckout'))
+  const [active, setActive] = useState(getStep ? getStep : 0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
+  useEffect(() => {
+    localStorage.setItem('stepCheckout', active)
+  },[active])
   const navigate = useNavigate()
   const editPayment = () => {
     setActive(1)
@@ -29,6 +31,7 @@ function Checkout() {
     editInfo: editInfo  
     
   }
+
   return (
     <div className='mt-10 pt-8 px-20'>
        

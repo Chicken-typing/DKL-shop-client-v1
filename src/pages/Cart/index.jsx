@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-
-
-import { addToCart, deleteFromCart, removeFromCart } from '../../action';
-
-
+import { addToCart, deleteFromCart, removeFromCart, clearCart } from '../../action';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-
 import { Empty, notification, Button } from 'antd';
 import { getPath } from '../../action';
-import _ from 'lodash'
-
-
 
 
 function Cart() {
@@ -163,8 +155,9 @@ function Cart() {
         </div>
 
         {data.length === 0 ? <div className='lg:col-span-2 lg:mt-8'><Empty /></div> : <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
+        <Button type='primary' onClick={() => dispatch(clearCart())}>Clear Cart</Button>
           {data.map((item) => (
-            <div className='w-[90%] mb-8  '
+            <div className='w-[90%] mb-8 mt-4  '
               key={item._id}>
               <div className='mb-8 lg:border-t lg:border-gray-300  '></div>
 

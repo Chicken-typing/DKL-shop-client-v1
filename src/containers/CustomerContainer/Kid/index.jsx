@@ -41,7 +41,7 @@ function Kid() {
       setFilter('HighLow')
       const datas = [...check]
       datas.sort((a,b) => {
-        return a.price - b.price
+        return b.price - a.price
       })
       setProducts(datas)
   }
@@ -49,7 +49,7 @@ function Kid() {
     setFilter('lowhigh')
       const datas = [...check]
       datas.sort((a,b) => {
-        return b.price - a.price
+        return a.price - b.price
       })
       setProducts(datas)
 
@@ -75,9 +75,9 @@ function Kid() {
     <div>
       <Advertise DataInfo={advertise} />
       <h3 className='mt-[30px] text-center font-normal font-Helvetical text-3xl italic text-light-black'>More Product</h3>
-      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[40px]  lg:px-[200px]'>
+      <div className='contain xl:px-[160px] s:px-[40px] ss:px-[60px] lg:px-[200px] smd:px-[160px]'>
         <div className='flex justify-between'>
-          <h2 className='mt-[20px] text-4xl font-medium font-Helvetical'>Kid's Shoes</h2>
+          <h2 className='mt-[20px] lg:text-4xl font-medium font-Helvetical text-2xl'>Kid's Shoes</h2>
           <Filter filterHighLow={filterHighLow} filterLowHigh={filterLowHigh} filterNike={filterNike} filterAdidas={filterAdidas} all={all}/>
         </div>
         <div className='list-product mt-[20px] mx-auto my-auto'>
