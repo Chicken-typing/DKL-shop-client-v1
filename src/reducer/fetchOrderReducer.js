@@ -13,7 +13,7 @@ const fetchOrderReducer = (state = initialize, action) => {
       };
     }
     default:
-      return { ...state };
+      return state;
   }
 };
 export default fetchOrderReducer;
