@@ -1,33 +1,32 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   PayPalScriptProvider,
   PayPalButtons,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
-import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../../action";
+import { useDispatch } from "react-redux";
+import { clearCart, clearPayment, clearShippingAddress } from "../../action";
 import { Button, Result } from 'antd';
 import { useNavigate } from "react-router-dom";
-import { Callbacks } from "jquery";
-
+import payOrder from "../../services/payOrder";
 
 const style = { layout: "vertical" };
-
 // Custom component to wrap the PayPalButtons and handle currency changes
-const ButtonWrapper = ({ currency, showSpinner, total, callBack}) => {
+const ButtonWrapper = ({ currency, showSpinner, orderInfor, callback }) => {
   // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
   // This is the main reason to wrap the PayPalButtons in a new component
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
-  const navigate = useNavigate()
-  const [paidFor, setPaidFor] = useState(false)
   const [error, setError] = useState(null)
-  const handleApprove = (orderID) => {
-      setPaidFor(true)
-      dispatch(clearCart())
+  const handleApprove = (res) => {
+    const data = {
+      ...orderInfor,
+      paymentResult: {
+        ...res
+      },
+    }
+    payOrder(data, callback)
   }
-  
-  if(error)
-  {
+  if (error) {
     alert(error)
   }
   useEffect(() => {
@@ -39,39 +38,23 @@ const ButtonWrapper = ({ currency, showSpinner, total, callBack}) => {
       },
     });
   }, [currency, showSpinner]);
-  if(paidFor)
-  {
-    
-    return <Result
-    status="success"
-    title="Successfully Purchased Product"
-    subTitle="You can go shopping continue and choose your best product."
-    extra={[
-      <Button key="buy" onClickCapture={() => {
-        callBack()
-        navigate("/")
-      }}>Buy Again</Button>,
-    ]}
-  />
-  }
   return (
     <>
       {showSpinner && isPending && <div className="spinner" />}
       <PayPalButtons
-      onClick={(data, actions) => {
-        const hasBought = false
-        if(hasBought)
-        {
-          setError("You has bought it")
-          return actions.reject()
-        }
-        else {
-          return actions.resolve()
-        }
-      } }
+        onClick={(data, actions) => {
+          const hasBought = false
+          if (hasBought) {
+            setError("You has bought it")
+            return actions.reject()
+          }
+          else {
+            return actions.resolve()
+          }
+        }}
         style={style}
         disabled={false}
-        forceReRender={[total, currency, style]}
+        forceReRender={[orderInfor.totalPrice, currency, style]}
         fundingSource={undefined}
         createOrder={(data, actions) => {
           return actions.order
@@ -80,7 +63,7 @@ const ButtonWrapper = ({ currency, showSpinner, total, callBack}) => {
                 {
                   amount: {
                     currency_code: currency,
-                    value: total,
+                    value: orderInfor.totalPrice,
                   },
                 },
               ],
@@ -90,25 +73,34 @@ const ButtonWrapper = ({ currency, showSpinner, total, callBack}) => {
               return orderId;
             });
         }}
-        onApprove = { async (data, action) => {
+        onApprove={async (data, action) => {
           const order = await action.order.capture();
-          console.log("order", order);
-
-          handleApprove(data.orderID);
-      }}
-      onCancel={() => {}}
-      onError={(err) => {
-          setError(err);
-          console.log("PayPal Checkout onError", err);
-      }}
+          const res = {
+            id: order.id,
+            status: order.status,
+            update_time: order.update_time,
+            payer: order.payer,
+          }
+          handleApprove(res);
+        }}
+        onCancel={() => { console.log("Transactions are canceled") }}
+        onError={() => {
+          setError("PayPal Checkout onError");
+        }}
       />
     </>
   );
 };
-function PaypaButton({ total, callBack }) {
-
-
+function PaypalButton({ orderInfor}) {
   const currency = "USD";
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const clearInfor = () => {
+    dispatch(clearShippingAddress())
+    dispatch(clearPayment())
+    dispatch(clearCart())
+    navigate('/thanks')
+  }
   return (
     <PayPalScriptProvider
       options={{
@@ -117,9 +109,9 @@ function PaypaButton({ total, callBack }) {
         currency: "USD",
       }}
     >
-      <ButtonWrapper currency={currency} showSpinner={false} total={total} callBack={callBack} />
+      <ButtonWrapper currency={currency} showSpinner={false} orderInfor={orderInfor} callback={clearInfor} />
     </PayPalScriptProvider>
   );
 }
 
-export default PaypaButton;
+export default PaypalButton;

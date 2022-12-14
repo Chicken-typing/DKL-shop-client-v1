@@ -15,9 +15,7 @@ const fetchStaticReducer = (state = initialize, action) => {
         dataStatistic: action.payload.dataStatistic,
       };
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 };
 export default fetchStaticReducer;

@@ -15,9 +15,7 @@ const fetchProductReducer = (state = initialize, action) => {
         products: action.payload.data,
       };
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 };
 export default fetchProductReducer;

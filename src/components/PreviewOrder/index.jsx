@@ -1,9 +1,9 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { Card, Space, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import PaypaButton from "../PaypalButton";
-import { clearCart,  clearShippingAddress, clearPayment  } from "../../action";
+import { useSelector } from "react-redux";
+import PaypalButton from "../PaypalButton";
+import store from "../../store";
 
 function PreviewOrder() {
   const data = useSelector((state) => state.Cart.carts);
@@ -13,51 +13,57 @@ function PreviewOrder() {
   const [total, setTotal] = useState(0)
   const [ship, setShip] = useState(0)
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const state = store.getState()
+  const user = state?.User?.userInfor
+  const taxCost = Math.round(price * 0.02*100)/100
+  const orderInfor = {
+    orderItems: [...data],
+    shippingAddress: shipping.shippingAddress,
+    paymentMethod: payment,
+    itemsPrice: price,
+    shippingPrice: ship,
+    taxPrice: taxCost,
+    totalPrice: total + price * 0.02,
+    user: user._id,
+  }
   const subTotal = () => {
     let price = 0;
-    data.map((item) =>{
-        price = item.price * item.quantity + price
+    data.map((item) => {
+      price = item.price * item.quantity + price
     });
     setPrice(price);
   };
 
 
   const totalAll = () => {
-    let price = 0                  
-    let shipCost = ship            
-    data.map(item => {             
-      if(data.length > 0)          
-      {   
-        setShip(14)                
-        price = item.price * item.quantity + shipCost + price    
-        setTotal(price)            
-      }
-      else {                       
-        setShip(0)                 
-        setTotal(0)                
-      }
-    })
+    let price = 0
+    let shipCost = ship
+    if (data.length > 0) {
+      setShip(14)
+      data.map(item => {
+        price = item.price * item.quantity  + price
+      })
+      setTotal(price + shipCost)
+    }
+    else {
+      setShip(0)
+      setTotal(0)
+    }
   }
-  
-  
-  
+
+
+
   useEffect(() => {
-    {data.length === 0 && setShip(0)}
+    data.length === 0 && setShip(0)
+    data.length === 0 && setTotal(0)
   })
-  
   useEffect(() => {
-    {data.length === 0 && setTotal(0)}
-  })
-  
-  useEffect(()=>{
     subTotal();
-  },[subTotal])
-  
+  }, [subTotal])
+
   useEffect(() => {
     totalAll()
   }, [totalAll])
-
 
   return (
     <div>
@@ -82,7 +88,7 @@ function PreviewOrder() {
               <div className="flex w-[100%] ">
                 <div className="flex-1 text-gray-600 text-lg">Subtotal</div>
                 <div className="flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]">
-                {`$${price}`}
+                  {`$${price}`}
                 </div>
               </div>
               <div className="mt-3 mb-3 lg:border-t lg:border-gray-400  "></div>
@@ -93,26 +99,31 @@ function PreviewOrder() {
                   Shipping Cost
                 </div>
                 <div className="flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]">
-                {`$${ship}`}
+                  {`$${ship}`}
                 </div>
               </div>
               <div className="mt-3 mb-3 lg:border-t lg:border-gray-400 "></div>
-
+              {/* Tax Cost   */}
+              <div className="flex w-[100%]">
+                <div className="flex-1 text-gray-600 text-lg">
+                  Tax Cost
+                </div>
+                <div className="flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]">
+                  {`$${taxCost}`}
+                </div>
+              </div>
+              <div className="mt-3 mb-3 lg:border-t lg:border-gray-400 "></div>
               {/* Total   */}
               <div className="flex w-[100%]">
                 <div className="flex-1 font-[600] text-gray-800 text-lg">
                   Order Total
                 </div>
                 <div className="flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]">
-                {`$${total}`}
+                  {`$${total+taxCost}`}
                 </div>
               </div>
               <div className="mt-3 mb-3 lg:border-t lg:border-gray-400 "></div>
-              <PaypaButton total={total} callBack={() =>  {
-                dispatch(clearCart())
-                dispatch(clearShippingAddress())
-                dispatch(clearPayment())
-              }}/>
+              <PaypalButton orderInfor={orderInfor}/>
 
               {/* Checkout  */}
               {/* <button className='w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
@@ -123,7 +134,7 @@ function PreviewOrder() {
         </div>
 
         <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
-        <Space
+          <Space
             direction="vertical"
             size="middle"
             style={{
@@ -131,27 +142,27 @@ function PreviewOrder() {
             }}
           >
             <Card title="Shipping" size="small">
-             <Space direction="vertical">
-             <Space>
-                <div className="font-bold">Name:</div>
-                <div>{shipping.shippingAddress.fullName}</div>
+              <Space direction="vertical">
+                <Space>
+                  <div className="font-bold">Name:</div>
+                  <div>{shipping.shippingAddress.fullName}</div>
+                </Space>
+                <Space>
+                  <div className="font-bold">Address:</div>
+                  <div>{shipping.shippingAddress.address}</div>
+                </Space>
+                <a href="/payment">Edit</a>
               </Space>
-              <Space>
-                <div className="font-bold">Address:</div>
-                <div>{shipping.shippingAddress.address}</div>
-              </Space>
-              <a href="/payment">Edit</a>
-             </Space>
             </Card>
 
             <Card title="Payment" size="small">
-             <Space direction="vertical">
-             <Space >
-                <div className="font-bold">Method:</div>
-                <div>{payment}</div>
+              <Space direction="vertical">
+                <Space >
+                  <div className="font-bold">Method:</div>
+                  <div>{payment}</div>
+                </Space>
+                <a href="/checkout/payment">Edit</a>
               </Space>
-              <a href="/checkout/payment">Edit</a>
-             </Space>
             </Card>
 
             <Card title="Items" size="small">
@@ -164,7 +175,7 @@ function PreviewOrder() {
                        <div className="lg:ml-8 lg:mr-8 lg:text-center">{item.price*item.quantity}</div>
                     </div>
                  ))}
-                  </Space>
+                  </Space>              
             </Card>
 
           </Space>
