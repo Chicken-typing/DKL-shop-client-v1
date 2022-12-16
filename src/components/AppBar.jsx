@@ -17,10 +17,6 @@ import { RefreshOutlined } from '@mui/icons-material';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
@@ -161,22 +157,20 @@ const AppBar = props => {
         )
     }
     return (
-        <Affix offsetTop={props.affix}>
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBarMUI position="static">
-                    <Toolbar>
-                        {SearchFeature(hasSearch)}
-                        <Box sx={{ flexGrow: 1 }} />
-                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            {NotificationFeature(hasNotification)}
-                            {MailFeature(hasMail)}
-                            {AccountFeature(hasAccount)}
-                            <Button onClick={() => handleRefresh()} icon={<RefreshOutlined />} type='link' style={{ color: 'white' }}></Button>
-                        </Box>
-                    </Toolbar>
-                </AppBarMUI>
-            </Box>
-        </Affix>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBarMUI position="static">
+                <Toolbar>
+                    {SearchFeature(hasSearch)}
+                    <Box sx={{ flexGrow: 1 }} />
+                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        {NotificationFeature(hasNotification)}
+                        {MailFeature(hasMail)}
+                        {AccountFeature(hasAccount)}
+                        <Button onClick={() => handleRefresh()} icon={<RefreshOutlined />} type='link' style={{ color: 'white' }}></Button>
+                    </Box>
+                </Toolbar>
+            </AppBarMUI>
+        </Box>
     );
 }
 AppBar.propTypes = {
@@ -194,7 +188,6 @@ AppBar.defaultProps = {
     },
     hasAccount: {},
     hasSearch: {},
-    affix: 0
 }
 
 export default AppBar

@@ -1,4 +1,4 @@
-import { SIGNIN_USER, SIGNOUT_USER } from "../ActionType";
+import { SIGNIN_USER, SIGNOUT_USER, UPDATE_USER } from "../ActionType";
 
 const initialize = {
   userInfor: {
@@ -7,6 +7,9 @@ const initialize = {
     token: "",
     username: "",
     _id: "",
+    birthday: "",
+    phone: "",
+    address:'',
   },
 };
 const userReducer = (state = initialize, action) => {
@@ -15,6 +18,14 @@ const userReducer = (state = initialize, action) => {
       return {
         ...state,
         userInfor: action.payload,
+      };
+    case UPDATE_USER:
+      return {
+        ...state,
+        userInfor: {
+          ...state.userInfor,
+          ...action.payload
+        },
       };
     case SIGNOUT_USER:
       return {

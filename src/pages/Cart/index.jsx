@@ -154,7 +154,7 @@ function Cart() {
         </div>
 
         {data.length === 0 ? <div className='lg:col-span-2 lg:mt-8'><Empty /></div> : <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
-        <Button danger type='link' onClick={() => dispatch(clearCart())}>Clear all item</Button>
+        <Button danger type='link' onClick={() => dispatch(clearCart())}>Clear all items</Button>
           {data.map((item) => (
             <div className='w-[90%] mb-8  '
               key={item._id+item.size}>

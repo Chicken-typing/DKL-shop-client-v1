@@ -218,7 +218,7 @@ const ProductListTab = () => {
                     display: 'flex',
                     justifyContent: 'space-evenly'
                 }}>
-                    <Button type='ghost' onClick={() => {
+                    <Button type='default' onClick={() => {
                         setIsModalOpen(true)
                         setEditItem(index)
                     }}>Edit</Button>
@@ -311,7 +311,7 @@ const EditForm = (item, open, handleSubmit, handleClose) => {
                             offset: 14,
                             span: 16,
                         }}>
-                        <Button type='ghost' style={{ margin: '0px 5px' }} onClick={handleClose}>Cancel</Button>
+                        <Button type='default' style={{ margin: '0px 5px' }} onClick={handleClose}>Cancel</Button>
                         <Button type="primary" htmlType="submit" style={{ margin: '0px 5px' }}>Submit</Button>
                     </Item>
                 </Form>
