@@ -2,41 +2,36 @@ import React, { useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import 'antd/dist/antd.css';
 import { Dropdown, Menu, Space } from "antd";
-import { Data } from "../../Data/Data";
 import { Select } from "antd";
 const { Option } = Select;
 
-function Filter({filterHighLow, filterLowHigh, filterNike, filterAdidas, all}) {
+function Filter({ filterHighLow, filterLowHigh, filterNike, filterAdidas, all }) {
 
+  const [type, setType] = useState('All')
+  const items =
+    [
+      {
+        label: <button onClick={all}>All</button>,
+        key: 'All',
 
-  const menu = (
-      <Menu
-        items={[
-          {
-            label:  <button onClick={all}>All</button>,
-            key: '0',
-
-          }, 
-          {
-            label:  <button onClick={filterHighLow}>Price: High-Low</button>,
-            key: '1',
-          },           
-          {
-            label: <button onClick={filterLowHigh}>Price: Low-High</button>,
-            key: '2',
-          },
-          {
-            label: <button  onClick={filterNike}>Nike</button>,
-            key: '3',
-          },
-          {
-              label: <button  onClick={filterAdidas}>Adidas</button>,
-              key: '4',
-          },
-        ]}
-      />
-    );
-
+      },
+      {
+        label: <button onClick={filterHighLow}>Price: High-Low</button>,
+        key: 'Price: High-Low',
+      },
+      {
+        label: <button onClick={filterLowHigh}>Price: Low-High</button>,
+        key: 'Price: Low-High',
+      },
+      {
+        label: <button onClick={filterNike}>Nike</button>,
+        key: 'Nike',
+      },
+      {
+        label: <button onClick={filterAdidas}>Adidas</button>,
+        key: 'Adidas',
+      },
+    ]
 
   return (
     <div className="mt-[40px] ">
@@ -52,14 +47,14 @@ function Filter({filterHighLow, filterLowHigh, filterNike, filterAdidas, all}) {
         <Option value="woman">Woman</Option>
         <Option value="man">Man</Option>
       </Select> */}
-       <Dropdown overlay={menu} trigger={['click']} >
+      <Dropdown menu={{ items, onClick: e => setType(e.key), defaultSelectedKeys: [type] }} trigger={['click']}  >
         <a onClick={(e) => e.preventDefault()}>
-        <Space style={{color: 'black', fontSize: '20px'}} >
-        Filter
-        <DownOutlined  />
-        </Space>
+          <Space style={{ color: 'black', fontSize: '20px' }} >
+            {type}
+            <DownOutlined />
+          </Space>
         </a>
-       </Dropdown>
+      </Dropdown>
     </div>
   );
 }
