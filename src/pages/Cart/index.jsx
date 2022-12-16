@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { Empty, notification, Button } from 'antd';
 import { getPath } from '../../action';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Cart() {
 
@@ -188,7 +188,7 @@ function Cart() {
 
                 {/* Remove item */}
                 <span className='lg:ml-[200px]' >
-                  <box-icon box-icon type='solid' name='trash-alt' onClick={() => handleDelAll(item)}></box-icon>
+                  <Button type='text' onClick={() => handleDelAll(item)}><DeleteIcon/></Button>
                 </span>
               </div>
             </div>

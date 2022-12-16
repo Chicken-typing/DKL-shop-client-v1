@@ -157,12 +157,7 @@ ul {
     flex-direction: column;
     background-color: white;
     border-radius: 14px;
-    padding: 10px;
-    position: relative;
-    top: 1rem;
-    left: -0.7rem;
-    width: 100%;
-    z-index: 4;
+    max-height:300px ;
 }
 
 .dropdown:empty {
@@ -207,4 +202,8 @@ ul {
     .ul-container {
         left: 0;
     }
+}
+.result-list{
+        max-height:300px ;
+        overflow: auto;
 }
