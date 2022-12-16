@@ -148,7 +148,6 @@ export default function AdminList() {
     return (
         <>
             <Layout>
-                <Affix offsetTop={64.5}>
                     <Header
                         style={{
                             backgroundColor: '#1976d2',
@@ -168,7 +167,6 @@ export default function AdminList() {
                             />
                         </Button>
                     </Header>
-                </Affix>
                 <Content
                     style={{
                         overflow: "auto",

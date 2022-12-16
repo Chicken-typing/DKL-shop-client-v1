@@ -36,7 +36,7 @@ export default function CustomerList(props) {
         <>
             <Layout>
                 <Header style={{ padding: 0 }}>
-                    <AppBar hasSearch={search} affix={64} handleRefresh={handleRefresh} />
+                    <AppBar hasSearch={search} handleRefresh={handleRefresh} />
                 </Header>
                 <Content
                     style={{

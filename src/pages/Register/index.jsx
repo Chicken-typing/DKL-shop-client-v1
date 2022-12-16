@@ -85,7 +85,9 @@ const Register = () => {
                         }
 
                     ]}>
-                    <DatePicker format={'DD/MM/YY'} />
+                    <DatePicker format={'L'} style={{
+                        width: '100%',
+                    }} />
                 </Item>
                 <Item
                     label="Phone number"
