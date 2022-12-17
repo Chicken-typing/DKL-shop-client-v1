@@ -19,10 +19,12 @@ const Login = () => {
     const path = useSelector(state => state.path.pathname)
     const navigate = useNavigate()
     const handleGetRes = (res) => {
+
             if (_.isEmpty(res)) {
                 error()
             }
             else {
+
                 if (res?.isActive) {
                     dispatch(login(res))
                     success()
@@ -33,6 +35,7 @@ const Login = () => {
                     navigate(`/${res._id}/banned`)
                 }
             }
+
     }
     const handleLogin = (value) => {
         console.log(value);
