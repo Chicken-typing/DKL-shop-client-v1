@@ -7,7 +7,6 @@ const loginUser = async(data, callback) =>
       callback(res.data);
     })
     .catch((error) => {
-      console.log(error);
       callback({})
     });
 export default loginUser;
