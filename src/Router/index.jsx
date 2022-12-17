@@ -29,6 +29,9 @@ import PlaceOrder from "../components/PlaceOrder";
 import Protected from "./Protected";
 import ThanksPage from "../pages/ThanksPage";
 import MyAccountPage from "../pages/MyAccountPage";
+
+import Banned from "../pages/Banned";
+
 function Router() {
 
   return (
@@ -64,6 +67,7 @@ function Router() {
         <Route path="dashboard" element={<ProtectedRoute><DasboardTab /></ProtectedRoute>} />
         <Route path="order" element={<ProtectedRoute><OrderTab /></ProtectedRoute>} />
       </Route>
+      <Route path="/:id/banned" element={<Banned/>}/>
     </Routes>
 
   )
