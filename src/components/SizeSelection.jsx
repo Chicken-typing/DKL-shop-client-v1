@@ -26,7 +26,7 @@ const SizeSelection = ({ open, item, addItem,handleClose }) => {
         value:size*1
     }))
     return (
-        <Modal open={open} onOk={onOk} onCancel={onCancel} title="Select size" bodyStyle={{ display:'flex',justifyContent:'center'}}>
+        <Modal open={open} onOk={onOk} onCancel={onCancel} title="Select size" bodyStyle={{ display:'flex',justifyContent:'center'}} destroyOnClose>
             < Group onChange={handleSelect}
                 options={option}
                 optionType="button"
