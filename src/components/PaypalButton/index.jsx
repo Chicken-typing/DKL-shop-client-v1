@@ -100,6 +100,7 @@ function PaypalButton({ orderInfor}) {
     dispatch(clearPayment())
     dispatch(clearCart())
     navigate('/thanks')
+    localStorage.removeItem('stepCheckout')
   }
   return (
     <PayPalScriptProvider
