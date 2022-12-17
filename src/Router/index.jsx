@@ -29,7 +29,9 @@ import PlaceOrder from "../components/PlaceOrder";
 import Protected from "./Protected";
 import ThanksPage from "../pages/ThanksPage";
 import MyAccountPage from "../pages/MyAccountPage";
+
 import Banned from "../pages/Banned";
+
 function Router() {
 
   return (

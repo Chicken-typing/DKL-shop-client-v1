@@ -19,6 +19,7 @@ const Login = () => {
     const path = useSelector(state => state.path.pathname)
     const navigate = useNavigate()
     const handleGetRes = (res) => {
+
         if (res.isActive) {
             dispatch(login(res))
             if (_.isEmpty(res)) {
@@ -37,6 +38,7 @@ const Login = () => {
     }
     const handleLogin = (value) => {
         console.log(value);
+
         loginUser(value, handleGetRes)
     }
 
