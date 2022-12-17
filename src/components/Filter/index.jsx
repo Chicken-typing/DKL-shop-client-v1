@@ -1,59 +1,72 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import 'antd/dist/antd.css';
-import { Dropdown, Menu, Space } from "antd";
+import { Button, Dropdown, Menu, Space } from "antd";
 import { Select } from "antd";
 const { Option } = Select;
 
 function Filter({ filterHighLow, filterLowHigh, filterNike, filterAdidas, all }) {
 
   const [type, setType] = useState('All')
+  useEffect(() => {
+    switch (type) {
+      case 'All': {
+        all()
+        break
+      }
+      case 'Price: High-Low': {
+        filterHighLow()
+        break
+      }
+      case 'Price: Low-High': {
+        filterLowHigh()
+        break
+      }
+      case 'Nike': {
+        filterNike()
+        break
+      }
+      case 'Adidas': {
+        filterAdidas()
+        break
+      }
+    }
+  }, [type]);
+
   const items =
     [
       {
-        label: <button onClick={all}>All</button>,
+        label: "All",
         key: 'All',
 
       },
       {
-        label: <button onClick={filterHighLow}>Price: High-Low</button>,
+        label:"Price: High-Low",
         key: 'Price: High-Low',
       },
       {
-        label: <button onClick={filterLowHigh}>Price: Low-High</button>,
+        label: "Price: Low-High",
         key: 'Price: Low-High',
       },
       {
-        label: <button onClick={filterNike}>Nike</button>,
+        label: "Nike",
         key: 'Nike',
       },
       {
-        label: <button onClick={filterAdidas}>Adidas</button>,
+        label: "Adidas",
         key: 'Adidas',
       },
     ]
 
   return (
     <div className="mt-[40px] ">
-      {/* <Select
-        defaultValue="Normal"
-        onChange={handleSelect}
-        style={{
-          width: 120,
-        }}
-      >
-        <Option onClick={onClick} value="desc" >High-Low</Option>
-        <Option onClick={onClick} value="ascd">Low-High</Option>
-        <Option value="woman">Woman</Option>
-        <Option value="man">Man</Option>
-      </Select> */}
       <Dropdown menu={{ items, onClick: e => setType(e.key), defaultSelectedKeys: [type] }} trigger={['click']}  >
-        <a onClick={(e) => e.preventDefault()}>
+        <Button type='text' onClick={(e) => e.preventDefault()}>
           <Space style={{ color: 'black', fontSize: '20px' }} >
             {type}
             <DownOutlined />
           </Space>
-        </a>
+        </Button>
       </Dropdown>
     </div>
   );
