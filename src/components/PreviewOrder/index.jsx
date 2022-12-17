@@ -46,11 +46,13 @@ function PreviewOrder() {
     let price = 0;
     data.map((item) => {
       price = item.price * item.quantity + price;
+
     });
     setPrice(price);
   };
 
   const totalAll = () => {
+
     let price = 0;
     let shipCost = ship;
     if (data.length > 0) {
@@ -129,6 +131,7 @@ function PreviewOrder() {
               {/* Tax Cost   */}
               <div className="flex w-[100%]">
                 <div className="flex-1 text-gray-600 text-lg">Tax Cost</div>
+
                 <div className="flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]">
                   {`$${taxCost}`}
                 </div>
@@ -221,6 +224,7 @@ function PreviewOrder() {
                     <div className="lg:ml-8 lg:mr-8 lg:text-center">
                       {item.size}
                     </div>
+
                   </div>
                 ))}
               </Space>

@@ -139,7 +139,9 @@ export default function ProductDetail() {
           <img
             // src={product.images[2].src}
             // alt={product.images[2].alt}
+
             src={res.images[1].thumbUrl}
+
             className="h-[40%] w-[40%] object-cover object-center "
           />
         </div>
@@ -152,7 +154,9 @@ export default function ProductDetail() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
+
             <div className="text-3xl tracking-tight text-gray-900 pt-6 font-bold flex items-center"><DollarCircleFilled /> <span className='ml-2'>{res.price}</span></div>
+
             <Divider />
             <form className="mt-10" onSubmit={(e) => e.preventDefault()}>
               {/* Colors */}
@@ -229,7 +233,9 @@ export default function ProductDetail() {
                     message.warning("Please select the size of shoes!")
                   } else {
                     const selectItem = {
+
                       ...res,
+
                       size: selectedSize
                     }
                     dispatch(addToCart(selectItem))
