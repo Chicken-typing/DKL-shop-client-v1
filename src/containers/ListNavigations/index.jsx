@@ -16,14 +16,18 @@ const ItemSearch = (item, handleClickItem) => {
   return(<Card
     style={{
       width: "100%",
+
       cursor:'pointer'
+
     }}
     onClick={() => handleClickItem(item._id)}
   >
     <Meta
       avatar={<Avatar src={item.defaultImage.thumbUrl } />}
       title={item.name}
+
       description={<div style={{display:'flex', justifyContent:'flex-start', alignItems:'center',color:'GrayText'}}><DollarCircleOutlined /> &nbsp; {item.price}</div>}
+
     />
   </Card>)
 }
