@@ -4,9 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../action';
 import { useParams } from "react-router-dom"
 import { addToCart } from '../../action';
-import { Divider, message} from 'antd';
-import { DollarCircleFilled } from'@ant-design/icons'
+import { Button, Comment, Divider, Avatar, Rate, Typography, message, Space } from 'antd';
+import { DollarCircleFilled } from '@ant-design/icons'
 import CommentRating from '../../components/CommentRating';
+import sizeGuide from '../../assets/images/size-guide.png'
+import { UserOutlined } from '@ant-design/icons'
+import postReview from '../../services/postReview';
+import { HeartFilled } from '@ant-design/icons'
+import _ from 'lodash'
 const product = {
   name: 'Nike Air Zoom Pegasus 39 Premium',
   price: '$200',
@@ -43,22 +48,55 @@ const product = {
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 }
 
+const CommentComponent = (props,key) => (
+  <div key={key}>
+    <Comment
+      author={
+        <Space
+          direction="vertical"
+          size='small'
+          style={{
+            display: 'flex',
+          }}>
+          <Rate disabled defaultValue={props.rating} character={<HeartFilled/> } />
+          <Typography.Text>{props.name}</Typography.Text>
+        </Space>}
+      avatar={<Avatar src={<UserOutlined />} size={32} style={{ backgroundColor: 'black' }} alt="User" />}
+      content={
+        <Typography.Paragraph
+          ellipsis={
+            {
+              rows: 3,
+              expandable: true,
+              symbol: 'more',
+            }
+          }>
+          {props.comment}
+        </Typography.Paragraph>
+      }
+      style={{
+        // backgroundColor: "#F3F3F3",
+        padding: '0px 10px 0px 20px'
+      }}
+    />
+    <Divider style={{ margin: "5px 0px" }} />
+  </div>
+)
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function ProductDetail() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(0)
-
+  const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProduct())
   }, [])
-  const res = useSelector(state => state.fetchProduct.products)
   const { id } = useParams()
-  const thisProduct = res.find(prod => prod._id === id)
+  const res = useSelector(state => state.fetchProduct.products.find(prod => prod._id === id))
+  const handlePostComment = (values) => postReview(res._id, values)
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -86,7 +124,7 @@ export default function ProductDetail() {
             ))}
             <li className="text-sm">
               <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                {thisProduct.name}
+                {res.name}
               </a>
             </li>
           </ol>
@@ -95,26 +133,26 @@ export default function ProductDetail() {
         <div className=" flex justify-center mt-6 aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
           <img
             alt='Default image'
-            src={thisProduct.defaultImage.thumbUrl}
+            src={res.defaultImage.thumbUrl}
             className="h-[40%] w-[40%] object-cover object-center mr-[20px] "
           />
           <img
             // src={product.images[2].src}
             // alt={product.images[2].alt}
-            src={thisProduct.images[1].thumbUrl}
+            src={res.images[1].thumbUrl}
             className="h-[40%] w-[40%] object-cover object-center "
           />
         </div>
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{thisProduct.name}</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{res.name}</h1>
           </div>
 
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <div className="text-3xl tracking-tight text-gray-900 pt-6 font-bold flex items-center"><DollarCircleFilled /> <span className='ml-2'>{thisProduct.price}</span></div>
+            <div className="text-3xl tracking-tight text-gray-900 pt-6 font-bold flex items-center"><DollarCircleFilled /> <span className='ml-2'>{res.price}</span></div>
             <Divider />
             <form className="mt-10" onSubmit={(e) => e.preventDefault()}>
               {/* Colors */}
@@ -123,9 +161,9 @@ export default function ProductDetail() {
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                  <Button type='text' className="text-sm font-medium " onClick={() => setVisible(!visible)}>
                     Size guide
-                  </a>
+                  </Button>
                 </div>
 
                 <RadioGroup value={selectedSize} onChange={(e) => setSelectedSize(e * 1)} className="mt-4">
@@ -191,7 +229,7 @@ export default function ProductDetail() {
                     message.warning("Please select the size of shoes!")
                   } else {
                     const selectItem = {
-                      ...thisProduct,
+                      ...res,
                       size: selectedSize
                     }
                     dispatch(addToCart(selectItem))
@@ -211,7 +249,7 @@ export default function ProductDetail() {
               <h3 className="sr-only">Description</h3>
 
               <div className="space-y-6">
-                <p className="text-base text-gray-900">{thisProduct.description}</p>
+                <p className="text-base text-gray-900">{res.description}</p>
               </div>
             </div>
 
@@ -229,8 +267,21 @@ export default function ProductDetail() {
               </div>
             </div>
 
-            <Divider/>
-          <CommentRating/>
+            <Divider />
+            <CommentRating callback={handlePostComment} />
+            <div
+              style={
+                _.isEmpty(res.reviews)
+                  ? {}
+                  : {
+                    marginTop: 20,
+                    maxHeight: 400,
+                    border: '1px solid #e7e7e7'
+                  }}>
+              {
+                res?.reviews.map((review,index) => CommentComponent(review,index))
+              }
+            </div>
           </div>
         </div>
       </div>

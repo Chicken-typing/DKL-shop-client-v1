@@ -4,7 +4,6 @@ import store from "../store";
 const addProduct = async (data) => {
   const state = store.getState();
   const user = state?.User?.userInfor;
-  console.log(data);
   return await axios
     .post(
       API_PRODUCT,

@@ -1,21 +1,13 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Rate, notification} from "antd";
+import { Button, Form, Input, Rate, notification } from "antd";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-
-function CommentRating() {
-  const { TextArea } = Input;
+import { HeartFilled } from '@ant-design/icons'
+const { TextArea } = Input;
+function CommentRating({callback}) {
   const navigate = useNavigate()
-  const onFinish = (values) => {
-    console.log("Success:", values);
-
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
   const token = useSelector(state => state.User.userInfor)
-
+  const [form] = Form.useForm();
   const openNotification = () => {
 
     const btn = (
@@ -34,9 +26,21 @@ function CommentRating() {
       duration: 2,
     });
   };
+  const handleSubmit = () => {
+    if (!token.token) {
+      openNotification()
+    } else {
+      form.submit()
+    }
+  }
+  const onFinish = (values) => {
+    callback(values)
+    form.resetFields();
+  };
   return (
     <Form
       name="basic"
+      form={form}
       labelCol={{
         span: 8,
       }}
@@ -47,27 +51,26 @@ function CommentRating() {
         remember: true,
       }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
     >
-       <div className="font-bold tex-2xl mb-4">Comment and Rating Product</div>
+      <div className="font-bold tex-2xl mb-4">Comment and Rating Product</div>
 
-       <Form.Item name="rating">
-        <Rate />
+      <Form.Item name="rating">
+        <Rate character={<HeartFilled />} allowClear />
       </Form.Item>
 
       <Form.Item name="comment">
-        <TextArea  autoSize={{
+        <TextArea autoSize={{
           minRows: 2,
           maxRows: 6,
-        }}/>
+        }} />
       </Form.Item>
 
-    <Form.Item
+      <Form.Item
       >
-      <Button type="primary" htmlType="submit" onClick={!token.token ? openNotification : '' }>
+        <Button type="primary" onClick={()=>handleSubmit()}>
           Send your comment
         </Button>
-    </Form.Item>
+      </Form.Item>
     </Form>
   );
 }
