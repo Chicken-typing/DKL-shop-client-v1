@@ -161,13 +161,18 @@ useEffect(() => {
             </Card>
 
             <Card title="Items" size="small">
+                  <div  className="w-[100%] lg:flex lg:justify-center lg:mb-4 m-xl:hidden">
+                    <div className="lg:w-[65%] lg:text-center lg:font-bold">Product's Name</div>
+                    <div className=" lg:text-right lg:w-[15%] lg:font-bold  ">Quantity</div>
+                    <div className=" lg:text-right lg:w-[10%] lg:font-bold lg:mr-1 lg:ml-4">Size</div>
+                  </div>
                   <Space direction="vertical" className="w-[100%]">
                  {data.map(item => (
                     <div className="lg:flex lg:justify-between w-[100%]">
                       <img className="m-sm:w-[50%] m-sm:h-[50%] lg:w-[20%] lg:h-[20%] bg-gray-nike" src={item.defaultImage.thumbUrl} alt="" />              
                      <Typography.Text ellipsis className="lg:ml-8 lg:mr-20 lg:flex-[0.6] flex-[0.5] max-w-[100%]">{item.name}</Typography.Text>
                      <div className="flex-[0.3] lg:text-center">{item.quantity}</div>
-                       <div className="lg:ml-8 lg:mr-8 lg:text-center">{item.price*item.quantity}</div>
+                       <div className="lg:ml-8 lg:mr-8 lg:text-center">{item.size}</div>
                     </div>
                  ))}
                   </Space>

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom"
 import { addToCart } from '../../action';
 import { Divider, message} from 'antd';
 import { DollarCircleFilled } from'@ant-design/icons'
-
+import CommentRating from '../../components/CommentRating';
 const product = {
   name: 'Nike Air Zoom Pegasus 39 Premium',
   price: '$200',
@@ -229,13 +229,8 @@ export default function ProductDetail() {
               </div>
             </div>
 
-            <div className="mt-10">
-              <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-              <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{product.details}</p>
-              </div>
-            </div>
+            <Divider/>
+          <CommentRating/>
           </div>
         </div>
       </div>
