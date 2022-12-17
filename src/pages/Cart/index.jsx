@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { Empty, notification, Button } from 'antd';
 import { getPath } from '../../action';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Cart() {
 
@@ -153,8 +153,13 @@ function Cart() {
           </form>
         </div>
 
-        {data.length === 0 ? <div className='lg:col-span-2 lg:mt-8'><Empty /></div> : <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
-        <Button danger type='link' onClick={() => dispatch(clearCart())}>Clear all item</Button>
+        {data.length === 0 ? <div className='lg:col-span-2 lg:mt-8'><Empty /></div>
+          : <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8 flex flex-col">
+            <Button danger type='link' onClick={() => dispatch(clearCart())}
+              style={{
+                alignSelf: 'flex-end',
+                fontSize:18
+              }}>Clear all items</Button>
           {data.map((item) => (
             <div className='w-[90%] mb-8  '
               key={item._id+item.size}>
@@ -188,7 +193,7 @@ function Cart() {
 
                 {/* Remove item */}
                 <span className='lg:ml-[200px]' >
-                  <box-icon box-icon type='solid' name='trash-alt' onClick={() => handleDelAll(item)}></box-icon>
+                  <Button type='text' onClick={() => handleDelAll(item)}><DeleteIcon/></Button>
                 </span>
               </div>
             </div>

@@ -14,7 +14,7 @@ export default function CustomerList(props) {
         data: []
     }
     const dataUser = useSelector(state => state.fetchUser.dataUser.filter(user => user.role === 'customer'))
-    useEffect(() => setResult(dataUser), [refresh])
+    useEffect( () => setResult(dataUser), [refresh])
     const handleSearch = (text) => {
         setResult([...dataUser.filter(object => object.username.toLowerCase().includes(text.toLowerCase()))])
         setSearching(true)
@@ -36,7 +36,7 @@ export default function CustomerList(props) {
         <>
             <Layout>
                 <Header style={{ padding: 0 }}>
-                    <AppBar hasSearch={search} affix={64} handleRefresh={handleRefresh} />
+                    <AppBar hasSearch={search} handleRefresh={handleRefresh} />
                 </Header>
                 <Content
                     style={{

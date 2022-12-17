@@ -13,14 +13,13 @@ const Account = (props) => {
     const handleLogout = () => {
         dispatch(logout())
         navigate('/login')
-        localStorage.setItem('userInfor', JSON.stringify({}))
     }
 
     const items = [
         {
             key: '1',
             label: (
-                <Button style={{ color: 'black' }} type='link'>My account</Button>
+                <Button style={{ color: 'black' }} onClick={()=>navigate(`/${props.user._id}/account`)} type='link'>My account</Button>
             ),
         },
         {

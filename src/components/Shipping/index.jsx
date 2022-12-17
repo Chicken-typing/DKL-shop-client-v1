@@ -2,182 +2,114 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../../action/Shipping';
-import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Radio } from 'antd';
-import {  Group } from '@mantine/core';
-import { ToastContainer, toast } from 'react-toastify';
+import { Group } from '@mantine/core';
 import 'react-toastify/dist/ReactToastify.css'
 
-function Shipping({onClick}) {
-
+function Shipping({ onClick }) {
+const user = useSelector(state=>state.User.userInfor)
   // Use hooks to declare information
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const shipping = useSelector(state => state.ShippingInfo)
-
-const [fullName, setFullName] = useState(shipping.shippingAddress.fullName || "");
-const [address, setAddress] = useState(shipping.shippingAddress.address || '');
-const [city, setCity] = useState(shipping.shippingAddress.city || '');
-const [postalCode, setPostalCode] = useState(
-  shipping.shippingAddress.postalCode || ''
-);
-const [country, setCountry] = useState(shipping.shippingAddress.country || '');
-
-  
-  
   const [form] = Form.useForm();
+  const handleBack = () =>navigate('/cart')
+  
 
-
-
-  const validateMessages = {
-    required: '${label} is required!',
-    types: {
-      email: '${label} is not a valid email!',
-      number: '${label} is not a valid number!',
-    },
-    number: {
-      range: '${label} must be between ${min} and ${max}',
-    },
-  };
-
-
-    
-  // Check User has login or not
-  // useEffect(() => {
-  //   if (!userInfo) {
-  //     navigate('/signin?redirect=/shipping');
-  //   }
-  // }, [userInfo, navigate]);
-
-
-  const submitHandler = (e) => {
-    dispatch(saveShippingAddress({fullName,address, city, postalCode, country }))
-    
-
-  }
-  const handleBack = () => {
-    navigate('/cart')
-  }
-
-  const notify = () => {
-    toast.warn('Please type full your Information!', {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      });
-  }
   const handleNext = () => {
-   if(fullName === "" || address === "" || city === "" || postalCode === "" || country === "")
-   {
-    notify()
-   }
-   else
-   {
-    submitHandler()
-    onClick()
-    dispatch(saveShippingAddress({fullName,address, city, postalCode, country }))
+    form.submit()
     navigate('/checkout/payment')
-   }
+    onClick()
   }
+
 
   return (
-    <div>
-     
-
       <div className=" p-4">
         <h1 className="my-3 text-2xl">Shipping Address</h1>
         <Form
-      form={form}
-      layout="vertical"
-      onFinish={() => {
-        submitHandler()
-        
-      }} 
+          form={form}
+          layout="vertical"
+        onFinish={(value) => dispatch(saveShippingAddress(value))}>
+          <Form.Item label="Full name"
+            tooltip="Please input your full name"
+            name='fullName'
+            rules={[
+            {
+              required: true,
+              message: 'Email is empty'
+            },
+          ]}
+        initialValue={user.username}>
+            <Input placeholder="Your full name"  />
+          </Form.Item>
 
-      validateMessages={validateMessages}
-      name="nest-messages" 
-    >
-      <Form.Item  label="Full Name"   required tooltip="Please input your Full Name" rules={[
-              {
-                required: true,
-              },
-            ]}>
-        <Input placeholder="Your FullName"  value={fullName} onChange={(e) => setFullName(e.target.value)} />
-      </Form.Item>
+          <Form.Item label="Phone number"
+            tooltip="Input your correct phone number"
+            name='phone'
+            rules={[
+            {
+              required: true,
+              message: 'Phone number is empty'
+            },
+          ]} initialValue={user.phone}>
+            <Input placeholder="Your phone number" />
+          </Form.Item>
+          <Form.Item label="Address"
+            tooltip="Input your correct address"
+            name='address'
+            rules={[
+            {
+              required: true,
+              message: 'Address is empty'
+            },
+          ]}  initialValue={user.address}>
+            <Input placeholder="Your Address" />
+          </Form.Item>
 
-      <Form.Item label="Address" required tooltip="Input your correct address" rules={[
-              {
-                required: true,
-              },
-            ]} >
-        <Input placeholder="Your Address" value={address} onChange={(e) => setAddress(e.target.value)}  />
-      </Form.Item>
+          <Form.Item label="City"
+            tooltip="Input your City"
+            name='city'
+            rules={[
+            {
+              required: true,
+              message: 'City is empty'
+            },
+          ]}>
+            <Input placeholder="Your City"/>
+          </Form.Item>
 
-      <Form.Item label="City" required tooltip="Input your City" rules={[
-              {
-                required: true,
-              },
-            ]}>
-        <Input placeholder="Your City"value={city} onChange={(e) => setCity(e.target.value)} />
-      </Form.Item>
+          <Form.Item label="Postal code "
+            tooltip="Input correct Postal c ode"
+            name='postalCode'
+            rules={[
+            {
+              required: true,
+              message: 'Postcode is empty'
+            },
+          ]}>
+            <Input placeholder="Postal Code"/>
+          </Form.Item>
 
-      <Form.Item label="Postal Code " required tooltip="Input correct Postal Code"  rules={[
-              {
-                required: true,
-              },
-            ]}>
-        <Input placeholder="Postal Code" value={postalCode} onChange={(e) => setPostalCode(e.target.value)}/>
-      </Form.Item>
+          <Form.Item label="Country "
+            tooltip="Input your country "
+            name="country"
+            rules={[
+            {
+              required: true,
+              message: 'Country is empty'
+            },
+          ]}>
+            <Input placeholder="Your Country"/>
+          </Form.Item>
+          <Form.Item>
+            <Group position="center" mt="xl">
+              <Button type='default' variant="default" onClick={handleBack}>Back</Button>
+              <Button type='primary' variant='default' onClick={handleNext} >Next step</Button>
+            </Group>
+          </Form.Item>
+        </Form>
 
-      <Form.Item label="Country " required tooltip="Input your country "  rules={[
-              {
-                required: true,
-              },
-            ]}>
-        <Input placeholder="Your Country" value={country} onChange={(e) => setCountry(e.target.value)} />
-      </Form.Item>
-
-      {/* <Form.Item label="Phone Number " required tooltip="Input your phone number" name={['user', 'phone number']} rules={[
-              {
-                required: true,
-                type: 'number',
-              },
-            ]}>
-        <Input placeholder="Your phone number" />
-      </Form.Item> */}
-
-
-
-     <Form.Item>
-     <Group position="center" mt="xl">
-        <Button type='primary' variant="default" onClick={handleBack}>Back</Button>
-        <Button type='primary' variant='default' onClick={handleNext} htmlType='submit' >Next step</Button>
-      </Group>
-     </Form.Item>
-
-      {/* <Form.Item>
-        <Button type="primary" htmlType="submit" onClick={() =>submitHandler }>Submit</Button>
-      </Form.Item> */}
-    </Form>
       </div>
-      <ToastContainer
-position="top-center"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="colored"
-/>
-    </div>
+    
   )
 }
 

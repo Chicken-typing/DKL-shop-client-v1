@@ -13,33 +13,35 @@ import { login } from '../../action';
 const { Item } = Form
 
 const Login = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [isLogin, setIsLogin] = useState(false)
-    const user = useSelector(state => state.User.userInfor)
     const dispatch = useDispatch()
     const success = () => message.success('Login success.');
     const error = () => message.error('Wrong email or password.');
     const path = useSelector(state => state.path.pathname)
     const navigate = useNavigate()
     const handleGetRes = (res) => {
-        dispatch(login(res))
-        _.isEmpty(res) ? error() : success()
+
+            if (_.isEmpty(res)) {
+                error()
+            }
+            else {
+
+                if (res?.isActive) {
+                    dispatch(login(res))
+                    success()
+                    res.role === 'customer'
+                        ? navigate(`/${path}`)
+                        : navigate('/admin')
+                } else {
+                    navigate(`/${res._id}/banned`)
+                }
+            }
+
     }
     const handleLogin = (value) => {
+        console.log(value);
+
         loginUser(value, handleGetRes)
-        setIsLogin(true)
     }
-    useEffect(() => {
-        const localUser = JSON.parse(localStorage.getItem("userInfor"))
-        if (isLogin && !_.isEmpty(localUser)) {
-            success()
-            localUser.role === 'customer'
-                ? navigate(`/${path}`)
-                : navigate('/admin')
-            setIsLogin(false)
-        }
-    }, [user])
 
     const responseFacebook = (res) => { }
     return (
@@ -61,7 +63,7 @@ const Login = () => {
                         type: 'email'
                     }]}
                 >
-                    <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <Input />
                 </Item>
                 <Item label='Password'
                     name='password'
@@ -69,7 +71,7 @@ const Login = () => {
                         required: true,
                         message: 'Please input password'
                     }]}>
-                    <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <Input.Password />
                 </Item>
                 <Typography.Link>Forgot password?</Typography.Link>
                 <Item>

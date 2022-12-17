@@ -54,7 +54,10 @@ function Header() {
             <Menu.Item  >
               {({ active }) => (
                 <div
-                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+                    onClick={() => {
+                      navigate(`/${user._id}/account`)
+                    }}
                 >
                   Your Profile
                 </div>
@@ -78,8 +81,6 @@ function Header() {
                     dispatch(clearShippingAddress())
                     dispatch(clearPayment())
                     navigate('/')
-
-                    localStorage.setItem('userInfor', JSON.stringify({}))
                   }}
 
                 >

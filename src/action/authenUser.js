@@ -1,4 +1,4 @@
-import { SIGNIN_USER, SIGNOUT_USER } from "../ActionType";
+import { SIGNIN_USER, SIGNOUT_USER, UPDATE_USER } from "../ActionType";
 
 export const login = (data) => {
     return {
@@ -10,5 +10,11 @@ export const login = (data) => {
 export const logout = () => {
     return {
         type: SIGNOUT_USER,
+    };
+};
+export const updated = (data) => {
+    return {
+      type: UPDATE_USER,
+      payload: data,
     };
 };
