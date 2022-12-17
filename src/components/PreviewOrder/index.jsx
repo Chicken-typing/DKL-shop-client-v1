@@ -11,83 +11,84 @@ function PreviewOrder() {
   const shipping = useSelector((state) => state.ShippingInfo);
   const payment = useSelector((state) => state.PaymentMethod.paymentMethod);
   const user = useSelector((state) => state?.User?.userInfor);
-  const [price, setPrice] = useState(0)
-  const [total, setTotal] = useState(0)
-  const [ship, setShip] = useState(0)
+  const [price, setPrice] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [ship, setShip] = useState(0);
   const navigate = useNavigate();
-  const dispatch=useDispatch()
-  const taxCost = Math.round(price * 0.02 * 100) / 100
+  const dispatch = useDispatch();
+  const taxCost = Math.round(price * 0.02 * 100) / 100;
   const orderInfor =
-    payment === 'cash'
-    ? {
-      orderItems: [...data],
-      shippingAddress: shipping.shippingAddress,
-      paymentMethod: payment,
-      itemsPrice: price,
-      shippingPrice: ship,
-      taxPrice: taxCost,
-      totalPrice: total + price * 0.02,
-      user: user._id,
-      paymentResult: {
-        status: "UNCOMPLETED"
-      },
-    } : {
-      orderItems: [...data],
-      shippingAddress: shipping.shippingAddress,
-      paymentMethod: payment,
-      itemsPrice: price,
-      shippingPrice: ship,
-      taxPrice: taxCost,
-      totalPrice: total + price * 0.02,
-      user: user._id,
-    }
+    payment === "cash"
+      ? {
+          orderItems: [...data],
+          shippingAddress: shipping.shippingAddress,
+          paymentMethod: payment,
+          itemsPrice: price,
+          shippingPrice: ship,
+          taxPrice: taxCost,
+          totalPrice: total + price * 0.02,
+          user: user._id,
+          paymentResult: {
+            status: "UNCOMPLETED",
+          },
+        }
+      : {
+          orderItems: [...data],
+          shippingAddress: shipping.shippingAddress,
+          paymentMethod: payment,
+          itemsPrice: price,
+          shippingPrice: ship,
+          taxPrice: taxCost,
+          totalPrice: total + price * 0.02,
+          user: user._id,
+        };
   const subTotal = () => {
     let price = 0;
     data.map((item) => {
-      price = item.price * item.quantity + price
+      price = item.price * item.quantity + price;
+
     });
     setPrice(price);
   };
 
-
   const totalAll = () => {
-    let price = 0
-    let shipCost = ship
+
+    let price = 0;
+    let shipCost = ship;
     if (data.length > 0) {
-      setShip(14)
-      data.map(item => {
-        price = item.price * item.quantity + price
-      })
-      setTotal(price + shipCost)
+      setShip(14);
+      data.map((item) => {
+        price = item.price * item.quantity + price;
+      });
+      setTotal(price + shipCost);
+    } else {
+      setShip(0);
+      setTotal(0);
     }
-    else {
-      setShip(0)
-      setTotal(0)
-    }
-  }
-    const clearInfor = () => {
-    dispatch(clearShippingAddress())
-    dispatch(clearPayment())
-    dispatch(clearCart())
-      navigate('/thanks')
-      localStorage.removeItem('stepCheckout')
-  }
+  };
+  const clearInfor = () => {
+    dispatch(clearShippingAddress());
+    dispatch(clearPayment());
+    dispatch(clearCart());
+    navigate("/thanks");
+    localStorage.removeItem("stepCheckout");
+  };
 
   const handleBuy = () => {
-    payOrder(orderInfor, clearInfor)
-  }
+    payOrder(orderInfor, clearInfor);
+  };
 
   useEffect(() => {
-    data.length === 0 && setShip(0)
-    data.length === 0 && setTotal(0)
-  })
+    data.length === 0 && setShip(0);
+    data.length === 0 && setTotal(0);
+  });
   useEffect(() => {
     subTotal();
-  }, [subTotal])
+  }, [subTotal]);
 
   useEffect(() => {
-    totalAll()
-  }, [totalAll])
+    totalAll();
+  }, [totalAll]);
 
   return (
     <div>
@@ -129,9 +130,8 @@ function PreviewOrder() {
               <div className="mt-3 mb-3 lg:border-t lg:border-gray-400 "></div>
               {/* Tax Cost   */}
               <div className="flex w-[100%]">
-                <div className="flex-1 text-gray-600 text-lg">
-                  Tax Cost
-                </div>
+                <div className="flex-1 text-gray-600 text-lg">Tax Cost</div>
+
                 <div className="flex-1 text-end text-lg text-gray-800 font-[400] lg:py-[2px]">
                   {`$${taxCost}`}
                 </div>
@@ -147,13 +147,17 @@ function PreviewOrder() {
                 </div>
               </div>
               <div className="mt-3 mb-3 lg:border-t lg:border-gray-400 "></div>
-              {payment === 'cash'?
-                <button className='w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
-                focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4'
-                onClick={handleBuy}
-                >BUY NOW</button>
-                :<PaypalButton orderInfor={orderInfor} />
-              }
+              {payment === "cash" ? (
+                <button
+                  className="w-[100%] bg-indigo-600 text-white lg:mt-5 items-center justify-center rounded-md border border-transparent hover:bg-indigo-700
+                focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 lg:p-4"
+                  onClick={handleBuy}
+                >
+                  BUY NOW
+                </button>
+              ) : (
+                <PaypalButton orderInfor={orderInfor} />
+              )}
             </div>
           </form>
         </div>
@@ -181,7 +185,7 @@ function PreviewOrder() {
 
             <Card title="Payment" size="small">
               <Space direction="vertical">
-                <Space >
+                <Space>
                   <div className="font-bold">Method:</div>
                   <div>{payment}</div>
                 </Space>
@@ -189,18 +193,42 @@ function PreviewOrder() {
             </Card>
 
             <Card title="Items" size="small">
+              <div className="w-[100%] lg:flex lg:justify-center lg:mb-4 m-xl:hidden">
+                <div className="lg:w-[65%] lg:text-center lg:font-bold">
+                  Product's Name
+                </div>
+                <div className=" lg:text-right lg:w-[15%] lg:font-bold  ">
+                  Quantity
+                </div>
+                <div className=" lg:text-right lg:w-[10%] lg:font-bold lg:mr-1 lg:ml-4">
+                  Size
+                </div>
+              </div>
               <Space direction="vertical" className="w-[100%]">
-                {data.map(item => (
+                {data.map((item) => (
                   <div className="lg:flex lg:justify-between w-[100%]">
-                    <img className="m-sm:w-[50%] m-sm:h-[50%] lg:w-[20%] lg:h-[20%] bg-gray-nike" src={item.defaultImage.thumbUrl} alt="" />
-                    <Typography.Text ellipsis className="lg:ml-8 lg:mr-20 lg:flex-[0.6] flex-[0.5]">{item.name}</Typography.Text>
-                    <div className="flex-[0.3] lg:text-center">{item.quantity}</div>
-                    <div className="lg:ml-8 lg:mr-8 lg:text-center">{item.price * item.quantity}</div>
+                    <img
+                      className="m-sm:w-[50%] m-sm:h-[50%] lg:w-[20%] lg:h-[20%] bg-gray-nike"
+                      src={item.defaultImage.thumbUrl}
+                      alt=""
+                    />
+                    <Typography.Text
+                      ellipsis
+                      className="lg:ml-8 lg:mr-20 lg:flex-[0.6] flex-[0.5]"
+                    >
+                      {item.name}
+                    </Typography.Text>
+                    <div className="flex-[0.3] lg:text-center">
+                      {item.quantity}
+                    </div>
+                    <div className="lg:ml-8 lg:mr-8 lg:text-center">
+                      {item.size}
+                    </div>
+
                   </div>
                 ))}
               </Space>
             </Card>
-
           </Space>
         </div>
       </div>
