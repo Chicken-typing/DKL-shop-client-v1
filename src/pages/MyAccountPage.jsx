@@ -97,7 +97,7 @@ const MyAccountPage = () => {
                 <Item label="Email" name='email' initialValue={user.email}>
                     <Input />
                 </Item>
-                <Item label="Password" name='password' >
+                <Item label="Password" name='' >
                     <Input disabled />
                 </Item>
                 <Item label="Address" name='address' initialValue={user?.address}>

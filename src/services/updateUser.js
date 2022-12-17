@@ -1,4 +1,5 @@
 import axios from "axios";
+import { fetchUser } from "../action";
 import store from "../store";
 const updateUser = (url, id, value) => {
   const state = store.getState();
@@ -7,7 +8,15 @@ const updateUser = (url, id, value) => {
     authorization: `Bearer ${user.token}`,
   };
   return axios
-    .put(`${url}/${id}`, value, { headers: header })
+    .put(`${url}/${id}`, {
+      ...value,
+      _id:id
+    },
+      { headers: header })
+    .then((res) => {
+      console.log(res.data);
+      store.dispatch(fetchUser());
+    })
     .catch((error) => console.error(error.response));
 };
 export default updateUser;

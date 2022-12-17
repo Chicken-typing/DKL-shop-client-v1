@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import { DeleteOutlined, SettingOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Badge, Card, Space, Popconfirm, Modal, Form, Input, Switch, Button, Divider } from 'antd';
+import { DeleteOutlined, SettingOutlined, MailOutlined, UserOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { Avatar, Badge, Card, Space, Popconfirm, Modal, Form, Input, Switch, Button, Divider, Tag } from 'antd';
 import updateUser from '../services/updateUser';
 import ChatBox from './ChatBox';
 import { API_CHAT_ROOM, API_USER } from '../linkTo';
-import { useDispatch } from 'react-redux';
-import { fetchUser } from '../action';
 const { Meta } = Card;
 const { Item } = Form;
 const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
     const handleCheckMail = () => {
-
         setOpenChat(!openChat)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const dispatch = useDispatch()
     const showModal = () => {
         setIsModalOpen(true);
         form.resetFields()
@@ -27,7 +23,6 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const onFinish = (values) => {
         updateUser(url, user._id, values)
         setIsModalOpen(false);
-        dispatch(fetchUser());
     };
     const handleCloseChatbox = () => {
         setOpenChat(!openChat)
@@ -43,12 +38,16 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                 }}
                 extra={
                     <Space>
+                        {
+                            !user.isActive ? <Tag color="error">
+                                BANNED
+                            </Tag>:<></>
+                        }
                         <Popconfirm
                             placement="bottom"
                             title="Do you want to delete this account?"
                             onConfirm={() => {
                                 handleDeleteUser.handleDeleteUser(API_USER, user._id);
-                                dispatch(fetchUser());
                             }}
                             okText="Accept"
                             cancelText="Cancel"
@@ -93,13 +92,16 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     }}
                     onFinish={value => onFinish(value)}
                     autoComplete="off">
-                    <Item label="Password" name="password" initialValue={user.password} rules={[
-                        {
-                            required: true,
-                            message: 'Password must not be empty.',
-                        },
-                    ]}>
-                        <Input />
+                    <Item label="Password"
+                        // name="password"
+                        // rules={[
+                        // {
+                        //     required: true,
+                        //     message: 'Password must not be empty.',
+                        // },
+                        // ]}
+                    >
+                        <Input disabled/>
                     </Item>
                     <Item label="Active" name="isActive" valuePropName='checked' initialValue={user.isActive}>
                         <Switch />
