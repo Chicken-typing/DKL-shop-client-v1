@@ -20,21 +20,22 @@ const Login = () => {
     const navigate = useNavigate()
     const handleGetRes = (res) => {
 
-        if (res.isActive) {
-            dispatch(login(res))
             if (_.isEmpty(res)) {
                 error()
             }
             else {
-                success()
-                res.role === 'customer'
-                    ? navigate(`/${path}`)
-                    : navigate('/admin')
+
+                if (res?.isActive) {
+                    dispatch(login(res))
+                    success()
+                    res.role === 'customer'
+                        ? navigate(`/${path}`)
+                        : navigate('/admin')
+                } else {
+                    navigate(`/${res._id}/banned`)
+                }
             }
-        }
-        else {
-            navigate(`/${res._id}/banned`)
-        }
+
     }
     const handleLogin = (value) => {
         console.log(value);

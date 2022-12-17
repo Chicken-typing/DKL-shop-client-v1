@@ -14,7 +14,7 @@ const updateUser = (url, id, value) => {
     },
       { headers: header })
     .then((res) => {
-      console.log(res.data);
+
       store.dispatch(fetchUser());
     })
     .catch((error) => console.error(error.response));

@@ -8,10 +8,12 @@ const Banned = () => {
         <Result
             status="error"
             title="Your account is blocked."
-            subTitle="Please turn back after 24h."
+
+            subTitle="Please turn back after 24 hours."
             extra={
                 <Button type="primary" key="console" onClick={()=>naviagate('/')}>
-                    Go Console
+                    Go to store
+
                 </Button>
             }
         />
