@@ -8,7 +8,7 @@ const deleteUser = (url, id) => {
     authorization: `Bearer ${user.token}`,
   };
   return axios
-    .delete(`${url}/${id}`, { headers: header, user: user })
+    .delete(`${url}/${id}`,{id:id} ,{ headers: header})
     .then(()=>store.dispatch(fetchUser()))
     .catch((error) => console.error(error));
 };
