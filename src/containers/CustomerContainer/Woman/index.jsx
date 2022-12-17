@@ -3,7 +3,6 @@ import Slider from '../../../components/Slider'
 import Advertise from '../../../components/Advertise';
 import Item from '../../../components/Item';
 import Filter from '../../../components/Filter';
-import { Data } from '../../../Data/Data'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../../action';
 import { BackTop } from 'antd';
@@ -96,7 +95,6 @@ function Woman() {
     const datas = [...check]
     datas.filter((val) =>  val.brand === 'Nike')
     setProducts( datas.filter((val) => val.brand === "Nike"))
-    console.log(datas.filter((val) => val.brand === "Nike"));
   }
   const filterAdidas = () => {
     setFilter('adidas')

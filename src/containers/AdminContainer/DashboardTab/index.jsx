@@ -17,9 +17,7 @@ const DasboardTab = () => {
   return (
     <Space className='Dashboard'
       direction='vertical'
-      split={<Divider type="horizontal" style={{
-        borderColor: "black"
-      }} />}
+      split={<Divider type="horizontal" />}
       size={50}
       style={{
         width: "100%"

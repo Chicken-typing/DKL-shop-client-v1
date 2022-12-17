@@ -1,4 +1,5 @@
 import axios from "axios";
+import { fetchUser } from "../action";
 import store from "../store";
 const deleteUser = (url, id) => {
   const state = store.getState();
@@ -7,7 +8,10 @@ const deleteUser = (url, id) => {
     authorization: `Bearer ${user.token}`,
   };
   return axios
-    .delete(`${url}/${id}`, { headers: header })
+
+    .delete(`${url}/${id}`,{ headers: header})
+
+    .then(()=>store.dispatch(fetchUser()))
     .catch((error) => console.error(error));
 };
 export default deleteUser;

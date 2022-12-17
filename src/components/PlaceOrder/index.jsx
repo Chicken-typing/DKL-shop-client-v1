@@ -48,12 +48,10 @@ const subTotal = () => {
 
 
 useEffect(() => {
-  {data.length === 0 && setShip(0)}
+  data.length === 0 && setShip(0)
+  data.length === 0 && setTotal(0)
 })
 
-useEffect(() => {
-  {data.length === 0 && setTotal(0)}
-})
 
 useEffect(()=>{
   subTotal();
@@ -167,7 +165,7 @@ useEffect(() => {
                  {data.map(item => (
                     <div className="lg:flex lg:justify-between w-[100%]">
                       <img className="m-sm:w-[50%] m-sm:h-[50%] lg:w-[20%] lg:h-[20%] bg-gray-nike" src={item.defaultImage.thumbUrl} alt="" />              
-                     <div ellipsis className="lg:ml-8 lg:mr-20 lg:flex-[0.6] flex-[0.5]">{item.name}</div>
+                     <Typography.Text ellipsis className="lg:ml-8 lg:mr-20 lg:flex-[0.6] flex-[0.5] max-w-[100%]">{item.name}</Typography.Text>
                      <div className="flex-[0.3] lg:text-center">{item.quantity}</div>
                        <div className="lg:ml-8 lg:mr-8 lg:text-center">{item.price*item.quantity}</div>
                     </div>

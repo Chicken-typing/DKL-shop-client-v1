@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ItemSlider from '../ItemSlider';
 import './style.scss'
+import { ArrowCircleRightOutlined, ArrowCircleLeftOutlined } from '@mui/icons-material';
 function Popular({data}) {
 
     let slidesToShow = 5;
@@ -14,7 +15,7 @@ function Popular({data}) {
       <>
         {currentSlide !== 0 && (
           <div className={className} onClick={onClick} style={{ position: 'absolute', left: '-17px', bottom: '-150px', zIndex: '40'}} >    
-            <box-icon type='solid' name='left-arrow-square' size='lg'></box-icon>
+            <ArrowCircleLeftOutlined className='arrow-icon' />
           </div>
 
         )}
@@ -27,7 +28,7 @@ function Popular({data}) {
       <>
         {currentSlide !== slideCount - slidesToShow && (
           <div className={className} onClick={onClick}    >     
-          <box-icon name='right-arrow-square' type='solid' size='lg'></box-icon> 
+            <ArrowCircleRightOutlined className='arrow-icon'/>
           </div>
         )}
       </>
