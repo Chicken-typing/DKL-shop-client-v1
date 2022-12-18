@@ -9,7 +9,6 @@ const deleteReview = async(prodId,reviewId) => {
   const header = {
     authorization: `Bearer ${user.token}`,
   };
-  console.log(`${API_PRODUCT}/${prodId}/reviews/${reviewId}`);
   return await axios
     .delete(`${API_PRODUCT}/${prodId}/reviews/${reviewId}`, { headers: header })
     .then((res) => {
