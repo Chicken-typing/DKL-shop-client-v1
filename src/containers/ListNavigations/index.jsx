@@ -197,7 +197,6 @@ function ListNavigations() {
               <div className="space-y-1 px-2 pt-2 pb-3 relative">
                 <Tab label="Home" url="/home" />
                 <Tab label="Woman" url="/woman" />
-                -=
                 <Tab label="Man" url="/man" />
                 <Tab label="Kid" url="/kid" />
                 <Tab label="Brand" url="/brand" />

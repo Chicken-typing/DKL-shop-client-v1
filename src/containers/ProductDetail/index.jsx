@@ -167,9 +167,8 @@ export default function ProductDetail() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-
-            <div className="text-3xl tracking-tight text-gray-900 pt-6 font-bold flex items-center"><DollarCircleFilled /> <span className='ml-2'>{res.price}</span></div>
-
+            <div className="text-3xl tracking-tight text-gray-900 pt-6 font-bold flex items-center"><DollarCircleFilled /> <span className='ml-2'>{res.price}</span>
+            <span className='ml-4'><Rate character={<HeartFilled/>} disabled allowHalf defaultValue={res.rating} /></span></div>
             <Divider />
             <form className="mt-10" onSubmit={(e) => e.preventDefault()}>
               {/* Colors */}
