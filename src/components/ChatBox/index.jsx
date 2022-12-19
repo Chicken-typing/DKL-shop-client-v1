@@ -1,102 +1,105 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, Layout, Avatar, Button, Drawer, Input, Typography } from 'antd';
+import { Card, Layout, Avatar, Button, Drawer, Input, Typography, Form } from 'antd';
 import { UserOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import './style.scss'
 import { SendOutlined } from '@mui/icons-material';
 import MessagePiece from '../MessagePiece';
-import sendMessage from '../../services/sendMessage';
 import ScrollToBottom from 'react-scroll-to-bottom';
-// import { io } from 'socket.io-client';
+import { io } from 'socket.io-client';
+import _ from 'lodash'
+import { useSelector } from 'react-redux';
 const { Text } = Typography
 const { Meta } = Card
 const { Header, Footer, Content } = Layout;
 const { TextArea } = Input;
-
+let socket
 const ChatBox = ({ user, handleCloseChatbox, open }) => {
-    // const socket = io.connect("http://localhost:5001 ")
-    // const [currentMessage, setCurrentMessage] = useState("")
-    // const [messageList, setMessageList] = useState([])
-    // const sendNewMessage = async () => {
-    //     if (currentMessage !== "") {
-    //         sendMessage(user, currentMessage, socket, (messageData) => {
-    //             setMessageList([...messageList, messageData])
-    //         })
-    //     }
-    // }
-    // useEffect(() => {
-    //     socket.on("recieve_message", (data) => {
-    //         setMessageList([...messageList, data])
-    //     })
-    // }, [socket])
-    // return (
-    //     <Drawer
-    //         // afterOpenChange={() => open ? socket.emit("join_room", user._id) : socket.emit("disconnect")}
-    //         closable
-    //         closeIcon={
-    //             <CloseCircleOutlined style={{ fontSize: 24, color: "white" }} />
-    //         }
-    //         open={open}
-    //         bodyStyle={{ padding: 0 }}
-    //         onClose={() => {
-    //             // setMessageList([])
-    //             handleCloseChatbox()
-    //             setCurrentMessage("")
-    //         }}
-    //         maskClosable={false}
-    //         headerStyle={{
-    //             padding: 0,
-    //             position: 'fixed',
-    //             right: 0,
-    //             marginTop: 20,
-    //             border: 0,
-    //         }}
-    //     >
-    //         <Layout id='chatbox'>
-    //             <Header id='chatbox-header'>
-    //                 <Meta
-    //                     avatar={user.avatar ? <Avatar src={user.avatar} size={32} /> : <Avatar size={32} icon={<UserOutlined />} style={{ backgroundColor: 'black' }} />}
-    //                     title={<Text strong style={{ color: "white" }}>{user.userName}</Text>}
-    //                     description={user.phoneNumber}
-    //                     style={{ color: "white" }}
-    //                 />
-    //             </Header>
-    //             <Content id='chatbox-body'>
-    //                 <ScrollToBottom className="chatbox-content">
-    //                     {
-    //                         messageList.map(item => <MessagePiece message={item.message} userRole={item.author} />)
-    //                     }
-    //                 </ScrollToBottom>
-    //             </Content>
-    //             <Footer id='chatbox-footer'>
-    //                 <div id='chatbox-input'>
-    //                     <TextArea
-    //                         bordered={false}
-    //                         value={currentMessage}
-    //                         autoSize={{
-    //                             minRows: 1,
-    //                             maxRows: 3,
-    //                         }}
-    //                         style={{
-    //                             justifyItems: ' center',
-    //                         }}
-    //                         onChange={e => {
-    //                             setCurrentMessage(e.target.value)
-    //                         }}
-    //                         onPressEnter={(e) => {
-    //                             sendNewMessage()
-    //                             setCurrentMessage("")
-    //                             e.preventDefault()
-    //                         }}
-    //                     />
-    //                 </div>
-    //                 <Button type='link' onClick={() => {
-    //                     sendNewMessage()
-    //                     setCurrentMessage("")
-    //                 }}><SendOutlined /></Button>
-    //             </Footer>
-    //         </Layout>
-    //     </Drawer>
-    // );
+    const currentUser = useSelector(state => state.User.userInfor)
+    const [currentMessage, setCurrentMessage] = useState("")
+    const [messageList, setMessageList] = useState([])
+    const [form] = Form.useForm()
+    const account = {
+        name: currentUser.username,
+        email: currentUser.email,
+        room: user._id
+    }
+    useEffect(() => {
+        socket = io(`${process.env.REACT_APP_API_URL}`)
+        socket.emit('join', account)
+    }, [open])
+
+    useEffect(() => {
+        socket.on('message', message => setMessageList( [...messageList, ...message]))
+    })
+    const sendMessage = (value) => {
+        if (value) {
+            socket.emit('sendMessage', value)
+            form.resetFields()
+        }
+    }
+    return (
+        <Drawer
+            closable
+            closeIcon={
+                <CloseCircleOutlined style={{ fontSize: 24, color: "white" }} />
+            }
+            open={open}
+            bodyStyle={{ padding: 0 }}
+            onClose={handleCloseChatbox}
+            maskClosable={false}
+            headerStyle={{
+                padding: 0,
+                position: 'fixed',
+                right: 0,
+                marginTop: 20,
+                border: 0,
+            }}
+        >
+            <Layout id='chatbox'>
+                <Header id='chatbox-header'>
+                    <Meta
+                        avatar={user.avatar ? <Avatar src={user.avatar} size={32} /> : <Avatar size={32} icon={<UserOutlined />} style={{ backgroundColor: 'black' }} />}
+                        title={<Text strong style={{ color: "white" }}>{currentUser.role === 'customer' ? "DKL Store" : user.username}</Text>}
+                        style={{ color: "white" }}
+                    />
+                </Header>
+                <Content id='chatbox-body'>
+                    <ScrollToBottom className="chatbox-content">
+                        {
+                            _.isEmpty(messageList)
+                                ? <></>
+                                : messageList.map((item, index) => <MessagePiece piece={item} key={index} />)
+                        }
+                    </ScrollToBottom>
+                </Content>
+                <Footer id='chatbox-footer'>
+                    <Form
+                        form={form}
+                        id='chatbox-input'
+                        onFinish={(value, e) => sendMessage(value, e)}
+                        layout='inline'>
+                        <Form.Item name="message">
+                            <TextArea
+                                bordered={false}
+                                autoSize={{
+                                    minRows: 1,
+                                    maxRows: 3,
+                                }}
+                                style={{
+                                    justifyItems: ' center',
+                                }}
+                                onPressEnter={(e) => form.submit()} />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type='link' onClick={() => form.submit()}>
+                                <SendOutlined />
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Footer>
+            </Layout>
+        </Drawer>
+    );
 }
 
 export default ChatBox;

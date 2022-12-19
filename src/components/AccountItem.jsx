@@ -9,8 +9,10 @@ const { Item } = Form;
 const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
+    const [chatUser, setChatUser] = useState()
     const handleCheckMail = () => {
         setOpenChat(!openChat)
+        setChatUser(user)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
@@ -41,7 +43,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                         {
                             !user.isActive ? <Tag color="error">
                                 BANNED
-                            </Tag>:<></>
+                            </Tag> : <></>
                         }
                         <Popconfirm
                             placement="bottom"
@@ -92,16 +94,16 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     }}
                     onFinish={value => onFinish(value)}
                     autoComplete="off">
-                    <Item label="Password"
-                        // name="password"
-                        // rules={[
-                        // {
-                        //     required: true,
-                        //     message: 'Password must not be empty.',
-                        // },
-                        // ]}
+                    <Item label="Privilege"
+                    // name="password"
+                    // rules={[
+                    // {
+                    //     required: true,
+                    //     message: 'Password must not be empty.',
+                    // },
+                    // ]}
                     >
-                        <Input disabled/>
+                        <Input disabled />
                     </Item>
                     <Item label="Active" name="isActive" valuePropName='checked' initialValue={user.isActive}>
                         <Switch />
@@ -111,7 +113,10 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     </Item>
                 </Form>
             </Modal>
-            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} />
+            {openChat
+                ? <ChatBox user={chatUser} handleCloseChatbox={handleCloseChatbox} open={openChat} />
+                : <></>
+            }
 
         </>
     );
