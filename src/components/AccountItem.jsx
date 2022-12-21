@@ -10,9 +10,10 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
     const [chatUser, setChatUser] = useState()
+    const [bagde,setBagde]=useState(false)
     const handleCheckMail = () => {
         setOpenChat(!openChat)
-        setChatUser(user)
+        setBagde(false)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
@@ -29,6 +30,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const handleCloseChatbox = () => {
         setOpenChat(!openChat)
     }
+    const getBagde = () => openChat ? setBagde(false) : setBagde(true)
     //TODO: fetch newest message
     // const [message, setMessage] = useState()
     return (
@@ -63,7 +65,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                         </Button>
                         {
                             hasEmail ?
-                                <Badge dot={!(user.sentEmail === 0)}>
+                                <Badge dot={bagde}>
                                     <Button disabled={isDisable} title="Email" type='link' onClick={() => handleCheckMail(user)}>
                                         <MailOutlined />
                                     </Button>
@@ -113,11 +115,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     </Item>
                 </Form>
             </Modal>
-            {openChat
-                ? <ChatBox user={chatUser} handleCloseChatbox={handleCloseChatbox} open={openChat} />
-                : <></>
-            }
-
+            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} getBagde={getBagde} />
         </>
     );
 }

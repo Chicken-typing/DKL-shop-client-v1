@@ -65,7 +65,7 @@ export default function ChatButton({isDisable}) {
                         }}>
                     </Button>
                 </Tooltip>
-                {currentUser.token
+                {currentUser.token && currentUser.role==="customer"
                     ? <ChatBox user={currentUser} handleCloseChatbox={handleCloseChatbox} open={openChat} />
                     : <></>}
             </Divider>
