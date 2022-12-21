@@ -7,7 +7,7 @@ const sendMessage = async (user, message, socket, getNewest) => {
     sentAt: moment()._d,
     message: message,
   };
-  await socket.emit("send_message", messageData);
+  await socket.emit("message", messageData);
   getNewest(messageData);
 };
 export default sendMessage;

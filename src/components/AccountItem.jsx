@@ -9,8 +9,11 @@ const { Item } = Form;
 const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const [form] = Form.useForm();
     const [openChat, setOpenChat] = useState(false)
+    const [chatUser, setChatUser] = useState()
+    const [bagde,setBagde]=useState(false)
     const handleCheckMail = () => {
         setOpenChat(!openChat)
+        setBagde(false)
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
@@ -27,6 +30,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
     const handleCloseChatbox = () => {
         setOpenChat(!openChat)
     }
+    const getBagde = () => openChat ? setBagde(false) : setBagde(true)
     //TODO: fetch newest message
     // const [message, setMessage] = useState()
     return (
@@ -41,7 +45,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                         {
                             !user.isActive ? <Tag color="error">
                                 BANNED
-                            </Tag>:<></>
+                            </Tag> : <></>
                         }
                         <Popconfirm
                             placement="bottom"
@@ -61,7 +65,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                         </Button>
                         {
                             hasEmail ?
-                                <Badge dot={!(user.sentEmail === 0)}>
+                                <Badge dot={bagde}>
                                     <Button disabled={isDisable} title="Email" type='link' onClick={() => handleCheckMail(user)}>
                                         <MailOutlined />
                                     </Button>
@@ -92,16 +96,16 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     }}
                     onFinish={value => onFinish(value)}
                     autoComplete="off">
-                    <Item label="Password"
-                        // name="password"
-                        // rules={[
-                        // {
-                        //     required: true,
-                        //     message: 'Password must not be empty.',
-                        // },
-                        // ]}
+                    <Item label="Privilege"
+                    // name="password"
+                    // rules={[
+                    // {
+                    //     required: true,
+                    //     message: 'Password must not be empty.',
+                    // },
+                    // ]}
                     >
-                        <Input disabled/>
+                        <Input disabled />
                     </Item>
                     <Item label="Active" name="isActive" valuePropName='checked' initialValue={user.isActive}>
                         <Switch />
@@ -111,8 +115,7 @@ const AccountItem = ({ url, user, hasEmail, handleDeleteUser, isDisable }) => {
                     </Item>
                 </Form>
             </Modal>
-            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} />
-
+            <ChatBox user={user} handleCloseChatbox={handleCloseChatbox} open={openChat} getBagde={getBagde} />
         </>
     );
 }

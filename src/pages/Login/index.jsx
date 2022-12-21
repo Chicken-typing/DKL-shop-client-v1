@@ -38,8 +38,6 @@ const Login = () => {
 
     }
     const handleLogin = (value) => {
-        console.log(value);
-
         loginUser(value, handleGetRes)
     }
 

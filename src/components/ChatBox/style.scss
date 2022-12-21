@@ -25,15 +25,16 @@
     background-color: white;
     border-top: 2px solid #eaeaea;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    padding: 18px 50px;
-    #chatbox-input {
+    padding: 18px 20px;
+    .chatbox-input {
       background-color: #eaeaea;
       border-radius: 25px;
-      width: 80%;
-      padding: 10px 20px 10px 5px;
+      padding: 5px 20px 5px 10px;
+        width: 70%;
       textarea {
+        width: 100%;
         &::-webkit-scrollbar {
           width: 5px;
           height: 500px;
@@ -57,7 +58,7 @@
         }
       }
     }
-    #chatbox-input:focus-within {
+    .chatbox-input:focus-within {
       background-color: #d1daf1e7;
     }
   }

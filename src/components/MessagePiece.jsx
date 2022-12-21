@@ -1,10 +1,9 @@
 import { Typography } from 'antd';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const MessagePiece = ({
-    userRole,
-    message,
-    key
+piece,key
 }) => {
     const reciveStyle = {
         backgroundColor: "#e4e6eb",
@@ -25,8 +24,8 @@ const MessagePiece = ({
 
 
     }
-    const accountID = 'admin'
-    const alignStyle = userRole === accountID ? { justifyContent: "flex-end" } : { justifyContent: "flex-start" }
+    const user = useSelector(state=>state.User.userInfor)
+    const alignStyle = piece.email === user.email ? { justifyContent: "flex-end" } : { justifyContent: "flex-start" }
     return (
         <div
             key={key}
@@ -37,8 +36,8 @@ const MessagePiece = ({
             margin: "5x 0px",
 
         }}>
-            <Typography.Paragraph style={userRole === accountID ? sendStyle : reciveStyle}>
-                {message}
+            <Typography.Paragraph style={piece.email === user.email ? sendStyle : reciveStyle}>
+                {piece.message}
             </Typography.Paragraph>
         </div>
     );
