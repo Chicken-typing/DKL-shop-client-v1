@@ -16,7 +16,6 @@ const { TextArea } = Input;
 // let socket
 const ChatBox = ({ user, handleCloseChatbox, open, getBagde }) => {
     const currentUser = useSelector(state => state.User.userInfor)
-    const [currentMessage, setCurrentMessage] = useState("")
     const [messageList, setMessageList] = useState([])
     const [form] = Form.useForm()
     const inputRef = useRef(null)
@@ -27,18 +26,21 @@ const ChatBox = ({ user, handleCloseChatbox, open, getBagde }) => {
     }
     const socket = io(`${process.env.REACT_APP_API_URL}`)
     socket.emit('join', account)
-    useEffect(() => { getMessages(user._id, currentUser, (data) => setMessageList(data)) }, [])
     useEffect(() => {
-        (!_.isEmpty(messageList)) && currentUser.role !== 'customer' && getBagde()
+        getMessages(user._id, currentUser, (data) => setMessageList(data))
+    }, [])
+    socket.on('message', message => setMessageList([...messageList, message]))
+    useEffect(() => {
+        (!_.isEmpty(messageList))
+            && currentUser.role !== 'customer'
+            && _.last(messageList).email!=='admin'
+            && _.last(messageList).email === user.email
+            && getBagde()
         if (inputRef.current)
             inputRef.current.focus({
                 cursor: 'end'
             })
     }, [messageList])
-
-    useEffect(() => {
-        socket.on('message', message => setMessageList([...messageList, ...message]))
-    })
     const sendMessage = (value) => {
         if (value) {
             socket.emit('sendMessage', value)
