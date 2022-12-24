@@ -8,6 +8,7 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import { io } from 'socket.io-client';
 import _ from 'lodash'
 import { useSelector } from 'react-redux';
+import getMessages from '../../services/getMessage';
 const { Text } = Typography
 const { Meta } = Card
 const { Header, Footer, Content } = Layout;
@@ -18,6 +19,7 @@ const ChatBox = ({ user, handleCloseChatbox, open, getBagde }) => {
     const [currentMessage, setCurrentMessage] = useState("")
     const [messageList, setMessageList] = useState([])
     const [form] = Form.useForm()
+    const inputRef = useRef(null)
     const account = {
         name: currentUser.username,
         email: currentUser.email,
@@ -25,8 +27,13 @@ const ChatBox = ({ user, handleCloseChatbox, open, getBagde }) => {
     }
     const socket = io(`${process.env.REACT_APP_API_URL}`)
     socket.emit('join', account)
+    useEffect(() => { getMessages(user._id, currentUser, (data) => setMessageList(data)) }, [])
     useEffect(() => {
         (!_.isEmpty(messageList)) && currentUser.role !== 'customer' && getBagde()
+        if (inputRef.current)
+            inputRef.current.focus({
+                cursor: 'end'
+            })
     }, [messageList])
 
     useEffect(() => {
@@ -40,7 +47,6 @@ const ChatBox = ({ user, handleCloseChatbox, open, getBagde }) => {
     }
     const handleSubmit = () => {
         form.submit()
-        form.isFieldTouched('message')
     }
     return (
         <Drawer
@@ -95,7 +101,8 @@ const ChatBox = ({ user, handleCloseChatbox, open, getBagde }) => {
                                     minRows: 1,
                                     maxRows: 3,
                                 }}
-                                onPressEnter={handleSubmit} />
+                                onPressEnter={handleSubmit}
+                                ref={inputRef} />
                         </Form.Item>
                         <Form.Item>
                             <Button type='link' onClick={handleSubmit}>

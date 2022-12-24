@@ -8,7 +8,7 @@ export const API_PRODUCT = `${BASE_URL}/products`;
 export const API_ORDER = `${BASE_URL}/orders`;
 export const API_ADVERTISE = `${BASE_URL}/products`;
 export const API_USER = `${BASE_URL}/users`;
-export const API_CHAT_ROOM = `${BASE_URL}/`;
+export const API_CHAT_ROOM = `${BASE_URL}/room`;
 
 // For user
 export const API_SIGNUP = `${BASE_URL}/users/signup`;
