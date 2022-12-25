@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../action';
 import { useParams } from "react-router-dom"
 import { addToCart } from '../../action';
-import { Button, Comment, Divider, Avatar, Rate, Typography, message, Space, Tooltip } from 'antd';
+import { Button, Comment, Divider, Avatar, Rate, Typography, message, Space, Tooltip, Popconfirm } from 'antd';
 import { DollarCircleFilled } from '@ant-design/icons'
 import CommentRating from '../../components/CommentRating';
 import sizeGuide from '../../assets/images/size-guide.png'
@@ -51,12 +51,18 @@ const product = {
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 }
 
-const CommentComponent = (prodId,props, key) => {
+const CommentComponent = (prodId, props, key) => {
   const state = store.getState()
   const user = state?.User?.userInfor
   const action = [
     <Tooltip key="remove" title="Remove">
-      <span onClick={() => deleteReview(prodId,props._id)}><DeleteOutlined /></span>
+      <Popconfirm
+        title="Are you sure to delete this comment?"
+        onConfirm={() => deleteReview(prodId, props._id)}
+        okText="Yes"
+        cancelText="No">
+        <span><DeleteOutlined /></span>
+      </Popconfirm>
     </Tooltip>
   ]
   return (
@@ -168,7 +174,7 @@ export default function ProductDetail() {
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
             <div className="text-3xl tracking-tight text-gray-900 pt-6 font-bold flex items-center"><DollarCircleFilled /> <span className='ml-2'>{res.price}</span>
-            <span className='ml-4'><Rate character={<HeartFilled/>} disabled allowHalf defaultValue={res.rating} /></span></div>
+              <span className='ml-4'><Rate character={<HeartFilled />} disabled allowHalf value={res.rating} /></span></div>
             <Divider />
             <form className="mt-10" onSubmit={(e) => e.preventDefault()}>
               {/* Colors */}
@@ -297,7 +303,7 @@ export default function ProductDetail() {
                     border: '1px solid #e7e7e7'
                   }}>
               {
-                res?.reviews.map((review, index) => CommentComponent(res._id,review, index))
+                res?.reviews.map((review, index) => CommentComponent(res._id, review, index))
               }
             </div>
           </div>

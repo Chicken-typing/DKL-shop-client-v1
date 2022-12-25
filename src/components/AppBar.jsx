@@ -162,7 +162,7 @@ const AppBar = props => {
                 <Toolbar>
                     {SearchFeature(hasSearch)}
                     <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ display:'flex' }}>
                         {NotificationFeature(hasNotification)}
                         {MailFeature(hasMail)}
                         {AccountFeature(hasAccount)}

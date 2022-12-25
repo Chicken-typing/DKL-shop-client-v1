@@ -81,9 +81,7 @@ function Cart() {
       </Button>
     );
     notification.open({
-      message: 'Notification Title',
-      description:
-        'Please Sign In to Checkout',
+      message: 'Please log in to checkout!',
       btn,
       duration: 2,
     });
