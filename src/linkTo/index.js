@@ -1,5 +1,5 @@
 // todo: DEFAULT API FORMAT: `${BASE_URL}/route`
-export const BASE_URL = process.env.REACT_APP_API_URL;
+export const BASE_URL = `${process.env.REACT_APP_API_URL}/api`;
 // export const BASE_URL = "http://localhost:5000/api";
 // Statistic
 export const API_ADMIN_STATISTIC = `${BASE_URL}/orders/summary`;
@@ -13,3 +13,4 @@ export const API_CHAT_ROOM = `${BASE_URL}/`;
 // For user
 export const API_SIGNUP = `${BASE_URL}/users/signup`;
 export const API_SIGNIN = `${BASE_URL}/users/signin`;
+export const VALIDATE_TOKEN = `${process.env.REACT_APP_API_URL}/vtoken`;

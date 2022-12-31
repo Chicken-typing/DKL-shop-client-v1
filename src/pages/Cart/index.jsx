@@ -70,7 +70,7 @@ function Cart() {
 
 
 
-  const openNotification = () => {
+  const loginNotify = () => {
 
     const btn = (
       <Button type="primary" size="small" onClick={() => {
@@ -81,9 +81,7 @@ function Cart() {
       </Button>
     );
     notification.open({
-      message: 'Notification Title',
-      description:
-        'Please Sign In to Checkout',
+      message: 'Please Log in to Checkout',
       btn,
       duration: 2,
     });
@@ -142,7 +140,7 @@ function Cart() {
                     ? notify()
                     : token.token
                       ? navigate('/checkout/shippingAddress')
-                      : openNotification()}>
+                      : loginNotify()}>
                 Checkout
               </button>
               <ToastContainer position='bottom-right' />
