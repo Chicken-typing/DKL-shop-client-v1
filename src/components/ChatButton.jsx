@@ -1,12 +1,11 @@
 import { MailOutlined } from '@ant-design/icons'
-import { Button, Divider, message, notification, Tooltip } from 'antd'
+import { Button, Divider, Tooltip, notification } from 'antd'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ChatBox from './ChatBox'
 import _ from 'lodash'
 import { useSelector } from 'react-redux'
-
-export default function ChatButton(props) {
+export default function ChatButton({isDisable}) {
     const currentUser = useSelector(state => state.User.userInfor)
     const user = {
         _id: "dkl_admin",
@@ -24,30 +23,30 @@ export default function ChatButton(props) {
     const navigate = useNavigate()
 
     const openNotification = () => {
-        const key = `Notice${Date.now()}`;
+        const key = `open${Date.now()}`;
         const btn = (
             <Button type="primary" size="small" onClick={() => {
                 notification.close(key)
                 navigate("/login")
             }}>
-                Log in
+                Login now
             </Button>
         );
         notification.open({
-            message: 'You have not logged in.',
+            message: 'Please Login before chatting!',
             btn,
-            key,
+            key
         });
     };
     return (
         <>
             <Divider>
                 <Tooltip placement='top' arrowPointAtCenter title='Message to us!'>
-                    <Button disabled={props.isDisable}
+                    <Button disabled={isDisable}
                         onClick={() => {
-                            _.isEmpty(userData)
-                                ? openNotification()
-                                : handleChat()
+                            userData.token
+                            ?handleChat()
+                            : openNotification()
                         }} type='link'
                         icon={
                             <>
@@ -66,8 +65,13 @@ export default function ChatButton(props) {
                         }}>
                     </Button>
                 </Tooltip>
-                <ChatBox user={currentUser} handleCloseChatbox={handleCloseChatbox} open={openChat} />
+                {currentUser.token && currentUser.role==="customer"
+                    ? <ChatBox user={currentUser} handleCloseChatbox={handleCloseChatbox} open={openChat} />
+                    : <></>}
             </Divider>
         </>
     )
+}
+ChatButton.defaultProps = {
+    isDisable:false
 }

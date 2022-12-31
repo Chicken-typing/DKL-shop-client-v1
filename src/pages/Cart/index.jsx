@@ -81,7 +81,7 @@ function Cart() {
       </Button>
     );
     notification.open({
-      message: 'Please Log in to Checkout',
+      message: 'Please log in to checkout!',
       btn,
       duration: 2,
     });

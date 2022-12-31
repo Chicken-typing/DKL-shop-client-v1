@@ -52,6 +52,14 @@ function Header() {
           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-center"
             id="custom">
             <Menu.Item  >
+                <div
+                    className='block px-4 py-2 text-sm text-gray-700 cursor-pointer font-medium'
+
+                >
+                  {user.username}
+                </div>
+            </Menu.Item>
+            <Menu.Item  >
               {({ active }) => (
                 <div
                     className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
@@ -66,16 +74,7 @@ function Header() {
             <Menu.Item>
               {({ active }) => (
                 <div
-                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
-                >
-                  Settings
-                </div>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <div
-                  className={classNames(active ? 'bg-gray-100  text-rose-550' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+                    className={classNames(active ? 'bg-gray-100  text-red-danger' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
                   onClick={() => {
                     dispatch(logout())
                     dispatch(clearShippingAddress())
